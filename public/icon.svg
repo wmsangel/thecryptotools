@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 64 64" role="img" aria-label="TheCryptoTools">
+  <!--
+    A coin with a rising chart cut out of it.
+
+    Designed at 16 pixels, not at this size. Three rules it follows:
+      - two shapes only, and no text — "TCT" at tab size was a green blur;
+      - the chart is a GAP in a solid white disc, not a white line on green, so
+        the contrast is carried by the largest shape on the tile;
+      - nothing thinner than 7 units (≈1.7px in a tab strip).
+    An arrow leaving the circle was tried and rejected: a circle with an arrow
+    pointing up-right is the Mars glyph (♂).
+  -->
+  <defs>
+    <linearGradient id="tctBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#16b378"/>
+      <stop offset="1" stop-color="#2dd4bf"/>
+    </linearGradient>
+    <mask id="tctChart">
+      <rect width="64" height="64" fill="#fff"/>
+      <path d="M20 41 L28 32 L35 37 L45 24" stroke="#000" stroke-width="7"
+            stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </mask>
+  </defs>
+
+  <rect width="64" height="64" rx="15" fill="url(#tctBg)"/>
+  <circle cx="32" cy="33" r="19" fill="#fff" mask="url(#tctChart)"/>
+</svg>

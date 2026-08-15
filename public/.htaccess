@@ -1,0 +1,102 @@
+# ============================================================================
+# TheCryptoTools — Apache config for the static export (cPanel/GoDaddy).
+# ============================================================================
+# Everything here was written against what the live server actually returned,
+# not against a template. Re-check with:
+#   curl -sD- -o/dev/null https://thecryptotools.com/_next/static/chunks/<file>.js
+#
+# NOTE: this file must survive the zip upload. `zip -r ... .` does include
+# dotfiles, but cPanel's file manager hides them — turn on "Show hidden files"
+# if you ever need to confirm it is there.
+
+# ---------------------------------------------------------------------------
+# 404
+# ---------------------------------------------------------------------------
+# Without this, a mistyped or stale URL returns Apache's own 13-byte "404 Not
+# Found" — no header, no search, no way back into the site. out/404.html is our
+# real page (see scripts/generate-404.mjs).
+ErrorDocument 404 /404.html
+
+# ---------------------------------------------------------------------------
+# /embed/ — the widget directory root
+# ---------------------------------------------------------------------------
+# The widgets live at /embed/<tool>/ and there is deliberately no page at
+# /embed/ itself, so Apache had nothing to serve and no directory listing
+# allowed: it answered a bare "403 Forbidden". Search Console picked that up as
+# a blocked page (crawled 7 Aug 2026) — a 403 on a path we simply do not
+# publish, which reads to a crawler like a permissions mistake rather than an
+# absence.
+#
+# 301 to /widgets/ rather than letting it 404: /widgets/ IS the page a person
+# arriving at /embed/ wants — the builder that generates the embed snippets.
+# Individual widgets (/embed/profit-calculator/) are untouched and still 200.
+RedirectMatch 301 ^/embed/?$ /widgets/
+
+# ---------------------------------------------------------------------------
+# Caching
+# ---------------------------------------------------------------------------
+<IfModule mod_headers.c>
+  # Next's build output is content-hashed: webpack-a3c37fcb….js can never
+  # change without changing its name, so it is safe to cache for a year. The
+  # server was sending max-age=14400 (4 hours) for these, which threw away the
+  # whole point of hashed filenames — and Cloudflare copies the origin's
+  # max-age, so every edge revalidated four-hourly too.
+  <FilesMatch "\.(js|css|woff2?)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # ...but NOT the service worker. sw.js has a fixed name, so a year-long
+  # immutable cache would pin whatever version a visitor first received and no
+  # later deploy could ever replace it. This rule must stay after the one above.
+  <Files "sw.js">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </Files>
+
+  # Images and icons are not hashed, so they get a month rather than a year —
+  # long enough to matter, short enough that a replaced logo appears.
+  <FilesMatch "\.(png|jpg|jpeg|gif|svg|ico|webp|avif)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+
+  # The generated data files (price history, unlock schedules) change only when
+  # their generator is re-run, and a stale copy is wrong rather than merely old.
+  <FilesMatch "\.(json)$">
+    Header set Cache-Control "public, max-age=3600"
+  </FilesMatch>
+
+  # HTML must revalidate: a deploy replaces these files and a cached copy would
+  # keep serving the previous build.
+  <FilesMatch "\.html$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+
+  # Cheap, uncontroversial hardening. Deliberately NO X-Frame-Options and no
+  # frame-ancestors: /embed/<tool>/ exists to be iframed by other sites, and a
+  # blanket frame ban would kill the widget feature.
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# ---------------------------------------------------------------------------
+# Compression
+# ---------------------------------------------------------------------------
+# Cloudflare already brotli-compresses what it serves, but this covers direct
+# origin hits and anything the edge passes through uncompressed.
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml
+  AddOutputFilterByType DEFLATE application/javascript application/json
+  AddOutputFilterByType DEFLATE application/xml image/svg+xml text/markdown
+</IfModule>
+
+# ---------------------------------------------------------------------------
+# MIME types
+# ---------------------------------------------------------------------------
+# This host derives Content-Type from the extension, and it does not know these
+# three. llms.txt and the guide .md twins exist for AI crawlers; a webmanifest
+# served as text/plain is ignored by the browser and the PWA install prompt
+# never appears.
+<IfModule mod_mime.c>
+  AddType application/manifest+json .webmanifest
+  AddType text/markdown .md
+  AddType image/svg+xml .svg
+</IfModule>

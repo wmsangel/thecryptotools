@@ -1,0 +1,195 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * Brand green is a single hue but it cannot be a single colour: #0a9061
+ * (brand-600) measures 4.44:1 on the dark surface and 4.06:1 behind white
+ * button text — both just under the 4.5:1 WCAG AA floor, on the two things
+ * used most on the site. So the *role* is themed, not the palette:
+ *
+ *   --brand-ink   text that must read as a link/accent   (light 5.5:1, dark 9:1)
+ *   --btn-*       the primary button                     (5.9:1 light, 6.2:1 dark)
+ *
+ * Measured, not guessed — every pair below was computed against the surface it
+ * actually sits on. Use `text-brand-ink` for accent text; reach for a raw
+ * brand-500/600 only for fills and borders, where the 4.5:1 rule does not apply.
+ */
+:root {
+  --bg: #f6f8fb;
+  --bg-elevated: #ffffff;
+  --bg-subtle: #eef2f7;
+  --border: #e4e9f0;
+  --text: #0b1220;
+  --text-muted: #5b6b82;
+  --ring: 22 179 120; /* brand-500 rgb */
+  --brand-ink: #0a7350; /* brand-700 — 5.51:1 on --bg, 5.86:1 on white */
+  --btn-bg: #0a7350;
+  --btn-bg-hover: #0c5b41;
+  --btn-fg: #ffffff; /* 5.86:1 */
+  --gain: #047857; /* emerald-700 — 5.48:1 on white */
+  --loss: #dc2626; /* red-600 — 4.83:1 on white */
+  /* The sticky header's own surface.
+   *
+   * A real rgba() and not `bg-[var(--bg)]/80`: Tailwind's opacity modifier
+   * cannot apply an alpha to a variable holding a hex, so that class compiled
+   * to an invalid colour and the header rendered with NO background at all —
+   * only a backdrop blur. Over a plain page nobody noticed; over the coloured
+   * cells of a correlation matrix the nav links dropped to 4.1:1. 95% keeps a
+   * hint of the frosted look and still clears 4.5:1 over a saturated tile. */
+  --bg-header: rgba(246, 248, 251, 0.95);
+}
+
+.dark {
+  --bg: #070b14;
+  --bg-elevated: #0f1626;
+  --bg-subtle: #0c1320;
+  --border: #1c2740;
+  --text: #eef2f8;
+  --text-muted: #93a4bd;
+  --brand-ink: #3fce93; /* brand-400 — 8.99:1 on --bg-elevated */
+  /* A dark-green button disappears into a near-black page, so dark mode
+     inverts it: bright brand fill, near-black ink. 6.15:1. */
+  --btn-bg: #16b378;
+  --btn-bg-hover: #3fce93;
+  --btn-fg: #04231a;
+  --gain: #34d399; /* emerald-400 — 9.39:1 on --bg-elevated */
+  --loss: #f87171; /* red-400 — 6.53:1 */
+  --bg-header: rgba(7, 11, 20, 0.95);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+@layer base {
+  h1, h2, h3 {
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-2xl border bg-[var(--bg-elevated)] border-[var(--border)];
+  }
+  .card-hover {
+    @apply transition duration-200 hover:-translate-y-0.5 hover:border-brand-400/70 hover:shadow-xl hover:shadow-brand-500/5;
+  }
+
+  .input-field {
+    @apply w-full rounded-xl border bg-[var(--bg)] border-[var(--border)] px-4 py-3
+           text-[var(--text)] outline-none transition
+           focus:border-brand-500 focus:ring-4 focus:ring-brand-500/15;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5
+           font-semibold shadow-lg shadow-brand-600/20 transition
+           hover:shadow-brand-600/30
+           focus:outline-none focus:ring-4 focus:ring-brand-500/25 disabled:opacity-50;
+    background-color: var(--btn-bg);
+    color: var(--btn-fg);
+  }
+  .btn-primary:hover {
+    background-color: var(--btn-bg-hover);
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-[var(--border)]
+           bg-[var(--bg-elevated)] px-5 py-2.5 font-semibold transition
+           hover:border-brand-400 hover:text-brand-ink;
+  }
+  .btn-lg {
+    @apply px-7 py-3.5 text-lg;
+  }
+
+  .muted {
+    color: var(--text-muted);
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-[var(--border)]
+           bg-[var(--bg-elevated)] px-3.5 py-1.5 text-sm muted;
+  }
+
+  /* Big gradient headline accent */
+  .text-gradient {
+    @apply bg-gradient-to-r from-brand-500 via-emerald-500 to-teal-400 bg-clip-text text-transparent;
+  }
+
+  /* Soft glow used behind hero + section headers */
+  .hero-glow {
+    background:
+      radial-gradient(60% 60% at 20% 0%, rgba(22, 179, 120, 0.18), transparent 60%),
+      radial-gradient(50% 50% at 90% 10%, rgba(45, 212, 191, 0.14), transparent 55%);
+  }
+
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.18em] text-brand-ink;
+  }
+
+  .icon-badge {
+    @apply flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl text-2xl
+           bg-brand-500/10 ring-1 ring-inset ring-brand-500/15;
+  }
+
+  /* Keyboard users land here first; invisible until focused. */
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100]
+           focus:rounded-xl focus:px-4 focus:py-2.5 focus:font-semibold focus:shadow-xl
+           focus:ring-4 focus:ring-brand-500/25;
+  }
+  .skip-link:focus {
+    background-color: var(--btn-bg);
+    color: var(--btn-fg);
+  }
+}
+
+/**
+ * A link inside a sentence must not be identified by colour alone (WCAG 1.4.1)
+ * — brand green against body text is only a 1.6:1 difference, so a reader with
+ * a colour vision deficiency cannot see there is a link there at all. Prose
+ * links are therefore underlined always, not just on hover. Cards, nav and
+ * buttons are excluded: they are their own block, so colour is not the only cue.
+ */
+@layer base {
+  /* Scoped to running text: paragraphs, list items inside an <article>, and
+     table cells. NOT footer/nav lists (they are their own block of links) and
+     NOT `.card`/button links, which are large targets with their own border —
+     underlining those turned tidy card grids into a wall of underlines. */
+  p a[href]:not(.card):not([class*="btn-"]),
+  article li a[href]:not(.card):not([class*="btn-"]),
+  td a[href]:not(.card):not([class*="btn-"]) {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+}
+
+/**
+ * Vestibular disorders and motion sensitivity: honour the OS setting. The
+ * ticker's pulsing dot and the hero's entrance animation are decoration, and
+ * decoration should never move for someone who asked it not to.
+ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* subtle scrollbar for code/result blocks */
+::-webkit-scrollbar { height: 8px; width: 8px; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 8px; }
