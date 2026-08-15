@@ -1,95 +1,82 @@
-# CryptoToolkit 🧰
+# TheCryptoTools
 
-Бесплатная платформа крипто-инструментов: калькуляторы для трейдинга, конвертеры,
-DeFi/стейкинг и developer-утилиты. **100% статический сайт** — собрал и залил файлы
-на любой хостинг. Ни сервера, ни базы, ни API-ключей.
+Free crypto calculators, tools and guides — **[thecryptotools.com](https://thecryptotools.com)**.
 
-- **Config-driven:** каждый инструмент — это один файл-конфиг. Никакого кода страниц.
-- **SEO-first:** у каждого инструмента свой `<title>`, meta, OpenGraph, JSON-LD (schema.org), canonical. Плюс авто `sitemap.xml` и `robots.txt`.
-- **Быстро:** статический HTML, всё считается в браузере. Тёмная тема, поиск, мобильная вёрстка.
-- **Монетизация:** заготовки слотов под AdSense / партнёрские баннеры / спонсорские инструменты.
+A config-driven, 100% static Next.js site. Every tool, guide and coin is a small
+config file; SEO (titles, meta, OG images, JSON-LD), the sitemap and `robots.txt`
+are all generated from those configs. No server, no database, no API keys, no
+runtime `/api` routes — the build produces a plain `out/` folder served as static files.
 
----
+## What's inside
 
-## 🚀 Быстрый старт
+- **69 calculators** — trading, futures, portfolio, DeFi, mining, converters, and dev tools
+- **60 guides** — long-form articles cross-linked to the relevant tools
+- **62 coins** — per-coin profit/staking calculators and hubs
+- **Flagships** — investment backtester ("what if I'd invested"), portfolio analyzer +
+  correlation matrix, crypto tax report + tax-loss harvesting, token-unlock and events calendars
+- **Extras** — live price ticker, embeddable widgets, platform comparisons, shareable tool URLs
+
+## Tech stack
+
+Next.js 14 (App Router) · TypeScript · Tailwind CSS · static export (`output: "export"`).
+Node `>=18.17`.
+
+## Local development
 
 ```bash
-npm install        # один раз
-npm run dev        # локальный просмотр на http://localhost:3000
+npm install
+cp .env.example .env.local   # adjust values as needed
+npm run dev                  # http://localhost:3000
 ```
 
-## 📦 Сборка и заливка на хостинг
+`.env.local` holds only public `NEXT_PUBLIC_*` values (site URL, AdSense/GA ids, ad toggle).
 
-1. Пропиши свой домен (один раз): создай файл `.env.local`:
-   ```
-   NEXT_PUBLIC_SITE_URL=https://твой-домен.com
-   ```
-2. Собери статику:
-   ```bash
-   npm run build
-   ```
-3. Залей содержимое папки **`out/`** на хостинг:
-   - Обычный хостинг / FTP — просто скопируй файлы из `out/` в `public_html`.
-   - Netlify / Cloudflare Pages — перетащи папку `out/` (drag-and-drop) или укажи её как каталог публикации.
-   - GitHub Pages — залей содержимое `out/`.
+## Build
 
-Всё. Готовый сайт — это статические HTML/CSS/JS файлы.
+```bash
+npm run build                # next build + OG cards + llms.txt + 404 → out/
+```
 
----
+The `build` script runs `next build` then generates OG share cards, `llms.txt`, and the
+static `404.html`. The result is the deployable `out/` directory.
 
-## ➕ Как добавляются инструменты
+Useful checks: `npm run typecheck`, `npm run lint`.
 
-**Вариант 1 (твой основной):** просто попроси в чате — «добавь калькулятор X» — и
-готовый файл-конфиг появится в проекте. После этого `npm run build` и заливай `out/`.
+## Data refresh (manual, not part of the build)
 
-**Вариант 2 (руками, 2 минуты):** см. [docs/ADDING_TOOLS.md](docs/ADDING_TOOLS.md).
-Скопировал файл-конфиг, добавил одну строчку в реестр — новая страница, SEO, sitemap
-подхватятся автоматически.
+These hit external APIs and take minutes, so they're run by hand and commit generated data:
 
----
+```bash
+npm run history    # daily price history for the backtester
+npm run unlocks    # token unlock schedules (DefiLlama)
+npm run halvings   # halving estimates from live chain tips
+```
 
-## 🗂 Структура проекта
+## Adding a tool or guide
+
+Each tool is one config in `src/lib/tools/configs/*.ts`, registered in
+`src/lib/tools/registry.ts`; guides live under `src/lib/guides/`. See
+[`docs/ADDING_TOOLS.md`](docs/ADDING_TOOLS.md).
+
+## Deployment
+
+The site is hosted on shared hosting behind Cloudflare. `npm run deploy` builds, then
+uploads only the changed files and purges the Cloudflare cache — see
+[`docs/DEPLOY.md`](docs/DEPLOY.md). Deploy credentials live in `scripts/.deploy.env`
+(gitignored); a template is in `scripts/.deploy.env.example`.
+
+> Note: `git push` does **not** deploy. Publishing to production is the separate
+> `npm run deploy` step.
+
+## Project layout
 
 ```
 src/
-├─ app/                      # страницы (App Router)
-│  ├─ page.tsx               # главная
-│  ├─ tools/[slug]/page.tsx  # универсальная страница инструмента (SSG)
-│  ├─ tools/page.tsx         # каталог всех инструментов + фильтр
-│  ├─ category/[category]/   # страницы категорий
-│  ├─ sitemap.ts             # авто sitemap.xml
-│  └─ robots.ts              # авто robots.txt
-├─ components/               # UI: движок, карточки, поиск, тема, слоты рекламы
-└─ lib/
-   ├─ tools/
-   │  ├─ types.ts            # схема одного инструмента
-   │  ├─ formula.ts          # безопасный вычислитель формул-строк (без eval)
-   │  ├─ run.ts              # исполнитель + нормализация результата
-   │  ├─ registry.ts         # сборка всех инструментов + поиск/связи
-   │  └─ configs/            # 👉 ОДИН ФАЙЛ = ОДИН ИНСТРУМЕНТ
-   ├─ categories.ts          # категории
-   ├─ seo.ts                 # метаданные + JSON-LD
-   └─ market/                # (опционально) заготовка под CoinGecko/Binance
+  app/(site)/     page routes (tools, coins, guides, portfolio, calendar, …)
+  app/(embed)/    minimal layout for embeddable widgets
+  components/     shared UI (ToolEngine, charts, ads, header/footer)
+  lib/            configs + engines: tools, guides, backtest, portfolio, harvest, …
+scripts/          build-time generators + the deploy script
+public/           static assets, logos, generated data, OG cards
+docs/             ADDING_TOOLS.md, DEPLOY.md
 ```
-
-## 🧠 Как работает движок
-
-Один универсальный компонент `ToolEngine`:
-- читает конфиг инструмента,
-- автоматически строит форму из `inputs`,
-- считает результат (`compute`-функция для встроенных или безопасная строка-формула),
-- рисует результат + разбивку,
-- страница отдаёт SEO-мета, JSON-LD и FAQ из того же конфига.
-
-Ни один инструмент не требует своего кода страницы.
-
-## 💰 Монетизация
-
-В `src/components/ads/AdSlot.tsx` — заготовки слотов (`AdSlot`, `AffiliateBanner`,
-`SponsoredSlot`). Логики рекламы пока нет: вставь свой AdSense/партнёрский код и
-переключи `NEXT_PUBLIC_ENABLE_ADS=true`.
-
-## 📈 Масштабирование
-
-Добавление инструментов не замедляет сайт: каждая страница — статический HTML,
-генерируется на сборке. 500+ инструментов — без деградации.
