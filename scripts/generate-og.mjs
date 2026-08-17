@@ -287,6 +287,18 @@ async function main() {
     footnote: "Compare all three on your own file",
   }));
 
+  // Research: linkable data studies.
+  add("research", async () => ({
+    eyebrow: "Research",
+    title: "Crypto research & data studies",
+    footnote: CTA,
+  }));
+  add("research/crypto-correlation", async () => ({
+    eyebrow: "Data study",
+    title: "How correlated is the crypto market?",
+    footnote: "Measured from real daily closes",
+  }));
+
   // Flat families: one card per directory under each of these.
   for (const [dir, eyebrow] of [
     ["tools", "Crypto calculator"],

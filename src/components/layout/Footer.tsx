@@ -62,6 +62,7 @@ export function Footer() {
               <li><Link href="/unlocks" className="muted hover:text-brand-ink">Token unlock calendar</Link></li>
               <li><Link href="/calendar" className="muted hover:text-brand-ink">Crypto calendar</Link></li>
               <li><Link href="/guides" className="muted hover:text-brand-ink">Guides</Link></li>
+              <li><Link href="/research" className="muted hover:text-brand-ink">Research</Link></li>
               <li><Link href="/about" className="muted hover:text-brand-ink">About</Link></li>
               <li><Link href="/contact" className="muted hover:text-brand-ink">Contact</Link></li>
               <li><Link href="/donate" className="muted hover:text-brand-ink">Support us</Link></li>
