@@ -12,6 +12,7 @@
     "history": "node scripts/generate-history.mjs",
     "unlocks": "node scripts/generate-unlocks.mjs",
     "halvings": "node scripts/generate-halvings.mjs",
+    "indexnow": "node scripts/indexnow.mjs",
     "deploy": "node scripts/deploy.mjs",
     "deploy:dry": "node scripts/deploy.mjs --dry-run --no-build",
     "deploy:selftest": "node scripts/deploy.mjs --selftest --no-build"

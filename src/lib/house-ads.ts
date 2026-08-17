@@ -48,6 +48,33 @@ export const houseAds: HouseAd[] = [
     cta: "Open CalcLumen",
   },
   {
+    id: "costtrek",
+    href: "https://costtrek.com/",
+    lang: "en",
+    eyebrow: "Cost of living",
+    title: "Will your salary go further abroad?",
+    description: "Compare cost of living, taxes and quality of life across 49 cities before you move.",
+    cta: "Open CostTrek",
+  },
+  {
+    id: "iznkit",
+    href: "https://iznkit.com/",
+    lang: "en",
+    eyebrow: "Free PDF tools",
+    title: "Invoices & docs → a clean PDF, free",
+    description: "21+ generators and calculators: invoices, quotes, freelance tax, QR codes. No signup.",
+    cta: "Open iznKit",
+  },
+  {
+    id: "izngames",
+    href: "https://izngames.com/",
+    lang: "en",
+    eyebrow: "Free games",
+    title: "Free browser games — no install",
+    description: "Quick, casual games you can play right in the browser. Nothing to download.",
+    cta: "Open iznGames",
+  },
+  {
     id: "prodom-expert",
     href: "https://prodom-expert.ru/",
     lang: "ru",
@@ -67,21 +94,30 @@ export const houseAds: HouseAd[] = [
   },
 ];
 
-/** Shown on the server and to every non-Russian visitor. */
-export const defaultHouseAd: HouseAd = houseAds.find((a) => a.id === "calclumen")!;
-
-/** The pool a Russian-speaking visitor rotates through, after mount. */
+export const englishHouseAds: HouseAd[] = houseAds.filter((a) => a.lang === "en");
 export const russianHouseAds: HouseAd[] = houseAds.filter((a) => a.lang === "ru");
 
 /**
- * Pick the house ad to show for a browser language. Deterministic default; a
- * Russian visitor gets one of the Russian ads chosen by `pick` in [0, 1) so the
- * caller controls variety across slots without this module importing randomness.
+ * Shown on the server and on every first paint, before we know the visitor's
+ * language. Must be ONE stable ad so the static HTML and hydration match — the
+ * client swaps in a rotated/localised one after mount. CalcLumen is the closest
+ * fit to a crypto-calculator audience, so it is the safe default.
+ */
+export const defaultHouseAd: HouseAd = houseAds.find((a) => a.id === "calclumen")!;
+
+/**
+ * Pick the house ad to show for a browser language. Russian visitors rotate
+ * through the Russian sites; everyone else rotates through the English ones.
+ * `pick` is a number in [0, 1) supplied by the caller (one Math.random per slot,
+ * after mount), so variety across slots lives in the component and this module
+ * stays pure and safe to import on the server.
  */
 export function houseAdFor(language: string | undefined, pick: number): HouseAd {
-  if (language && language.toLowerCase().startsWith("ru") && russianHouseAds.length > 0) {
-    const i = Math.min(russianHouseAds.length - 1, Math.floor(pick * russianHouseAds.length));
-    return russianHouseAds[i];
-  }
-  return defaultHouseAd;
+  const pool =
+    language && language.toLowerCase().startsWith("ru") && russianHouseAds.length > 0
+      ? russianHouseAds
+      : englishHouseAds;
+  if (pool.length === 0) return defaultHouseAd;
+  const i = Math.min(pool.length - 1, Math.floor(pick * pool.length));
+  return pool[i];
 }
