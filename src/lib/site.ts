@@ -17,7 +17,7 @@ export const site = {
    * Public contact address shown on /contact and in the legal pages. Set up a
    * forwarder for it (Cloudflare Email Routing is free) or override via env.
    */
-  contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "contact@thecryptotools.com",
+  contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "info@thecryptotools.com",
   /**
    * Google AdSense publisher id. The loader script must be present in <head>
    * on every page for Google to verify the site and to serve Auto ads — that

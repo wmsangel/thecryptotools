@@ -8,6 +8,7 @@ import { getGuidesForTool } from "@/lib/guides/registry";
 import { ToolEngine } from "@/components/ToolEngine";
 import { CoinLogo } from "@/components/CoinLogo";
 import { CoinFacts } from "@/components/CoinFacts";
+import { CoinToolInsight } from "@/components/coins/CoinToolInsight";
 import { JsonLd } from "@/components/JsonLd";
 import { AdSlot, AffiliateBanner } from "@/components/ads/AdSlot";
 
@@ -146,6 +147,8 @@ export default function CoinToolPage({ params }: { params: { coin: string; tool:
                 </p>
               ))}
             </section>
+
+            <CoinToolInsight coin={coin} toolSlug={spec.slug} className="mt-12" />
 
             <CoinFacts coin={coin} className="mt-10" />
 
