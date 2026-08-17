@@ -9,6 +9,8 @@ import { ToolEngine } from "@/components/ToolEngine";
 import { CoinLogo } from "@/components/CoinLogo";
 import { CoinFacts } from "@/components/CoinFacts";
 import { CoinToolInsight } from "@/components/coins/CoinToolInsight";
+import { CoinCalcGrid } from "@/components/coins/CoinCalcGrid";
+import { popularCoinsForTool } from "@/lib/coins/featured-pairs";
 import { JsonLd } from "@/components/JsonLd";
 import { AdSlot, AffiliateBanner } from "@/components/ads/AdSlot";
 
@@ -48,6 +50,7 @@ export default function CoinToolPage({ params }: { params: { coin: string; tool:
   const title = spec.title(coin);
   const faq = [...spec.faq(coin), ...tool.faq.slice(0, 2)];
   const siblings = pagesForCoin(coin).filter((p) => p.spec.slug !== spec.slug);
+  const otherCoins = popularCoinsForTool(spec.slug, coin.slug, 6);
   const guides = getGuidesForTool(tool.slug).slice(0, 3);
 
   const jsonLd: Record<string, unknown>[] = [
@@ -180,6 +183,15 @@ export default function CoinToolPage({ params }: { params: { coin: string; tool:
                       <p className="muted mt-1 line-clamp-2 text-sm">{s.description(coin)}</p>
                     </Link>
                   ))}
+                </div>
+              </section>
+            )}
+
+            {otherCoins.length > 0 && (
+              <section className="mt-10">
+                <h2 className="text-xl font-bold">{tool.title} for other coins</h2>
+                <div className="mt-4">
+                  <CoinCalcGrid items={otherCoins} compact />
                 </div>
               </section>
             )}

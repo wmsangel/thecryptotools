@@ -13,6 +13,8 @@ import { JsonLd } from "@/components/JsonLd";
 import { OG_DEFAULT, collectionJsonLd } from "@/lib/seo";
 import { AdSlot, AffiliateBanner } from "@/components/ads/AdSlot";
 import { MyTools } from "@/components/MyTools";
+import { CoinCalcGrid } from "@/components/coins/CoinCalcGrid";
+import { featuredCoinCalculators } from "@/lib/coins/featured-pairs";
 import { CalendarPeek } from "@/components/calendar/CalendarPeek";
 import { calendarEvents } from "@/lib/events/registry";
 
@@ -236,6 +238,22 @@ export default function HomePage() {
             {featured.map((t) => (
               <ToolCard key={t.slug} tool={t} large />
             ))}
+          </div>
+        </section>
+
+        {/* ---------- POPULAR COIN CALCULATORS ---------- */}
+        <section className="pb-16">
+          <SectionHead
+            eyebrow="By coin"
+            title="Popular coin calculators"
+            href="/coins"
+          />
+          <p className="muted mt-3 max-w-2xl">
+            The same calculators, preloaded with each coin&apos;s live price, realistic defaults and a
+            read of its own recent history — profit, DCA and staking for the most-searched assets.
+          </p>
+          <div className="mt-8">
+            <CoinCalcGrid items={featuredCoinCalculators(12)} />
           </div>
         </section>
 
