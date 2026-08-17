@@ -16,6 +16,7 @@ const tool: ToolConfig = {
   description:
     "Encode text to Base64 or decode Base64 back to text — instant, client-side, nothing leaves your browser.",
   category: "dev",
+  noindex: true,
   popular: true,
   source: "builtin",
   seo: {

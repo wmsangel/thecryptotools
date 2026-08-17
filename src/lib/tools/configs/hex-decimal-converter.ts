@@ -9,6 +9,7 @@ const tool: ToolConfig = {
   description:
     "Convert numbers between hexadecimal, decimal and binary — handy for smart contracts, addresses and low-level data.",
   category: "dev",
+  noindex: true,
   popular: true,
   source: "builtin",
   seo: {

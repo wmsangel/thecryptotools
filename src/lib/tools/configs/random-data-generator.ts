@@ -16,6 +16,7 @@ const tool: ToolConfig = {
   description:
     "Generate UUIDs, random hex strings, numbers or passwords for testing and development — as many as you need at once.",
   category: "dev",
+  noindex: true,
   source: "builtin",
   seo: {
     keywords: [

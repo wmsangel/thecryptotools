@@ -14,6 +14,7 @@ const tool: ToolConfig = {
   description:
     "Generate an array of realistic fake user records as JSON — ideal seed data for APIs, tables and frontend prototypes.",
   category: "dev",
+  noindex: true,
   popular: true,
   source: "builtin",
   seo: {

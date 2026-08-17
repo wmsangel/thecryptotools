@@ -175,12 +175,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  const toolRoutes: MetadataRoute.Sitemap = tools.map((t) => ({
-    url: absoluteUrl(`/tools/${t.slug}`),
-    lastModified: t.updatedAt ? new Date(t.updatedAt) : undefined,
-    changeFrequency: "weekly",
-    priority: t.featured ? 0.9 : 0.8,
-  }));
+  const toolRoutes: MetadataRoute.Sitemap = tools
+    .filter((t) => !t.noindex)
+    .map((t) => ({
+      url: absoluteUrl(`/tools/${t.slug}`),
+      lastModified: t.updatedAt ? new Date(t.updatedAt) : undefined,
+      changeFrequency: "weekly",
+      priority: t.featured ? 0.9 : 0.8,
+    }));
 
   return [
     ...staticRoutes,

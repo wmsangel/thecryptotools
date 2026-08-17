@@ -95,6 +95,9 @@ export function buildToolMetadata(tool: ToolConfig): Metadata {
     title,
     description,
     keywords: tool.seo.keywords,
+    // Off-topic utilities are crawlable but kept out of the index so they do not
+    // drag the site's content-quality signal; links out of them are still followed.
+    robots: tool.noindex ? { index: false, follow: true } : undefined,
     alternates: { canonical: url },
     openGraph: {
       type: "website",

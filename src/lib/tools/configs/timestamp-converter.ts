@@ -7,6 +7,7 @@ const tool: ToolConfig = {
   description:
     "Convert a Unix timestamp to a human-readable UTC date and time, with seconds or milliseconds auto-detected.",
   category: "dev",
+  noindex: true,
   popular: true,
   source: "builtin",
   seo: {

@@ -121,6 +121,14 @@ export interface ToolConfig {
   description: string;
   category: CategoryId;
   seo: ToolSeo;
+  /**
+   * When true, the tool page is served `noindex, follow` and left out of the
+   * sitemap. Used for generic, off-topic developer utilities (base64, hex,
+   * timestamp…) that will never rank against the whole web and only dilute a
+   * crypto site's topical focus. The page still works for anyone who lands on
+   * it directly or browses to it — it just does not represent us in search.
+   */
+  noindex?: boolean;
   inputs: ToolInput[];
 
   /** Built-in path: typed function. Provide this OR `expression`. */
