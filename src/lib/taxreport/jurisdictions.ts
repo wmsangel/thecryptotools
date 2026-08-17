@@ -14,6 +14,8 @@
 
 export type MatchingMethod =
   | "fifo" // oldest lot first
+  | "lifo" // newest lot first — US specific-identification only
+  | "hifo" // highest-cost lot first — US specific-identification only
   | "acb" // adjusted cost base / moving average (Canada)
   | "pool104" // UK: same-day, then 30-day, then the Section 104 pool
   | "annual-pool"; // Poland: annual revenue less annual costs, no lot matching

@@ -163,6 +163,13 @@ export default function CryptoTaxReportPage() {
               Run the same file through the harvesting tool →
             </Link>
           </p>
+          <p className="muted mt-4 leading-relaxed">
+            Filing in the US? The cost-basis method you elect — FIFO, LIFO or HIFO — changes the gain
+            above, sometimes by thousands.{" "}
+            <Link href="/cost-basis-method-calculator" className="font-semibold text-brand-ink hover:underline">
+              Compare all three on the same file →
+            </Link>
+          </p>
         </div>
       </section>
 

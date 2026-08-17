@@ -231,6 +231,7 @@ export default function Page() {
         <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {[
             { href: "/crypto-tax-report", title: "Crypto tax report", note: "The full capital-gains position from the same CSV" },
+            { href: "/cost-basis-method-calculator", title: "Cost basis methods", note: "FIFO vs LIFO vs HIFO on the same file (US)" },
             { href: "/tools/tax-loss-harvesting-calculator", title: "Harvesting calculator", note: "One position, no file needed" },
             { href: "/guides/crypto-tax-loss-harvesting", title: "Harvesting explained", note: "The rules, country by country, in prose" },
             { href: "/guides/crypto-tax-by-country", title: "Crypto tax by country", note: "The rules behind every figure here" },

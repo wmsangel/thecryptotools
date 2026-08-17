@@ -110,6 +110,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Same reasoning as the tax report: the page is a client-side calculator
     // over the visitor's own file, so its HTML has no content date to claim.
     { url: absoluteUrl("/tax-loss-harvesting"), changeFrequency: "weekly", priority: 0.9 },
+    { url: absoluteUrl("/cost-basis-method-calculator"), changeFrequency: "weekly", priority: 0.9 },
     { url: absoluteUrl("/donate"), changeFrequency: "monthly", priority: 0.4 },
   ];
 

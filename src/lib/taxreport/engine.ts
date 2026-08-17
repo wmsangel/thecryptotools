@@ -13,7 +13,7 @@
 
 import type { Disposal, OpenLot, ReportIssue, TaxReport, ReportTotals, Tx } from "./types";
 import { FIAT_CODES } from "./csv";
-import { reliefApplies, taxYearFor, type Jurisdiction } from "./jurisdictions";
+import { reliefApplies, taxYearFor, type Jurisdiction, type MatchingMethod } from "./jurisdictions";
 
 const DAY_MS = 86_400_000;
 
@@ -51,10 +51,21 @@ export interface ReportOptions {
   taxYearLabel: string;
   rate: number;
   longTermRate?: number;
+  /**
+   * Override the jurisdiction's matching method. Only meaningful where the law
+   * lets you choose the method — in practice the US, whose specific-
+   * identification rule permits FIFO, LIFO or HIFO. The cost-basis method
+   * comparison passes each in turn to run the same history three ways.
+   */
+  methodOverride?: MatchingMethod;
+  /** Label for the overridden method, echoed into the disposals and report. */
+  methodLabelOverride?: string;
 }
 
 export function buildReport(txs: Tx[], importIssues: ReportIssue[], opts: ReportOptions): TaxReport {
   const j = opts.jurisdiction;
+  const method = opts.methodOverride ?? j.method;
+  const methodLabel = opts.methodLabelOverride ?? j.methodLabel;
   const issues: ReportIssue[] = [...importIssues];
   const disposals: Disposal[] = [];
 
@@ -95,7 +106,7 @@ export function buildReport(txs: Tx[], importIssues: ReportIssue[], opts: Report
       out.push({ qty: amount, cost, acquired: lot.acquired });
     };
 
-    if (j.method === "pool104") {
+    if (method === "pool104") {
       // HMRC order: same day, then acquisitions in the next 30 days, then pool.
       for (const lot of pool) {
         if (remaining <= 1e-12) break;
@@ -124,7 +135,7 @@ export function buildReport(txs: Tx[], importIssues: ReportIssue[], opts: Report
         // The pool has no single acquisition date — holding relief cannot apply.
         out.push({ qty: taken, cost, acquired: null });
       }
-    } else if (j.method === "acb") {
+    } else if (method === "acb") {
       const live = pool.filter((l) => l.qty > 1e-12);
       const totalQty = live.reduce((s, l) => s + l.qty, 0);
       const totalCost = live.reduce((s, l) => s + l.qty * l.costPerUnit, 0);
@@ -135,6 +146,22 @@ export function buildReport(txs: Tx[], importIssues: ReportIssue[], opts: Report
         for (const lot of live) lot.qty -= lot.qty * share;
         remaining -= amount;
         out.push({ qty: amount, cost, acquired: null });
+      }
+    } else if (method === "lifo") {
+      // Newest lot first. Pool is in acquisition order, so walk it backwards.
+      for (const lot of [...pool].reverse()) {
+        if (remaining <= 1e-12) break;
+        if (lot.qty > 1e-12) consume(lot, Math.min(lot.qty, remaining));
+      }
+    } else if (method === "hifo") {
+      // Highest cost per unit first — the order that minimises this year's gain.
+      // Ties broken by oldest-first so the result is deterministic.
+      const ordered = pool
+        .filter((l) => l.qty > 1e-12)
+        .sort((a, b) => b.costPerUnit - a.costPerUnit || a.acquired.getTime() - b.acquired.getTime());
+      for (const lot of ordered) {
+        if (remaining <= 1e-12) break;
+        if (lot.qty > 1e-12) consume(lot, Math.min(lot.qty, remaining));
       }
     } else {
       // FIFO — oldest first.
@@ -156,7 +183,7 @@ export function buildReport(txs: Tx[], importIssues: ReportIssue[], opts: Report
    * processed. Pre-load every acquisition for the pooling method only — FIFO
    * and ACB must never see a lot that had not been bought yet.
    */
-  const preloadAcquisitions = j.method === "pool104";
+  const preloadAcquisitions = method === "pool104";
   if (preloadAcquisitions) {
     for (const t of txs) {
       if (!t.receivedAsset || !t.receivedAmount) continue;
@@ -255,7 +282,7 @@ export function buildReport(txs: Tx[], importIssues: ReportIssue[], opts: Report
           break;
         }
         if (inYear(tx.date)) {
-          record(tx, tx.sentAsset, matches, tx.fiatValue, tx.fiatFee ?? 0, j.methodLabel);
+          record(tx, tx.sentAsset, matches, tx.fiatValue, tx.fiatFee ?? 0, methodLabel);
         }
         break;
       }
@@ -278,7 +305,7 @@ export function buildReport(txs: Tx[], importIssues: ReportIssue[], opts: Report
         if (tx.fiatValue === undefined) {
           issues.push({ line: tx.line, severity: "error", message: `Swap of ${tx.sentAsset} for ${tx.receivedAsset} has no value in ${j.currencyCode}. A crypto-to-crypto swap is a taxable disposal here and cannot be valued from the row alone — add a value column.` });
         }
-        if (inYear(tx.date)) record(tx, tx.sentAsset, matches, tx.fiatValue, tx.fiatFee ?? 0, j.methodLabel);
+        if (inYear(tx.date)) record(tx, tx.sentAsset, matches, tx.fiatValue, tx.fiatFee ?? 0, methodLabel);
         // The received asset's basis is what it was worth at the swap. Without
         // a value we fall back to the disposed cost, which at least conserves
         // the total basis rather than fabricating one.
@@ -345,7 +372,7 @@ export function buildReport(txs: Tx[], importIssues: ReportIssue[], opts: Report
     totals,
     holdings,
     openLots,
-    methodLabel: j.methodLabel,
+    methodLabel,
   };
 }
 

@@ -280,6 +280,13 @@ async function main() {
     footnote: "12 countries · 100% in your browser",
   }));
 
+  // The US method-comparison companion to the tax report.
+  add("cost-basis-method-calculator", async () => ({
+    eyebrow: "Cost basis methods",
+    title: "FIFO vs LIFO vs HIFO for crypto tax",
+    footnote: "Compare all three on your own file",
+  }));
+
   // Flat families: one card per directory under each of these.
   for (const [dir, eyebrow] of [
     ["tools", "Crypto calculator"],

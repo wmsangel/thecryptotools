@@ -55,6 +55,7 @@ export function Footer() {
               <li><Link href="/widgets" className="muted hover:text-brand-ink">Embeddable widgets</Link></li>
               <li><Link href="/crypto-tax-report" className="muted hover:text-brand-ink">Crypto tax report</Link></li>
               <li><Link href="/tax-loss-harvesting" className="muted hover:text-brand-ink">Tax loss harvesting</Link></li>
+              <li><Link href="/cost-basis-method-calculator" className="muted hover:text-brand-ink">Cost basis method (FIFO/LIFO/HIFO)</Link></li>
               <li><Link href="/portfolio" className="muted hover:text-brand-ink">Portfolio analyzer</Link></li>
               <li><Link href="/portfolio/correlation" className="muted hover:text-brand-ink">Correlation matrix</Link></li>
               <li><Link href="/investment-calculator" className="muted hover:text-brand-ink">Investment calculator</Link></li>
