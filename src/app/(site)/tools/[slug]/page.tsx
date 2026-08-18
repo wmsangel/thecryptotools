@@ -13,6 +13,7 @@ import { FaqSection } from "@/components/FaqSection";
 import { RelatedTools } from "@/components/RelatedTools";
 import { JsonLd } from "@/components/JsonLd";
 import { AdSlot, AffiliateBanner } from "@/components/ads/AdSlot";
+import { tradeContextForTool } from "@/lib/affiliate";
 
 export const dynamicParams = false;
 
@@ -127,7 +128,7 @@ export default function ToolPage({ params }: { params: { slug: string } }) {
           {/* div, not <aside>: a complementary landmark nested inside <main> is a
               landmark-structure error, and this is a sidebar of ads/links. */}
           <div className="space-y-4">
-            <AffiliateBanner />
+            <AffiliateBanner context={tradeContextForTool(tool.slug)} placement={`tool-${tool.slug}`} />
             <AdSlot slot="tool-sidebar" />
           </div>
         </div>

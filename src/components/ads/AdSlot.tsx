@@ -20,6 +20,7 @@ import { useEffect, useRef, useState } from "react";
 import { CONSENT_CHANGED_EVENT, readConsent, type Consent } from "@/lib/consent";
 import { site } from "@/lib/site";
 import { defaultHouseAd, houseAdFor, type HouseAd as HouseAdData } from "@/lib/house-ads";
+import { exchangesForContext, type TradeContext } from "@/lib/affiliate";
 
 const adsEnabled = process.env.NEXT_PUBLIC_ENABLE_ADS === "true";
 
@@ -120,13 +121,67 @@ function HouseAd({ slot, className = "" }: { slot: string; className?: string })
   );
 }
 
-export function AffiliateBanner({ className = "" }: { className?: string }) {
+/**
+ * A real, disclosed exchange call-to-action. Renders the best-fitting partner
+ * exchange for the page (derivatives vs spot) from platforms.ts, and nothing at
+ * all if no exchange has a real referral link configured — never a placeholder.
+ */
+export function AffiliateBanner({
+  className = "",
+  context = "spot",
+  coinSymbol,
+  placement = "sidebar",
+}: {
+  className?: string;
+  context?: TradeContext;
+  /** When set, the CTA reads "Trade BTC on …" instead of the generic verb. */
+  coinSymbol?: string;
+  /** GA attribution for which slot converted. */
+  placement?: string;
+}) {
+  const picks = exchangesForContext(context, 3);
+  if (picks.length === 0) return null;
+  const [primary, ...alts] = picks;
+  const verb = coinSymbol ? `Trade ${coinSymbol}` : "Start trading";
+
   return (
-    <div className={`card p-4 ${className}`}>
+    <div className={`card p-5 ${className}`}>
       <div className="text-xs font-semibold uppercase tracking-wide text-brand-ink">Partner</div>
-      <div className="mt-1 text-sm font-medium">Trade on a top crypto exchange</div>
-      <p className="muted mt-1 text-xs">
-        Affiliate banner placeholder — swap in your exchange referral (Binance, Bybit, etc.).
+      <div className="mt-1 font-semibold">{verb} on {primary.name}</div>
+      <p className="muted mt-1 text-xs leading-relaxed">{primary.bonus}</p>
+      <a
+        href={primary.url}
+        target="_blank"
+        rel="sponsored nofollow noopener noreferrer"
+        data-affiliate={primary.slug}
+        data-affiliate-placement={placement}
+        className="btn-primary mt-3 w-full"
+      >
+        {verb} on {primary.name} →
+      </a>
+      {alts.length > 0 && (
+        <p className="muted mt-3 text-xs">
+          Also:{" "}
+          {alts.map((a, i) => (
+            <span key={a.slug}>
+              {i > 0 && " · "}
+              <a
+                href={a.url}
+                target="_blank"
+                rel="sponsored nofollow noopener noreferrer"
+                data-affiliate={a.slug}
+                data-affiliate-placement={placement}
+                className="font-semibold text-brand-ink hover:underline"
+              >
+                {a.name}
+              </a>
+            </span>
+          ))}
+        </p>
+      )}
+      <p className="muted mt-3 text-[11px] leading-snug">
+        Partner links — we may earn a commission at no extra cost to you. See our{" "}
+        <a href="/affiliate-disclosure" className="underline hover:text-brand-ink">affiliate disclosure</a>.
       </p>
     </div>
   );

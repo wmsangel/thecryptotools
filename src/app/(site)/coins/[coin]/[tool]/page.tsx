@@ -11,6 +11,7 @@ import { CoinFacts } from "@/components/CoinFacts";
 import { CoinToolInsight } from "@/components/coins/CoinToolInsight";
 import { CoinCalcGrid } from "@/components/coins/CoinCalcGrid";
 import { popularCoinsForTool } from "@/lib/coins/featured-pairs";
+import { tradeContextForTool } from "@/lib/affiliate";
 import { JsonLd } from "@/components/JsonLd";
 import { AdSlot, AffiliateBanner } from "@/components/ads/AdSlot";
 
@@ -231,7 +232,11 @@ export default function CoinToolPage({ params }: { params: { coin: string; tool:
           {/* div, not <aside>: a complementary landmark nested inside <main> is a
               landmark-structure error, and this is a sidebar of ads/links. */}
           <div className="space-y-4">
-            <AffiliateBanner />
+            <AffiliateBanner
+              context={tradeContextForTool(spec.slug)}
+              coinSymbol={coin.symbol}
+              placement={`coin-${coin.slug}-${spec.slug}`}
+            />
             <AdSlot slot="tool-sidebar" />
           </div>
         </div>
