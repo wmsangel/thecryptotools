@@ -13,8 +13,16 @@ export function ThemeToggle() {
 
   function toggle() {
     const next = !dark;
+    const root = document.documentElement;
+    // Suppress colour transitions for this one flip so no element renders an
+    // intermediate low-contrast state (see `.theme-switching` in globals.css).
+    root.classList.add("theme-switching");
     setDark(next);
-    document.documentElement.classList.toggle("dark", next);
+    root.classList.toggle("dark", next);
+    // Force a style flush so the colour swap commits with transitions disabled,
+    // then re-enable them next frame for normal hover/focus animation.
+    void root.offsetHeight;
+    requestAnimationFrame(() => root.classList.remove("theme-switching"));
     try {
       localStorage.setItem("theme", next ? "dark" : "light");
     } catch {

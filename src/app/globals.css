@@ -190,6 +190,23 @@ body {
   }
 }
 
+/**
+ * Theme toggle: kill the colour cross-fade for the single frame in which the
+ * theme flips. Elements carry `transition` on colour/background, so a light→dark
+ * swap animates each property independently — and mid-animation a dark-theme
+ * text colour can sit on a not-yet-darkened surface (e.g. #93a4bd on #f6f8fb,
+ * 2.38:1). The state is stable and compliant at both ends; only the ~150ms
+ * tween dips. ThemeToggle adds `.theme-switching` to <html>, flips the class,
+ * forces a reflow so colours snap with transitions off, then removes it on the
+ * next frame so hover/focus transitions keep working.
+ */
+html.theme-switching,
+html.theme-switching *,
+html.theme-switching *::before,
+html.theme-switching *::after {
+  transition: none !important;
+}
+
 /* subtle scrollbar for code/result blocks */
 ::-webkit-scrollbar { height: 8px; width: 8px; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 8px; }
