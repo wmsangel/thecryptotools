@@ -108,6 +108,12 @@ export interface ToolFaqItem {
   a: string;
 }
 
+/** A block in a tool's optional hand-written article. */
+export type ToolArticleBlock =
+  | { type: "h2"; text: string }
+  | { type: "p"; text: string }
+  | { type: "ul"; items: string[] };
+
 export interface ToolSeo {
   keywords: string[];
   description: string;
@@ -143,6 +149,14 @@ export interface ToolConfig {
   precision?: number;
 
   faq: ToolFaqItem[];
+
+  /**
+   * Optional hand-written, tool-specific article rendered under the generated
+   * SEO copy. Use it where a tool competes in a crowded generic field (compound
+   * interest, APY…) and needs unique, crypto-specific substance to stand out —
+   * the templated ToolSeoContent alone reads like every other calculator.
+   */
+  article?: ToolArticleBlock[];
 
   /** Curation flags used for homepage sections & internal linking. */
   featured?: boolean;

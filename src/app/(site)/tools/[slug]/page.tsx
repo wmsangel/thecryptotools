@@ -76,6 +76,28 @@ export default function ToolPage({ params }: { params: { slug: string } }) {
         <div className="grid gap-8 lg:grid-cols-[1fr_300px]">
           <div>
             <ToolSeoContent tool={tool} related={related} />
+
+            {tool.article && tool.article.length > 0 && (
+              <section className="mt-12 max-w-3xl">
+                {tool.article.map((block, i) => {
+                  if (block.type === "h2")
+                    return <h2 key={i} className="mt-8 text-2xl font-extrabold tracking-tight sm:text-3xl first:mt-0">{block.text}</h2>;
+                  if (block.type === "ul")
+                    return (
+                      <ul key={i} className="mt-4 space-y-2">
+                        {block.items.map((it, j) => (
+                          <li key={j} className="flex gap-3 leading-relaxed">
+                            <span className="mt-1 select-none text-brand-ink" aria-hidden>▸</span>
+                            <span>{it}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    );
+                  return <p key={i} className="mt-4 leading-relaxed text-[var(--text)]/90">{block.text}</p>;
+                })}
+              </section>
+            )}
+
             {coinVersions.length > 0 && (
               <section className="mt-10">
                 <h2 className="text-xl font-bold">Coin-specific versions</h2>

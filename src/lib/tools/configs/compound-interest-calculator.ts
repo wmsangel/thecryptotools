@@ -54,7 +54,33 @@ const tool: ToolConfig = {
       ],
     };
   },
-  relatedSlugs: ["crypto-withdrawal-calculator", "apy-calculator", "staking-rewards-calculator", "crypto-savings-goal-calculator"],
+  relatedSlugs: ["apy-calculator", "staking-rewards-calculator", "crypto-lending-calculator", "yield-farming-apy-calculator"],
+  article: [
+    { type: "h2", text: "Compounding in crypto is not compounding in a savings account" },
+    {
+      type: "p",
+      text: "In a bank the rate is fixed and the currency is stable, so a projection like the one above is the whole story. In crypto the “interest” comes from staking, lending or providing liquidity at rates that float from week to week, and it is paid in the same token you already hold. So this projection assumes a steady rate and quietly ignores the variable that usually decides the outcome: the token’s own price. An 8% yield compounded for five years is erased by a single 40% drawdown in the asset, and no compounding frequency changes that.",
+    },
+    { type: "h2", text: "APR vs APY — the number crypto platforms blur" },
+    {
+      type: "p",
+      text: "Most crypto yields are advertised as APY, which already contains the effect of compounding. Enter an APY here and then let it compound monthly and you double-count. If your platform quotes APR — the flat rate before compounding — then monthly compounding is right and APY is what you actually end up with. The gap grows with the rate: 12% APR compounded daily is about 12.7% APY; 100% APR is about 171%. Enter APR and let the tool compound it, or enter the APY directly and treat the rate as the final number.",
+    },
+    { type: "h2", text: "Realistic crypto yield ranges — a starting point, not a promise" },
+    {
+      type: "ul",
+      items: [
+        "Proof-of-stake staking: roughly 2–8% a year, depending on the chain and how much of the supply is staked network-wide.",
+        "Stablecoin lending on major platforms: roughly 4–12% — but that rate is the platform’s promise, not the protocol’s, and platforms have failed.",
+        "Liquidity provision and yield farming: often quoted at 20%+, but the headline ignores impermanent loss and decaying token emissions — read it as gross, not net.",
+        "“Too good” tiers of 50%+: almost always subsidised by token emissions that fall over time, or a risk you are being paid to take. Model them if you like, but do not plan around them.",
+      ],
+    },
+    {
+      type: "p",
+      text: "The honest way to use this: run a conservative rate you would actually accept, then run an optimistic one, and treat the two results as a range rather than a target. And judge any crypto yield on total return in dollars — where, more often than not, the token price matters more than the rate you compounded.",
+    },
+  ],
   faq: [
     { q: "How does compound interest work?", a: "Each period's earnings are added to the balance, so future earnings are calculated on a larger amount — growth accelerates over time." },
     { q: "Does it include my monthly deposits?", a: "Yes — each monthly contribution compounds from the month it's added, using monthly compounding." },

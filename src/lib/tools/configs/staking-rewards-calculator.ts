@@ -48,7 +48,7 @@ const tool: ToolConfig = {
       ],
     };
   },
-  relatedSlugs: ["crypto-lending-calculator"],
+  relatedSlugs: ["apy-calculator", "compound-interest-calculator", "crypto-lending-calculator", "yield-farming-apy-calculator"],
   faq: [
     { q: "How are staking rewards calculated?", a: "Rewards ≈ amount staked × annual reward rate × (days ÷ 365). This is a simple (non-compounded) estimate." },
     { q: "APR vs APY for staking?", a: "APR is the flat annual rate. If you restake (compound) rewards, your effective APY is higher — see the APY calculator." },

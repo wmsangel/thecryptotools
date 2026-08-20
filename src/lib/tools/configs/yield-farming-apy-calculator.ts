@@ -57,7 +57,7 @@ const tool: ToolConfig = {
       ],
     };
   },
-  relatedSlugs: ["crypto-lending-calculator"],
+  relatedSlugs: ["apy-calculator", "compound-interest-calculator", "crypto-lending-calculator", "staking-rewards-calculator"],
   faq: [
     { q: "What's the difference between APR and APY?", a: "APR is the simple annual rate. APY includes the effect of reinvesting (compounding) your rewards, so it's always higher than APR when you compound more than once a year." },
     { q: "How does compounding frequency change my yield?", a: "The more often you harvest and reinvest, the higher the APY — but each reinvest costs gas, so daily compounding isn't always worth it for small positions." },
