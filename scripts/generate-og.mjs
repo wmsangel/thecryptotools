@@ -298,6 +298,11 @@ async function main() {
     title: "How correlated is the crypto market?",
     footnote: "Measured from real daily closes",
   }));
+  add("research/crypto-drawdowns", async () => ({
+    eyebrow: "Data study",
+    title: "How deep do crypto crashes go?",
+    footnote: "Drawdowns & recovery, from real data",
+  }));
 
   // Flat families: one card per directory under each of these.
   for (const [dir, eyebrow] of [

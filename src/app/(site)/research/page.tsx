@@ -4,6 +4,7 @@ import { absoluteUrl } from "@/lib/site";
 import { breadcrumbJsonLd, ogImage } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { getCorrelationStudy } from "@/lib/research/crypto-correlation";
+import { getDrawdownStudy } from "@/lib/research/crypto-drawdowns";
 
 const TITLE = "Crypto Research & Data Studies";
 const DESCRIPTION =
@@ -25,6 +26,8 @@ export const metadata: Metadata = {
 
 export default function Page() {
   const study = getCorrelationStudy();
+  const drawdowns = getDrawdownStudy();
+  const avgDepth = drawdowns ? Math.round(drawdowns.avgWorstDepth) : 80;
 
   const studies = [
     {
@@ -36,6 +39,16 @@ export default function Page() {
       stat: study ? study.rho.toFixed(2) : "0.80",
       statLabel: "avg correlation",
       updated: study?.through,
+    },
+    {
+      href: "/research/crypto-drawdowns",
+      title: "How deep do crypto crashes go?",
+      blurb: drawdowns
+        ? `The ${drawdowns.count} largest cryptocurrencies have fallen an average of ${avgDepth}% from their peak, and spent ~${Math.round(drawdowns.avgUnderwater)}% of their life underwater. How deep, and how long recovery takes.`
+        : "How far the largest cryptocurrencies fall from their peaks, and how long recovery takes.",
+      stat: `−${avgDepth}%`,
+      statLabel: "avg worst drawdown",
+      updated: drawdowns?.through,
     },
   ];
 

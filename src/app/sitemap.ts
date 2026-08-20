@@ -113,6 +113,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: absoluteUrl("/cost-basis-method-calculator"), changeFrequency: "weekly", priority: 0.9 },
     { url: absoluteUrl("/research"), changeFrequency: "monthly", priority: 0.7 },
     { url: absoluteUrl("/research/crypto-correlation"), changeFrequency: "monthly", priority: 0.8 },
+    { url: absoluteUrl("/research/crypto-drawdowns"), changeFrequency: "monthly", priority: 0.8 },
     { url: absoluteUrl("/donate"), changeFrequency: "monthly", priority: 0.4 },
   ];
 
