@@ -47,6 +47,8 @@ export function buildBaseMetadata(): Metadata {
       shortcut: [{ url: "/favicon.ico" }],
     },
     category: "finance",
+    // Site-ownership verification for the Mitgo/Awin affiliate network.
+    verification: { other: { "mitgo-verification": "d8806337-8721-40ec-a330-8759e370ab62" } },
     alternates: { canonical: site.url },
     formatDetection: { telephone: false, email: false, address: false },
     openGraph: {
