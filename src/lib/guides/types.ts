@@ -13,6 +13,13 @@
  * a link — that is how a hub page links out to the guides it summarises,
  * without needing a markup parser inside cell text.
  */
+/**
+ * Affiliate context a guide can declare. Kept in this self-contained file so the
+ * isolated guides compile (generate-llms, `--rootDir src/lib/guides`) stays
+ * clean; @/lib/affiliate imports this type rather than the other way around.
+ */
+export type GuideAffiliateKind = "exchange" | "derivatives" | "wallet" | "tax" | "bot";
+
 export interface GuideTableRow {
   cells: string[];
   href?: string;
@@ -80,6 +87,17 @@ export interface Guide {
   };
   /** Tool slugs surfaced as cards at the end (internal linking). */
   relatedTools: string[];
+  /**
+   * Optional affiliate context. A high-intent guide funnels to the right kind of
+   * partner — a seed-phrase guide to a hardware wallet, a tax guide to tax
+   * software. Renders nothing until a partner in that category has a real
+   * referral link in platforms.ts, so it is safe to set ahead of signing up.
+   *
+   * Defined HERE (not imported from @/lib/affiliate) on purpose: generate-llms
+   * compiles the guides subtree in isolation with `--rootDir src/lib/guides`, so
+   * this file must not reach outside it. affiliate.ts imports the type from here.
+   */
+  affiliate?: GuideAffiliateKind;
   /**
    * Slug of a hub guide this one belongs to. Renders a link back to the hub at
    * the top and bottom of the page — the return leg of hub-and-spoke internal

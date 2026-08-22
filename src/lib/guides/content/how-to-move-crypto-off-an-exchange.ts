@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "how-to-move-crypto-off-an-exchange",
+  affiliate: "wallet",
   title: "How to Move Crypto Off an Exchange Safely",
   description:
     "Withdrawing to self-custody is the step where beginners lose money — wrong network, missing memo, fat-fingered address. Here is the order of operations that makes it routine.",

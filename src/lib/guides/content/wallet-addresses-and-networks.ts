@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "wallet-addresses-and-networks",
+  affiliate: "wallet",
   title: "Wallet Addresses and Networks: How Crypto Gets Lost in Transit",
   description:
     "Same address, different chain. Token sent to a contract. Bitcoin format mismatch. Almost every permanently lost transfer comes from misunderstanding what an address actually identifies.",

@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "grid-trading-explained",
+  affiliate: "derivatives",
   title: "Grid Trading in Crypto: How Grid Bots Actually Make (and Lose) Money",
   description:
     "How a grid bot works, why the spacing has to clear twice your trading fee, what happens when price leaves the range, and how to size a grid you can live with.",

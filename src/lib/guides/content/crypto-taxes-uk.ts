@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "crypto-taxes-uk",
+  affiliate: "tax",
   title: "Crypto Tax in the UK: HMRC Rules, CGT Rates and Share Pooling",
   description:
     "HMRC has no separate crypto tax — it uses Capital Gains Tax, an income tax charge on rewards, and share-pooling rules that decide which coins you actually sold. Here is how all three work.",

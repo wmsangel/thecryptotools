@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "crypto-taxes-germany",
+  affiliate: "tax",
   title: "Crypto Tax in Germany: The One-Year Rule, §23 EStG and the €1,000 Limit",
   description:
     "Germany treats crypto unusually kindly: hold for more than a year and the gain is completely tax-free. Here is how §23 EStG works, the €1,000 exemption limit, staking rules and the new DAC8 reporting.",

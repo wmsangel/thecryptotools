@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "crypto-taxes-japan",
+  affiliate: "tax",
   title: "Crypto Tax in Japan: Miscellaneous Income Up to 55% — and the 20% Reform",
   description:
     "Japan taxes crypto gains as miscellaneous income at progressive rates that can reach around 55%. A reform to a flat 20% is advancing but not yet law. Here is the current system and what may change.",

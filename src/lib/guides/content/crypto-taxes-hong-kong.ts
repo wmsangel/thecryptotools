@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "crypto-taxes-hong-kong",
+  affiliate: "tax",
   title: "Crypto Tax in Hong Kong: 0% on Investment Gains — Until You Look Like a Trader",
   description:
     "Hong Kong has no capital gains tax, so a genuine long-term crypto investor pays nothing. But profits from a crypto trade are chargeable to profits tax, and the badges of trade decide which you are.",

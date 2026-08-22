@@ -7,6 +7,7 @@ import type { Guide } from "../types";
  */
 const guide: Guide = {
   slug: "crypto-tax-by-country",
+  affiliate: "tax",
   title: "Crypto Tax by Country: Rates and Rules in 22 Countries Compared",
   description:
     "How crypto is taxed in 22 countries, side by side: the headline rate, whether long-term holding helps, and whether a crypto-to-crypto swap is itself a taxable event.",

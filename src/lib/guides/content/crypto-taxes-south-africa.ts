@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "crypto-taxes-south-africa",
+  affiliate: "tax",
   title: "Crypto Tax in South Africa: 18% Effective CGT or 45% Income — SARS Decides Which",
   description:
     "SARS taxes crypto either as capital gains (40% inclusion, 18% maximum effective rate) or as ordinary income at up to 45%. Which one applies is a question of intention — and the annual exclusion just rose to R50,000.",

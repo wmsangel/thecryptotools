@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "how-to-store-a-seed-phrase",
+  affiliate: "wallet",
   title: "How to Store a Seed Phrase (Without Losing It or Leaking It)",
   description:
     "Your seed phrase is the wallet. Storing it badly is the single most common way people lose crypto — and the two failure modes, theft and loss, pull in opposite directions. Here is how to balance them.",

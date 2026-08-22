@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "crypto-taxes-spain",
+  affiliate: "tax",
   title: "Crypto Tax in Spain: Savings-Income Rates, Swaps and Modelo 721",
   description:
     "Spain taxes crypto gains as savings income on a 19%–28% sliding scale, treats every swap as a disposal, and makes you declare foreign holdings on Modelo 721. Here is how the whole system fits together.",

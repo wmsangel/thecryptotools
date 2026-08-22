@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "lost-crypto-wallet-recovery",
+  affiliate: "wallet",
   title: "Lost Access to a Crypto Wallet? What Is Actually Recoverable",
   description:
     "Some losses are fixable in ten minutes, some need specialist help, and some are genuinely final. Knowing which is which stops you wasting months — or handing your remaining coins to a fake recovery service.",

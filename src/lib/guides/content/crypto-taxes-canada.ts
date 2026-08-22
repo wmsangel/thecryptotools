@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "crypto-taxes-canada",
+  affiliate: "tax",
   title: "Crypto Tax in Canada: CRA Rules, the 50% Inclusion Rate and ACB",
   description:
     "The CRA taxes crypto as a commodity, with only half your capital gain taxable — the feared increase to two-thirds was cancelled. Here is how the ACB method, the superficial loss rule and CARF work.",

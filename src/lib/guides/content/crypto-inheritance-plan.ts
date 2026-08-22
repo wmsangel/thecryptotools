@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "crypto-inheritance-plan",
+  affiliate: "wallet",
   title: "Crypto Inheritance: Making Sure Your Coins Outlive You",
   description:
     "Self-custody has no next of kin, no password reset and no probate department. Without a plan your holdings simply stop existing for everyone else. Here is how to fix that without putting your keys in a will.",

@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "how-to-choose-a-hardware-wallet",
+  affiliate: "wallet",
   title: "How to Choose a Hardware Wallet (And Set It Up Properly)",
   description:
     "Every hardware wallet keeps your keys offline — that part is solved. What differs is the security model, the coins supported, and how easy it is to make an expensive mistake. Here is how to choose and set one up.",

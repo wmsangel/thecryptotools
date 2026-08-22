@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "how-to-calculate-liquidation-price",
+  affiliate: "derivatives",
   title: "How to Calculate Liquidation Price in Crypto Futures",
   description:
     "Understand exactly how liquidation price works on leveraged crypto positions, the formula behind it, and how to trade with a safety buffer.",

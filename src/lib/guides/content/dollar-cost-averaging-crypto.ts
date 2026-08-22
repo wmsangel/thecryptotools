@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "dollar-cost-averaging-crypto",
+  affiliate: "bot",
   title: "Dollar-Cost Averaging (DCA) in Crypto: A Complete Guide",
   description:
     "What dollar-cost averaging is, why it works in volatile crypto markets, its pros and cons, and how to model your own DCA plan.",

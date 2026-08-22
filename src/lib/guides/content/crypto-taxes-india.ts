@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "crypto-taxes-india",
+  affiliate: "tax",
   title: "Crypto Tax in India: The 30% Flat Tax, 1% TDS and No Loss Offset",
   description:
     "India runs one of the world's harshest crypto tax regimes: a flat 30% on every gain, a 1% TDS on each transfer, and no way to offset losses. Here is exactly how Sections 115BBH and 194S work.",

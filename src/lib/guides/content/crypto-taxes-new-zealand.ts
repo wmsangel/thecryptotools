@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "crypto-taxes-new-zealand",
+  affiliate: "tax",
   title: "Crypto Tax in New Zealand: No CGT, But Almost Everything Is Income",
   description:
     "New Zealand has no capital gains tax — and that is exactly why crypto is taxed so heavily. IRD treats most crypto profit as ordinary income at up to 39%, and it already holds data on 355,000 NZ crypto users.",

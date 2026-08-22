@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "perpetual-funding-rates-explained",
+  affiliate: "derivatives",
   title: "Perpetual Funding Rates Explained",
   description:
     "Funding is the payment that keeps perpetual futures pinned to spot. Learn how it is charged, what it costs a held position, and how traders read it as sentiment.",

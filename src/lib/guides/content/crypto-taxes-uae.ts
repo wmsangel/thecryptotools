@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "crypto-taxes-uae",
+  affiliate: "tax",
   title: "Crypto Tax in the UAE (Dubai): 0% for Individuals — and the Fine Print",
   description:
     "The UAE charges individuals no personal income tax and no capital gains tax on crypto. But corporate tax, VAT on mining and residency rules matter. Here is where the zero-tax story holds and where it doesn't.",

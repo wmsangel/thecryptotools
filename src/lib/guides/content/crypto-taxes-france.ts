@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "crypto-taxes-france",
+  affiliate: "tax",
   title: "Crypto Tax in France: The 30% Flat Tax, the €305 Rule and Tax-Free Swaps",
   description:
     "France taxes crypto only when you cash out to euros — crypto-to-crypto swaps are tax-free. Here is how the 30% flat tax (PFU) works, the €305 exemption, the portfolio gain formula and the account-declaration trap.",

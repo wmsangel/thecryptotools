@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "crypto-tax-loss-harvesting",
+  affiliate: "tax",
   title: "Crypto Tax Loss Harvesting: What It Saves, and What Your Country Allows",
   description:
     "How selling a losing position cuts your tax bill, why the saving is smaller than the loss, and the repurchase rule for each country — from the US wash-sale gap to Canada's 61-day window.",

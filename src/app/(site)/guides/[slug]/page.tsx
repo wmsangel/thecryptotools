@@ -9,6 +9,7 @@ import { getTool } from "@/lib/tools/registry";
 import { ToolCard } from "@/components/ToolCard";
 import { JsonLd } from "@/components/JsonLd";
 import { AdSlot } from "@/components/ads/AdSlot";
+import { GuideAffiliateCTA } from "@/components/guides/GuideAffiliateCTA";
 
 export const dynamicParams = false;
 
@@ -330,6 +331,8 @@ export default function GuidePage({ params }: { params: { slug: string } }) {
           <Block key={i} block={block} />
         ))}
       </div>
+
+      {guide.affiliate && <GuideAffiliateCTA kind={guide.affiliate} />}
 
       {guide.faq && guide.faq.length > 0 && (
         <section className="mt-12">

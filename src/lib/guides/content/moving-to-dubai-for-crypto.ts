@@ -18,6 +18,7 @@ import type { Guide } from "../types";
  */
 const guide: Guide = {
   slug: "moving-to-dubai-for-crypto",
+  affiliate: "tax",
   title: "Moving to Dubai for Crypto: What Is Actually Tax-Free",
   description:
     "The UAE charges no personal income tax on crypto — but that is rarely the number that decides your bill. What the rules really say, and what the country you leave does about it.",

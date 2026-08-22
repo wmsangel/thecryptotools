@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "crypto-taxes-portugal",
+  affiliate: "tax",
   title: "Crypto Tax in Portugal: The 365-Day Rule and the 28% Flat Rate",
   description:
     "Portugal is no longer fully tax-free, but it still rewards patience: hold for more than a year and your gain is exempt. Here is how the 28% short-term rate, the 365-day rule and category classification work.",

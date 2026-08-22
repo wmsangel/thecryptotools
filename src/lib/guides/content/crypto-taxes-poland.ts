@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "crypto-taxes-poland",
+  affiliate: "tax",
   title: "Crypto Tax in Poland: Flat 19%, Crypto-to-Crypto Is Free, and Costs Never Expire",
   description:
     "Poland taxes crypto at a flat 19% on PIT-38, does not tax crypto-to-crypto swaps at all, and lets unused acquisition costs roll forward indefinitely. It is one of Europe's cleanest regimes — with two sharp edges.",

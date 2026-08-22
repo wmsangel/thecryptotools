@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "crypto-taxes-singapore",
+  affiliate: "tax",
   title: "Crypto Tax in Singapore: No Capital Gains Tax — With Fine Print",
   description:
     "Singapore has no capital gains tax, so individual investors pay nothing on crypto profits. But trading as a business, or earning crypto as income, is taxable. Here is exactly where the line falls.",

@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "crypto-wallets-explained",
+  affiliate: "wallet",
   title: "Crypto Wallets Explained: Hot vs Cold, Custodial vs Self-Custody",
   description:
     "A wallet does not store your coins — it stores the key that moves them. Here is what actually differs between wallet types, and how to pick one without losing everything to the wrong choice.",

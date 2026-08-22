@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "crypto-taxes-australia",
+  affiliate: "tax",
   title: "Crypto Tax in Australia: ATO Rules, the 50% CGT Discount and Personal Use",
   description:
     "The ATO taxes crypto as a CGT asset, but a 12-month hold halves your taxable gain. Here is how the 50% discount works, when the personal-use exemption applies, and how staking is taxed.",

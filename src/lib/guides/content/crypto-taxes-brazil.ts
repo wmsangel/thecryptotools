@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "crypto-taxes-brazil",
+  affiliate: "tax",
   title: "Crypto Tax in Brazil: The Flat 17.5% Rule and the End of the R$35,000 Exemption",
   description:
     "Brazil scrapped its tiered system and monthly exemption. From 2026 a flat 17.5% applies to all crypto gains — including self-custody and offshore wallets. Here is what changed and how it works.",

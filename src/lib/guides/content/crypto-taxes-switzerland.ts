@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "crypto-taxes-switzerland",
+  affiliate: "tax",
   title: "Crypto Tax in Switzerland: No Capital Gains Tax — But a Wealth Tax",
   description:
     "Private investors in Switzerland pay no capital gains tax on crypto. Instead there is an annual wealth tax, income tax on staking, and a professional-trader trap that can flip your gains to taxable.",

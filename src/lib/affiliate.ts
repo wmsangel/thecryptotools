@@ -1,4 +1,4 @@
-import { platforms, type Platform } from "./platforms";
+import { platforms, type Platform, type PlatformCategoryId } from "./platforms";
 
 /**
  * ============================================================================
@@ -58,3 +58,34 @@ const DERIVATIVES_TOOLS = new Set([
 export function tradeContextForTool(slug: string): TradeContext {
   return DERIVATIVES_TOOLS.has(slug) ? "derivatives" : "spot";
 }
+
+/**
+ * Affiliate context a GUIDE can declare (seed-phrase guide → hardware wallet,
+ * tax guide → tax software, …). Defined in @/lib/guides/types so the isolated
+ * guides compile stays self-contained; re-exported here for convenience.
+ */
+export type { GuideAffiliateKind } from "@/lib/guides/types";
+import type { GuideAffiliateKind } from "@/lib/guides/types";
+
+const CATEGORY_FOR: Record<Exclude<GuideAffiliateKind, "exchange" | "derivatives">, PlatformCategoryId> = {
+  wallet: "wallet",
+  tax: "tax",
+  bot: "trading",
+};
+
+/** Earning partners to feature for a guide's declared affiliate kind. */
+export function partnersForGuide(kind: GuideAffiliateKind, limit = 3): Platform[] {
+  if (kind === "exchange") return exchangesForContext("spot", limit);
+  if (kind === "derivatives") return exchangesForContext("derivatives", limit);
+  const cat = CATEGORY_FOR[kind];
+  return platforms.filter((p) => p.category === cat && isReferralLink(p.url)).slice(0, limit);
+}
+
+/** Heading + CTA verb per kind, for the guide affiliate block. */
+export const GUIDE_AFFILIATE_COPY: Record<GuideAffiliateKind, { heading: string; verb: string }> = {
+  exchange: { heading: "Where to buy or trade", verb: "Trade on" },
+  derivatives: { heading: "Where to trade this", verb: "Trade on" },
+  wallet: { heading: "Where to store it safely", verb: "Get a" },
+  tax: { heading: "Do it without the spreadsheet", verb: "Try" },
+  bot: { heading: "Automate the strategy", verb: "Start with" },
+};

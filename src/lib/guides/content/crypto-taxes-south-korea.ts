@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "crypto-taxes-south-korea",
+  affiliate: "tax",
   title: "Crypto Tax in South Korea: No Gains Tax Yet — 22% Arrives in 2027",
   description:
     "South Korea still does not tax individual crypto gains. A 22% tax on gains above ₩2.5 million is legislated to start in January 2027 after three delays — but its future is still contested.",

@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "crypto-taxes-explained",
+  affiliate: "tax",
   title: "Crypto Taxes Explained: How Capital Gains Work",
   description:
     "A beginner-friendly overview of how crypto is taxed — capital gains, taxable events, short vs long term, and how to estimate what you owe.",

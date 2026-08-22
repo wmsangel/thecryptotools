@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "understanding-crypto-leverage",
+  affiliate: "derivatives",
   title: "Understanding Leverage in Crypto Trading",
   description:
     "Leverage multiplies your position, your profit, your loss and your chance of being liquidated. Here is exactly what 10x does to your account — and how traders survive it.",

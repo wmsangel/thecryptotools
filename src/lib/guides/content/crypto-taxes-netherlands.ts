@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "crypto-taxes-netherlands",
+  affiliate: "tax",
   title: "Crypto Tax in the Netherlands: Box 3 Wealth Tax, Not Capital Gains",
   description:
     "The Netherlands does not tax your crypto profits — it taxes a deemed return on what you hold on 1 January. Here is how Box 3 works, the 2026 tax-free allowance, actual-return claims and the big change coming in 2028.",

@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "crypto-taxes-italy",
+  affiliate: "tax",
   title: "Crypto Tax in Italy: The 26% Rate Rising to 33%, Plus the 0.2% Wealth Tax",
   description:
     "Italy taxes crypto gains at a flat 26% for 2025, rising to 33% from 2026 as the €2,000 exemption disappears — and levies a separate 0.2% wealth tax on holdings. Here is how it all fits together.",

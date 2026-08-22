@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "crypto-trading-fees-explained",
+  affiliate: "exchange",
   title: "Crypto Trading Fees Explained: The Silent Tax on Every Trade",
   description:
     "Maker, taker, spread, funding, withdrawal — fees come in more flavours than most traders realise, and they compound. Here's what each one is and how to stop them eating your returns.",

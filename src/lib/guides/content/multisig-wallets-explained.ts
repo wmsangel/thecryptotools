@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "multisig-wallets-explained",
+  affiliate: "wallet",
   title: "Multisig Wallets Explained: When 2-of-3 Beats a Hardware Wallet",
   description:
     "Multisig removes the single point of failure that every seed phrase creates. It also introduces new ways to lock yourself out. Here is how it works, when the trade is worth it, and what a workable setup looks like.",

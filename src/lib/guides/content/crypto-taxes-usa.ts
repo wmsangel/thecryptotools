@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "crypto-taxes-usa",
+  affiliate: "tax",
   title: "Crypto Taxes in the US: IRS Rules, Rates and Forms",
   description:
     "The IRS treats crypto as property, which makes almost every trade a taxable event. Here are the current rates, the forms you file, and the two rule changes that caught people out this year.",

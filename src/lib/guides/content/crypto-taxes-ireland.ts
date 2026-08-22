@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "crypto-taxes-ireland",
+  affiliate: "tax",
   title: "Crypto Tax in Ireland: 33% CGT, the €1,270 Exemption and the 15 December Trap",
   description:
     "Ireland charges 33% Capital Gains Tax on crypto disposals after a €1,270 annual exemption — but the payment deadline comes almost a year before the return is due. Here is how the Irish system actually works.",
