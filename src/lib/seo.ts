@@ -90,7 +90,13 @@ export function buildBaseMetadata(): Metadata {
 export function buildToolMetadata(tool: ToolConfig): Metadata {
   const url = absoluteUrl(`/tools/${tool.slug}`);
   const title = tool.seo.title ?? tool.title;
-  const description = tool.seo.description || tool.description;
+  // Bing flags very short meta descriptions. Pad the short ones with a true,
+  // useful tail rather than shipping a 90-character snippet.
+  const rawDescription = tool.seo.description || tool.description;
+  const description =
+    rawDescription.length >= 120
+      ? rawDescription
+      : `${rawDescription.replace(/\s+$/, "")} Free, no sign-up — it runs entirely in your browser.`;
   return {
     title,
     description,

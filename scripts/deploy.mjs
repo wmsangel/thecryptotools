@@ -535,7 +535,7 @@ async function main() {
     console.log(`Защищено от записи и удаления: ${PROTECTED.map((d) => `${REMOTE_DIR}/${d}`).join(", ")}`);
   }
 
-  const { current, changed, deleted, first } = plan();
+  const { previous, current, changed, deleted, first } = plan();
   const totalBytes = changed.reduce((sum, rel) => sum + fs.statSync(path.join(OUT_DIR, rel)).size, 0);
 
   console.log(
@@ -583,7 +583,58 @@ async function main() {
 
   console.log("\n✓ Готово.");
   if (!hasFlag("no-purge")) await purgeCloudflare();
+  if (!hasFlag("no-indexnow")) await submitIndexNow(changed, previous);
   console.log("  Что проверить после заливки — в docs/DEPLOY.md.");
+}
+
+const INDEXNOW_KEY = "ca926f030bf003a521911ee7d9801f72";
+const INDEXNOW_HOST = "thecryptotools.com";
+
+/**
+ * Notify IndexNow (Bing/Yandex/Seznam/Naver) of only the NEWLY ADDED pages in
+ * this deploy — never the whole sitemap. Bing flags full-sitemap resubmission as
+ * excessive "batch mode". We deliberately ping only brand-new routes (paths that
+ * did not exist in the previous state), not "changed" files: any code change
+ * rehashes the shared JS chunk, which byte-changes almost every HTML file, so
+ * "changed" is a useless proxy for "meaningfully updated". New routes are a
+ * small, honest signal. Edits to existing pages are left to the normal sitemap
+ * recrawl (Bing already crawls us well). Google ignores IndexNow entirely.
+ */
+async function submitIndexNow(changed, previous) {
+  const urls = [
+    ...new Set(
+      changed
+        .filter((rel) => rel.endsWith("index.html") && !(rel in previous))
+        .map((rel) => `https://${INDEXNOW_HOST}/` + rel.replace(/index\.html$/, "")),
+    ),
+  ];
+  if (urls.length === 0) {
+    console.log("  IndexNow: новых страниц нет — пропуск (правки существующих переобойдут по sitemap)");
+    return;
+  }
+  if (urls.length > 500) {
+    console.log(`  IndexNow: ${urls.length} новых страниц — пропуск, чтобы не слать пачкой; sitemap переобойдут сами`);
+    return;
+  }
+  try {
+    const res = await fetch("https://api.indexnow.org/indexnow", {
+      method: "POST",
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+      body: JSON.stringify({
+        host: INDEXNOW_HOST,
+        key: INDEXNOW_KEY,
+        keyLocation: `https://${INDEXNOW_HOST}/${INDEXNOW_KEY}.txt`,
+        urlList: urls,
+      }),
+    });
+    if (res.status === 200 || res.status === 202) {
+      console.log(`  IndexNow: уведомлено ${urls.length} изменившихся URL (${res.status})`);
+    } else {
+      console.log(`  ⚠ IndexNow: ${res.status} ${res.statusText}`);
+    }
+  } catch (e) {
+    console.log(`  ⚠ IndexNow не отправлен: ${e.message}`);
+  }
 }
 
 main().catch((e) => {
