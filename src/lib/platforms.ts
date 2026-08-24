@@ -235,8 +235,8 @@ export const platforms: Platform[] = [
     description:
       "Ledger hardware wallets keep your private keys offline on a secure-element chip, managed through the Ledger Live app.",
     highlights: ["Secure-element chip", "Supports thousands of assets", "Ledger Live companion app"],
-    bonus: "Occasional device discounts — add your affiliate link",
-    url: "https://www.ledger.com",
+    bonus: "Keep your keys off the internet with a hardware wallet",
+    url: "https://shop.ledger.com/?r=c5f06eb56aa8",
   },
   {
     slug: "trezor",
