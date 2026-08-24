@@ -7,6 +7,7 @@ import { AdSlot } from "@/components/ads/AdSlot";
 import { FaqSection } from "@/components/FaqSection";
 import { jurisdictions } from "@/lib/taxreport/jurisdictions";
 import { HarvestApp } from "./HarvestApp";
+import { GuideAffiliateCTA } from "@/components/guides/GuideAffiliateCTA";
 import { harvestAssetMap, pricedAssetCount } from "./assets";
 
 const TITLE = "Crypto Tax Loss Harvesting Tool — Free, 12 Countries";
@@ -131,6 +132,10 @@ export default function Page() {
       </header>
 
       <HarvestApp assets={assets} buildDate={buildDate} />
+
+      <div className="mt-10 max-w-3xl">
+        <GuideAffiliateCTA kind="tax" placement="tool-tax-loss-harvesting" />
+      </div>
 
       <AdSlot slot="harvest-below" className="my-10" />
 

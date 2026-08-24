@@ -14,6 +14,7 @@ import { RelatedTools } from "@/components/RelatedTools";
 import { JsonLd } from "@/components/JsonLd";
 import { AdSlot, AffiliateBanner } from "@/components/ads/AdSlot";
 import { tradeContextForTool } from "@/lib/affiliate";
+import { GuideAffiliateCTA } from "@/components/guides/GuideAffiliateCTA";
 
 export const dynamicParams = false;
 
@@ -96,6 +97,12 @@ export default function ToolPage({ params }: { params: { slug: string } }) {
                   return <p key={i} className="mt-4 leading-relaxed text-[var(--text)]/90">{block.text}</p>;
                 })}
               </section>
+            )}
+
+            {tool.affiliate && (
+              <div className="mt-12">
+                <GuideAffiliateCTA kind={tool.affiliate} placement={`tool-${tool.affiliate}-${tool.slug}`} />
+              </div>
             )}
 
             {coinVersions.length > 0 && (

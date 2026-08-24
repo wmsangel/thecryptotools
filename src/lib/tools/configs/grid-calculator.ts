@@ -18,6 +18,7 @@ const tool: ToolConfig = {
   description:
     "Plan a grid bot and find out whether the settings can make money at all — spacing, profit per grid after fees, capital per order, and a warning when the grid is too tight to clear its own costs.",
   category: "grid",
+  affiliate: "bot",
   featured: true,
   popular: true,
   source: "builtin",

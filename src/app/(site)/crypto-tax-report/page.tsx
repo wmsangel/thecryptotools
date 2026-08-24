@@ -6,6 +6,7 @@ import { jurisdictions } from "@/lib/taxreport/jurisdictions";
 import { JsonLd } from "@/components/JsonLd";
 import { FaqSection } from "@/components/FaqSection";
 import { TaxReportApp } from "./TaxReportApp";
+import { GuideAffiliateCTA } from "@/components/guides/GuideAffiliateCTA";
 
 const FAQ = [
   {
@@ -112,6 +113,10 @@ export default function CryptoTaxReportPage() {
       </header>
 
       <TaxReportApp />
+
+      <div className="mx-auto mt-10 max-w-3xl">
+        <GuideAffiliateCTA kind="tax" placement="tool-crypto-tax-report" />
+      </div>
 
       <section className="mt-16 max-w-3xl">
         <h2 className="text-3xl font-extrabold tracking-tight">Why the method matters more than the rate</h2>

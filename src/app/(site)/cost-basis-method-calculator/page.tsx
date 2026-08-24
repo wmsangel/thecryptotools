@@ -6,6 +6,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { AdSlot } from "@/components/ads/AdSlot";
 import { FaqSection } from "@/components/FaqSection";
 import { CostBasisApp } from "./CostBasisApp";
+import { GuideAffiliateCTA } from "@/components/guides/GuideAffiliateCTA";
 
 const TITLE = "Crypto Cost Basis Method Calculator — FIFO vs LIFO vs HIFO";
 const DESCRIPTION =
@@ -128,6 +129,10 @@ export default function Page() {
       </header>
 
       <CostBasisApp buildDate={buildDate} />
+
+      <div className="mt-10 max-w-3xl">
+        <GuideAffiliateCTA kind="tax" placement="tool-cost-basis" />
+      </div>
 
       <AdSlot slot="cost-basis-below" className="my-10" />
 

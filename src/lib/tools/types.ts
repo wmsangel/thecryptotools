@@ -158,6 +158,13 @@ export interface ToolConfig {
    */
   article?: ToolArticleBlock[];
 
+  /**
+   * Optional affiliate context (same kinds as guides). Renders a disclosed
+   * partner CTA on the tool page — e.g. a grid/DCA-bot tool → trading-bot
+   * partners. Dormant until a partner in that category has a real referral link.
+   */
+  affiliate?: import("@/lib/guides/types").GuideAffiliateKind;
+
   /** Curation flags used for homepage sections & internal linking. */
   featured?: boolean;
   popular?: boolean;

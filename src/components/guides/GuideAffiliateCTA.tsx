@@ -6,11 +6,19 @@ import { partnersForGuide, GUIDE_AFFILIATE_COPY, type GuideAffiliateKind } from 
  * platforms.ts — so tagging a wallet/tax guide before signing up is harmless;
  * it simply stays invisible until the link exists, then lights up.
  */
-export function GuideAffiliateCTA({ kind }: { kind: GuideAffiliateKind }) {
+export function GuideAffiliateCTA({
+  kind,
+  placement,
+}: {
+  kind: GuideAffiliateKind;
+  /** GA attribution slot; defaults to guide-<kind>. Pass e.g. tool-<slug> on tool pages. */
+  placement?: string;
+}) {
   const picks = partnersForGuide(kind, 3);
   if (picks.length === 0) return null;
   const [primary, ...alts] = picks;
   const { heading, verb } = GUIDE_AFFILIATE_COPY[kind];
+  const slot = placement ?? `guide-${kind}`;
 
   return (
     <section className="mt-12 rounded-2xl border border-brand-500/30 bg-brand-500/5 p-6">
@@ -22,7 +30,7 @@ export function GuideAffiliateCTA({ kind }: { kind: GuideAffiliateKind }) {
         target="_blank"
         rel="sponsored nofollow noopener noreferrer"
         data-affiliate={primary.slug}
-        data-affiliate-placement={`guide-${kind}`}
+        data-affiliate-placement={slot}
         className="btn-primary mt-4"
       >
         {verb} {primary.name} →
@@ -38,7 +46,7 @@ export function GuideAffiliateCTA({ kind }: { kind: GuideAffiliateKind }) {
                 target="_blank"
                 rel="sponsored nofollow noopener noreferrer"
                 data-affiliate={a.slug}
-                data-affiliate-placement={`guide-${kind}`}
+                data-affiliate-placement={slot}
                 className="font-semibold text-brand-ink hover:underline"
               >
                 {a.name}

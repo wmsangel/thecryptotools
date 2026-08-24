@@ -13,6 +13,7 @@ const tool: ToolConfig = {
   description:
     "Plan a DCA bot's safety-order ladder: total capital required, how far the price can fall before you run out of orders, and the average entry the ladder leaves you with.",
   category: "trading",
+  affiliate: "bot",
   popular: true,
   source: "builtin",
   updatedAt: "2026-07-31",
