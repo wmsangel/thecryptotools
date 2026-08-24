@@ -354,8 +354,8 @@ export const platforms: Platform[] = [
     description:
       "CoinLedger imports your transactions and produces tax forms that plug into popular filing software like TurboTax.",
     highlights: ["TurboTax export", "Portfolio tracking", "DeFi & NFT support"],
-    bonus: "Referral discount — add your affiliate link",
-    url: "https://coinledger.io",
+    bonus: "Crypto tax reports that export straight to TurboTax",
+    url: "https://coinledger.io?fpr=eb2ref",
   },
   {
     slug: "cointracker",
