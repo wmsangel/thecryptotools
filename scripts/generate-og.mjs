@@ -303,6 +303,11 @@ async function main() {
     title: "How deep do crypto crashes go?",
     footnote: "Drawdowns & recovery, from real data",
   }));
+  add("research/token-unlocks", async () => ({
+    eyebrow: "Data study",
+    title: "The biggest token unlocks of the next 12 months",
+    footnote: "Ranked by share of supply, not dollars",
+  }));
 
   // Flat families: one card per directory under each of these.
   for (const [dir, eyebrow] of [

@@ -5,6 +5,7 @@ import { breadcrumbJsonLd, ogImage } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { getCorrelationStudy } from "@/lib/research/crypto-correlation";
 import { getDrawdownStudy } from "@/lib/research/crypto-drawdowns";
+import { getUnlockStudy } from "@/lib/research/token-unlocks";
 
 const TITLE = "Crypto Research & Data Studies";
 const DESCRIPTION =
@@ -27,6 +28,7 @@ export const metadata: Metadata = {
 export default function Page() {
   const study = getCorrelationStudy();
   const drawdowns = getDrawdownStudy();
+  const unlocks = getUnlockStudy();
   const avgDepth = drawdowns ? Math.round(drawdowns.avgWorstDepth) : 80;
 
   const studies = [
@@ -49,6 +51,16 @@ export default function Page() {
       stat: `−${avgDepth}%`,
       statLabel: "avg worst drawdown",
       updated: drawdowns?.through,
+    },
+    {
+      href: "/research/token-unlocks",
+      title: "The biggest token unlocks of the next 12 months",
+      blurb: unlocks
+        ? `${unlocks.over10} tokens release more than 10% of their circulating supply in a single cliff over the next year. Ranked by share of float — the number that actually predicts impact — not dollars.`
+        : "Upcoming token unlocks ranked by share of circulating supply, not dollars.",
+      stat: unlocks ? String(unlocks.over10) : "—",
+      statLabel: "unlocks >10% of supply",
+      updated: unlocks?.asOf,
     },
   ];
 
