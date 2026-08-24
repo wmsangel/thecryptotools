@@ -17,7 +17,10 @@ import { platforms, type Platform, type PlatformCategoryId } from "./platforms";
 
 /** A homepage URL earns nothing; a referral link has an id/invite/ref in it. */
 export function isReferralLink(url: string): boolean {
-  return /(?:[?&/](?:ref|invite|join|r)=?)|invite\.|\/join\/|referral/i.test(url);
+  // Common affiliate params/paths across networks: ref/r (many), invite/join
+  // (exchanges), via (Rewardful/Koinly), aff (generic), fpr (FirstPromoter),
+  // partner. A bare utm_source is NOT enough — that is not a referral by itself.
+  return /(?:[?&/](?:ref|r|invite|join|via|aff|fpr|partner)=?)|invite\.|\/join\/|referral/i.test(url);
 }
 
 export function earningExchanges(): Platform[] {

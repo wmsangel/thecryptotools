@@ -341,8 +341,8 @@ export const platforms: Platform[] = [
     description:
       "Koinly connects to your exchanges and wallets, reconciles your history and generates country-specific tax reports.",
     highlights: ["Syncs 700+ integrations", "Country-specific reports", "Free portfolio tracking tier"],
-    bonus: "Discount for referrals — add your affiliate link",
-    url: "https://koinly.io",
+    bonus: "Save on your first Koinly tax report",
+    url: "https://koinly.io/?via=5733C88D&utm_source=friend",
   },
   {
     slug: "coinledger",
