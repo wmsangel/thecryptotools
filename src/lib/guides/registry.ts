@@ -61,6 +61,8 @@ import cryptoPortfolioDiversification from "./content/crypto-portfolio-diversifi
 import cryptoLendingAndBorrowing from "./content/crypto-lending-and-borrowing";
 import cryptoMiningProfitability from "./content/crypto-mining-profitability";
 import cryptoTokenomicsExplained from "./content/crypto-tokenomics-explained";
+import howToChooseACryptoExchange from "./content/how-to-choose-a-crypto-exchange";
+import howToDoYourCryptoTaxes from "./content/how-to-do-your-crypto-taxes";
 
 export const guides: Guide[] = [
   howToCalculateLiquidationPrice,
@@ -123,6 +125,8 @@ export const guides: Guide[] = [
   cryptoLendingAndBorrowing,
   cryptoMiningProfitability,
   cryptoTokenomicsExplained,
+  howToChooseACryptoExchange,
+  howToDoYourCryptoTaxes,
 ];
 
 const bySlug = new Map(guides.map((g) => [g.slug, g]));

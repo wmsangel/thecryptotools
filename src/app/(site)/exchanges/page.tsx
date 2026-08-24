@@ -12,23 +12,24 @@ import { AdSlot } from "@/components/ads/AdSlot";
 import { PlatformLogo } from "@/components/PlatformLogo";
 
 export const metadata: Metadata = {
-  title: "Best Crypto Platforms — Exchanges, Wallets & Tools",
+  title: "Best Crypto Exchanges 2026 (+ Wallets & Tax Tools)",
   description:
-    "A curated directory of the best crypto exchanges, hardware and software wallets, tax software and trading tools — compared side by side.",
+    "The best crypto exchanges of 2026, compared on what actually matters — custody, availability and track record — plus the hardware wallets, tax software and trading tools worth using. Every entry carries a plain 'watch out' note.",
   keywords: [
-    "best crypto exchange",
+    "best crypto exchange 2026",
+    "best crypto exchanges",
     "crypto exchanges compared",
-    "best crypto wallet",
+    "best crypto wallet 2026",
     "crypto tax software",
     "crypto trading tools",
   ],
   alternates: { canonical: absoluteUrl("/exchanges") },
   openGraph: {
-    title: "Best Crypto Platforms — Exchanges, Wallets & Tools",
+    title: "Best Crypto Exchanges 2026 (+ Wallets & Tax Tools)",
     description:
-      "Compare the best crypto exchanges, wallets, tax software and trading tools in one place.",
+      "The best crypto exchanges of 2026, plus wallets, tax software and trading tools — compared on what holds still for years, not a fee table.",
     url: absoluteUrl("/exchanges"),
-    images: [ogImage("exchanges", "Best crypto platforms")],
+    images: [ogImage("exchanges", "Best crypto exchanges 2026")],
   },
 };
 
@@ -36,7 +37,7 @@ function itemListJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "Best Crypto Platforms",
+    name: "Best Crypto Exchanges 2026",
     itemListElement: platforms.map((p, i) => ({
       "@type": "ListItem",
       position: i + 1,
@@ -54,9 +55,9 @@ export default function ExchangesPage() {
 
       {/* ---------- Header ---------- */}
       <header className="mb-6">
-        <div className="eyebrow">Recommended</div>
+        <div className="eyebrow">Updated for 2026</div>
         <h1 className="mt-2 text-4xl font-extrabold tracking-tight sm:text-5xl">
-          Best crypto <span className="text-gradient">platforms</span>
+          Best crypto <span className="text-gradient">exchanges</span> 2026
         </h1>
         <p className="muted mt-3 max-w-2xl text-lg">
           Hand-picked exchanges, wallets, tax software and trading tools — with
