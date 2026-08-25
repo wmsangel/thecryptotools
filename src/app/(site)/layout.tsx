@@ -7,6 +7,7 @@ import { PriceTicker } from "@/components/PriceTicker";
 import { ThemeScript } from "@/components/ThemeScript";
 import { ConsentModeScript } from "@/components/ConsentModeScript";
 import { AdSenseScript } from "@/components/ads/AdSenseScript";
+import { EzoicScript } from "@/components/ads/EzoicScript";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { CookieConsent } from "@/components/CookieConsent";
 import { DonateButton } from "@/components/DonateButton";
@@ -34,6 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Must come after ConsentModeScript — consent defaults first, tags second. */}
         <GoogleAnalytics />
         <AdSenseScript />
+        <EzoicScript />
         <JsonLd data={websiteJsonLd()} />
       </head>
       <body className="min-h-screen font-sans">
