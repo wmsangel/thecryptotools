@@ -65,6 +65,7 @@ import howToChooseACryptoExchange from "./content/how-to-choose-a-crypto-exchang
 import howToDoYourCryptoTaxes from "./content/how-to-do-your-crypto-taxes";
 import bestCryptoTaxSoftware from "./content/best-crypto-tax-software";
 import hotWalletVsColdWallet from "./content/hot-wallet-vs-cold-wallet";
+import bestCryptoGridTradingBots from "./content/best-crypto-grid-trading-bots";
 
 export const guides: Guide[] = [
   howToCalculateLiquidationPrice,
@@ -131,6 +132,7 @@ export const guides: Guide[] = [
   howToDoYourCryptoTaxes,
   bestCryptoTaxSoftware,
   hotWalletVsColdWallet,
+  bestCryptoGridTradingBots,
 ];
 
 const bySlug = new Map(guides.map((g) => [g.slug, g]));
