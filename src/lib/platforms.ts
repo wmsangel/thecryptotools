@@ -143,7 +143,7 @@ export const platforms: Platform[] = [
       "Bitget is best known for its copy-trading marketplace, letting you mirror experienced traders alongside standard spot and futures markets.",
     highlights: ["Large copy-trading network", "Competitive futures fees", "Frequent bonuses"],
     bonus: "Welcome package — add your referral offer",
-    url: "https://www.bitget.com",
+    url: "https://partner.bitget.com/bg/D8AALB",
   },
   {
     slug: "mexc",
