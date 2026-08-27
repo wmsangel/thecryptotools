@@ -616,25 +616,25 @@ async function submitIndexNow(changed, previous) {
     console.log(`  IndexNow: ${urls.length} новых страниц — пропуск, чтобы не слать пачкой; sitemap переобойдут сами`);
     return;
   }
-  try {
-    const res = await fetch("https://api.indexnow.org/indexnow", {
-      method: "POST",
-      headers: { "Content-Type": "application/json; charset=utf-8" },
-      body: JSON.stringify({
-        host: INDEXNOW_HOST,
-        key: INDEXNOW_KEY,
-        keyLocation: `https://${INDEXNOW_HOST}/${INDEXNOW_KEY}.txt`,
-        urlList: urls,
-      }),
-    });
-    if (res.status === 200 || res.status === 202) {
-      console.log(`  IndexNow: уведомлено ${urls.length} изменившихся URL (${res.status})`);
-    } else {
-      console.log(`  ⚠ IndexNow: ${res.status} ${res.statusText}`);
+  // Submit one URL at a time via the single-URL GET endpoint. Bing Webmaster
+  // flags the JSON `urlList` form as "IndexNow is in batch mode" — a moderate
+  // SEO warning — even for a single URL, and processes the per-URL GET faster.
+  // We only ever ping brand-new routes, so this loop is tiny (usually 0–1).
+  const keyLocation = `https://${INDEXNOW_HOST}/${INDEXNOW_KEY}.txt`;
+  let ok = 0;
+  for (const url of urls) {
+    try {
+      const endpoint =
+        `https://api.indexnow.org/indexnow?url=${encodeURIComponent(url)}` +
+        `&key=${INDEXNOW_KEY}&keyLocation=${encodeURIComponent(keyLocation)}`;
+      const res = await fetch(endpoint);
+      if (res.status === 200 || res.status === 202) ok++;
+      else console.log(`  ⚠ IndexNow: ${res.status} ${res.statusText} — ${url}`);
+    } catch (e) {
+      console.log(`  ⚠ IndexNow не отправлен (${url}): ${e.message}`);
     }
-  } catch (e) {
-    console.log(`  ⚠ IndexNow не отправлен: ${e.message}`);
   }
+  if (ok) console.log(`  IndexNow: уведомлено ${ok}/${urls.length} новых URL по одному (не пачкой)`);
 }
 
 main().catch((e) => {

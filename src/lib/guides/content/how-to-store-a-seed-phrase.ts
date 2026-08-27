@@ -6,11 +6,17 @@ const guide: Guide = {
   title: "How to Store a Seed Phrase (Without Losing It or Leaking It)",
   description:
     "Your seed phrase is the wallet. Storing it badly is the single most common way people lose crypto — and the two failure modes, theft and loss, pull in opposite directions. Here is how to balance them.",
-  readingMinutes: 8,
-  updatedAt: "2026-07-30",
+  readingMinutes: 9,
+  updatedAt: "2026-08-27",
   seo: {
     keywords: [
       "how to store seed phrase",
+      "how to store crypto seed phrases safely",
+      "how to back up a seed phrase",
+      "best way to store a seed phrase",
+      "how to store a seed phrase at home",
+      "how to manage multiple seed phrases",
+      "most secure way to store seed phrase",
       "seed phrase backup",
       "metal seed phrase storage",
       "recovery phrase security",
@@ -67,6 +73,16 @@ const guide: Guide = {
     { type: "p", text: "A BIP-39 passphrase — often called the 25th word — mixes an arbitrary string of your choosing into the seed, producing an entirely separate wallet. Its strength is that the words alone are then useless: someone who finds your metal plate gets an empty wallet, not your funds. Some people fund that decoy wallet lightly so a coerced 'show me' produces something plausible." },
     { type: "p", text: "The danger is the flip side. There is no checksum on a passphrase and no error message: a typo silently opens a different, empty, perfectly valid wallet. Forget it and no amount of correct words will bring the funds back. If you use one, store it separately from the phrase, write it down somewhere, and confirm you can reproduce it character for character — including capitals and spaces — before you rely on it." },
 
+    { type: "h2", text: "Managing more than one seed phrase" },
+    { type: "p", text: "Sooner or later you hold several: a second wallet once your balance outgrows a single backup, a passphrase decoy, a hardware upgrade that generated a fresh phrase, a copy set aside for [inheritance](/guides/crypto-inheritance-plan). Each one carries the full set of risks above, and the failure that grows with the count is **confusion** — restoring the wrong phrase, funding a wallet you thought was empty, or forgetting which metal plate controls what." },
+    { type: "ul", items: [
+      "Keep a private index, stored separately from every phrase, that records how many wallets exist, what each is for, and roughly where its backups live — but **never the words themselves**. A neutral line like 'Wallet B — long-term, two copies' is safe; a plate stamped 'ETH savings' is not.",
+      "Number the plates, not the wallets. A small, meaningless mark ('1', '2') lets your index point at a plate without announcing to a finder what it holds.",
+      "Use the **same storage pattern for each** — the same two location types, in the same order — so a missing copy is obvious instead of a surprise years later.",
+      "Sort them by purpose in your head — 'spending', 'long-term', 'decoy' — not by chain. Every extra wallet is another backup to test and re-check, so keep the number to what you will actually maintain.",
+    ] },
+    { type: "p", text: "The rule of thumb: **more phrases raise the odds that one is mishandled, not lower them.** Add a second or third only when a real need — size, separation, inheritance — justifies the extra upkeep, and hold each to exactly the same standard as your first." },
+
     { type: "h2", text: "Test the recovery before you fund it" },
     { type: "p", text: "This is the step almost everyone skips, and it is the one that catches the errors while they are still free to fix. Once the phrase is written and transferred to metal, wipe the device and restore it from your own backup. If the restored wallet shows the same first receiving address, your backup is proven. If it does not, you have just discovered — at zero cost — that you would have lost everything." },
     { type: "p", text: "Then send a small test transaction, confirm it arrives, and only afterwards move the real balance. Re-check the backups once a year: confirm both copies still exist, are still legible, and that you still remember where the second one is. A backup you have not looked at in five years is an assumption, not a plan." },
@@ -79,6 +95,7 @@ const guide: Guide = {
     { q: "Should I write down which wallet the phrase belongs to?", a: "Note the device type and derivation path separately from the words, not on the same plate. Knowing whether it was a Bitcoin-only or multi-chain wallet saves hours during a recovery, but a label that identifies the phrase as valuable defeats the point of hiding it." },
     { q: "Do I need a new seed phrase for each coin?", a: "No. One phrase derives keys for every chain your wallet supports. That is convenient and also concentrating: one backup failure affects everything, which is an argument for a second wallet with a separate phrase once your balance is large." },
     { q: "Someone may have seen my seed phrase. What now?", a: "Move the funds immediately to a wallet created from a completely new phrase. Do not merely change the PIN or passphrase — the phrase itself is the key, and once it is out it cannot be revoked. Speed matters more than tidiness here." },
+    { q: "What is the safest way to manage multiple seed phrases?", a: "Hold each phrase to the same standard as your first — two offline copies in separate locations, on metal, unlabelled. Keep a single private index, stored apart from every phrase, that records how many wallets exist and what each is for, but never the words. Number the plates rather than naming the wallets, and use an identical storage pattern for each so a missing copy is obvious. The more phrases you keep, the more backups you have to test and re-check, so only add one for a real reason." },
   ],
 };
 

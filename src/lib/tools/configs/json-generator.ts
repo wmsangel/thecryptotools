@@ -26,7 +26,7 @@ const tool: ToolConfig = {
       "sample json generator",
     ],
     description:
-      "Free fake JSON data generator. Produce arrays of realistic mock records for testing APIs and UIs.",
+      "Free fake JSON data generator: produce arrays of realistic mock records — names, emails, dates and IDs — to seed tests, prototype APIs and populate UI mock-ups, entirely in your browser.",
   },
   inputs: [
     { name: "count", label: "Records", type: "number", default: 5, min: 1, max: 100, step: 1 },
