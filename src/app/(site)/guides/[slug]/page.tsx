@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { site, absoluteUrl } from "@/lib/site";
-import { breadcrumbJsonLd, ogImage } from "@/lib/seo";
+import { ogImage } from "@/lib/seo";
 import { getAllGuideSlugs, getGuide } from "@/lib/guides/registry";
 import type { Guide, GuideBlock } from "@/lib/guides/types";
 import { getTool } from "@/lib/tools/registry";
 import { ToolCard } from "@/components/ToolCard";
 import { JsonLd } from "@/components/JsonLd";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { renderInline } from "@/components/RichText";
 import { AdSlot } from "@/components/ads/AdSlot";
 import { GuideAffiliateCTA } from "@/components/guides/GuideAffiliateCTA";
 
@@ -49,6 +51,8 @@ function guideJsonLd(guide: Guide) {
       "@type": "Article",
       headline: guide.title,
       description: guide.seo.description,
+      // The per-guide share card doubles as the Article image Google prefers.
+      image: absoluteUrl(`/og/guides/${guide.slug}.png`),
       datePublished: guide.updatedAt,
       // The later of the two: re-confirming a rate against HMRC is a
       // modification of the page's usefulness even when no prose changed.
@@ -99,14 +103,14 @@ function Block({ block }: { block: GuideBlock }) {
     case "h2":
       return <h2 className="mt-10 text-2xl font-extrabold tracking-tight sm:text-3xl">{block.text}</h2>;
     case "p":
-      return <p className="mt-4 leading-relaxed text-[var(--text)]/90">{block.text}</p>;
+      return <p className="mt-4 leading-relaxed text-[var(--text)]/90">{renderInline(block.text)}</p>;
     case "ul":
       return (
         <ul className="mt-4 space-y-2">
           {block.items.map((it, i) => (
             <li key={i} className="flex items-start gap-2 leading-relaxed">
               <span className="mt-1 text-brand-ink">•</span>
-              <span className="text-[var(--text)]/90">{it}</span>
+              <span className="text-[var(--text)]/90">{renderInline(it)}</span>
             </li>
           ))}
         </ul>
@@ -114,7 +118,7 @@ function Block({ block }: { block: GuideBlock }) {
     case "callout":
       return (
         <p className="mt-5 rounded-xl border-l-4 border-brand-500 bg-[var(--bg-elevated)] px-4 py-3 text-sm font-medium">
-          {block.text}
+          {renderInline(block.text)}
         </p>
       );
     case "tool": {
@@ -291,20 +295,13 @@ export default function GuidePage({ params }: { params: { slug: string } }) {
   return (
     <article className="mx-auto max-w-3xl px-4 py-10">
       <JsonLd data={guideJsonLd(guide)} />
-      <JsonLd
-        data={breadcrumbJsonLd([
+      <Breadcrumbs
+        trail={[
           { name: "Guides", path: "/guides" },
           { name: guide.title, path: `/guides/${guide.slug}` },
-        ])}
+        ]}
       />
 
-      <nav className="mb-5 flex items-center gap-2 text-sm muted" aria-label="Breadcrumb">
-        <Link href="/" className="hover:text-brand-ink">Home</Link>
-        <span>/</span>
-        <Link href="/guides" className="hover:text-brand-ink">Guides</Link>
-        <span>/</span>
-        <span className="text-[var(--text)] line-clamp-1">{guide.title}</span>
-      </nav>
 
       <header className="mb-2">
         <div className="flex flex-wrap items-center gap-2 text-xs muted">

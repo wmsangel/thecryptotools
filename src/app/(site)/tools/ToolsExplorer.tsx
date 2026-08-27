@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { categories, categoryList, type CategoryId } from "@/lib/categories";
 import { useFavorites } from "@/lib/tool-prefs";
 import { FavoriteButton } from "@/components/FavoriteButton";
@@ -19,6 +19,16 @@ export function ToolsExplorer({ items }: { items: Item[] }) {
   const [query, setQuery] = useState("");
   const [cat, setCat] = useState<CategoryId | "all" | "favorites">("all");
   const { favorites, ready } = useFavorites();
+
+  // Seed the search from a ?q= param so the Search Console sitelinks searchbox
+  // (WebSite SearchAction → /tools/?q=…) actually filters on arrival. Read after
+  // mount rather than from server props: this is a static export, so the HTML is
+  // identical for every visitor and the query lives only in the URL. Server
+  // renders the empty box, the client fills it in — no hydration mismatch.
+  useEffect(() => {
+    const q = new URLSearchParams(window.location.search).get("q");
+    if (q) setQuery(q);
+  }, []);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();

@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "../globals.css";
-import { buildBaseMetadata, websiteJsonLd } from "@/lib/seo";
+import { buildBaseMetadata, websiteJsonLd, organizationJsonLd } from "@/lib/seo";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { PriceTicker } from "@/components/PriceTicker";
@@ -29,12 +29,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Warm up the two hosts every page hits immediately: the price ticker
+            fires a CoinGecko/Binance fetch on mount. preconnect opens the TLS
+            connection early; the ad/analytics hosts are deferred, so a cheaper
+            dns-prefetch is enough for them. */}
+        <link rel="preconnect" href="https://api.coingecko.com" />
+        <link rel="preconnect" href="https://api.binance.com" />
+        <link rel="dns-prefetch" href="https://api.coingecko.com" />
+        <link rel="dns-prefetch" href="https://api.binance.com" />
+        <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <ThemeScript />
         <ConsentModeScript />
         {/* Must come after ConsentModeScript — consent defaults first, tags second. */}
         <GoogleAnalytics />
         <AdSenseScript />
-        <JsonLd data={websiteJsonLd()} />
+        <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
       </head>
       <body className="min-h-screen font-sans">
         {/* First tab stop on every page: the header alone is ~15 links, and a

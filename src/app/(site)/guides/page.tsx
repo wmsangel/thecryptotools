@@ -31,7 +31,29 @@ export default function GuidesPage() {
 
   return (
     <div className="mx-auto max-w-content px-4 py-10">
-    <JsonLd data={breadcrumbJsonLd([{ name: "Guides", path: "/guides" }])} />
+    <JsonLd
+      data={[
+        breadcrumbJsonLd([{ name: "Guides", path: "/guides" }]),
+        {
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: "Crypto Guides & Tutorials",
+          url: absoluteUrl("/guides"),
+          description: `Plain-English crypto guides from ${site.name}, researched against primary sources.`,
+          isPartOf: { "@type": "WebSite", name: site.name, url: site.url },
+          mainEntity: {
+            "@type": "ItemList",
+            numberOfItems: guides.length,
+            itemListElement: guides.map((g, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              name: g.title,
+              url: absoluteUrl(`/guides/${g.slug}`),
+            })),
+          },
+        },
+      ]}
+    />
       <header className="mb-8">
         <div className="eyebrow">Learn</div>
         <h1 className="mt-2 text-4xl font-extrabold tracking-tight sm:text-5xl">Crypto guides</h1>

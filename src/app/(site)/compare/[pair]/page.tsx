@@ -146,6 +146,8 @@ export default function Page({ params }: { params: { pair: string } }) {
             "@context": "https://schema.org",
             "@type": "Article",
             headline: `${a.name} vs ${b.name}`,
+            description: `${a.name} vs ${b.name} compared on the things that do not change every month: who can open an account, who holds the keys, what each actually does, and the history worth knowing.`,
+            image: absoluteUrl(`/og/compare/${params.pair}.png`),
             datePublished: CHECKED_ON,
             dateModified: CHECKED_ON,
             author: { "@type": "Organization", name: site.editorial.author, url: absoluteUrl(site.editorial.policyPath) },

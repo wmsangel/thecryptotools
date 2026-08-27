@@ -66,7 +66,28 @@ export default function Page() {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-10">
-      <JsonLd data={breadcrumbJsonLd([{ name: "Research", path: "/research" }])} />
+      <JsonLd
+        data={[
+          breadcrumbJsonLd([{ name: "Research", path: "/research" }]),
+          {
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            name: TITLE,
+            url: absoluteUrl("/research"),
+            description: DESCRIPTION,
+            mainEntity: {
+              "@type": "ItemList",
+              numberOfItems: studies.length,
+              itemListElement: studies.map((s, i) => ({
+                "@type": "ListItem",
+                position: i + 1,
+                name: s.title,
+                url: absoluteUrl(s.href),
+              })),
+            },
+          },
+        ]}
+      />
 
       <header>
         <div className="eyebrow">Research</div>
@@ -85,7 +106,11 @@ export default function Page() {
             <div className="min-w-0 flex-1">
               <h2 className="text-xl font-bold">{s.title}</h2>
               <p className="muted mt-1.5 leading-relaxed">{s.blurb}</p>
-              {s.updated && <p className="muted mt-2 text-xs">Updated {s.updated}</p>}
+              {s.updated && (
+                <p className="muted mt-2 text-xs">
+                  Updated <time dateTime={s.updated}>{s.updated}</time>
+                </p>
+              )}
             </div>
             <div className="text-right">
               <div className="text-3xl font-extrabold tracking-tight text-brand-ink">{s.stat}</div>

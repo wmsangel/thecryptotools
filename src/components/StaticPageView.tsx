@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { absoluteUrl } from "@/lib/site";
-import { OG_DEFAULT, breadcrumbJsonLd } from "@/lib/seo";
+import { site, absoluteUrl } from "@/lib/site";
+import { OG_DEFAULT, ORGANIZATION_ID } from "@/lib/seo";
 import { getStaticPage } from "@/lib/pages/registry";
-import type { PageBlock } from "@/lib/pages/types";
+import type { PageBlock, StaticPage } from "@/lib/pages/types";
 import { CookieSettingsButton } from "@/components/CookieConsent";
+import { renderInline } from "@/components/RichText";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { JsonLd } from "@/components/JsonLd";
 
 /** Metadata builder shared by every thin legal/info route file. */
@@ -33,14 +34,14 @@ function Block({ block }: { block: PageBlock }) {
     case "h2":
       return <h2 className="mt-10 text-2xl font-extrabold tracking-tight">{block.text}</h2>;
     case "p":
-      return <p className="mt-4 leading-relaxed text-[var(--text)]/90">{block.text}</p>;
+      return <p className="mt-4 leading-relaxed text-[var(--text)]/90">{renderInline(block.text)}</p>;
     case "ul":
       return (
         <ul className="mt-4 space-y-2">
           {block.items.map((it, i) => (
             <li key={i} className="flex items-start gap-2 leading-relaxed">
               <span className="mt-1 text-brand-ink">•</span>
-              <span className="text-[var(--text)]/90">{it}</span>
+              <span className="text-[var(--text)]/90">{renderInline(it)}</span>
             </li>
           ))}
         </ul>
@@ -48,7 +49,7 @@ function Block({ block }: { block: PageBlock }) {
     case "callout":
       return (
         <p className="mt-5 rounded-xl border-l-4 border-brand-500 bg-[var(--bg-elevated)] px-4 py-3 text-sm font-medium">
-          {block.text}
+          {renderInline(block.text)}
         </p>
       );
     case "cookieSettings":
@@ -62,6 +63,28 @@ function Block({ block }: { block: PageBlock }) {
   }
 }
 
+/**
+ * schema.org for a static page. /about and /contact get their specific types
+ * (a small but real E-E-A-T signal — this is the page that says who runs the
+ * site); everything else is a plain WebPage. The visible "Last updated" date
+ * becomes machine-readable dateModified.
+ */
+function pageJsonLd(page: StaticPage): Record<string, unknown> {
+  const type =
+    page.slug === "about" ? "AboutPage" : page.slug === "contact" ? "ContactPage" : "WebPage";
+  return {
+    "@context": "https://schema.org",
+    "@type": type,
+    name: page.seo.title ?? page.title,
+    description: page.seo.description,
+    url: absoluteUrl(`/${page.slug}`),
+    dateModified: page.updatedAt,
+    inLanguage: "en",
+    isPartOf: { "@type": "WebSite", name: site.name, url: site.url },
+    publisher: { "@id": ORGANIZATION_ID },
+  };
+}
+
 /** Universal renderer for every page in the static-page registry. */
 export function StaticPageView({ slug }: { slug: string }) {
   const page = getStaticPage(slug);
@@ -69,15 +92,8 @@ export function StaticPageView({ slug }: { slug: string }) {
 
   return (
     <article className="mx-auto max-w-3xl px-4 py-10">
-      <JsonLd data={breadcrumbJsonLd([{ name: page.title, path: `/${page.slug}` }])} />
-
-      <nav className="mb-5 flex items-center gap-2 text-sm muted" aria-label="Breadcrumb">
-        <Link href="/" className="hover:text-brand-ink">
-          Home
-        </Link>
-        <span>/</span>
-        <span className="text-[var(--text)]">{page.title}</span>
-      </nav>
+      <JsonLd data={pageJsonLd(page)} />
+      <Breadcrumbs trail={[{ name: page.title, path: `/${page.slug}` }]} />
 
       <header>
         <div className="eyebrow">{page.eyebrow}</div>
@@ -87,11 +103,13 @@ export function StaticPageView({ slug }: { slug: string }) {
         <p className="muted mt-3 text-lg leading-relaxed">{page.description}</p>
         <p className="muted mt-2 text-xs">
           Last updated:{" "}
-          {new Date(page.updatedAt).toLocaleDateString("en-GB", {
-            day: "numeric",
-            month: "long",
-            year: "numeric",
-          })}
+          <time dateTime={page.updatedAt}>
+            {new Date(page.updatedAt).toLocaleDateString("en-GB", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            })}
+          </time>
         </p>
       </header>
 

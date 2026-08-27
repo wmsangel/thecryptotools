@@ -108,7 +108,12 @@ export default function Page() {
           datePublished: "2026-08-17",
           dateModified: updated,
           author: { "@type": "Organization", name: site.organization.name, url: site.url },
-          publisher: { "@type": "Organization", name: site.organization.name, url: site.url },
+          publisher: {
+            "@type": "Organization",
+            name: site.organization.name,
+            url: site.url,
+            logo: { "@type": "ImageObject", url: absoluteUrl(site.organization.logo) },
+          },
           mainEntityOfPage: absoluteUrl(PATH),
           image: ogImage("research/crypto-correlation", TITLE).url,
         }}
@@ -130,7 +135,7 @@ export default function Page() {
       </nav>
 
       <header>
-        <div className="eyebrow">Data study · updated {updated}</div>
+        <div className="eyebrow">Data study · updated <time dateTime={updated}>{updated}</time></div>
         <h1 className="mt-3 text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
           How correlated is the crypto market?
         </h1>

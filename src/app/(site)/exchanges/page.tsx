@@ -36,14 +36,20 @@ export const metadata: Metadata = {
 function itemListJsonLd() {
   return {
     "@context": "https://schema.org",
-    "@type": "ItemList",
+    "@type": "CollectionPage",
     name: "Best Crypto Exchanges 2026",
-    itemListElement: platforms.map((p, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      name: p.name,
-      description: p.description,
-    })),
+    url: absoluteUrl("/exchanges"),
+    isPartOf: { "@type": "WebSite", name: site.name, url: site.url },
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: platforms.length,
+      itemListElement: platforms.map((p, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: p.name,
+        description: p.description,
+      })),
+    },
   };
 }
 

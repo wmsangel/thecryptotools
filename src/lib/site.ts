@@ -49,6 +49,10 @@ export const site = {
   organization: {
     name: "TheCryptoTools",
     logo: "/icon-512.png",
+    // Public profiles that establish this as the same entity, for the
+    // Organization `sameAs`. Only real, owned profiles belong here — there is
+    // no X/social account, so the open-source repo is the one honest signal.
+    sameAs: ["https://github.com/wmsangel/thecryptotools"],
   },
   /**
    * Byline for the guides.

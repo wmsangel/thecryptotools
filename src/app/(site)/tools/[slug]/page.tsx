@@ -12,6 +12,7 @@ import { ToolSeoContent } from "@/components/ToolSeoContent";
 import { FaqSection } from "@/components/FaqSection";
 import { RelatedTools } from "@/components/RelatedTools";
 import { JsonLd } from "@/components/JsonLd";
+import { renderInline } from "@/components/RichText";
 import { AdSlot, AffiliateBanner } from "@/components/ads/AdSlot";
 import { tradeContextForTool } from "@/lib/affiliate";
 import { GuideAffiliateCTA } from "@/components/guides/GuideAffiliateCTA";
@@ -89,12 +90,12 @@ export default function ToolPage({ params }: { params: { slug: string } }) {
                         {block.items.map((it, j) => (
                           <li key={j} className="flex gap-3 leading-relaxed">
                             <span className="mt-1 select-none text-brand-ink" aria-hidden>▸</span>
-                            <span>{it}</span>
+                            <span>{renderInline(it)}</span>
                           </li>
                         ))}
                       </ul>
                     );
-                  return <p key={i} className="mt-4 leading-relaxed text-[var(--text)]/90">{block.text}</p>;
+                  return <p key={i} className="mt-4 leading-relaxed text-[var(--text)]/90">{renderInline(block.text)}</p>;
                 })}
               </section>
             )}

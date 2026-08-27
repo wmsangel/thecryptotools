@@ -61,16 +61,16 @@ export function buildBaseMetadata(): Metadata {
     twitter: {
       // No `site`/`creator`: there is no X account, and pointing the card at a
       // handle we do not own would credit someone else on every share.
+      //
+      // Deliberately ONLY `card` here — no title/description/images. Next
+      // replaces the whole `twitter` object rather than merging it, so anything
+      // set at the base is inherited by every page that overrides only
+      // `openGraph` (which is nearly all of them), pinning the card to the
+      // generic homepage title even on a specific guide. With title/description/
+      // image all absent, X falls back to the og:* equivalents — which ARE set
+      // per page — so every page gets its own card for free. Pages that need a
+      // distinct Twitter card still set the whole `twitter` object themselves.
       card: "summary_large_image",
-      // Deliberately NO `images` here. Next replaces the whole `twitter` object
-      // rather than merging it, so a default set at the base was inherited by
-      // every page that overrides only `openGraph` — which was all of them —
-      // and pinned twitter:image to the generic card even on pages with a card
-      // of their own. With the field absent, X falls back to og:image, which is
-      // always the right one. Pages that want a distinct Twitter image set the
-      // whole `twitter` object themselves.
-      title: `${site.name} — ${site.tagline}`,
-      description: site.description,
     },
     robots: {
       index: true,
@@ -223,6 +223,30 @@ export function breadcrumbJsonLd(
   };
 }
 
+/** Stable @id for the one Organization node, so other nodes can reference it. */
+export const ORGANIZATION_ID = `${site.url}/#organization`;
+
+/**
+ * The single site-wide Organization node, emitted once in the root layout.
+ * Carries the logo and `sameAs` that the nested publisher references lacked, so
+ * Google can tie the brand together for a knowledge panel. Everything else that
+ * needs a publisher can point at ORGANIZATION_ID instead of repeating this.
+ */
+export function organizationJsonLd(): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": ORGANIZATION_ID,
+    name: site.organization.name,
+    url: site.url,
+    logo: {
+      "@type": "ImageObject",
+      url: absoluteUrl(site.organization.logo),
+    },
+    sameAs: [...site.organization.sameAs],
+  };
+}
+
 export function websiteJsonLd(): Record<string, unknown> {
   return {
     "@context": "https://schema.org",
@@ -230,14 +254,13 @@ export function websiteJsonLd(): Record<string, unknown> {
     name: site.name,
     url: site.url,
     description: site.description,
-    publisher: {
-      "@type": "Organization",
-      name: site.organization.name,
-      url: site.url,
-    },
+    publisher: { "@id": ORGANIZATION_ID },
     potentialAction: {
       "@type": "SearchAction",
-      target: `${site.url}/tools?q={search_term_string}`,
+      // Trailing slash: next.config sets trailingSlash:true, so /tools 301s to
+      // /tools/ — targeting the un-slashed form would bounce the searchbox
+      // through a redirect. ToolsExplorer reads this `q` on mount.
+      target: `${site.url}/tools/?q={search_term_string}`,
       "query-input": "required name=search_term_string",
     },
   };

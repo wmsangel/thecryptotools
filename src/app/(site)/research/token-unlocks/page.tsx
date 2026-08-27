@@ -113,7 +113,12 @@ export default function Page() {
           datePublished: "2026-08-24",
           dateModified: study.asOf,
           author: { "@type": "Organization", name: site.organization.name, url: site.url },
-          publisher: { "@type": "Organization", name: site.organization.name, url: site.url },
+          publisher: {
+            "@type": "Organization",
+            name: site.organization.name,
+            url: site.url,
+            logo: { "@type": "ImageObject", url: absoluteUrl(site.organization.logo) },
+          },
           mainEntityOfPage: absoluteUrl(PATH),
           image: ogImage("research/token-unlocks", TITLE).url,
         }}
@@ -135,7 +140,7 @@ export default function Page() {
       </nav>
 
       <header>
-        <div className="eyebrow">Data study · snapshot {study.asOf}</div>
+        <div className="eyebrow">Data study · snapshot <time dateTime={study.asOf}>{study.asOf}</time></div>
         <h1 className="mt-3 text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
           The biggest token unlocks of the next 12 months
         </h1>
