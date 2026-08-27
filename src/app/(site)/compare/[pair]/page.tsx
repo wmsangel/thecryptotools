@@ -7,6 +7,7 @@ import { platforms } from "@/lib/platforms";
 import { compareData, CHECKED_ON } from "@/lib/compare/data";
 import { getPair, pairSlug, validPairs } from "@/lib/compare/pairs";
 import { JsonLd } from "@/components/JsonLd";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { PlatformLogo } from "@/components/PlatformLogo";
 import { AdSlot } from "@/components/ads/AdSlot";
 import { FaqSection } from "@/components/FaqSection";
@@ -172,25 +173,15 @@ export default function Page({ params }: { params: { pair: string } }) {
                 },
               ]
             : []),
-          {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") },
-              { "@type": "ListItem", position: 2, name: "Compare", item: absoluteUrl("/compare") },
-              { "@type": "ListItem", position: 3, name: `${a.name} vs ${b.name}`, item: absoluteUrl(`/compare/${params.pair}`) },
-            ],
-          },
         ]}
       />
 
-      <nav className="mb-5 flex flex-wrap items-center gap-2 text-sm muted" aria-label="Breadcrumb">
-        <Link href="/" className="hover:text-brand-ink">Home</Link>
-        <span>/</span>
-        <Link href="/compare" className="hover:text-brand-ink">Compare</Link>
-        <span>/</span>
-        <span className="text-[var(--text)]">{a.name} vs {b.name}</span>
-      </nav>
+      <Breadcrumbs
+        trail={[
+          { name: "Compare", path: "/compare" },
+          { name: `${a.name} vs ${b.name}`, path: `/compare/${params.pair}` },
+        ]}
+      />
 
       <header>
         <div className="flex items-center gap-3">

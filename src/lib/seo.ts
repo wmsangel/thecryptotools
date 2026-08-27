@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { site, absoluteUrl } from "./site";
 import type { ToolConfig } from "./tools/types";
-import { categories, type Category } from "./categories";
+import { type Category } from "./categories";
 
 /**
  * Share cards. The PNGs are rendered after `next build` by scripts/generate-og.mjs
@@ -163,20 +163,6 @@ export function toolJsonLd(tool: ToolConfig): Record<string, unknown>[] {
         url: site.url,
       },
     },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: site.url },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: categories[tool.category].title,
-          item: absoluteUrl(`/category/${tool.category}`),
-        },
-        { "@type": "ListItem", position: 3, name: tool.title, item: url },
-      ],
-    },
   ];
 
   if (tool.faq.length > 0) {
@@ -290,14 +276,6 @@ export function categoryJsonLd(
           url: absoluteUrl(`/tools/${t.slug}`),
         })),
       },
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: site.url },
-        { "@type": "ListItem", position: 2, name: category.title, item: url },
-      ],
     },
   ];
 }

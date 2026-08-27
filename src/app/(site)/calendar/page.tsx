@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { site, absoluteUrl } from "@/lib/site";
-import { ogImage, breadcrumbJsonLd } from "@/lib/seo";
+import { ogImage } from "@/lib/seo";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { JsonLd } from "@/components/JsonLd";
 import { AdSlot } from "@/components/ads/AdSlot";
 import { calendarEvents } from "@/lib/events/registry";
@@ -39,7 +40,6 @@ export default function Page() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-10">
 
-    <JsonLd data={breadcrumbJsonLd([{ name: "Calendar", path: "/calendar" }])} />
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -54,11 +54,7 @@ export default function Page() {
         }}
       />
 
-      <nav className="mb-5 flex items-center gap-2 text-sm muted" aria-label="Breadcrumb">
-        <Link href="/" className="hover:text-brand-ink">Home</Link>
-        <span>/</span>
-        <span className="text-[var(--text)]">Calendar</span>
-      </nav>
+      <Breadcrumbs trail={[{ name: "Calendar", path: "/calendar" }]} />
 
       <header>
         <div className="eyebrow">What is coming</div>

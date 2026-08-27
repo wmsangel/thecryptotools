@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { absoluteUrl } from "@/lib/site";
-import { ogImage, breadcrumbJsonLd } from "@/lib/seo";
+import { ogImage } from "@/lib/seo";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { platforms, platformCategories } from "@/lib/platforms";
 import { CHECKED_ON } from "@/lib/compare/data";
 import { pairSlug, validPairs } from "@/lib/compare/pairs";
@@ -45,7 +46,6 @@ export default function Page() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-10">
 
-    <JsonLd data={breadcrumbJsonLd([{ name: "Compare platforms", path: "/compare" }])} />
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -60,11 +60,7 @@ export default function Page() {
         }}
       />
 
-      <nav className="mb-5 flex items-center gap-2 text-sm muted" aria-label="Breadcrumb">
-        <Link href="/" className="hover:text-brand-ink">Home</Link>
-        <span>/</span>
-        <span className="text-[var(--text)]">Compare</span>
-      </nav>
+      <Breadcrumbs trail={[{ name: "Compare", path: "/compare" }]} />
 
       <header>
         <div className="eyebrow">Head to head</div>

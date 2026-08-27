@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { site, absoluteUrl } from "@/lib/site";
 import { ogImage } from "@/lib/seo";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { getAllCoinSlugs, getCoin, sortedCoins } from "@/lib/coins/registry";
 import { pagesForCoin } from "@/lib/coins/pairs";
 import { CoinLogo } from "@/components/CoinLogo";
@@ -83,15 +84,6 @@ export default function CoinHubPage({ params }: { params: { coin: string } }) {
           },
         ]
       : []),
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: site.url },
-        { "@type": "ListItem", position: 2, name: "Coins", item: absoluteUrl("/coins") },
-        { "@type": "ListItem", position: 3, name: coin.name, item: url },
-      ],
-    },
   ];
 
   return (
@@ -101,13 +93,12 @@ export default function CoinHubPage({ params }: { params: { coin: string } }) {
       <div className="relative overflow-hidden border-b border-[var(--border)]">
         <div className="hero-glow absolute inset-0" aria-hidden />
         <div className="relative mx-auto max-w-content px-4 pb-10 pt-8">
-          <nav className="mb-5 flex items-center gap-2 text-sm muted" aria-label="Breadcrumb">
-            <Link href="/" className="hover:text-brand-ink">Home</Link>
-            <span>/</span>
-            <Link href="/coins" className="hover:text-brand-ink">Coins</Link>
-            <span>/</span>
-            <span className="text-[var(--text)]">{coin.name}</span>
-          </nav>
+          <Breadcrumbs
+            trail={[
+              { name: "Coins", path: "/coins" },
+              { name: coin.name, path: `/coins/${coin.slug}` },
+            ]}
+          />
 
           <div className="flex items-start gap-4">
             <CoinLogo

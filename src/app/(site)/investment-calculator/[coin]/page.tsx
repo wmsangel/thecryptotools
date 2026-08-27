@@ -6,6 +6,7 @@ import { ogImage } from "@/lib/seo";
 import { getCoin, sortedCoins } from "@/lib/coins/registry";
 import { getHistoryMeta } from "@/lib/backtest/history-index";
 import { JsonLd } from "@/components/JsonLd";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CoinLogo } from "@/components/CoinLogo";
 import { AdSlot } from "@/components/ads/AdSlot";
 import { BacktestApp } from "../BacktestApp";
@@ -95,25 +96,15 @@ export default function Page({ params }: { params: { coin: string } }) {
                 },
               ]
             : []),
-          {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") },
-              { "@type": "ListItem", position: 2, name: "Investment calculator", item: absoluteUrl("/investment-calculator") },
-              { "@type": "ListItem", position: 3, name: coin.name, item: absoluteUrl(`/investment-calculator/${coin.slug}`) },
-            ],
-          },
         ]}
       />
 
-      <nav className="mb-5 flex flex-wrap items-center gap-2 text-sm muted" aria-label="Breadcrumb">
-        <Link href="/" className="hover:text-brand-ink">Home</Link>
-        <span>/</span>
-        <Link href="/investment-calculator" className="hover:text-brand-ink">Investment calculator</Link>
-        <span>/</span>
-        <span className="text-[var(--text)]">{coin.name}</span>
-      </nav>
+      <Breadcrumbs
+        trail={[
+          { name: "Investment calculator", path: "/investment-calculator" },
+          { name: coin.name, path: `/investment-calculator/${coin.slug}` },
+        ]}
+      />
 
       <header className="flex items-start gap-4">
         <span className="mt-1 shrink-0">

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { absoluteUrl } from "@/lib/site";
-import { breadcrumbJsonLd, ogImage } from "@/lib/seo";
+import { ogImage } from "@/lib/seo";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { JsonLd } from "@/components/JsonLd";
 import { AdSlot } from "@/components/ads/AdSlot";
 import { FaqSection } from "@/components/FaqSection";
@@ -76,7 +77,6 @@ export default function Page() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
-      <JsonLd data={breadcrumbJsonLd([{ name: "Tax loss harvesting", path: "/tax-loss-harvesting" }])} />
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -109,11 +109,7 @@ export default function Page() {
         }}
       />
 
-      <nav className="mb-5 flex items-center gap-2 text-sm muted" aria-label="Breadcrumb">
-        <Link href="/" className="hover:text-brand-ink">Home</Link>
-        <span>/</span>
-        <span className="text-[var(--text)]">Tax loss harvesting</span>
-      </nav>
+      <Breadcrumbs trail={[{ name: "Tax loss harvesting", path: "/tax-loss-harvesting" }]} />
 
       <header>
         <div className="eyebrow">Tax</div>

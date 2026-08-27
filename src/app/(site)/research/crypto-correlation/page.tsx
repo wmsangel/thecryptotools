@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { absoluteUrl, site } from "@/lib/site";
-import { breadcrumbJsonLd, ogImage } from "@/lib/seo";
+import { ogImage } from "@/lib/seo";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { JsonLd } from "@/components/JsonLd";
 import { AdSlot } from "@/components/ads/AdSlot";
 import { FaqSection } from "@/components/FaqSection";
@@ -81,10 +82,6 @@ export default function Page() {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-10">
-      <JsonLd data={breadcrumbJsonLd([
-        { name: "Research", path: "/research" },
-        { name: "Crypto correlation", path: PATH },
-      ])} />
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -126,13 +123,12 @@ export default function Page() {
         }}
       />
 
-      <nav className="mb-5 flex items-center gap-2 text-sm muted" aria-label="Breadcrumb">
-        <Link href="/" className="hover:text-brand-ink">Home</Link>
-        <span>/</span>
-        <Link href="/research" className="hover:text-brand-ink">Research</Link>
-        <span>/</span>
-        <span className="text-[var(--text)]">Crypto correlation</span>
-      </nav>
+      <Breadcrumbs
+        trail={[
+          { name: "Research", path: "/research" },
+          { name: "Crypto correlation", path: PATH },
+        ]}
+      />
 
       <header>
         <div className="eyebrow">Data study · updated <time dateTime={updated}>{updated}</time></div>

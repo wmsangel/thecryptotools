@@ -6,6 +6,7 @@ import { getActiveCategories, getToolsByCategory } from "@/lib/tools/registry";
 import { buildCategoryMetadata, categoryJsonLd } from "@/lib/seo";
 import { ToolCard } from "@/components/ToolCard";
 import { JsonLd } from "@/components/JsonLd";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { AdSlot } from "@/components/ads/AdSlot";
 
 export const dynamicParams = false;
@@ -30,11 +31,7 @@ export default function CategoryPage({ params }: { params: { category: string } 
   return (
     <div className="mx-auto max-w-content px-4 py-10">
       <JsonLd data={categoryJsonLd(cat, tools)} />
-      <nav className="mb-5 flex items-center gap-2 text-sm muted" aria-label="Breadcrumb">
-        <Link href="/" className="hover:text-brand-ink">Home</Link>
-        <span>/</span>
-        <span className="text-[var(--text)]">{cat.title}</span>
-      </nav>
+      <Breadcrumbs trail={[{ name: cat.title, path: `/category/${cat.id}` }]} />
 
       <header className="mb-8 flex items-start gap-4">
         <span className="icon-badge h-16 w-16 text-3xl">{cat.icon}</span>

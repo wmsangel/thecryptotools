@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { site, absoluteUrl } from "@/lib/site";
-import { ogImage, breadcrumbJsonLd } from "@/lib/seo";
+import { ogImage } from "@/lib/seo";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { sortedCoins } from "@/lib/coins/registry";
 import { JsonLd } from "@/components/JsonLd";
 import { CoinLogo } from "@/components/CoinLogo";
@@ -38,7 +39,6 @@ export default function Page() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
 
-    <JsonLd data={breadcrumbJsonLd([{ name: "Investment calculator", path: "/investment-calculator" }])} />
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -53,11 +53,7 @@ export default function Page() {
         }}
       />
 
-      <nav className="mb-5 flex items-center gap-2 text-sm muted" aria-label="Breadcrumb">
-        <Link href="/" className="hover:text-brand-ink">Home</Link>
-        <span>/</span>
-        <span className="text-[var(--text)]">Investment calculator</span>
-      </nav>
+      <Breadcrumbs trail={[{ name: "Investment calculator", path: "/investment-calculator" }]} />
 
       <header>
         <div className="eyebrow">Backtest</div>

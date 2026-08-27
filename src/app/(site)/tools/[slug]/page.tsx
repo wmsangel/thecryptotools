@@ -12,6 +12,7 @@ import { ToolSeoContent } from "@/components/ToolSeoContent";
 import { FaqSection } from "@/components/FaqSection";
 import { RelatedTools } from "@/components/RelatedTools";
 import { JsonLd } from "@/components/JsonLd";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { renderInline } from "@/components/RichText";
 import { AdSlot, AffiliateBanner } from "@/components/ads/AdSlot";
 import { tradeContextForTool } from "@/lib/affiliate";
@@ -46,13 +47,12 @@ export default function ToolPage({ params }: { params: { slug: string } }) {
       <div className="relative overflow-hidden border-b border-[var(--border)]">
         <div className="hero-glow absolute inset-0" aria-hidden />
         <div className="relative mx-auto max-w-content px-4 pb-10 pt-8">
-          <nav className="mb-5 flex flex-wrap items-center gap-2 text-sm muted" aria-label="Breadcrumb">
-            <Link href="/" className="hover:text-brand-ink">Home</Link>
-            <span>/</span>
-            <Link href={`/category/${cat.id}`} className="hover:text-brand-ink">{cat.title}</Link>
-            <span>/</span>
-            <span className="text-[var(--text)]">{tool.title}</span>
-          </nav>
+          <Breadcrumbs
+            trail={[
+              { name: cat.title, path: `/category/${cat.id}` },
+              { name: tool.title, path: `/tools/${tool.slug}` },
+            ]}
+          />
 
           <div className="flex items-start gap-4">
             <span className="icon-badge h-16 w-16 text-3xl">{cat.icon}</span>

@@ -13,6 +13,7 @@ import { CoinCalcGrid } from "@/components/coins/CoinCalcGrid";
 import { popularCoinsForTool } from "@/lib/coins/featured-pairs";
 import { tradeContextForTool } from "@/lib/affiliate";
 import { JsonLd } from "@/components/JsonLd";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { AdSlot, AffiliateBanner } from "@/components/ads/AdSlot";
 
 export const dynamicParams = false;
@@ -70,16 +71,6 @@ export default function CoinToolPage({ params }: { params: { coin: string; tool:
     },
     {
       "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: site.url },
-        { "@type": "ListItem", position: 2, name: "Coins", item: absoluteUrl("/coins") },
-        { "@type": "ListItem", position: 3, name: coin.name, item: absoluteUrl(`/coins/${coin.slug}`) },
-        { "@type": "ListItem", position: 4, name: title, item: url },
-      ],
-    },
-    {
-      "@context": "https://schema.org",
       "@type": "FAQPage",
       mainEntity: faq.map((f) => ({
         "@type": "Question",
@@ -96,15 +87,13 @@ export default function CoinToolPage({ params }: { params: { coin: string; tool:
       <div className="relative overflow-hidden border-b border-[var(--border)]">
         <div className="hero-glow absolute inset-0" aria-hidden />
         <div className="relative mx-auto max-w-content px-4 pb-10 pt-8">
-          <nav className="mb-5 flex flex-wrap items-center gap-2 text-sm muted" aria-label="Breadcrumb">
-            <Link href="/" className="hover:text-brand-ink">Home</Link>
-            <span>/</span>
-            <Link href="/coins" className="hover:text-brand-ink">Coins</Link>
-            <span>/</span>
-            <Link href={`/coins/${coin.slug}`} className="hover:text-brand-ink">{coin.name}</Link>
-            <span>/</span>
-            <span className="text-[var(--text)]">{tool.title}</span>
-          </nav>
+          <Breadcrumbs
+            trail={[
+              { name: "Coins", path: "/coins" },
+              { name: coin.name, path: `/coins/${coin.slug}` },
+              { name: tool.title, path: `/coins/${coin.slug}/${spec.slug}` },
+            ]}
+          />
 
           <div className="flex items-start gap-4">
             <CoinLogo

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { site, absoluteUrl } from "@/lib/site";
-import { ogImage, breadcrumbJsonLd } from "@/lib/seo";
+import { ogImage } from "@/lib/seo";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { tools } from "@/lib/tools/registry";
 import { categories } from "@/lib/categories";
 import { JsonLd } from "@/components/JsonLd";
@@ -37,7 +38,6 @@ export default function Page() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
 
-    <JsonLd data={breadcrumbJsonLd([{ name: "Embeddable widgets", path: "/widgets" }])} />
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -48,11 +48,7 @@ export default function Page() {
         }}
       />
 
-      <nav className="mb-5 flex items-center gap-2 text-sm muted" aria-label="Breadcrumb">
-        <Link href="/" className="hover:text-brand-ink">Home</Link>
-        <span>/</span>
-        <span className="text-[var(--text)]">Widgets</span>
-      </nav>
+      <Breadcrumbs trail={[{ name: "Widgets", path: "/widgets" }]} />
 
       <header>
         <div className="eyebrow">Embed</div>
