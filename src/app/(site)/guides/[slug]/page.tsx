@@ -311,7 +311,7 @@ export default function GuidePage({ params }: { params: { slug: string } }) {
             <>
               <span>·</span>
               <Link href={`/guides/${hub.slug}`} className="font-semibold text-brand-ink hover:underline">
-                Part of: Crypto Tax by Country
+                Part of: {hub.hubName ?? hub.title}
               </Link>
             </>
           )}
@@ -359,7 +359,7 @@ export default function GuidePage({ params }: { params: { slug: string } }) {
       {hub && (
         <section className="mt-12">
           <Link href={`/guides/${hub.slug}`} className="card card-hover group block p-6">
-            <div className="eyebrow">Compare every country</div>
+            <div className="eyebrow">{hub.hubBacklinkEyebrow ?? "Read the full guide"}</div>
             <div className="mt-2 font-bold group-hover:text-brand-ink">{hub.title}</div>
             <p className="muted mt-1.5 text-sm leading-relaxed">{hub.description}</p>
           </Link>

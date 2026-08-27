@@ -3,6 +3,7 @@ import type { Guide } from "../types";
 const guide: Guide = {
   slug: "hot-wallet-vs-cold-wallet",
   affiliate: "wallet",
+  partOf: "crypto-wallet-security",
   title: "Hot Wallet vs Cold Wallet: Which Do You Need?",
   description:
     "The real difference between hot and cold wallets, when each is the right tool, and the simple split most people should actually run.",

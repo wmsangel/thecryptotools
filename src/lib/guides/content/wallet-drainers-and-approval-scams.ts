@@ -3,6 +3,7 @@ import type { Guide } from "../types";
 const guide: Guide = {
   slug: "wallet-drainers-and-approval-scams",
   affiliate: "wallet",
+  partOf: "crypto-wallet-security",
   title: "Wallet Drainers, Token Approvals and Signature Scams",
   description:
     "Most wallets are not hacked — they are authorised. Approvals, gasless permit signatures and the newer delegation attacks all rely on you clicking confirm. Here is what each one does and how to revoke it.",

@@ -104,6 +104,15 @@ export interface Guide {
    * linking, which is what makes a large guide set crawlable.
    */
   partOf?: string;
+  /**
+   * When THIS guide is a hub (others point to it via `partOf`), these label the
+   * two-way link on its children. `hubName` is the short name shown as
+   * "Part of: <hubName>" in the child byline (the full title is usually too
+   * long); `hubBacklinkEyebrow` is the eyebrow on the child's back-link card.
+   * Both fall back to sensible generics, so a hub can omit them.
+   */
+  hubName?: string;
+  hubBacklinkEyebrow?: string;
   body: GuideBlock[];
   faq?: GuideFaqItem[];
 }
