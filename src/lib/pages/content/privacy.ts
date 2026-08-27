@@ -59,8 +59,7 @@ export const privacy: StaticPage = {
       type: "ul",
       items: [
         "CoinGecko and Binance — public market-data APIs called from your browser to show live prices and the ticker. They receive your IP address as part of that request. No personal data is sent.",
-        "Ezoic — our advertising partner, which places and optimises the ads on the site. Ezoic and its own upstream ad partners may set cookies to serve and measure ads, and Ezoic operates its own consent tool where required. See Ezoic's privacy policy at ezoic.com/privacy-policy and the vendor list at g.ezoic.net/privacy/thecryptotools.com.",
-        "Google AdSense — Google may set cookies to serve and measure ads. Ad personalisation is only enabled if you consent (see the cookie policy).",
+        "Google AdSense — if and when advertising is enabled, Google may set cookies to serve and measure ads. Ad personalisation is only enabled if you consent (see the cookie policy).",
         "Google Analytics — measures aggregate site usage. Google receives your IP address and standard request data, and stores an analytics cookie only after you accept analytics (see the cookie policy).",
         "Cloudflare — our DNS and CDN provider, which terminates TLS and may process request metadata for security and performance.",
         "Exchange and hardware-wallet partners — only when you deliberately click an affiliate link on our platforms page, which passes a referral identifier to that partner.",
@@ -80,7 +79,7 @@ export const privacy: StaticPage = {
     { type: "h2", text: "Advertising" },
     {
       type: "p",
-      text: "The site is funded by ads served through Ezoic and Google. These partners may set cookies to show ads and measure their performance. Personalised (interest-based) ads are only used if you consent through the cookie banner, and you can change your mind at any time using the cookie settings link in the footer. You can also turn off ad personalisation at the source: Google's controls at myadcenter.google.com and adssettings.google.com, and the industry opt-out pages at optout.aboutads.info and youronlinechoices.eu. Ezoic's own privacy controls and vendor list are linked from its consent tool and at ezoic.com/privacy-policy.",
+      text: "When advertising is enabled, ads are served through Google (AdSense) and its ad partners, which may set cookies to show ads and measure their performance. Personalised (interest-based) ads are only used if you consent through the cookie banner, and you can change your mind at any time using the cookie settings link in the footer. You can also turn off ad personalisation at the source: Google's controls at myadcenter.google.com and adssettings.google.com, and the industry opt-out pages at optout.aboutads.info and youronlinechoices.eu.",
     },
 
     { type: "h2", text: "Your rights" },

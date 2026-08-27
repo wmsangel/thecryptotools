@@ -58,11 +58,11 @@ export const cookies: StaticPage = {
     { type: "h2", text: "Advertising (optional)" },
     {
       type: "p",
-      text: "The site is partly funded by advertising. Ads are served through Ezoic, our advertising partner, together with Google AdSense and their upstream ad partners. If you accept advertising cookies, these partners may set cookies to select ads, cap how often you see the same one, and measure whether ads work. If you decline, ads — where shown — are limited to non-personalised ones, which still need basic cookies for frequency capping and fraud prevention but do not build a profile of you.",
+      text: "The site is partly funded by advertising. If you accept advertising cookies, Google AdSense and its partners may set cookies to select ads, cap how often you see the same one, and measure whether ads work. If you decline, ads — where shown — are limited to non-personalised ones, which still need basic cookies for frequency capping and fraud prevention but do not build a profile of you.",
     },
     {
       type: "p",
-      text: "Ezoic operates its own IAB-standard consent tool where the law requires it; its privacy notice and full vendor list are at ezoic.com/privacy-policy and g.ezoic.net/privacy/thecryptotools.com. Google's use of advertising cookies is described in Google's own Advertising & Privacy notice at policies.google.com/technologies/ads. EU, UK and Swiss visitors are handled through Google Consent Mode, which receives your choice from the banner before any ad request is made.",
+      text: "Google's use of advertising cookies is described in Google's own Advertising & Privacy notice at policies.google.com/technologies/ads. EU, UK and Swiss visitors are handled through Google Consent Mode, which receives your choice from the banner before any ad request is made.",
     },
     {
       type: "p",
