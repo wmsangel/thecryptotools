@@ -49,7 +49,7 @@ export const houseAds: HouseAd[] = [
   },
   {
     id: "costtrek",
-    href: "https://costtrek.com/",
+    href: "https://costtrek.com/en",
     lang: "en",
     eyebrow: "Cost of living",
     title: "Will your salary go further abroad?",
@@ -58,7 +58,7 @@ export const houseAds: HouseAd[] = [
   },
   {
     id: "iznkit",
-    href: "https://iznkit.com/",
+    href: "https://iznkit.com/en",
     lang: "en",
     eyebrow: "Free PDF tools",
     title: "Invoices & docs → a clean PDF, free",
@@ -109,6 +109,15 @@ export const houseAds: HouseAd[] = [
     title: "Здоровье по доказательной медицине",
     description: "Питание, сон и тренировки: понятные разборы, рецепты и калькуляторы здоровья.",
     cta: "Открыть 24Здоровье",
+  },
+  {
+    id: "bilimjol",
+    href: "https://bilimjol.com/",
+    lang: "ru",
+    eyebrow: "Учёба детям",
+    title: "Учиться — это интересно",
+    description: "Интерактивные задания по логике, математике и чтению — от подготовки к школе до 11 класса.",
+    cta: "Открыть Bilimjol",
   },
 ];
 
