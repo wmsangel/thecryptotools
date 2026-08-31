@@ -20,6 +20,12 @@ const guide: Guide = {
     description:
       "How Ethereum staking works: the 32 ETH validator minimum, where staking yield comes from, solo vs pooled vs exchange vs liquid staking, exit queues, slashing and how to calculate your real return.",
   },
+  keyTakeaways: [
+    "Four routes with different economics: **solo (32 ETH), pooled, exchange, and liquid** staking.",
+    "**Solo** maximises rewards and control but needs 32 ETH and uptime; **pooled/liquid** lower the barrier at added risk.",
+    "**Liquid staking** (stETH etc.) frees your capital to use elsewhere but adds smart-contract and depeg risk.",
+    "Compare on **yield, lock-up and who controls the keys** — not just the headline APR.",
+  ],
   relatedTools: ["staking-rewards-calculator", "apy-calculator", "compound-interest-calculator"],
   body: [
     { type: "p", text: "Ethereum stopped being mined in 2022. Blocks are now proposed and attested by validators who have locked ETH as collateral, and the network pays them for doing it honestly. Staking is how you become one of those validators, directly or through someone else. The mechanics are the same in every case; what changes is who holds the keys and who takes a cut." },

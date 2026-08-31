@@ -20,6 +20,12 @@ const guide: Guide = {
     description:
       "Crypto staking explained: how proof-of-stake rewards are generated, the difference between solo, pooled, exchange and liquid staking, and how to calculate your returns.",
   },
+  keyTakeaways: [
+    "Staking locks coins to help **secure a proof-of-stake network**, and the network pays you new coins for it.",
+    "The yield is real but comes with **lock-up/unbonding periods** and **slashing** risk if your validator misbehaves.",
+    "Staking rewards are usually **taxed as income** on the day you receive them.",
+    "Your realistic return is the **reward rate**, not a marketing 'up to' figure — model it before committing.",
+  ],
   relatedTools: ["staking-rewards-calculator", "apy-calculator", "compound-interest-calculator"],
   body: [
     { type: "p", text: "Staking is what replaced mining on most modern blockchains. Instead of burning electricity to win the right to add a block, validators lock up coins as collateral. Behave honestly and the network pays you; try to cheat and part of your stake is destroyed. Your staking yield is the fee for that service." },

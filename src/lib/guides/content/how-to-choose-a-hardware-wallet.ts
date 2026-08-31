@@ -21,6 +21,12 @@ const guide: Guide = {
     description:
       "How to choose a hardware wallet: secure element vs open source, coin support, passphrase and multisig options, what to avoid when buying, and a step-by-step first-time setup.",
   },
+  keyTakeaways: [
+    "Every hardware wallet already solves the core job — keys offline; the differences are **security model, coin support and ease of mistakes**.",
+    "Look for a **secure element**, **open-source firmware**, support for the coins you hold, and clear recovery.",
+    "**Buy sealed, directly from the manufacturer** — never used or from a third-party marketplace.",
+    "Generate your own seed on first boot, back it up on **metal**, and **test recovery before funding it**.",
+  ],
   relatedTools: ["gas-fee-calculator", "crypto-price-converter", "satoshi-converter"],
   body: [
     { type: "p", text: "A hardware wallet solves exactly one problem, and it solves it well: your private key is generated on a device that never connects to the internet, and it never leaves that device. Transactions are sent in, signed inside the chip, and sent back out signed. Malware on your laptop can see what you are doing but cannot extract the key. Everything else — screens, apps, coin lists, price charts — is packaging around that single guarantee." },

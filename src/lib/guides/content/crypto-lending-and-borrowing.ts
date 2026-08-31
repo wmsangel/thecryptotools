@@ -25,6 +25,12 @@ const guide: Guide = {
     description:
       "How crypto lending and borrowing actually work: the break-even failure probability that tells you whether a yield is worth taking, how LTV sets your liquidation price, and what Celsius and BlockFi depositors really got back.",
   },
+  keyTakeaways: [
+    "Lending pays interest because a **borrower** is paying to use your coins; the rate is set by supply and demand.",
+    "The yield has to justify the **counterparty/platform risk** — several big custodial lenders failed in 2022.",
+    "When **borrowing**, the **liquidation price matters more than the interest rate**.",
+    "Decentralised protocols and custodial platforms carry **different risks** — know which one you're actually using.",
+  ],
   relatedTools: [
     "crypto-lending-calculator",
     "crypto-loan-ltv-calculator",

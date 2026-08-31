@@ -20,6 +20,12 @@ const guide: Guide = {
     description:
       "Liquid staking explained: how LSTs like stETH and rETH work, rebasing vs value-accruing tokens, why they can trade below par, restaking risk, and how to calculate your real net yield.",
   },
+  keyTakeaways: [
+    "Liquid staking gives you a **tradable token** (stETH, rETH) that represents your staked position, so capital isn't locked.",
+    "That convenience adds **smart-contract, depeg and leverage** risks the underlying staking doesn't have.",
+    "The liquid token can trade **below** the value it represents, turning a safe-looking yield into a loss.",
+    "Useful, but treat it as a **DeFi position**, not a risk-free savings account.",
+  ],
   relatedTools: ["staking-rewards-calculator", "yield-farming-apy-calculator", "impermanent-loss-calculator"],
   body: [
     { type: "p", text: "Ordinary staking forces a choice: earn rewards, or keep your capital usable. Liquid staking removes the choice. You deposit your coins with a protocol, it stakes them through professional validators, and you receive a token representing your claim on the staked position. That token keeps earning while remaining tradeable, lendable and usable as collateral. It is one of the genuinely useful ideas in DeFi — and it stacks several distinct risks on top of plain staking." },

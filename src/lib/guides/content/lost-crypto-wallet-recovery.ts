@@ -21,6 +21,12 @@ const guide: Guide = {
     description:
       "What is genuinely recoverable when you lose access to a crypto wallet: forgotten passwords, missing words, wrong derivation paths, broken hardware, old wallet files — and how to spot the recovery services that are themselves scams.",
   },
+  keyTakeaways: [
+    "Some losses are **fixable in minutes**, some need specialists, and some are **genuinely final** — knowing which saves months.",
+    "A forgotten password to an encrypted wallet may be recoverable; a **lost seed phrase with no backup usually is not**.",
+    "Coins sent to a **wrong address or network** are almost always unrecoverable.",
+    "Any service promising to recover a **lost seed phrase** for a fee is a scam — never pay upfront or share your phrase.",
+  ],
   relatedTools: ["crypto-price-converter", "satoshi-converter", "gas-fee-calculator"],
   body: [
     { type: "p", text: "Losing access feels identical whatever the cause, which is why people so often give up on situations that were fixable, or spend two years chasing ones that were not. The useful first move is triage: work out which category you are in before doing anything else, because the categories have almost nothing in common." },

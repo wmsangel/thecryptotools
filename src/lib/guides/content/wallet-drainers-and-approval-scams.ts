@@ -21,6 +21,12 @@ const guide: Guide = {
     description:
       "How wallet drainers actually work: unlimited token approvals, gasless permit signatures, setApprovalForAll, EIP-7702 delegation attacks and address poisoning — plus how to audit and revoke what you have already granted.",
   },
+  keyTakeaways: [
+    "Most wallets aren't hacked — they're **authorised**: you click 'confirm' on a malicious approval.",
+    "**Token approvals**, gasless **permit** signatures and newer **delegation** attacks all rely on your signature, not a breach.",
+    "**Revoke** unused approvals regularly, and read what a signature actually grants before you sign it.",
+    "A 'validate' or 'sync your wallet' seed-phrase prompt is always a scam — never enter your phrase on a website.",
+  ],
   relatedTools: ["gas-fee-calculator", "eth-unit-converter", "crypto-price-converter"],
   body: [
     { type: "p", text: "The mental image of a wallet being 'hacked' — someone cracking your key from outside — describes almost none of the losses that actually happen. Private keys are not broken. What happens instead is that the owner is persuaded to approve something, and the approval is valid, signed and irreversible. The industry calls the tooling for this a drainer: a kit that presents a normal-looking transaction or signature request and empties the wallet once you confirm it." },

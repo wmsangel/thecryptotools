@@ -22,6 +22,12 @@ const guide: Guide = {
       "best way to store crypto",
     ],
   },
+  keyTakeaways: [
+    "**Hot** = connected to the internet (convenient, exposed); **cold** = kept offline (safe, deliberate).",
+    "Keep only **spending money** in a hot wallet and **savings in cold storage** — most people should run both.",
+    "A hot wallet's risk is your device being compromised; a cold wallet signs offline so that alone can't drain it.",
+    "The amount decides, not the label: once it's more than you'd carry as cash, move it to cold storage.",
+  ],
   relatedTools: [],
   body: [
     {

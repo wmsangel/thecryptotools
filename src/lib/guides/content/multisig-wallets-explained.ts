@@ -21,6 +21,12 @@ const guide: Guide = {
     description:
       "How multisig wallets work, why 2-of-3 is the standard choice, the difference between Bitcoin script multisig and Ethereum smart-contract multisig, what you must back up beyond seed phrases, and when the complexity is justified.",
   },
+  keyTakeaways: [
+    "Multisig requires **several keys to move funds** (e.g. 2-of-3), removing the single point of failure a lone seed phrase creates.",
+    "It defends against one lost or stolen key — but adds **new ways to lock yourself out** if the keys are mismanaged.",
+    "Worth it for **large holdings, shared treasuries or inheritance**; overkill for a small balance.",
+    "A workable setup keeps the keys and their backups **genuinely separate** — different devices, locations or people.",
+  ],
   relatedTools: ["gas-fee-calculator", "satoshi-converter", "crypto-price-converter"],
   body: [
     { type: "p", text: "A normal wallet has one key. That key is a single point of failure in both directions: whoever obtains it takes everything, and if you lose it everything is gone. Every backup strategy for a single-key wallet is an attempt to work around that fact, and each one trades theft risk against loss risk without ever escaping the trade." },

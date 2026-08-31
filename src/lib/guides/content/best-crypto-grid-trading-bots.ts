@@ -22,6 +22,12 @@ const guide: Guide = {
       "grid trading strategy",
     ],
   },
+  keyTakeaways: [
+    "A grid bot **buys low and sells high across a set range** — it profits from sideways chop, not from predicting direction.",
+    "It **loses** when the price trends hard out of your range, and when the per-grid profit is smaller than the fees.",
+    "Look for **non-custodial** (a trade-only API key), support for your exchange, backtesting and transparent fees.",
+    "**Grid ≠ DCA**: grids suit ranging markets, DCA bots suit steady long-term accumulation.",
+  ],
   relatedTools: ["grid-calculator", "dca-bot-calculator"],
   body: [
     {

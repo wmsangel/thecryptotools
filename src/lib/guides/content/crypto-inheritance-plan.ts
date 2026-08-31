@@ -21,6 +21,12 @@ const guide: Guide = {
     description:
       "How to leave crypto to your heirs: why a seed phrase must never go in a will, sealed instructions vs multisig vs timelocks, writing recovery documentation a non-technical person can follow, and the tax paperwork your executor will need.",
   },
+  keyTakeaways: [
+    "Self-custody has **no next of kin and no password reset** — without a plan, your coins simply vanish for everyone else.",
+    "The goal is instructions that are **useless to a thief but complete for your heir**.",
+    "**Never put keys or the seed phrase in a will** — wills become public record.",
+    "**Test it**: could someone you trust actually reach the funds using only what you've left them?",
+  ],
   relatedTools: ["crypto-tax-calculator", "portfolio-rebalance-calculator", "crypto-price-converter"],
   body: [
     { type: "p", text: "Every property of self-custody that makes it valuable while you are alive makes it hostile afterwards. There is no institution holding the asset, no account to be transferred, no identity check that a grieving relative can pass. If the keys die with you, so do the coins — they stay visible on the ledger forever, provably yours, permanently unreachable. A meaningful share of all lost crypto is exactly this: not stolen, not spent, just orphaned." },

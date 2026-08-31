@@ -21,6 +21,12 @@ const guide: Guide = {
       "crypto exchange fees",
     ],
   },
+  keyTakeaways: [
+    "What actually matters: **custody, availability in your country, real all-in fees, liquidity and track record**.",
+    "**'Not your keys, not your coins'** — an exchange holds your crypto, so move savings to self-custody.",
+    "Compare **real fees** (maker/taker + spread + withdrawal), not just the headline trading fee.",
+    "Prefer a **long, clean track record** and clear regulatory standing over the biggest sign-up bonus.",
+  ],
   relatedTools: ["trading-fee-calculator", "profit-calculator", "position-size-calculator"],
   body: [
     {

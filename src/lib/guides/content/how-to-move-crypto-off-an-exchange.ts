@@ -21,6 +21,12 @@ const guide: Guide = {
     description:
       "A step-by-step guide to withdrawing crypto from an exchange to your own wallet: picking the right network, memos and destination tags, test transactions, withdrawal fees, address whitelists and the tax treatment of self-transfers.",
   },
+  keyTakeaways: [
+    "Withdrawing to self-custody is where beginners lose money: **wrong network, missing memo, mistyped address**.",
+    "Always send a **small test transaction first**, confirm it arrives, then move the rest.",
+    "Match the **network** on both sides (e.g. ERC-20 vs BEP-20) and include any required **memo or tag**.",
+    "Crypto sent to the wrong address or network is **usually gone for good** — there is no reversal.",
+  ],
   relatedTools: ["trading-fee-calculator", "gas-fee-calculator", "crypto-price-converter"],
   body: [
     { type: "p", text: "Coins on an exchange are an entry in that company's database and a claim against it. That claim has failed often enough — through insolvency, fraud, hacks and frozen withdrawals — that 'not your keys, not your coins' stopped being a slogan and became a description of events. Moving to self-custody removes counterparty risk and hands you a new one: from that moment, every mistake is final and there is nobody to call." },

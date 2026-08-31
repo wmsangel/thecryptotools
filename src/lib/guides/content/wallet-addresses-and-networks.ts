@@ -21,6 +21,12 @@ const guide: Guide = {
     description:
       "How crypto addresses and networks really work: Bitcoin address formats, why one Ethereum address exists on every EVM chain, ERC-20 vs TRC-20 vs BEP-20, memos, contract addresses, and which mistakes are recoverable.",
   },
+  keyTakeaways: [
+    "An address identifies a **destination on a specific chain** — the same string can exist on several networks.",
+    "Sending on the **wrong network**, to a **contract**, or in the wrong **Bitcoin format** is how most permanent losses happen.",
+    "Always confirm the **network matches on both sides** and include any required **memo or tag**.",
+    "Verify the **whole address** or use a saved/whitelisted one — malware can silently swap a copied address.",
+  ],
   relatedTools: ["gas-fee-calculator", "eth-unit-converter", "satoshi-converter"],
   body: [
     { type: "p", text: "An address is not an account somewhere. It is a short public identifier derived from a key you hold, and it only means anything within a specific network's ledger. Two things follow from that, and between them they explain nearly every irreversible loss that is not outright theft: the same string of characters can be perfectly valid on several chains at once, and a chain has no idea what you meant to do — only what you signed." },

@@ -21,6 +21,12 @@ const guide: Guide = {
     description:
       "Crypto wallets explained: how private keys and seed phrases really work, the difference between hot, cold, custodial and self-custody wallets, and how to choose one for your balance.",
   },
+  keyTakeaways: [
+    "A wallet doesn't store your coins — it stores the **private key** that authorises moving them; the coins live on the blockchain.",
+    "The real split is **custodial vs self-custodial** (who holds the key) and **hot vs cold** (online vs offline), not the brand.",
+    "Your wallet is only ever a backup of its **seed phrase** — that phrase, not the app or device, is what you actually protect.",
+    "Match the wallet to the job: a hot wallet for spending, a cold wallet for savings.",
+  ],
   relatedTools: ["gas-fee-calculator", "satoshi-converter", "crypto-price-converter"],
   body: [
     { type: "p", text: "The single most useful thing to understand about crypto is that your coins are never in your wallet. They are entries on a public ledger. A wallet holds the private key that authorises changes to those entries. Lose the key and the coins still exist — they are simply unreachable, forever, by anyone. Almost every wallet decision follows from that one fact." },

@@ -22,6 +22,12 @@ const guide: Guide = {
       "crypto capital gains tax",
     ],
   },
+  keyTakeaways: [
+    "Every country's process is the same five steps: **gather transactions → cost basis → gains → local rules → report**.",
+    "The most expensive mistake is **incomplete data** — a missing exchange corrupts the cost basis of everything you sold.",
+    "A **crypto-to-crypto swap is a taxable disposal** in most countries, even when no fiat is involved.",
+    "For a simple year, do it free; once it's complex, **software pays for itself** — but check the numbers before filing.",
+  ],
   relatedTools: ["average-entry-calculator"],
   body: [
     {

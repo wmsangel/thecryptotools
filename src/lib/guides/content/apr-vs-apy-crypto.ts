@@ -13,6 +13,12 @@ const guide: Guide = {
     description:
       "APR vs APY explained for crypto: how compounding frequency turns APR into a higher APY, with examples for staking and yield farming.",
   },
+  keyTakeaways: [
+    "**APR** is the simple rate; **APY** folds in **compounding**, so the same yield looks larger quoted as APY.",
+    "Platforms quote whichever number is bigger — **convert to the same basis** before you compare.",
+    "The gap between them grows with **compounding frequency** and higher rates.",
+    "A high APY paid in a platform's **own token** decays as emissions and price change — discount it.",
+  ],
   relatedTools: ["yield-farming-apy-calculator", "apy-calculator", "compound-interest-calculator", "staking-rewards-calculator"],
   body: [
     { type: "p", text: "You'll see both APR and APY advertised across staking, lending and yield-farming platforms — and they're not the same. Confusing them can make an offer look better or worse than it really is." },
