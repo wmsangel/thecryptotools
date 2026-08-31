@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "crypto-lending-and-borrowing",
+  partOf: "crypto-staking-and-earning",
   title: "Crypto Lending and Borrowing: The Yield, the Liquidation Price, and the Counterparty",
   description:
     "What a crypto lending yield has to be worth to justify the platform risk, why the liquidation price matters more than the interest rate when borrowing, and what depositors actually recovered when the lenders failed.",

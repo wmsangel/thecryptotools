@@ -2,10 +2,10 @@
 // Re-run `npm run unlocks` to refresh this and public/data/unlocks.json.
 
 /** Date the schedules and prices were read. Shown on the page. */
-export const unlocksAsOf = "2026-08-06";
+export const unlocksAsOf = "2026-08-31";
 /** How far ahead the calendar reaches. */
 export const unlocksHorizonDays = 400;
 /** Distinct projects with at least one scheduled unlock in the window. */
 export const unlocksProjectCount = 136;
 /** Individual dated unlock rows. */
-export const unlocksRowCount = 3416;
+export const unlocksRowCount = 3372;

@@ -85,6 +85,14 @@ export interface Guide {
     description: string;
     title?: string;
   };
+  /**
+   * Optional TL;DR shown as a "Key takeaways" card directly under the title.
+   * A handful of one-line, self-contained answers — the shape featured-snippet
+   * extraction and AI answer engines lift cleanly, and a fast orientation for
+   * readers. Supports inline **bold** / [links]. Omit on guides where a summary
+   * would just restate the intro.
+   */
+  keyTakeaways?: string[];
   /** Tool slugs surfaced as cards at the end (internal linking). */
   relatedTools: string[];
   /**

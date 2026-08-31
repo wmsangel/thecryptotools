@@ -37,3 +37,6 @@ next-env.d.ts
 # deploy
 .deploy-state.json
 scripts/.deploy.env
+
+# personal local nav hub (absolute paths to the memory dir)
+START-HERE.md

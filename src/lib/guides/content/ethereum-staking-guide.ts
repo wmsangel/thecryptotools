@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "ethereum-staking-guide",
+  partOf: "crypto-staking-and-earning",
   title: "Ethereum Staking Guide: Solo, Pooled, Exchange and Liquid Compared",
   description:
     "Four ways to stake ETH, with genuinely different economics and risks. What the yield is made of, what each route costs you, and how long your money is actually locked.",

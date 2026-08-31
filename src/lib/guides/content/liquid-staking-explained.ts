@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "liquid-staking-explained",
+  partOf: "crypto-staking-and-earning",
   title: "Liquid Staking Explained: stETH, rETH and the Risks Behind the Yield",
   description:
     "Liquid staking lets you earn staking rewards without locking your capital. That convenience is real — and so are the depeg, smart-contract and leverage risks it introduces.",

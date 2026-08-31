@@ -30,6 +30,12 @@ const guide: Guide = {
     description:
       "A complete self-custody guide: how to choose and set up a wallet, move crypto off an exchange, protect your seed phrase, avoid drainers and approval scams, and plan recovery and inheritance. Each step links to a full guide.",
   },
+  keyTakeaways: [
+    "Self-custody means there is no password reset — every loss is either **you lost the keys** or **someone else got them**.",
+    "Keep savings in a **hardware (cold) wallet** bought sealed from the maker; keep only spending money in a hot wallet.",
+    "The **seed phrase, not the device**, is what you protect — back it up on metal in two places and test recovery.",
+    "Most losses are ordinary: the wrong network, a malicious 'approve' signature, or a fake 'validate your wallet' seed-phrase prompt.",
+  ],
   relatedTools: ["gas-fee-calculator", "satoshi-converter"],
   body: [
     { type: "p", text: "Self-custody is the whole promise of crypto: no bank, no broker, no one who can freeze or seize your money. It is also the whole risk, because the flip side of nobody being able to touch your funds is that **nobody can get them back for you** either. There is no password reset and no fraud department. Every real-world crypto loss comes down to one of two failures — you lost the keys, or someone else got them — and this guide is a path through avoiding both, from the first coin you move off an exchange to the plan for what happens when you are no longer around." },

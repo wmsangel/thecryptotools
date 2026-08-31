@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "apr-vs-apy-crypto",
+  partOf: "crypto-staking-and-earning",
   title: "APR vs APY in Crypto: What's the Difference?",
   description:
     "APR and APY look similar but can mean very different returns. Learn how compounding turns APR into APY and why it matters for staking and yield farming.",

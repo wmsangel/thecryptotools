@@ -68,6 +68,7 @@ import hotWalletVsColdWallet from "./content/hot-wallet-vs-cold-wallet";
 import bestCryptoGridTradingBots from "./content/best-crypto-grid-trading-bots";
 import cryptoWalletSecurity from "./content/crypto-wallet-security";
 import bestCryptoHardwareWallets from "./content/best-crypto-hardware-wallets";
+import cryptoStakingAndEarning from "./content/crypto-staking-and-earning";
 
 export const guides: Guide[] = [
   howToCalculateLiquidationPrice,
@@ -137,6 +138,7 @@ export const guides: Guide[] = [
   bestCryptoGridTradingBots,
   cryptoWalletSecurity,
   bestCryptoHardwareWallets,
+  cryptoStakingAndEarning,
 ];
 
 const bySlug = new Map(guides.map((g) => [g.slug, g]));

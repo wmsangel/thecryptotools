@@ -49,6 +49,12 @@ const guide: Guide = {
     description:
       "Crypto tax rates and rules in 22 countries compared in one table: headline rate, holding-period relief and allowances, and whether crypto-to-crypto swaps are taxable. Links to a full guide for each country.",
   },
+  keyTakeaways: [
+    "There is no global standard — the same sale is **tax-free in Germany after 12 months** and up to **~55% in Japan**.",
+    "The **structure** matters more than the rate: holding-period relief, whether swaps are taxed, gains-vs-wealth, and investor-vs-trader.",
+    "A **crypto-to-crypto swap is taxable** in most countries (US, UK, Ireland) but not in France, Poland or Portugal.",
+    "Under **CARF (from 2026)**, assume your tax authority can already see your exchange and on-chain activity.",
+  ],
   relatedTools: ["crypto-tax-calculator", "tax-loss-harvesting-calculator", "profit-calculator"],
   body: [
     { type: "callout", text: "General information, not tax advice. Rules change and personal circumstances differ — treat this table as a map, then read the country guide and check the primary source before you file." },

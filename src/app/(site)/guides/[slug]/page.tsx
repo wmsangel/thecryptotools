@@ -321,6 +321,23 @@ export default function GuidePage({ params }: { params: { slug: string } }) {
         <Byline guide={guide} />
       </header>
 
+      {guide.keyTakeaways && guide.keyTakeaways.length > 0 && (
+        <section
+          className="mt-6 rounded-xl border border-brand-500/30 bg-brand-500/5 p-5"
+          aria-label="Key takeaways"
+        >
+          <h2 className="text-sm font-bold uppercase tracking-wide text-brand-ink">Key takeaways</h2>
+          <ul className="mt-3 space-y-2">
+            {guide.keyTakeaways.map((t, i) => (
+              <li key={i} className="flex items-start gap-2 text-sm leading-relaxed">
+                <span className="mt-0.5 shrink-0 text-brand-ink" aria-hidden>✓</span>
+                <span className="text-[var(--text)]/90">{renderInline(t)}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       <AdSlot slot="guide-top" className="my-8" />
 
       <div>

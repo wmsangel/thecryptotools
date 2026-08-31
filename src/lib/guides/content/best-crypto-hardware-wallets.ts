@@ -21,6 +21,12 @@ const guide: Guide = {
     description:
       "An honest 2026 hardware wallet comparison: Ledger vs Trezor vs Tangem and air-gapped devices, on secure element, open-source firmware, coin support and price — plus how to buy one safely and set it up.",
   },
+  keyTakeaways: [
+    "Every major device protects your keys well — the real differences are **openness, coin support and trust**, not whether they work.",
+    "**Ledger** for the widest multi-chain support; **Trezor** for fully open-source hardware; **Tangem** for the simplest, cheapest start.",
+    "**Buy sealed, direct from the manufacturer** — a used or pre-initialised device can arrive with a seed a thief already knows.",
+    "The device is only half the job — store the seed phrase on metal and **test recovery before funding it**.",
+  ],
   relatedTools: ["satoshi-converter"],
   body: [
     { type: "p", text: "A hardware wallet does one job: it keeps the keys to your crypto offline and signs transactions without ever exposing them, so even a fully compromised computer cannot steal your funds. Once your balance is worth more than you would carry as cash, it is the standard way to protect it. The good news is that every device below does that core job well — the differences are about **openness, coin support, convenience and trust**, not whether they work. If you are new to the concept, start with [how to choose a hardware wallet](/guides/how-to-choose-a-hardware-wallet); this page is about which one to actually buy." },

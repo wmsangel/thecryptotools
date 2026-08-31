@@ -27,6 +27,12 @@ const guide: Guide = {
     description:
       "How to store a crypto seed phrase safely: paper vs metal, how many backups and where, why splitting the words is usually a mistake, passphrase trade-offs, and how to test recovery before you fund the wallet.",
   },
+  keyTakeaways: [
+    "Your seed phrase **is** the wallet — anyone who reads it owns your crypto instantly, and anyone who loses it loses the crypto permanently.",
+    "Write it by hand, move it to **metal**, and keep **two copies in two separate locations** — fire and water destroy far more backups than thieves do.",
+    "**Never** photograph it, put it in the cloud, or type it into a website — that single mistake drains most self-custodied wallets.",
+    "**Test recovery before you fund the wallet**: wipe the device, restore from your backup, confirm the same first address, then send a small test amount.",
+  ],
   relatedTools: ["crypto-price-converter", "gas-fee-calculator", "satoshi-converter"],
   body: [
     { type: "p", text: "A seed phrase is not a password to your wallet. It is the wallet. Twelve or twenty-four ordinary English words encode the master key from which every address and every private key you will ever use is derived. Anyone who reads those words owns the coins, instantly and irreversibly, from anywhere on earth. Anyone who loses them — including you — loses the coins just as permanently. Every decision about storage is a trade between those two failures, and optimising hard against one usually makes the other worse." },

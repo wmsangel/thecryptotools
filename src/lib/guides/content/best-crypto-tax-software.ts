@@ -22,6 +22,12 @@ const guide: Guide = {
       "crypto tax software comparison",
     ],
   },
+  keyTakeaways: [
+    "You need it once your history is genuinely complex — **hundreds of trades, or any DeFi/staking** — not for a dozen trades on one exchange.",
+    "**Koinly** is the broad international default; **CoinLedger** is strongest for US filers who live in TurboTax or TaxAct.",
+    "Both are **free until you download** the final report — run your whole history through each and compare before paying.",
+    "The output is only as good as the input: connect **every** exchange and wallet, or the cost basis of everything you sold comes out wrong.",
+  ],
   relatedTools: ["average-entry-calculator"],
   body: [
     {

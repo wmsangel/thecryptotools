@@ -2,6 +2,7 @@ import type { Guide } from "../types";
 
 const guide: Guide = {
   slug: "what-is-crypto-staking",
+  partOf: "crypto-staking-and-earning",
   title: "What Is Crypto Staking and How Are Rewards Calculated?",
   description:
     "Staking pays you for helping secure a proof-of-stake network. Here is where the yield actually comes from, what it costs you, and how to work out what you would earn.",
