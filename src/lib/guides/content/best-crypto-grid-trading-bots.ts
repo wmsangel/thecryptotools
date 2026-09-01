@@ -82,7 +82,7 @@ const guide: Guide = {
     { type: "h2", text: "Grid bot vs DCA bot — which do you want?" },
     {
       type: "p",
-      text: "They're often confused because both automate buying, but they solve different problems. A grid bot is a range-trading tool: it profits from oscillation and struggles in a strong trend. A DCA (dollar-cost-averaging) bot is an accumulation tool: it buys a fixed amount on a schedule regardless of price, which is what you want if your view is 'up over years' and you don't want to time anything. If you're trying to accumulate a long-term position, a DCA bot (or just a recurring buy) fits better than a grid.",
+      text: "They're often confused because both automate buying, but they solve different problems. A grid bot is a range-trading tool: it profits from oscillation and struggles in a strong trend. A DCA (dollar-cost-averaging) bot is an accumulation tool: it buys a fixed amount on a schedule regardless of price, which is what you want if your view is 'up over years' and you don't want to time anything. If you're trying to accumulate a long-term position, a DCA bot (or just a recurring buy) fits better than a grid. For the full landscape — signal and copy bots included — see [crypto trading bots explained](/guides/crypto-trading-bots-explained).",
     },
     {
       type: "cta",
