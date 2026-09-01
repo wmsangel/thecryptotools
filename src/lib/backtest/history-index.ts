@@ -16,151 +16,151 @@ export const historyIndex: HistoryMeta[] = [
     "symbol": "BTC",
     "source": "Bitstamp",
     "start": "2011-08-18",
-    "end": "2026-08-31",
-    "days": 5493
+    "end": "2026-09-01",
+    "days": 5494
   },
   {
     "slug": "ethereum",
     "symbol": "ETH",
     "source": "Binance",
     "start": "2017-08-17",
-    "end": "2026-08-31",
-    "days": 3302
+    "end": "2026-09-01",
+    "days": 3303
   },
   {
     "slug": "xrp",
     "symbol": "XRP",
     "source": "Binance",
     "start": "2018-05-04",
-    "end": "2026-08-31",
-    "days": 3042
+    "end": "2026-09-01",
+    "days": 3043
   },
   {
     "slug": "bnb",
     "symbol": "BNB",
     "source": "Binance",
     "start": "2017-11-06",
-    "end": "2026-08-31",
-    "days": 3221
+    "end": "2026-09-01",
+    "days": 3222
   },
   {
     "slug": "solana",
     "symbol": "SOL",
     "source": "Binance",
     "start": "2020-08-11",
-    "end": "2026-08-31",
-    "days": 2212
+    "end": "2026-09-01",
+    "days": 2213
   },
   {
     "slug": "dogecoin",
     "symbol": "DOGE",
     "source": "Binance",
     "start": "2019-07-05",
-    "end": "2026-08-31",
-    "days": 2615
+    "end": "2026-09-01",
+    "days": 2616
   },
   {
     "slug": "cardano",
     "symbol": "ADA",
     "source": "Binance",
     "start": "2018-04-17",
-    "end": "2026-08-31",
-    "days": 3059
+    "end": "2026-09-01",
+    "days": 3060
   },
   {
     "slug": "tron",
     "symbol": "TRX",
     "source": "Binance",
     "start": "2018-06-11",
-    "end": "2026-08-31",
-    "days": 3004
+    "end": "2026-09-01",
+    "days": 3005
   },
   {
     "slug": "avalanche",
     "symbol": "AVAX",
     "source": "Binance",
     "start": "2020-09-22",
-    "end": "2026-08-31",
-    "days": 2170
+    "end": "2026-09-01",
+    "days": 2171
   },
   {
     "slug": "chainlink",
     "symbol": "LINK",
     "source": "Binance",
     "start": "2019-01-16",
-    "end": "2026-08-31",
-    "days": 2785
+    "end": "2026-09-01",
+    "days": 2786
   },
   {
     "slug": "polkadot",
     "symbol": "DOT",
     "source": "Binance",
     "start": "2020-08-18",
-    "end": "2026-08-31",
-    "days": 2205
+    "end": "2026-09-01",
+    "days": 2206
   },
   {
     "slug": "litecoin",
     "symbol": "LTC",
     "source": "Binance",
     "start": "2017-12-13",
-    "end": "2026-08-31",
-    "days": 3184
+    "end": "2026-09-01",
+    "days": 3185
   },
   {
     "slug": "shiba-inu",
     "symbol": "SHIB",
     "source": "Binance",
     "start": "2021-05-10",
-    "end": "2026-08-31",
-    "days": 1940
+    "end": "2026-09-01",
+    "days": 1941
   },
   {
     "slug": "sui",
     "symbol": "SUI",
     "source": "Binance",
     "start": "2023-05-03",
-    "end": "2026-08-31",
-    "days": 1217
+    "end": "2026-09-01",
+    "days": 1218
   },
   {
     "slug": "algorand",
     "symbol": "ALGO",
     "source": "Binance",
     "start": "2019-06-22",
-    "end": "2026-08-31",
-    "days": 2628
+    "end": "2026-09-01",
+    "days": 2629
   },
   {
     "slug": "tezos",
     "symbol": "XTZ",
     "source": "Binance",
     "start": "2019-09-24",
-    "end": "2026-08-31",
-    "days": 2534
+    "end": "2026-09-01",
+    "days": 2535
   },
   {
     "slug": "stellar",
     "symbol": "XLM",
     "source": "Binance",
     "start": "2018-05-31",
-    "end": "2026-08-31",
-    "days": 3015
+    "end": "2026-09-01",
+    "days": 3016
   },
   {
     "slug": "bitcoin-cash",
     "symbol": "BCH",
     "source": "Binance",
     "start": "2019-11-28",
-    "end": "2026-08-31",
-    "days": 2469
+    "end": "2026-09-01",
+    "days": 2470
   },
   {
     "slug": "gram",
     "symbol": "GRAM",
     "source": "CoinGecko",
-    "start": "2025-09-01",
-    "end": "2026-08-31",
+    "start": "2025-09-02",
+    "end": "2026-09-01",
     "days": 365
   },
   {
@@ -168,31 +168,31 @@ export const historyIndex: HistoryMeta[] = [
     "symbol": "HBAR",
     "source": "Binance",
     "start": "2019-09-29",
-    "end": "2026-08-31",
-    "days": 2529
+    "end": "2026-09-01",
+    "days": 2530
   },
   {
     "slug": "polygon",
     "symbol": "POL",
     "source": "Binance",
     "start": "2024-09-13",
-    "end": "2026-08-31",
-    "days": 718
+    "end": "2026-09-01",
+    "days": 719
   },
   {
     "slug": "cosmos",
     "symbol": "ATOM",
     "source": "Binance",
     "start": "2019-04-29",
-    "end": "2026-08-31",
-    "days": 2682
+    "end": "2026-09-01",
+    "days": 2683
   },
   {
     "slug": "hyperliquid",
     "symbol": "HYPE",
     "source": "CoinGecko",
-    "start": "2025-09-01",
-    "end": "2026-08-31",
+    "start": "2025-09-02",
+    "end": "2026-09-01",
     "days": 365
   },
   {
@@ -200,15 +200,15 @@ export const historyIndex: HistoryMeta[] = [
     "symbol": "ZEC",
     "source": "Binance",
     "start": "2019-03-21",
-    "end": "2026-08-31",
-    "days": 2721
+    "end": "2026-09-01",
+    "days": 2722
   },
   {
     "slug": "monero",
     "symbol": "XMR",
     "source": "CoinGecko",
-    "start": "2025-09-01",
-    "end": "2026-08-31",
+    "start": "2025-09-02",
+    "end": "2026-09-01",
     "days": 365
   },
   {
@@ -216,31 +216,31 @@ export const historyIndex: HistoryMeta[] = [
     "symbol": "UNI",
     "source": "Binance",
     "start": "2020-09-17",
-    "end": "2026-08-31",
-    "days": 2175
+    "end": "2026-09-01",
+    "days": 2176
   },
   {
     "slug": "near",
     "symbol": "NEAR",
     "source": "Binance",
     "start": "2020-10-14",
-    "end": "2026-08-31",
-    "days": 2148
+    "end": "2026-09-01",
+    "days": 2149
   },
   {
     "slug": "aave",
     "symbol": "AAVE",
     "source": "Binance",
     "start": "2020-10-15",
-    "end": "2026-08-31",
-    "days": 2147
+    "end": "2026-09-01",
+    "days": 2148
   },
   {
     "slug": "cronos",
     "symbol": "CRO",
     "source": "CoinGecko",
-    "start": "2025-09-01",
-    "end": "2026-08-31",
+    "start": "2025-09-02",
+    "end": "2026-09-01",
     "days": 365
   },
   {
@@ -248,39 +248,39 @@ export const historyIndex: HistoryMeta[] = [
     "symbol": "TAO",
     "source": "Binance",
     "start": "2024-04-11",
-    "end": "2026-08-31",
-    "days": 873
+    "end": "2026-09-01",
+    "days": 874
   },
   {
     "slug": "internet-computer",
     "symbol": "ICP",
     "source": "Binance",
     "start": "2021-05-11",
-    "end": "2026-08-31",
-    "days": 1939
+    "end": "2026-09-01",
+    "days": 1940
   },
   {
     "slug": "ethereum-classic",
     "symbol": "ETC",
     "source": "Binance",
     "start": "2018-06-12",
-    "end": "2026-08-31",
-    "days": 3003
+    "end": "2026-09-01",
+    "days": 3004
   },
   {
     "slug": "pepe",
     "symbol": "PEPE",
     "source": "Binance",
     "start": "2023-05-05",
-    "end": "2026-08-31",
-    "days": 1215
+    "end": "2026-09-01",
+    "days": 1216
   },
   {
     "slug": "kaspa",
     "symbol": "KAS",
     "source": "CoinGecko",
-    "start": "2025-09-01",
-    "end": "2026-08-31",
+    "start": "2025-09-02",
+    "end": "2026-09-01",
     "days": 365
   },
   {
@@ -288,103 +288,103 @@ export const historyIndex: HistoryMeta[] = [
     "symbol": "FIL",
     "source": "Binance",
     "start": "2020-10-15",
-    "end": "2026-08-31",
-    "days": 2147
+    "end": "2026-09-01",
+    "days": 2148
   },
   {
     "slug": "arbitrum",
     "symbol": "ARB",
     "source": "Binance",
     "start": "2023-03-23",
-    "end": "2026-08-31",
-    "days": 1258
+    "end": "2026-09-01",
+    "days": 1259
   },
   {
     "slug": "optimism",
     "symbol": "OP",
     "source": "Binance",
     "start": "2022-06-01",
-    "end": "2026-08-31",
-    "days": 1553
+    "end": "2026-09-01",
+    "days": 1554
   },
   {
     "slug": "aptos",
     "symbol": "APT",
     "source": "Binance",
     "start": "2022-10-19",
-    "end": "2026-08-31",
-    "days": 1413
+    "end": "2026-09-01",
+    "days": 1414
   },
   {
     "slug": "injective",
     "symbol": "INJ",
     "source": "Binance",
     "start": "2020-10-21",
-    "end": "2026-08-31",
-    "days": 2141
+    "end": "2026-09-01",
+    "days": 2142
   },
   {
     "slug": "celestia",
     "symbol": "TIA",
     "source": "Binance",
     "start": "2023-10-31",
-    "end": "2026-08-31",
-    "days": 1036
+    "end": "2026-09-01",
+    "days": 1037
   },
   {
     "slug": "sei",
     "symbol": "SEI",
     "source": "Binance",
     "start": "2023-08-15",
-    "end": "2026-08-31",
-    "days": 1113
+    "end": "2026-09-01",
+    "days": 1114
   },
   {
     "slug": "render",
     "symbol": "RENDER",
     "source": "Binance",
     "start": "2024-07-26",
-    "end": "2026-08-31",
-    "days": 767
+    "end": "2026-09-01",
+    "days": 768
   },
   {
     "slug": "artificial-superintelligence-alliance",
     "symbol": "FET",
     "source": "Binance",
     "start": "2019-02-28",
-    "end": "2026-08-31",
-    "days": 2742
+    "end": "2026-09-01",
+    "days": 2743
   },
   {
     "slug": "ondo",
     "symbol": "ONDO",
     "source": "Binance",
     "start": "2025-04-11",
-    "end": "2026-08-31",
-    "days": 508
+    "end": "2026-09-01",
+    "days": 509
   },
   {
     "slug": "worldcoin",
     "symbol": "WLD",
     "source": "Binance",
     "start": "2023-07-24",
-    "end": "2026-08-31",
-    "days": 1135
+    "end": "2026-09-01",
+    "days": 1136
   },
   {
     "slug": "mantle",
     "symbol": "MNT",
     "source": "CoinGecko",
-    "start": "2025-09-01",
-    "end": "2026-08-31",
+    "start": "2025-09-02",
+    "end": "2026-09-01",
     "days": 365
   },
   {
     "slug": "sky",
     "symbol": "SKY",
     "source": "CoinGecko",
-    "start": "2025-09-01",
-    "end": "2026-08-31",
+    "start": "2025-09-02",
+    "end": "2026-09-01",
     "days": 365
   },
   {
@@ -392,128 +392,128 @@ export const historyIndex: HistoryMeta[] = [
     "symbol": "JUP",
     "source": "Binance",
     "start": "2024-01-31",
-    "end": "2026-08-31",
-    "days": 944
+    "end": "2026-09-01",
+    "days": 945
   },
   {
     "slug": "lido",
     "symbol": "LDO",
     "source": "Binance",
     "start": "2022-05-09",
-    "end": "2026-08-31",
-    "days": 1576
+    "end": "2026-09-01",
+    "days": 1577
   },
   {
     "slug": "curve",
     "symbol": "CRV",
     "source": "Binance",
     "start": "2020-08-15",
-    "end": "2026-08-31",
-    "days": 2208
+    "end": "2026-09-01",
+    "days": 2209
   },
   {
     "slug": "pyth",
     "symbol": "PYTH",
     "source": "Binance",
     "start": "2024-02-02",
-    "end": "2026-08-31",
-    "days": 942
+    "end": "2026-09-01",
+    "days": 943
   },
   {
     "slug": "stacks",
     "symbol": "STX",
     "source": "Binance",
     "start": "2019-10-25",
-    "end": "2026-08-31",
-    "days": 2503
+    "end": "2026-09-01",
+    "days": 2504
   },
   {
     "slug": "immutable",
     "symbol": "IMX",
     "source": "Binance",
     "start": "2022-01-10",
-    "end": "2026-08-31",
-    "days": 1695
+    "end": "2026-09-01",
+    "days": 1696
   },
   {
     "slug": "the-graph",
     "symbol": "GRT",
     "source": "Binance",
     "start": "2020-12-17",
-    "end": "2026-08-31",
-    "days": 2084
+    "end": "2026-09-01",
+    "days": 2085
   },
   {
     "slug": "thorchain",
     "symbol": "RUNE",
     "source": "Binance",
     "start": "2020-09-04",
-    "end": "2026-08-31",
-    "days": 2188
+    "end": "2026-09-01",
+    "days": 2189
   },
   {
     "slug": "vechain",
     "symbol": "VET",
     "source": "Binance",
     "start": "2018-07-25",
-    "end": "2026-08-31",
-    "days": 2960
+    "end": "2026-09-01",
+    "days": 2961
   },
   {
     "slug": "chiliz",
     "symbol": "CHZ",
     "source": "Binance",
     "start": "2019-09-06",
-    "end": "2026-08-31",
-    "days": 2552
+    "end": "2026-09-01",
+    "days": 2553
   },
   {
     "slug": "axie-infinity",
     "symbol": "AXS",
     "source": "Binance",
     "start": "2020-11-04",
-    "end": "2026-08-31",
-    "days": 2127
+    "end": "2026-09-01",
+    "days": 2128
   },
   {
     "slug": "the-sandbox",
     "symbol": "SAND",
     "source": "Binance",
     "start": "2020-08-14",
-    "end": "2026-08-31",
-    "days": 2209
+    "end": "2026-09-01",
+    "days": 2210
   },
   {
     "slug": "decentraland",
     "symbol": "MANA",
     "source": "Binance",
     "start": "2020-08-06",
-    "end": "2026-08-31",
-    "days": 2217
+    "end": "2026-09-01",
+    "days": 2218
   },
   {
     "slug": "bonk",
     "symbol": "BONK",
     "source": "Binance",
     "start": "2023-12-15",
-    "end": "2026-08-31",
-    "days": 991
+    "end": "2026-09-01",
+    "days": 992
   },
   {
     "slug": "dogwifhat",
     "symbol": "WIF",
     "source": "Binance",
     "start": "2024-03-05",
-    "end": "2026-08-31",
-    "days": 910
+    "end": "2026-09-01",
+    "days": 911
   },
   {
     "slug": "bittorrent",
     "symbol": "BTTC",
     "source": "Binance",
     "start": "2022-01-25",
-    "end": "2026-08-31",
-    "days": 1680
+    "end": "2026-09-01",
+    "days": 1681
   }
 ];
 
@@ -524,4 +524,4 @@ export function getHistoryMeta(slug: string): HistoryMeta | undefined {
 }
 
 /** The newest day any series reaches — what the site can honestly claim. */
-export const historyThrough: string = "2026-08-31";
+export const historyThrough: string = "2026-09-01";
