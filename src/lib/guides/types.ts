@@ -18,7 +18,7 @@
  * isolated guides compile (generate-llms, `--rootDir src/lib/guides`) stays
  * clean; @/lib/affiliate imports this type rather than the other way around.
  */
-export type GuideAffiliateKind = "exchange" | "derivatives" | "wallet" | "tax" | "bot";
+export type GuideAffiliateKind = "exchange" | "derivatives" | "wallet" | "tax" | "bot" | "card";
 
 export interface GuideTableRow {
   cells: string[];

@@ -74,6 +74,7 @@ const CATEGORY_FOR: Record<Exclude<GuideAffiliateKind, "exchange" | "derivatives
   wallet: "wallet",
   tax: "tax",
   bot: "trading",
+  card: "earn",
 };
 
 /** Earning partners to feature for a guide's declared affiliate kind. */
@@ -91,4 +92,5 @@ export const GUIDE_AFFILIATE_COPY: Record<GuideAffiliateKind, { heading: string;
   wallet: { heading: "Where to store it safely", verb: "Get a" },
   tax: { heading: "Do it without the spreadsheet", verb: "Try" },
   bot: { heading: "Automate the strategy", verb: "Start with" },
+  card: { heading: "Where to spend your crypto", verb: "Get the" },
 };

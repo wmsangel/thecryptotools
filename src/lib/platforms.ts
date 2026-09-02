@@ -439,6 +439,45 @@ export const platforms: Platform[] = [
     bonus: "Sign-up bonus — add your referral offer",
     url: "https://nexo.com",
   },
+  {
+    slug: "crypto-com-card",
+    name: "Crypto.com Visa Card",
+    category: "earn",
+    icon: "💳",
+    tagline: "Prepaid crypto Visa with tiered rewards",
+    bestFor: "Everyday spending rewards",
+    description:
+      "A prepaid Visa card funded from your Crypto.com account, with cashback and perks that scale with the amount of CRO you stake.",
+    highlights: ["Cashback on spending", "Tiered perks by CRO stake", "Widely accepted Visa"],
+    bonus: "Card sign-up bonus — add your referral offer",
+    url: "https://crypto.com/cards",
+  },
+  {
+    slug: "bybit-card",
+    name: "Bybit Card",
+    category: "earn",
+    icon: "💳",
+    tagline: "Mastercard that spends your Bybit balance",
+    bestFor: "Spending from an exchange balance",
+    description:
+      "A Mastercard linked to your Bybit account, letting you spend crypto directly from your balance with cashback in supported regions.",
+    highlights: ["Spends your Bybit balance", "Cashback in supported regions", "Virtual and physical options"],
+    bonus: "Card cashback offer — add your referral offer",
+    url: "https://www.bybit.com/en/cards/",
+  },
+  {
+    slug: "wirex",
+    name: "Wirex",
+    category: "earn",
+    icon: "💳",
+    tagline: "Multi-currency crypto & fiat card",
+    bestFor: "Multi-currency spending",
+    description:
+      "A card and app that hold both crypto and fiat, convert at the point of sale and pay rewards in the WXT token.",
+    highlights: ["Holds crypto and fiat together", "Rewards on spending", "Multi-currency support"],
+    bonus: "Sign-up bonus — add your referral offer",
+    url: "https://wirexapp.com",
+  },
 ];
 
 // --- Query helpers ----------------------------------------------------------
