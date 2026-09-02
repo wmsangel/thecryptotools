@@ -10,6 +10,22 @@
 # if you ever need to confirm it is there.
 
 # ---------------------------------------------------------------------------
+# Canonical host — force non-www
+# ---------------------------------------------------------------------------
+# www.thecryptotools.com was serving 200 instead of redirecting, so search
+# engines saw two hosts for every page. Bing flagged www URLs as "important
+# pages missing in sitemaps" (the sitemap lists only the canonical non-www
+# URLs, e.g. /tools/dca-bot-calculator/). Every page already emits a non-www
+# <link rel="canonical">, but a 301 is the definitive fix: one canonical host.
+# The condition only matches the www host, so the redirected (apex) request is
+# served normally — no loop.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} ^www\.thecryptotools\.com$ [NC]
+  RewriteRule ^(.*)$ https://thecryptotools.com/$1 [R=301,L]
+</IfModule>
+
+# ---------------------------------------------------------------------------
 # 404
 # ---------------------------------------------------------------------------
 # Without this, a mistyped or stale URL returns Apache's own 13-byte "404 Not
