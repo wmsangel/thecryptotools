@@ -308,6 +308,11 @@ async function main() {
     title: "The biggest token unlocks of the next 12 months",
     footnote: "Ranked by share of supply, not dollars",
   }));
+  add("research/crypto-seasonality", async () => ({
+    eyebrow: "Data study",
+    title: "Crypto seasonality: the best and worst months",
+    footnote: "Average return by calendar month, measured",
+  }));
 
   // Flat families: one card per directory under each of these.
   for (const [dir, eyebrow] of [

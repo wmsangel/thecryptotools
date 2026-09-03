@@ -6,6 +6,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { getCorrelationStudy } from "@/lib/research/crypto-correlation";
 import { getDrawdownStudy } from "@/lib/research/crypto-drawdowns";
 import { getUnlockStudy } from "@/lib/research/token-unlocks";
+import { getSeasonalityStudy } from "@/lib/research/crypto-seasonality";
 
 const TITLE = "Crypto Research & Data Studies";
 const DESCRIPTION =
@@ -29,6 +30,7 @@ export default function Page() {
   const study = getCorrelationStudy();
   const drawdowns = getDrawdownStudy();
   const unlocks = getUnlockStudy();
+  const seasonality = getSeasonalityStudy();
   const avgDepth = drawdowns ? Math.round(drawdowns.avgWorstDepth) : 80;
 
   const studies = [
@@ -61,6 +63,16 @@ export default function Page() {
       stat: unlocks ? String(unlocks.over10) : "—",
       statLabel: "unlocks >10% of supply",
       updated: unlocks?.asOf,
+    },
+    {
+      href: "/research/crypto-seasonality",
+      title: "Crypto seasonality: the best and worst months",
+      blurb: seasonality
+        ? `Bitcoin's strongest month over ${seasonality.years} years is ${seasonality.bitcoin.best.name}; its weakest is ${seasonality.bitcoin.worst.name}. Is September really bad and Q4 really good? The monthly numbers, measured.`
+        : "Average crypto return by calendar month, for Bitcoin and the largest coins.",
+      stat: seasonality ? seasonality.bitcoin.best.short : "—",
+      statLabel: "BTC's best month",
+      updated: seasonality?.through,
     },
   ];
 

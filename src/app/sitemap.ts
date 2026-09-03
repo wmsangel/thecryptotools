@@ -115,6 +115,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: absoluteUrl("/research/crypto-correlation"), changeFrequency: "monthly", priority: 0.8 },
     { url: absoluteUrl("/research/crypto-drawdowns"), changeFrequency: "monthly", priority: 0.8 },
     { url: absoluteUrl("/research/token-unlocks"), changeFrequency: "monthly", priority: 0.8 },
+    { url: absoluteUrl("/research/crypto-seasonality"), changeFrequency: "monthly", priority: 0.8 },
     { url: absoluteUrl("/donate"), changeFrequency: "monthly", priority: 0.4 },
   ];
 
