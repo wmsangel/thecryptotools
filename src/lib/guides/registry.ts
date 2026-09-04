@@ -70,6 +70,7 @@ import cryptoWalletSecurity from "./content/crypto-wallet-security";
 import bestCryptoHardwareWallets from "./content/best-crypto-hardware-wallets";
 import cryptoTradingBotsExplained from "./content/crypto-trading-bots-explained";
 import bestCryptoCards from "./content/best-crypto-cards";
+import howToAvoidCryptoScams from "./content/how-to-avoid-crypto-scams";
 import cryptoStakingAndEarning from "./content/crypto-staking-and-earning";
 
 export const guides: Guide[] = [
@@ -143,6 +144,7 @@ export const guides: Guide[] = [
   cryptoStakingAndEarning,
   cryptoTradingBotsExplained,
   bestCryptoCards,
+  howToAvoidCryptoScams,
 ];
 
 const bySlug = new Map(guides.map((g) => [g.slug, g]));
