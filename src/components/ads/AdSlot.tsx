@@ -107,15 +107,20 @@ function HouseAd({ slot, className = "" }: { slot: string; className?: string })
       data-ad-slot={slot}
       data-house-ad={ad.id}
       data-house-ad-placement={slot}
-      className={`card card-hover flex min-h-[90px] flex-col justify-center gap-1 p-4 ${className}`}
+      className={`group card card-hover relative flex min-h-[96px] flex-col justify-center gap-1.5 overflow-hidden border-l-[3px] border-l-brand-500 p-4 pl-5 ${className}`}
     >
-      <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-brand-ink">
+      {/* Honest, unobtrusive marker: these are cross-promos of our own network. */}
+      <span className="absolute right-3 top-3 text-[9px] font-medium uppercase tracking-wider muted opacity-70">
+        Our network
+      </span>
+      <span className="w-fit rounded-full bg-brand-500/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-brand-ink">
         {ad.eyebrow}
       </span>
-      <span className="text-sm font-semibold leading-snug">{ad.title}</span>
+      <span className="text-sm font-bold leading-snug">{ad.title}</span>
       <span className="muted text-xs leading-snug">{ad.description}</span>
-      <span className="mt-0.5 text-xs font-semibold text-brand-ink">
-        {ad.cta} <span aria-hidden="true">→</span>
+      <span className="mt-0.5 inline-flex items-center gap-1 text-xs font-semibold text-brand-ink">
+        {ad.cta}
+        <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-1">→</span>
       </span>
     </a>
   );

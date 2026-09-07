@@ -2111,6 +2111,34 @@ export const coins: Coin[] = [
     typicalAmount: 1000,
     order: 64,
   },
+  {
+    slug: "pendle",
+    name: "Pendle",
+    symbol: "PENDLE",
+    coingeckoId: "pendle",
+    binance: "PENDLEUSDT",
+    domain: "pendle.finance",
+    color: "#12b3a6",
+    tagline: "DeFi protocol for trading future yield, and its vote-escrow token.",
+    intro:
+      "Pendle splits a yield-bearing asset into two tradable tokens — a principal token (PT) and a yield token (YT) — letting users lock in a fixed yield, speculate on future yield, or provide liquidity. PENDLE is the governance token; locking it as vePENDLE earns a share of protocol fees and boosts LP rewards. There is no hard supply cap: PENDLE has a weekly emission on a gradually declining schedule, so circulating supply keeps rising — the main dilution to weigh against the fee income vePENDLE captures.",
+    facts: [
+      { label: "Launched", value: "April 2021" },
+      { label: "Token type", value: "ERC-20 on Ethereum, also on Arbitrum and other chains" },
+      { label: "Max supply", value: "No hard cap — weekly emissions on a declining schedule" },
+      { label: "Role", value: "Governance and fee-sharing via vote-escrow (vePENDLE)" },
+      { label: "Native staking", value: "Yes — lock PENDLE as vePENDLE for protocol fees and boosted LP rewards" },
+    ],
+    feeNote:
+      "PENDLE lives mainly on Ethereum, so moving it costs Ethereum gas; it also trades on Arbitrum and other chains where fees are far lower.",
+    volatilityNote:
+      "PENDLE is a high-beta DeFi token that tracks DeFi yield cycles and total value locked, and reprices hard as large points and airdrop campaigns rotate in and out of its pools.",
+    circulatingSupply: 172_300_000,
+    totalSupply: 281_500_000,
+    supplyAsOf: "2026-09-07",
+    typicalAmount: 100,
+    order: 65,
+  },
 ];
 
 const bySlug = new Map(coins.map((c) => [c.slug, c]));
