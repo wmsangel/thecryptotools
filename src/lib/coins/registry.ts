@@ -2082,6 +2082,35 @@ export const coins: Coin[] = [
     typicalAmount: 100000000,
     order: 63,
   },
+  {
+    slug: "ethena",
+    name: "Ethena",
+    symbol: "ENA",
+    coingeckoId: "ethena",
+    binance: "ENAUSDT",
+    domain: "ethena.fi",
+    color: "#5b7cfa",
+    tagline: "Governance token of the USDe synthetic-dollar protocol.",
+    intro:
+      "Ethena issues USDe, a synthetic dollar that holds its peg not by keeping cash in a bank but by pairing staked-ETH and other crypto collateral with equal short perpetual-futures positions — a delta-neutral hedge whose yield comes from staking plus funding rates. ENA is the protocol's governance token. Two things follow from that design: USDe is not a fiat-backed stablecoin and carries funding-rate and exchange-counterparty risk a cash-backed coin does not, and ENA itself has large team, investor and foundation allocations vesting over years, so scheduled unlocks are a recurring source of sell pressure.",
+    facts: [
+      { label: "Launched", value: "April 2024 (ENA airdrop)" },
+      { label: "Token type", value: "ERC-20 on Ethereum" },
+      { label: "Max supply", value: "15,000,000,000 ENA" },
+      { label: "Role", value: "Governance of Ethena, the protocol behind the USDe synthetic dollar" },
+      { label: "Native staking", value: "Yes — ENA can be staked (sENA) for protocol rewards" },
+      { label: "Unlocks", value: "Large team, investor and foundation allocations vest over several years" },
+    ],
+    feeNote:
+      "ENA is an ERC-20 on Ethereum, so on-chain transfers cost Ethereum gas; for a small position the exchange trading fee usually dwarfs it.",
+    volatilityNote:
+      "ENA is a high-beta DeFi token that has fallen sharply from its 2024 high, and it reprices hard around token-unlock dates and shifts in perpetual funding rates — the engine behind USDe's yield.",
+    circulatingSupply: 9_828_125_000,
+    totalSupply: 15_000_000_000,
+    supplyAsOf: "2026-09-04",
+    typicalAmount: 1000,
+    order: 64,
+  },
 ];
 
 const bySlug = new Map(coins.map((c) => [c.slug, c]));
