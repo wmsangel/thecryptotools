@@ -9,7 +9,7 @@ function randHex(len: number): string {
 
 const tool: ToolConfig = {
   slug: "fake-wallet-generator",
-  updatedAt: "2026-07-13",
+  updatedAt: "2026-09-09",
   title: "Fake Crypto Wallet Generator",
   description:
     "Generate realistic-looking but fake wallet addresses for testing UIs and demos. For development only — never holds real funds.",
@@ -18,13 +18,16 @@ const tool: ToolConfig = {
   seo: {
     keywords: [
       "fake wallet generator",
+      "fake crypto wallet simulator",
+      "crypto wallet simulator",
+      "fake wallet simulator",
       "test crypto address generator",
       "fake ethereum address",
       "dummy wallet address",
       "mock crypto wallet",
     ],
     description:
-      "Free fake crypto wallet address generator for testing and mockups. Generate ETH/BTC-style addresses instantly.",
+      "Free fake crypto wallet generator and simulator for testing and mockups. Produce realistic ETH/BTC-style addresses instantly — for development only, never real funds.",
   },
   inputs: [
     {

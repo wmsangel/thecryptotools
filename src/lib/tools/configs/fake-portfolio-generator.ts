@@ -21,7 +21,7 @@ function bar(pct: number): string {
 
 const tool: ToolConfig = {
   slug: "fake-portfolio-generator",
-  updatedAt: "2026-08-06",
+  updatedAt: "2026-09-09",
   title: "Fake Crypto Portfolio Generator",
   description:
     "Generate a random but realistic crypto portfolio — see the allocation as a table, and copy it as JSON for testing dashboards and mock APIs.",
@@ -32,6 +32,8 @@ const tool: ToolConfig = {
       "fake crypto portfolio",
       "fake bitcoin portfolio",
       "fake portfolio generator",
+      "fake crypto portfolio simulator",
+      "crypto portfolio simulator",
       "mock crypto portfolio",
       "random crypto portfolio",
       "test portfolio data",
