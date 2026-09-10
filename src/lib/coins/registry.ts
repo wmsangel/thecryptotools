@@ -2139,6 +2139,34 @@ export const coins: Coin[] = [
     typicalAmount: 100,
     order: 65,
   },
+  {
+    slug: "pudgy-penguins",
+    name: "Pudgy Penguins",
+    symbol: "PENGU",
+    coingeckoId: "pudgy-penguins",
+    binance: "PENGUUSDT",
+    domain: "pudgypenguins.com",
+    color: "#4db2f0",
+    tagline: "Community token of the Pudgy Penguins NFT and IP brand.",
+    intro:
+      "PENGU is the token tied to Pudgy Penguins — an NFT collection turned consumer brand, with toys and media alongside the on-chain community. It launched through a December 2024 airdrop, primarily on Solana and bridged to Ethereum and other chains. Treat it as a brand/meme token: its price moves on Pudgy Penguins momentum, NFT-market sentiment and exchange listings rather than any protocol revenue. Supply runs into the tens of billions against a capped 88,888,888,888, so a holding is quoted in tens of thousands of tokens and the fraction-of-a-cent unit price is an artefact of that large supply, not a sign the token is cheap.",
+    facts: [
+      { label: "Launched", value: "December 2024 (airdrop)" },
+      { label: "Token type", value: "SPL token on Solana, bridged to Ethereum and other chains" },
+      { label: "Max supply", value: "88,888,888,888 PENGU" },
+      { label: "Role", value: "Community token of the Pudgy Penguins brand — no protocol revenue behind it" },
+      { label: "Native staking", value: "None at protocol level" },
+    ],
+    feeNote:
+      "PENGU is cheap to move on Solana; the bridged Ethereum version costs Ethereum gas, which for a fraction-of-a-cent token can dwarf a small position.",
+    volatilityNote:
+      "PENGU is a high-volatility brand/meme token that has swung hard since its 2024 launch, repricing on NFT-market sentiment, brand news and listings rather than fundamentals.",
+    circulatingSupply: 62_860_000_000,
+    totalSupply: 76_720_000_000,
+    supplyAsOf: "2026-09-10",
+    typicalAmount: 10000,
+    order: 66,
+  },
 ];
 
 const bySlug = new Map(coins.map((c) => [c.slug, c]));
