@@ -2167,6 +2167,34 @@ export const coins: Coin[] = [
     typicalAmount: 10000,
     order: 66,
   },
+  {
+    slug: "virtuals-protocol",
+    name: "Virtuals Protocol",
+    symbol: "VIRTUAL",
+    coingeckoId: "virtual-protocol",
+    binance: "VIRTUALUSDT",
+    domain: "virtuals.io",
+    color: "#5c6bc0",
+    tagline: "Base token of the Virtuals platform for tokenised AI agents.",
+    intro:
+      "Virtuals Protocol is a platform for creating and trading tokenised AI agents, launched on Base in 2024 and later bridged to Solana and Ethereum. VIRTUAL is its base asset: new agent tokens launch paired against VIRTUAL, so it captures activity across the whole ecosystem rather than one product. That also makes it a concentrated bet on the 'AI agent' narrative — it ran up hard through 2024–25 and gave much of it back, and its price tracks sentiment about AI agents and how many new agent tokens are launching far more than any steady revenue.",
+    facts: [
+      { label: "Launched", value: "2024 (on Base)" },
+      { label: "Token type", value: "ERC-20 on Base, bridged to Solana and Ethereum" },
+      { label: "Max supply", value: "1,000,000,000 VIRTUAL" },
+      { label: "Role", value: "Base/pairing asset for launching and trading tokenised AI-agent tokens" },
+      { label: "Native staking", value: "None in the yield sense — VIRTUAL is the liquidity and launch asset for agents" },
+    ],
+    feeNote:
+      "VIRTUAL is cheap to move on Base; the bridged Ethereum version costs Ethereum gas, which usually dwarfs a small position.",
+    volatilityNote:
+      "VIRTUAL is a high-beta proxy for the 'AI agent' narrative — it saw a large 2024–25 run-up and drawdown and reprices hard on AI-sentiment swings and agent-launch activity.",
+    circulatingSupply: 658_400_000,
+    totalSupply: 1_000_000_000,
+    supplyAsOf: "2026-09-10",
+    typicalAmount: 500,
+    order: 67,
+  },
 ];
 
 const bySlug = new Map(coins.map((c) => [c.slug, c]));

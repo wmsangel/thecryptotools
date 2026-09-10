@@ -382,10 +382,10 @@ export const historyIndex: HistoryMeta[] = [
   {
     "slug": "sky",
     "symbol": "SKY",
-    "source": "Binance",
-    "start": "2025-09-17",
+    "source": "CoinGecko",
+    "start": "2025-09-11",
     "end": "2026-09-10",
-    "days": 359
+    "days": 365
   },
   {
     "slug": "jupiter",
@@ -538,6 +538,14 @@ export const historyIndex: HistoryMeta[] = [
     "start": "2024-12-17",
     "end": "2026-09-10",
     "days": 633
+  },
+  {
+    "slug": "virtuals-protocol",
+    "symbol": "VIRTUAL",
+    "source": "Binance",
+    "start": "2025-04-11",
+    "end": "2026-09-10",
+    "days": 518
   }
 ];
 
