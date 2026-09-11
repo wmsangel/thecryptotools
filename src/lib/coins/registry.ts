@@ -2195,6 +2195,34 @@ export const coins: Coin[] = [
     typicalAmount: 500,
     order: 67,
   },
+  {
+    slug: "eigenlayer",
+    name: "EigenLayer",
+    symbol: "EIGEN",
+    coingeckoId: "eigenlayer",
+    binance: "EIGENUSDT",
+    domain: "eigenlayer.xyz",
+    color: "#4a5cf0",
+    tagline: "Restaking protocol on Ethereum, and its EIGEN token.",
+    intro:
+      "EigenLayer pioneered restaking — letting already-staked ETH be re-used to help secure additional services (called AVSs) built on top of it, instead of each needing its own validator set. The project has since broadened under the 'EigenCloud' banner. EIGEN is its native token: it can be staked and delegated within the ecosystem and underpins a class of security guarantees. Two things to weigh — the token became transferable only in late 2024 and has no fixed cap, so emissions and scheduled unlocks are an ongoing source of dilution, and its price is driven by restaking-narrative sentiment more than by steady fees.",
+    facts: [
+      { label: "Launched", value: "2024 (EIGEN transferable from October 2024)" },
+      { label: "Token type", value: "ERC-20 on Ethereum" },
+      { label: "Max supply", value: "No fixed cap — supply grows via emissions" },
+      { label: "Role", value: "Securing and staking within EigenLayer's restaking ecosystem (now EigenCloud)" },
+      { label: "Native staking", value: "Yes — EIGEN can be staked and delegated within the protocol" },
+    ],
+    feeNote:
+      "EIGEN is an ERC-20 on Ethereum, so transfers cost Ethereum gas; for a small position the exchange trading fee usually dwarfs it.",
+    volatilityNote:
+      "EIGEN is a high-beta token tied to the restaking narrative; it has fallen well below its 2024 debut and reprices hard around unlock dates and shifts in restaking sentiment.",
+    circulatingSupply: 922_900_000,
+    totalSupply: 1_842_500_000,
+    supplyAsOf: "2026-09-11",
+    typicalAmount: 1000,
+    order: 68,
+  },
 ];
 
 const bySlug = new Map(coins.map((c) => [c.slug, c]));
