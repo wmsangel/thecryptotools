@@ -93,6 +93,15 @@ export const houseAds: HouseAd[] = [
     cta: "Open TestSweep",
   },
   {
+    id: "foldout",
+    href: "https://foldoutkit.com/",
+    lang: "en",
+    eyebrow: "Code templates",
+    title: "Templates with code you can actually read",
+    description: "Website, email and spreadsheet templates — clean HTML/Tailwind, MJML and macro-free Excel. No signup.",
+    cta: "Open Foldout",
+  },
+  {
     id: "prodom-expert",
     href: "https://prodom-expert.ru/",
     lang: "ru",
