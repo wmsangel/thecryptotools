@@ -91,6 +91,16 @@ RedirectMatch 301 ^/embed/?$ /widgets/
   # blanket frame ban would kill the widget feature.
   Header set X-Content-Type-Options "nosniff"
   Header set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # HTTPS is enforced end to end (www 301s to the apex, Cloudflare terminates
+  # TLS), so instruct browsers to refuse plain HTTP for a year. `always` so it
+  # rides error responses too. No `preload` on purpose — that is a manual,
+  # hard-to-reverse commitment to the browser preload list, done separately.
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+  # Lock down device APIs the site never uses. An injected script — or a widget
+  # framed on someone else's page — then cannot silently ask for them.
+  Header set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
 </IfModule>
 
 # ---------------------------------------------------------------------------
