@@ -2223,6 +2223,34 @@ export const coins: Coin[] = [
     typicalAmount: 1000,
     order: 68,
   },
+  {
+    slug: "aerodrome-finance",
+    name: "Aerodrome Finance",
+    symbol: "AERO",
+    coingeckoId: "aerodrome-finance",
+    binance: "AEROUSDT",
+    domain: "aerodrome.finance",
+    color: "#2f6bff",
+    tagline: "The leading decentralised exchange on Base, and its ve(3,3) token.",
+    intro:
+      "Aerodrome is the largest decentralised exchange on Base, built on the ve(3,3) model. AERO is its token: lock it as veAERO and you vote each week on which liquidity pools receive AERO emissions, and in return you earn the trading fees and incentives from the pools you back. There is no hard cap — weekly emissions keep inflating supply, which is the dilution lockers offset with the fees they capture. Its price tracks Base DeFi activity and total value locked far more than any fixed cash flow, so treat it as a leveraged bet on the Base ecosystem.",
+    facts: [
+      { label: "Launched", value: "August 2023 (on Base)" },
+      { label: "Token type", value: "ERC-20 on Base" },
+      { label: "Max supply", value: "No hard cap — weekly ve(3,3) emissions" },
+      { label: "Role", value: "Governance and liquidity direction via vote-escrow (veAERO)" },
+      { label: "Native staking", value: "Yes — lock AERO as veAERO to vote on emissions and earn fees and incentives" },
+    ],
+    feeNote:
+      "AERO is Base-native, so moving and trading it is cheap; there is no expensive Ethereum-mainnet leg unless you bridge it off Base.",
+    volatilityNote:
+      "AERO is a high-beta DeFi token tied to Base's total value locked and emission schedule; it swings hard with Base ecosystem sentiment and incentive campaigns.",
+    circulatingSupply: 988_800_000,
+    totalSupply: 1_978_500_000,
+    supplyAsOf: "2026-09-13",
+    typicalAmount: 1000,
+    order: 69,
+  },
 ];
 
 const bySlug = new Map(coins.map((c) => [c.slug, c]));
