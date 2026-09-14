@@ -72,6 +72,7 @@ import cryptoTradingBotsExplained from "./content/crypto-trading-bots-explained"
 import bestCryptoCards from "./content/best-crypto-cards";
 import howToAvoidCryptoScams from "./content/how-to-avoid-crypto-scams";
 import cryptoStakingAndEarning from "./content/crypto-staking-and-earning";
+import stablecoinsExplained from "./content/stablecoins-explained";
 
 export const guides: Guide[] = [
   howToCalculateLiquidationPrice,
@@ -145,6 +146,7 @@ export const guides: Guide[] = [
   cryptoTradingBotsExplained,
   bestCryptoCards,
   howToAvoidCryptoScams,
+  stablecoinsExplained,
 ];
 
 const bySlug = new Map(guides.map((g) => [g.slug, g]));
