@@ -9,10 +9,12 @@
 # A source WITHOUT a wildcard matches that exact path only.
 
 # --- Canonical host: force non-www --------------------------------------------
-# Was: RewriteCond %{HTTP_HOST} ^www\. → 301 to the apex. For this to fire,
-# www.thecryptotools.com must also be attached to the Pages project (see the
-# migration checklist) — then this sends it to the apex, preserving the path.
-https://www.thecryptotools.com/*  https://thecryptotools.com/:splat  301
+# NOT handled here. Cloudflare Pages matches _redirects sources by PATH only, so
+# a host-based source (https://www.…/*) never fires — www would serve 200 and
+# duplicate the apex. www → apex 301 is done by a zone-level Redirect Rule in the
+# Cloudflare dashboard instead (Rules → Redirect Rules, "www to apex":
+# http.host eq "www.thecryptotools.com" → concat("https://thecryptotools.com",
+# http.request.uri.path), 301, preserve query). Keep that rule, not a line here.
 
 # --- /embed and /embed/ → /widgets/ -------------------------------------------
 # Was: RedirectMatch 301 ^/embed/?$ /widgets/. Only the bare directory root
