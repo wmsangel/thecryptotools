@@ -1,0 +1,26 @@
+# ============================================================================
+# Cloudflare Pages — redirects. Ported from public/.htaccess.
+# ============================================================================
+# Everything in public/ is copied verbatim into out/ by the Next export, so
+# this file ships at the site root where Pages reads it.
+#
+# Format:  <source>  <destination>  <status>
+# First match wins. `*` is a wildcard; `:splat` is what it captured.
+# A source WITHOUT a wildcard matches that exact path only.
+
+# --- Canonical host: force non-www --------------------------------------------
+# Was: RewriteCond %{HTTP_HOST} ^www\. → 301 to the apex. For this to fire,
+# www.thecryptotools.com must also be attached to the Pages project (see the
+# migration checklist) — then this sends it to the apex, preserving the path.
+https://www.thecryptotools.com/*  https://thecryptotools.com/:splat  301
+
+# --- /embed and /embed/ → /widgets/ -------------------------------------------
+# Was: RedirectMatch 301 ^/embed/?$ /widgets/. Only the bare directory root
+# redirects; individual widgets at /embed/<tool>/ are NOT matched (no wildcard)
+# and keep serving 200.
+/embed   /widgets/  301
+/embed/  /widgets/  301
+
+# --- 404 ----------------------------------------------------------------------
+# No rule needed: Pages automatically serves /404.html for any unmatched path,
+# which is exactly what `ErrorDocument 404 /404.html` did on Apache.

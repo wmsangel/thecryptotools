@@ -14,7 +14,8 @@
     "halvings": "node scripts/generate-halvings.mjs",
     "deploy": "node scripts/deploy.mjs",
     "deploy:dry": "node scripts/deploy.mjs --dry-run --no-build",
-    "deploy:selftest": "node scripts/deploy.mjs --selftest --no-build"
+    "deploy:selftest": "node scripts/deploy.mjs --selftest --no-build",
+    "deploy:pages": "npm run build && npx --yes wrangler pages deploy"
   },
   "dependencies": {
     "next": "^14.2.35",

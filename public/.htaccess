@@ -34,6 +34,17 @@
 ErrorDocument 404 /404.html
 
 # ---------------------------------------------------------------------------
+# _redirects / _headers — Cloudflare Pages config, not ours to serve
+# ---------------------------------------------------------------------------
+# These two files configure the Pages migration target and are inert to Apache,
+# but Apache would happily serve them at /_redirects and /_headers (they are not
+# dotfiles). Deny them so the GoDaddy origin does not expose them during the
+# transition. Harmless to keep after the cutover.
+<FilesMatch "^_(redirects|headers)$">
+  Require all denied
+</FilesMatch>
+
+# ---------------------------------------------------------------------------
 # /embed/ — the widget directory root
 # ---------------------------------------------------------------------------
 # The widgets live at /embed/<tool>/ and there is deliberately no page at

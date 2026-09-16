@@ -1,0 +1,10 @@
+# Cloudflare Pages project config for the manual (wrangler) deploy path.
+# `npm run deploy:pages` reads this, so the deploy needs no CLI flags.
+#
+# `name` MUST match the Pages project name in the Cloudflare dashboard. If you
+# set up Git integration instead (recommended — zero-touch deploys on push),
+# this file is not used by that path, but keep it in sync so the manual fallback
+# still targets the same project.
+name = "thecryptotools"
+pages_build_output_dir = "out"
+compatibility_date = "2026-09-16"

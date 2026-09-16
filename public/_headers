@@ -1,0 +1,62 @@
+# ============================================================================
+# Cloudflare Pages — response headers. Ported from public/.htaccess (mod_headers).
+# ============================================================================
+# A pattern line, then indented `Name: value` lines that apply to it. `*`
+# matches any characters including "/". Every matching rule contributes its
+# headers; for the same header name a later rule in this file wins. The rules
+# below never set the same header on the same file twice, so order is not load-
+# bearing — but they are ordered general → specific for readability.
+#
+# NOTE on HTML: there is deliberately no Cache-Control rule for pages. Pages
+# versions every deployment and the edge revalidates against the current one, so
+# a deploy can never serve stale HTML — which is the exact thing the old
+# `.html → must-revalidate` rule existed to prevent on GoDaddy+Cloudflare.
+
+# --- Sitewide hardening + HSTS (every response) -------------------------------
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+
+# --- Content-hashed build output: cache a year, immutable ---------------------
+# webpack-<hash>.js / <hash>.css can never change without changing their name.
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# --- Service worker: fixed name, must always revalidate -----------------------
+# A year-long immutable cache would pin whatever sw.js a visitor first got and
+# no deploy could replace it. sw.js lives at the root, not under _next/static,
+# so the rule above never touches it.
+/sw.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+# --- Unhashed images & icons: a month ----------------------------------------
+/*.png
+  Cache-Control: public, max-age=2592000
+/*.jpg
+  Cache-Control: public, max-age=2592000
+/*.jpeg
+  Cache-Control: public, max-age=2592000
+/*.gif
+  Cache-Control: public, max-age=2592000
+/*.svg
+  Cache-Control: public, max-age=2592000
+/*.ico
+  Cache-Control: public, max-age=2592000
+/*.webp
+  Cache-Control: public, max-age=2592000
+/*.avif
+  Cache-Control: public, max-age=2592000
+
+# --- Generated data files: an hour (a stale copy is wrong, not merely old) -----
+/*.json
+  Cache-Control: public, max-age=3600
+
+# --- MIME types Pages might otherwise get wrong -------------------------------
+# The PWA manifest is ignored by browsers if not served as manifest+json; the
+# guide .md twins exist for AI crawlers and should read as markdown, not plain.
+/*.webmanifest
+  Content-Type: application/manifest+json
+/guides/*.md
+  Content-Type: text/markdown; charset=utf-8
