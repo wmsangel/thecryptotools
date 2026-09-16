@@ -15,7 +15,8 @@
     "deploy": "node scripts/deploy.mjs",
     "deploy:dry": "node scripts/deploy.mjs --dry-run --no-build",
     "deploy:selftest": "node scripts/deploy.mjs --selftest --no-build",
-    "deploy:pages": "npm run build && npx --yes wrangler pages deploy"
+    "deploy:pages": "npm run build && npx --yes wrangler pages deploy && node scripts/indexnow.mjs",
+    "indexnow": "node scripts/indexnow.mjs"
   },
   "dependencies": {
     "next": "^14.2.35",
