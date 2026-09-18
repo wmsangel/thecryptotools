@@ -6,11 +6,14 @@ const guide: Guide = {
   title: "Ethereum Staking Guide: Solo, Pooled, Exchange and Liquid Compared",
   description:
     "Four ways to stake ETH, with genuinely different economics and risks. What the yield is made of, what each route costs you, and how long your money is actually locked.",
-  readingMinutes: 8,
-  updatedAt: "2026-07-21",
+  readingMinutes: 9,
+  updatedAt: "2026-09-18",
   seo: {
     keywords: [
       "ethereum staking",
+      "ethereum staking pool vs solo staking",
+      "staking pool vs solo staking",
+      "pooled vs solo staking eth",
       "how to stake eth",
       "eth staking rewards",
       "solo staking ethereum",
@@ -53,6 +56,20 @@ const guide: Guide = {
 
     { type: "h2", text: "Liquid staking" },
     { type: "p", text: "You deposit ETH and receive a token representing the staked position — stETH, rETH, cbETH and others. The position keeps earning while the receipt token stays tradeable and usable as DeFi collateral, so you are not locked out of your capital. In return you take on smart-contract risk and the possibility that the receipt trades below the underlying ETH when everyone wants out at once, as stETH did during the 2022 stress. Covered in more depth in our liquid staking guide." },
+
+    { type: "h2", text: "Staking pool vs solo staking, side by side" },
+    { type: "p", text: "The choice most people are weighing is a staking pool versus solo staking, so here it is in one view alongside the other two routes. Solo staking wins on yield and control but costs you 32 ETH and real operational effort; a pool drops both the minimum and the effort in exchange for a commission and more trust in an operator. Exchange and liquid staking sit further along that same trade-off." },
+    { type: "table",
+      headers: ["Route", "Minimum", "Net yield", "Who holds keys", "Effort", "Main risk"],
+      rows: [
+        { cells: ["Solo", "32 ETH", "Highest — no fee", "You", "High — run a node", "Slashing / downtime (self-inflicted)"] },
+        { cells: ["Pooled / SaaS", "None*", "High − 5–15% fee", "You or operator", "Low", "Operator trust"] },
+        { cells: ["Exchange", "None", "Lowest — biggest cut", "Exchange", "None", "Counterparty / custody"] },
+        { cells: ["Liquid (stETH…)", "None", "High − protocol fee", "Smart contract", "Low", "Contract bug / depeg"] },
+      ],
+      caption: "*Some staking services let you keep withdrawal credentials while delegating only operations — less to trust. Yields move with network activity; compare live figures.",
+    },
+    { type: "p", text: "Read it as a spectrum, not four unrelated products: every step away from solo staking buys you convenience and a lower minimum by handing someone else more control and taking a cut of the yield. Decide how much of each you are willing to trade before you look at the headline APR." },
 
     { type: "h2", text: "Getting your ETH back" },
     { type: "p", text: "Withdrawals have worked since the Shapella upgrade in 2023, so staked ETH is no longer trapped — but it is not instant either. Rewards above the effective balance are swept automatically every few days. A full exit means joining an exit queue whose length depends on how many others are leaving at the same time: usually days, occasionally much longer during a rush. Plan around that. If you might need the ETH inside a week under stress, staked ETH is the wrong place for it — and that is precisely the gap liquid staking tokens exist to fill." },

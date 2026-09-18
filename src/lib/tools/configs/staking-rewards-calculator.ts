@@ -3,24 +3,28 @@ import { fmtUsd, fmtNumber } from "@/lib/format";
 
 const tool: ToolConfig = {
   slug: "staking-rewards-calculator",
-  updatedAt: "2026-07-30",
+  updatedAt: "2026-09-18",
   title: "Crypto Staking Rewards Calculator",
   description:
-    "Estimate staking rewards on your coins over any period from the annual reward rate — in both coins and USD.",
+    "See exactly what staking would pay — enter your amount, reward rate (APR) and period to get rewards in both coins and USD, for ETH, SOL, ADA, BNB and any other coin.",
   category: "mining",
   featured: true,
   popular: true,
   source: "builtin",
   seo: {
+    title: "Staking Rewards Calculator — Estimate Your Crypto Yield in USD",
     keywords: [
       "staking calculator",
       "crypto staking rewards calculator",
       "staking rewards calculator",
       "eth staking calculator",
+      "sol staking calculator",
+      "bnb staking calculator",
+      "ada staking calculator",
       "staking income calculator",
     ],
     description:
-      "Free crypto staking rewards calculator. Enter your amount, reward rate and period to estimate rewards in coins and USD.",
+      "Free crypto staking rewards calculator. Enter your amount, reward rate and period to see what you'd earn — in coins and dollars — for ETH, SOL, ADA, BNB and more. Uses the live coin price.",
   },
   inputs: [
     { name: "amount", label: "Amount staked", type: "number", suffix: "coins", default: 100, min: 0, step: 0.0001 },
