@@ -40,3 +40,11 @@ scripts/.deploy.env
 
 # personal local nav hub (absolute paths to the memory dir)
 START-HERE.md
+
+# personal outreach copy
+outreach-*.md
+
+# Service-account keys (GSC AdSense-readiness) — NEVER commit
+*.sa.json
+gsc-*.json
+service-account*.json
