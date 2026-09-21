@@ -3,7 +3,7 @@ import { fmtUsd, fmtPct } from "@/lib/format";
 
 const tool: ToolConfig = {
   slug: "profit-calculator",
-  updatedAt: "2026-07-31",
+  updatedAt: "2026-09-21",
   title: "Crypto Profit Calculator",
   description:
     "Calculate profit, loss and ROI from any crypto trade using your buy price, sell price and position size — including trading fees.",
@@ -12,8 +12,11 @@ const tool: ToolConfig = {
   popular: true,
   source: "builtin",
   seo: {
+    title: "Crypto Profit Calculator — See Profit & ROI in Dollars",
     keywords: [
       "crypto profit calculator",
+      "crypto calculator profit in dollars",
+      "crypto profit calculator in usd",
       "crypto trade calculator",
       "crypto trading calculator",
       "roi crypto",
@@ -22,7 +25,7 @@ const tool: ToolConfig = {
       "crypto gain calculator",
     ],
     description:
-      "Free crypto trade calculator. Enter your buy price, sell price and amount to instantly see profit, loss, ROI % and trading fees.",
+      "Free crypto profit calculator. Enter your buy price, sell price and amount to instantly see profit, loss and ROI in dollars — after trading fees. Works for BTC, ETH and any coin, with the live price.",
   },
   inputs: [
     { name: "buyPrice", label: "Buy Price", type: "number", suffix: "USD", default: 20000, min: 0, step: 0.01 },

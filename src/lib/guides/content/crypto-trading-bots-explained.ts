@@ -7,10 +7,12 @@ const guide: Guide = {
   description:
     "What crypto trading bots actually do, the main types and when each one makes sense, how to run one safely with a trade-only API key, and the honest limits — plus free calculators to plan a strategy before you automate it.",
   readingMinutes: 8,
-  updatedAt: "2026-09-01",
+  updatedAt: "2026-09-21",
   seo: {
+    title: "Crypto Trading Bots Explained — Types, Safety & Profit",
     keywords: [
       "crypto trading bots",
+      "crypto trading bots explained",
       "best crypto trading bots",
       "types of crypto trading bots",
       "how do crypto trading bots work",
@@ -19,7 +21,7 @@ const guide: Guide = {
       "are crypto trading bots profitable",
     ],
     description:
-      "A plain-English guide to crypto trading bots in 2026: how they work, DCA vs grid vs signal vs copy bots, when each fits, how to connect one safely with a trade-only API key, and whether they're actually profitable.",
+      "Do crypto trading bots actually make money? A plain-English 2026 guide: how they work, DCA vs grid vs signal vs copy bots, when each fits, connecting one safely with a trade-only API key, and the honest answer on profitability.",
   },
   keyTakeaways: [
     "A bot is an **executor, not an edge** — it runs a rule around the clock; it doesn't know where the market is going.",

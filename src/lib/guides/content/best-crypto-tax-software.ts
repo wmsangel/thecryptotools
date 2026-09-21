@@ -8,13 +8,15 @@ const guide: Guide = {
   description:
     "What crypto tax software actually does, when you need it, and how the main options — Koinly and CoinLedger — differ. An honest comparison, plus the free way to do it yourself first.",
   readingMinutes: 8,
-  updatedAt: "2026-08-24",
+  updatedAt: "2026-09-21",
   seo: {
-    title: "Best Crypto Tax Software 2026: Koinly vs CoinLedger",
+    title: "Best Crypto Tax Software 2026 (+ the Free DIY Option)",
     description:
-      "Do you need crypto tax software, and which one? An honest 2026 comparison of Koinly and CoinLedger — country support, integrations, how pricing works — plus a free way to do it yourself.",
+      "Do you need paid crypto tax software, or can you do it free? An honest 2026 comparison of Koinly vs CoinLedger — country support, integrations and pricing — plus the free DIY method that works for a simple portfolio.",
     keywords: [
       "best crypto tax software",
+      "best crypto tax software free",
+      "free crypto tax software",
       "koinly vs coinledger",
       "crypto tax software 2026",
       "crypto tax calculator software",
