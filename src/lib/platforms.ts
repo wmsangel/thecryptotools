@@ -103,7 +103,7 @@ export const platforms: Platform[] = [
     description:
       "Coinbase is a publicly-traded, heavily-regulated exchange with a simple interface, making it a common first stop for new investors.",
     highlights: ["Easy fiat on-ramp", "Strong regulatory standing", "Learn-and-earn rewards"],
-    bonus: "Sign-up reward — add your referral offer",
+    bonus: "Beginner-friendly, with an easy fiat on-ramp",
     url: "https://www.coinbase.com",
   },
   {
@@ -129,8 +129,8 @@ export const platforms: Platform[] = [
     description:
       "KuCoin lists a very large range of small- and mid-cap tokens, making it popular with traders looking beyond the majors.",
     highlights: ["Huge altcoin listing", "Trading bots built in", "Spot & futures"],
-    bonus: "Fee rebate for referrals — add your offer",
-    url: "https://www.kucoin.com",
+    bonus: "Sign up & trade to unlock KuCoin welcome rewards",
+    url: "https://www.kucoin.com/en/ucenter/signup?rcode=CXEENPVN",
   },
   {
     slug: "bitget",
@@ -142,7 +142,7 @@ export const platforms: Platform[] = [
     description:
       "Bitget is best known for its copy-trading marketplace, letting you mirror experienced traders alongside standard spot and futures markets.",
     highlights: ["Large copy-trading network", "Competitive futures fees", "Frequent bonuses"],
-    bonus: "Welcome package — add your referral offer",
+    bonus: "Sign up & trade to unlock Bitget welcome rewards",
     url: "https://partner.bitget.com/bg/D8AALB",
   },
   {
@@ -155,8 +155,8 @@ export const platforms: Platform[] = [
     description:
       "MEXC lists an enormous number of tokens, often earlier than larger exchanges, which appeals to traders chasing new projects.",
     highlights: ["Thousands of tokens", "Frequent early listings", "Low fees"],
-    bonus: "Airdrop & bonus events — add your referral offer",
-    url: "https://www.mexc.com",
+    bonus: "Sign up & trade to claim MEXC new-user rewards",
+    url: "https://promote.mexc.com/b/thecryptotools",
   },
   {
     slug: "gate-io",
@@ -168,8 +168,8 @@ export const platforms: Platform[] = [
     description:
       "Operating since 2013, Gate.io offers an extensive catalog of coins plus spot, margin, futures and a startup launchpad.",
     highlights: ["Very large asset list", "Long operating history", "Spot, margin & futures"],
-    bonus: "Referral rewards — add your offer",
-    url: "https://www.gate.io",
+    bonus: "Sign up & trade to unlock Gate welcome rewards",
+    url: "https://www.gate.com/referral/earn-together/invite/A1URB1oM?ref=A1URB1oM&ref_type=103",
   },
   {
     slug: "crypto-com",
@@ -181,7 +181,7 @@ export const platforms: Platform[] = [
     description:
       "Crypto.com pairs an easy mobile app with a wider ecosystem including a Visa card, staking and its own chain.",
     highlights: ["Polished mobile app", "Crypto Visa card", "Earn & staking products"],
-    bonus: "App sign-up bonus — add your referral offer",
+    bonus: "Buy, earn and spend crypto in one app",
     url: "https://crypto.com",
   },
   {
@@ -194,7 +194,7 @@ export const platforms: Platform[] = [
     description:
       "Founded by the Winklevoss twins, Gemini emphasizes regulation, security and a straightforward interface for US customers.",
     highlights: ["Strong compliance focus", "Insurance on some assets", "Simple & advanced modes"],
-    bonus: "New-user reward — add your referral offer",
+    bonus: "US-regulated, with strong security and asset insurance",
     url: "https://www.gemini.com",
   },
   {
@@ -207,8 +207,8 @@ export const platforms: Platform[] = [
     description:
       "HTX (formerly Huobi) is a veteran global exchange offering spot, derivatives and a large selection of listed assets.",
     highlights: ["Established since 2013", "Broad asset coverage", "Spot & derivatives"],
-    bonus: "Sign-up rewards — add your referral offer",
-    url: "https://www.htx.com",
+    bonus: "Sign up & trade to unlock HTX welcome rewards",
+    url: "https://www.htx.com/invite/en-us/1f?invite_code=ictte223",
   },
   {
     slug: "bitfinex",
@@ -220,8 +220,8 @@ export const platforms: Platform[] = [
     description:
       "Bitfinex targets advanced traders with sophisticated order types, margin trading and a peer-to-peer funding market.",
     highlights: ["Advanced order types", "Margin & P2P funding", "Deep liquidity on majors"],
-    bonus: "Fee discount for referrals — add your offer",
-    url: "https://www.bitfinex.com",
+    bonus: "Sign up via referral for a trading-fee discount",
+    url: "https://www.bitfinex.com/sign-up?refcode=zlUb_U9lm",
   },
 
   // ---- Wallets -------------------------------------------------------------
@@ -248,8 +248,8 @@ export const platforms: Platform[] = [
     description:
       "Trezor built the first hardware wallet and remains fully open-source, appealing to users who value transparency and auditability.",
     highlights: ["Fully open-source firmware", "Long security track record", "Simple recovery flow"],
-    bonus: "Store discounts — add your affiliate link",
-    url: "https://trezor.io",
+    bonus: "Get a discount on your Trezor hardware wallet",
+    url: "https://trezorio.refr.cc/default/u/igorzagorodnyi",
   },
   {
     slug: "tangem",
@@ -261,7 +261,7 @@ export const platforms: Platform[] = [
     description:
       "Tangem is a card-shaped hardware wallet you tap to your phone over NFC — no cables, no battery, backed by a secure chip.",
     highlights: ["Card form factor", "No cables or charging", "Backup card sets"],
-    bonus: "Referral discount — add your affiliate link",
+    bonus: "Simple tap-to-use NFC cold storage",
     url: "https://tangem.com",
   },
   {
@@ -274,8 +274,8 @@ export const platforms: Platform[] = [
     description:
       "SafePal offers an affordable hardware wallet that pairs with a mobile app supporting swaps and dApp access across many chains.",
     highlights: ["Affordable hardware", "App with in-wallet swaps", "Multi-chain support"],
-    bonus: "Referral rewards — add your affiliate link",
-    url: "https://www.safepal.com",
+    bonus: "Referral discount on your SafePal hardware wallet",
+    url: "https://www.safepal.com/store/s1?ref=ntllyzu",
   },
   {
     slug: "metamask",
@@ -367,7 +367,7 @@ export const platforms: Platform[] = [
     description:
       "CoinTracker combines real-time portfolio tracking with tax reporting and integrates with a wide range of exchanges and wallets.",
     highlights: ["Live portfolio tracking", "Broad integrations", "Mobile app"],
-    bonus: "Referral discount — add your affiliate link",
+    bonus: "Track your portfolio and generate tax reports",
     url: "https://www.cointracker.io",
   },
   {
@@ -380,7 +380,7 @@ export const platforms: Platform[] = [
     description:
       "TokenTax offers crypto tax software plus optional accountant support, useful for traders with complex DeFi or high-volume histories.",
     highlights: ["Handles complex DeFi", "Optional accountant help", "Every major exchange"],
-    bonus: "Referral discount — add your affiliate link",
+    bonus: "Crypto tax reports with optional accountant support",
     url: "https://tokentax.co",
   },
 
@@ -395,8 +395,8 @@ export const platforms: Platform[] = [
     description:
       "TradingView is the most widely-used charting platform, with advanced indicators, drawing tools, alerts and a large community of ideas.",
     highlights: ["Powerful charts & indicators", "Price alerts", "Huge community scripts"],
-    bonus: "Plan discount for referrals — add your affiliate link",
-    url: "https://www.tradingview.com",
+    bonus: "Get account credit when you upgrade to a paid plan",
+    url: "https://www.tradingview.com/pricing/?share_your_love=wmsangel",
   },
   {
     slug: "3commas",
@@ -408,7 +408,7 @@ export const platforms: Platform[] = [
     description:
       "3Commas connects to your exchange accounts to run DCA, grid and signal bots plus a smart trading terminal — without holding your funds.",
     highlights: ["DCA, grid & signal bots", "Multi-exchange terminal", "Paper trading"],
-    bonus: "Trial or discount — add your affiliate link",
+    bonus: "Automate DCA, grid and signal bots across exchanges",
     url: "https://3commas.io",
   },
   {
@@ -421,8 +421,8 @@ export const platforms: Platform[] = [
     description:
       "Cryptohopper runs automated strategies in the cloud, including a marketplace of templates and copy-bot strategies.",
     highlights: ["Cloud bots (always on)", "Strategy marketplace", "Backtesting"],
-    bonus: "Free trial — add your affiliate link",
-    url: "https://www.cryptohopper.com",
+    bonus: "Start a free trial of Cryptohopper's cloud bots",
+    url: "https://www.cryptohopper.com/?atid=41091",
   },
 
   // ---- Earn / borrow / cards ----------------------------------------------
@@ -436,7 +436,7 @@ export const platforms: Platform[] = [
     description:
       "Nexo lets you earn interest on crypto and stablecoins, borrow against your holdings and spend via a crypto-backed card.",
     highlights: ["Interest on idle crypto", "Instant crypto-backed loans", "Crypto card"],
-    bonus: "Sign-up bonus — add your referral offer",
+    bonus: "Earn interest and borrow against your crypto",
     url: "https://nexo.com",
   },
   {
@@ -449,7 +449,7 @@ export const platforms: Platform[] = [
     description:
       "A prepaid Visa card funded from your Crypto.com account, with cashback and perks that scale with the amount of CRO you stake.",
     highlights: ["Cashback on spending", "Tiered perks by CRO stake", "Widely accepted Visa"],
-    bonus: "Card sign-up bonus — add your referral offer",
+    bonus: "Prepaid crypto Visa with tiered cashback",
     url: "https://crypto.com/cards",
   },
   {
@@ -462,8 +462,8 @@ export const platforms: Platform[] = [
     description:
       "A Mastercard linked to your Bybit account, letting you spend crypto directly from your balance with cashback in supported regions.",
     highlights: ["Spends your Bybit balance", "Cashback in supported regions", "Virtual and physical options"],
-    bonus: "Card cashback offer — add your referral offer",
-    url: "https://www.bybit.com/en/cards/",
+    bonus: "Sign up via referral, then order the Bybit Card in-app",
+    url: "https://www.bybit.com/invite?ref=YKGOVN&medium=referral&utm_campaign=evergreen",
   },
   {
     slug: "wirex",
@@ -475,7 +475,7 @@ export const platforms: Platform[] = [
     description:
       "A card and app that hold both crypto and fiat, convert at the point of sale and pay rewards in the WXT token.",
     highlights: ["Holds crypto and fiat together", "Rewards on spending", "Multi-currency support"],
-    bonus: "Sign-up bonus — add your referral offer",
+    bonus: "Hold crypto and fiat together, with spending rewards",
     url: "https://wirexapp.com",
   },
 ];
