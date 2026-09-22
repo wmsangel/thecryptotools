@@ -33,10 +33,10 @@ export const donationAddresses: DonationAddress[] = [
     id: "tron",
     network: "TRON",
     tag: "TRC-20",
-    address: "TT5MBhRrX4Fioc2F78BiWG95K2esAHKSMo",
-    accepts: ["USDT", "USDC", "TRX"],
+    address: "TTYkkhf3Pbc3Vw8h8wt2Y1uEGfxmT1TcL6",
+    accepts: ["USDT"],
     qr: "/donate/tron.svg",
     warning:
-      "Send only on the TRON network (TRC-20). If you are withdrawing USDT from an exchange, pick TRON — choosing Ethereum (ERC-20) or BNB Smart Chain (BEP-20) for this address will lose the funds, and nobody can reverse it.",
+      "Send USDT only, on the TRON network (TRC-20). If you are withdrawing from an exchange, pick TRON — choosing Ethereum (ERC-20) or BNB Smart Chain (BEP-20) for this address will lose the funds, and nobody can reverse it.",
   },
 ];
