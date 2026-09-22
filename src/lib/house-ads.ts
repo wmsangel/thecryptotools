@@ -57,6 +57,15 @@ export const houseAds: HouseAd[] = [
     cta: "Open CostTrek",
   },
   {
+    id: "pawdget",
+    href: "https://pawdget.com/",
+    lang: "en",
+    eyebrow: "Pet costs",
+    title: "How much does that breed really cost per year?",
+    description: "Food, vet, grooming, insurance and gear for 241 dog and cat breeds, adjusted to your state. Every figure sourced.",
+    cta: "Open Pawdget",
+  },
+  {
     id: "iznkit",
     href: "https://iznkit.com/en",
     lang: "en",
