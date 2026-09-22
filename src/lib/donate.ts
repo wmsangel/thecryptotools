@@ -39,4 +39,14 @@ export const donationAddresses: DonationAddress[] = [
     warning:
       "Send USDT only, on the TRON network (TRC-20). If you are withdrawing from an exchange, pick TRON — choosing Ethereum (ERC-20) or BNB Smart Chain (BEP-20) for this address will lose the funds, and nobody can reverse it.",
   },
+  {
+    id: "solana",
+    network: "Solana",
+    tag: "SPL",
+    address: "He8CCQNSxyeGTiBG1EwxjbfNnQJndYB58jY15fBezyLX",
+    accepts: ["USDT"],
+    qr: "/donate/solana.svg",
+    warning:
+      "Send USDT only, on the Solana network (SPL). Do not send native SOL or a token from another chain to this address — a wrong-network transfer cannot be reversed.",
+  },
 ];
