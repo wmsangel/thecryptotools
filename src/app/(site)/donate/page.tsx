@@ -6,6 +6,7 @@ import { tools } from "@/lib/tools/registry";
 import { guides } from "@/lib/guides/registry";
 import { donationAddresses } from "@/lib/donate";
 import { DonateCard } from "./DonateCard";
+import { ShareRow } from "./ShareRow";
 
 export const metadata: Metadata = {
   title: `Support ${site.name} — Donate Crypto`,
@@ -61,10 +62,35 @@ export default function DonatePage() {
         <h2 className="text-2xl font-extrabold tracking-tight">Free ways to help</h2>
         <p className="mt-4 leading-relaxed text-[var(--text)]/90">
           A tip is genuinely optional and most people should not send one. If you want to help
-          without spending anything, linking to a calculator you found useful is worth more —
-          it is the single thing this site needs most.
+          without spending anything, the things below are worth far more than a coffee — a link
+          back is the single thing this site needs most.
         </p>
-        <p className="mt-4 leading-relaxed text-[var(--text)]/90">
+
+        {/* Embed CTA — the highest-value free help: a backlink. Deliberately the
+            first thing in this section. */}
+        <Link
+          href="/widgets"
+          className="card card-hover group mt-5 flex items-start justify-between gap-4 p-5"
+        >
+          <div>
+            <div className="font-semibold group-hover:text-brand-ink">
+              Put a free calculator on your site
+            </div>
+            <p className="muted mt-1 text-sm leading-relaxed">
+              Embed any calculator on your blog, docs or forum post in one line — free, no signup,
+              no attribution required. A link back is the best support there is.
+            </p>
+          </div>
+          <span className="shrink-0 self-center text-sm font-semibold text-brand-ink">
+            Get a widget →
+          </span>
+        </Link>
+
+        <div className="mt-5">
+          <ShareRow />
+        </div>
+
+        <p className="mt-5 leading-relaxed text-[var(--text)]/90">
           Spotted a number that looks wrong, or a tax rule that has changed?{" "}
           <Link href="/contact" className="font-semibold text-brand-ink hover:underline">
             Tell me
