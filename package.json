@@ -17,7 +17,8 @@
     "deploy:selftest": "node scripts/deploy.mjs --selftest --no-build",
     "deploy:pages": "npm run build && npx --yes wrangler pages deploy && node scripts/indexnow.mjs",
     "indexnow": "node scripts/indexnow.mjs",
-    "adsense:check": "node scripts/adsense-readiness.mjs"
+    "adsense:check": "node scripts/adsense-readiness.mjs",
+    "cf:stats": "node scripts/cf-stats.mjs"
   },
   "dependencies": {
     "next": "^14.2.35",
