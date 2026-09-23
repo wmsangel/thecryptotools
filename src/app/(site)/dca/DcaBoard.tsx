@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import type { DcaStatus, Variant } from "@/lib/dca/types";
 import { SAMPLE_STATUS } from "@/lib/dca/sample";
 import {
-  DCA_STATUS_URL, coinOf, strategyTitle, strategySubtitle, entryLabel,
+  DCA_STATUS_URL, coinOf, strategyTitle, strategySubtitle, variantTag, entryLabel,
   roiPct, stateLabel, pct, usd, hours, daysSince, round,
 } from "@/lib/dca/labels";
 
@@ -34,6 +34,7 @@ function Card({ v }: { v: Variant }) {
             <span className={`rounded-md px-1.5 py-0.5 text-[11px] font-semibold ${stChip}`}>{st.text}</span>
           </span>
           <span className="mt-0.5 block text-xs text-[var(--muted)]">{strategySubtitle(v)}</span>
+          <span className="mt-0.5 block font-mono text-[10px] text-[var(--muted)] opacity-70">{variantTag(v)}</span>
         </span>
         <span className="shrink-0 text-right">
           <span className="block text-lg font-extrabold"><Num v={roi} kind="pct" /></span>
@@ -113,6 +114,10 @@ export function DcaBoard() {
   const [status, setStatus] = useState<DcaStatus | null>(null);
   const [isSample, setIsSample] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [sort, setSort] = useState<"roi" | "realized" | "deals" | "unreal">("roi");
+  const [coin, setCoin] = useState("all");
+  const [family, setFamily] = useState<"all" | "new" | "classic">("all");
+  const [showAll, setShowAll] = useState(false);
 
   useEffect(() => {
     let alive = true;
@@ -136,18 +141,37 @@ export function DcaBoard() {
     return () => { alive = false; };
   }, []);
 
-  const variants = useMemo(() => {
-    const vs = status?.variants ? [...status.variants] : [];
-    vs.sort((a, b) => (roiPct(b) ?? -999) - (roiPct(a) ?? -999));
-    return vs;
-  }, [status]);
+  const all = status?.variants ?? [];
+
+  const coinsList = useMemo(() => {
+    const m = new Map<string, string>();
+    for (const v of all) m.set(v.symbol, coinOf(v.symbol).name);
+    return [...m.entries()].sort((a, b) => a[1].localeCompare(b[1]));
+  }, [all]);
+
+  const filtered = useMemo(() => {
+    const vs = all.filter(
+      (v) =>
+        (coin === "all" || v.symbol === coin) &&
+        (family === "all" || (family === "new" ? !!v.is_new : !v.is_new)),
+    );
+    const key = (v: Variant) =>
+      sort === "roi" ? (roiPct(v) ?? -1e9)
+        : sort === "realized" ? v.realized_pnl
+          : sort === "deals" ? v.deals_done
+            : v.unrealized_pnl;
+    return [...vs].sort((a, b) => key(b) - key(a));
+  }, [all, coin, family, sort]);
 
   if (loading) return <p className="text-[var(--muted)]">Loading live strategies…</p>;
   if (!status) return null;
 
-  const totalRealized = variants.reduce((s, v) => s + (v.realized_pnl || 0), 0);
-  const totalDeals = variants.reduce((s, v) => s + (v.deals_done || 0), 0);
-  const days = daysSince(status.started_at);
+  const totalRealized = all.reduce((s, v) => s + (v.realized_pnl || 0), 0);
+  const totalDeals = all.reduce((s, v) => s + (v.deals_done || 0), 0);
+  const earliest = all.flatMap((v) => v.slots || []).map((s) => s.opened_at).filter(Boolean).sort()[0];
+  const days = daysSince(status.started_at) ?? daysSince(earliest);
+  const shown = showAll ? filtered : filtered.slice(0, 24);
+  const selCls = "rounded-lg border border-[var(--border)] bg-[var(--card,#141a24)] px-3 py-1.5 text-sm";
 
   return (
     <div>
@@ -158,15 +182,43 @@ export function DcaBoard() {
       )}
 
       <div className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <Tile k="Strategies" v={String(variants.length)} />
+        <Tile k="Strategies" v={String(all.length)} />
         <Tile k="Realized (paper)" v={usd(totalRealized)} tone={totalRealized} />
         <Tile k="Closed deals" v={String(totalDeals)} />
         <Tile k="Running" v={days != null ? `${days} days` : "—"} />
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-2">
-        {variants.map((v) => <Card key={v.name} v={v} />)}
+      <div className="mb-4 flex flex-wrap items-center gap-2 text-sm">
+        <select value={coin} onChange={(e) => { setCoin(e.target.value); setShowAll(false); }} className={selCls} aria-label="Filter by coin">
+          <option value="all">All coins ({all.length})</option>
+          {coinsList.map(([sym, name]) => <option key={sym} value={sym}>{name}</option>)}
+        </select>
+        <div className="inline-flex overflow-hidden rounded-lg border border-[var(--border)]">
+          {(["all", "new", "classic"] as const).map((f) => (
+            <button key={f} onClick={() => { setFamily(f); setShowAll(false); }}
+              className={`px-3 py-1.5 ${family === f ? "bg-white/10 font-semibold" : "text-[var(--muted)]"}`}>
+              {f === "all" ? "All" : f === "new" ? "New" : "Classic"}
+            </button>
+          ))}
+        </div>
+        <select value={sort} onChange={(e) => setSort(e.target.value as typeof sort)} className={selCls} aria-label="Sort by">
+          <option value="roi">Sort: ROI</option>
+          <option value="realized">Sort: Realized</option>
+          <option value="deals">Sort: Deals</option>
+          <option value="unreal">Sort: Unrealized</option>
+        </select>
+        <span className="ml-auto text-[var(--muted)]">{shown.length} of {filtered.length}</span>
       </div>
+
+      <div className="grid gap-4 lg:grid-cols-2">
+        {shown.map((v) => <Card key={`${v.symbol}-${v.name}`} v={v} />)}
+      </div>
+
+      {filtered.length > shown.length && (
+        <div className="mt-6 text-center">
+          <button onClick={() => setShowAll(true)} className="btn-ghost">Show all {filtered.length} strategies</button>
+        </div>
+      )}
 
       <p className="mt-6 text-xs text-[var(--muted)]">
         {isSample ? "Example snapshot" : `Updated ${status.updated_at ?? "—"} UTC`} · paper trading, no real funds ·

@@ -26,6 +26,14 @@ export function strategyTitle(v: Variant): string {
   return `${coinOf(v.symbol).name} DCA grid`;
 }
 
+/** Различитель варианта: схема или «хвост» сырого имени (чтобы одинаковые по
+ *  параметрам стратегии не выглядели дублями). */
+export function variantTag(v: Variant): string {
+  if (v.scheme) return String(v.scheme);
+  const parts = v.name.split("·");
+  return (parts.length > 1 ? parts.slice(1).join(" · ") : v.name).replace(/_/g, " ");
+}
+
 /** Короткий подзаголовок из реальных параметров. */
 export function strategySubtitle(v: Variant): string {
   const parts: string[] = [];
