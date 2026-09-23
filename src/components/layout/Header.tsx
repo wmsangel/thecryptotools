@@ -28,6 +28,7 @@ export function Header() {
           <Link href="/compare" className="muted hover:text-brand-ink">Compare</Link>
           <Link href="/exchanges" className="muted hover:text-brand-ink">Exchanges</Link>
           <Link href="/guides" className="muted hover:text-brand-ink">Guides</Link>
+          <Link href="/dca" className="muted hover:text-brand-ink">DCA Lab</Link>
           <Link href="/calendar" className="muted hover:text-brand-ink">Calendar</Link>
           <Link href="/unlocks" className="muted hover:text-brand-ink">Unlocks</Link>
           <Link href="/investment-calculator" className="muted hover:text-brand-ink">What if?</Link>

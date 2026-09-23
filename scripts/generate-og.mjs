@@ -352,6 +352,7 @@ async function main() {
     ["unlocks", "Token unlocks"],
     ["widgets", "Embeddable widgets"],
     ["exchanges", "Platforms"],
+    ["dca", "DCA strategy lab"],
     ["prices", "Live prices"],
     ["donate", "Donate"],
     // Section indexes. `og/coins.png` sits happily alongside the `og/coins/`
