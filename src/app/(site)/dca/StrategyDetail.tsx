@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import type { HistoryDeal } from "@/lib/dca/types";
 import type { StrategyGroup } from "@/lib/dca/labels";
@@ -26,7 +27,8 @@ function Metric({ label, children, tone }: { label: string; children: React.Reac
   );
 }
 
-function PnlChart({ deals }: { deals: HistoryDeal[] }) {
+function PnlChart({ deals }: { deals: (HistoryDeal & { symbol?: string })[] }) {
+  const [hi, setHi] = useState<number | null>(null);
   if (deals.length < 2) return null;
   const cum: number[] = [];
   let run = 0;
@@ -38,22 +40,40 @@ function PnlChart({ deals }: { deals: HistoryDeal[] }) {
   const y = (v: number) => h - pad - ((v - min) / span) * (h - 2 * pad);
   const line = cum.map((v, i) => `${i ? "L" : "M"}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
   const area = `${line} L${x(cum.length - 1).toFixed(1)},${(h - pad).toFixed(1)} L${x(0).toFixed(1)},${(h - pad).toFixed(1)} Z`;
+  const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const rx = (e.clientX - rect.left) / rect.width;
+    setHi(Math.max(0, Math.min(cum.length - 1, Math.round(rx * (cum.length - 1)))));
+  };
+  const leftPct = hi != null ? (hi / (cum.length - 1)) * 100 : 0;
   return (
-    <svg viewBox={`0 0 ${w} ${h}`} className="w-full" preserveAspectRatio="none" style={{ height: 120 }}>
-      <defs>
-        <linearGradient id="pnlg" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#2dd4bf" stopOpacity="0.35" />
-          <stop offset="100%" stopColor="#2dd4bf" stopOpacity="0" />
-        </linearGradient>
-      </defs>
-      <line x1={pad} y1={y(0)} x2={w - pad} y2={y(0)} stroke="var(--border)" strokeWidth="1" strokeDasharray="3 3" />
-      <path d={area} fill="url(#pnlg)" />
-      <path d={line} fill="none" stroke="#2dd4bf" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
-    </svg>
+    <div className="relative" onMouseMove={onMove} onMouseLeave={() => setHi(null)} onTouchStart={() => setHi(null)}>
+      <svg viewBox={`0 0 ${w} ${h}`} className="w-full" preserveAspectRatio="none" style={{ height: 120 }}>
+        <defs>
+          <linearGradient id="pnlg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#2dd4bf" stopOpacity="0.35" />
+            <stop offset="100%" stopColor="#2dd4bf" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+        <line x1={pad} y1={y(0)} x2={w - pad} y2={y(0)} stroke="var(--border)" strokeWidth="1" strokeDasharray="3 3" />
+        <path d={area} fill="url(#pnlg)" />
+        <path d={line} fill="none" stroke="#2dd4bf" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
+        {hi != null && <line x1={x(hi)} y1={pad} x2={x(hi)} y2={h - pad} stroke="var(--muted)" strokeWidth="1" />}
+        {hi != null && <circle cx={x(hi)} cy={y(cum[hi])} r={3.5} fill="#2dd4bf" stroke="var(--bg-elevated)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />}
+      </svg>
+      {hi != null && (
+        <div className="pointer-events-none absolute top-0 -translate-x-1/2 whitespace-nowrap rounded-md border border-[var(--border)] bg-[var(--bg-elevated)] px-2 py-1 text-xs shadow-lg"
+          style={{ left: `${Math.min(90, Math.max(10, leftPct))}%` }}>
+          <span className={`font-bold ${cum[hi] > 0 ? "text-emerald-500" : cum[hi] < 0 ? "text-red-500" : ""}`}>{usd(cum[hi])}</span>
+          <span className="ml-2 text-[var(--muted)]">{(deals[hi].closed_at || "").slice(0, 10)}</span>
+          {deals[hi].symbol && <span className="ml-2 text-[var(--muted)]">{coinOf(deals[hi].symbol!).ticker}</span>}
+        </div>
+      )}
+    </div>
   );
 }
 
-export function StrategyDetail({ group, onBack }: { group: StrategyGroup; onBack: () => void }) {
+export function StrategyDetail({ group }: { group: StrategyGroup }) {
   const rep = group.variants[0];
   const deals: (HistoryDeal & { symbol: string })[] = group.variants
     .flatMap((v) => (v.slots || []).flatMap((s) => (s.history || []).map((h) => ({ ...h, symbol: v.symbol }))))
@@ -61,7 +81,7 @@ export function StrategyDetail({ group, onBack }: { group: StrategyGroup; onBack
 
   return (
     <div>
-      <button onClick={onBack} className="mb-5 text-sm font-semibold text-brand-ink hover:underline">← All strategies</button>
+      <Link href="/dca/" className="mb-5 inline-block text-sm font-semibold text-brand-ink hover:underline">← All strategies</Link>
 
       <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)] p-5 sm:p-7">
         {/* header */}

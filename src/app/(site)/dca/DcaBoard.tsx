@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import type { DcaStatus } from "@/lib/dca/types";
 import { SAMPLE_STATUS } from "@/lib/dca/sample";
-import { StrategyDetail } from "./StrategyDetail";
+import Link from "next/link";
 import type { StrategyGroup } from "@/lib/dca/labels";
 import { DCA_STATUS_URL, buildGroups, coinOf, pct, usd, round, daysSince } from "@/lib/dca/labels";
 
@@ -32,9 +32,9 @@ function Tile({ k, v, tone }: { k: string; v: string; tone?: number }) {
   );
 }
 
-function GroupCard({ g, onOpen }: { g: StrategyGroup; onOpen: () => void }) {
+function GroupCard({ g }: { g: StrategyGroup }) {
   return (
-    <button onClick={onOpen} className="block w-full rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)] p-5 text-left transition hover:border-[color:var(--muted)]">
+    <Link href={`/dca/${g.slug}/`} className="block w-full rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)] p-5 text-left transition hover:border-[color:var(--muted)]">
       <div className="flex items-start gap-3">
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
@@ -67,7 +67,7 @@ function GroupCard({ g, onOpen }: { g: StrategyGroup; onOpen: () => void }) {
         {g.coins > 8 && <span className="text-[10px] text-[var(--muted)]">+{g.coins - 8}</span>}
         <span className="ml-auto text-xs font-semibold text-brand-ink">See per-coin results →</span>
       </div>
-    </button>
+    </Link>
   );
 }
 
@@ -77,14 +77,6 @@ export function DcaBoard() {
   const [loading, setLoading] = useState(true);
   const [sort, setSort] = useState<"roi" | "realized" | "deals" | "coins">("roi");
   const [family, setFamily] = useState<"all" | "new" | "classic">("all");
-  const [selected, setSelected] = useState<string | null>(null);
-
-  useEffect(() => {
-    const read = () => setSelected(new URLSearchParams(window.location.search).get("s"));
-    read();
-    window.addEventListener("popstate", read);
-    return () => window.removeEventListener("popstate", read);
-  }, []);
 
   useEffect(() => {
     let alive = true;
@@ -120,18 +112,6 @@ export function DcaBoard() {
 
   if (loading) return <p className="text-[var(--muted)]">Loading live strategies…</p>;
   if (!status) return null;
-
-  const go = (slug: string) => {
-    window.history.pushState({}, "", `?s=${encodeURIComponent(slug)}`);
-    setSelected(slug);
-    window.scrollTo({ top: 0 });
-  };
-  const back = () => {
-    window.history.pushState({}, "", window.location.pathname);
-    setSelected(null);
-  };
-  const current = selected ? groups.find((g) => g.slug === selected) : null;
-  if (current) return <StrategyDetail group={current} onBack={back} />;
 
   const coins = new Set(all.map((v) => v.symbol)).size;
   const totalRealized = all.reduce((s, v) => s + (v.realized_pnl || 0), 0);
@@ -173,7 +153,7 @@ export function DcaBoard() {
       </div>
 
       <div className="grid gap-4 lg:grid-cols-2">
-        {filtered.map((g) => <GroupCard key={g.slug} g={g} onOpen={() => go(g.slug)} />)}
+        {filtered.map((g) => <GroupCard key={g.slug} g={g} />)}
       </div>
 
       <p className="mt-6 text-xs text-[var(--muted)]">

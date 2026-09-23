@@ -5,7 +5,7 @@
   "description": "CryptoToolkit — free crypto utilities platform with 100+ trading, AI and developer tools. Config-driven, SEO-first, infinitely scalable.",
   "scripts": {
     "dev": "next dev",
-    "build": "next build && node scripts/generate-og.mjs && node scripts/generate-llms.mjs && node scripts/generate-404.mjs && npx --yes tsx scripts/build-go-redirects.ts",
+    "build": "node scripts/dca-snapshot.mjs && next build && node scripts/generate-og.mjs && node scripts/generate-llms.mjs && node scripts/generate-404.mjs && npx --yes tsx scripts/build-go-redirects.ts",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",

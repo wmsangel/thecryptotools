@@ -10,6 +10,7 @@ import { CHECKED_ON } from "@/lib/compare/data";
 import { pairSlug, validPairs } from "@/lib/compare/pairs";
 import { unlocksAsOf } from "@/lib/unlocks/meta";
 import { halvingsComputedAt } from "@/lib/events/halvings";
+import { getStrategyGroups } from "@/lib/dca/build-snapshot";
 
 /**
  * ============================================================================
@@ -29,7 +30,7 @@ import { halvingsComputedAt } from "@/lib/events/halvings";
  * today. `lastmod` is optional in the protocol; a missing one costs nothing,
  * while a wrong one costs trust in every other one.
  */
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const coins = sortedCoins();
 
   /** Newest of a set of ISO dates, ignoring the ones that aren't set. */
@@ -189,6 +190,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: t.featured ? 0.9 : 0.8,
     }));
 
+  // DCA strategy lab: the hub plus one page per live strategy (from the
+  // build-time snapshot of the strategies feed). Volatile numbers, but each
+  // page is a unique strategy with its own coins/params — worth crawling.
+  const dcaGroups = getStrategyGroups();
+  const dcaRoutes: MetadataRoute.Sitemap = [
+    { url: absoluteUrl("/dca"), changeFrequency: "daily", priority: 0.8 },
+    ...dcaGroups.map((g) => ({
+      url: absoluteUrl(`/dca/${g.slug}`),
+      changeFrequency: "daily" as const,
+      priority: 0.6,
+    })),
+  ];
+
   return [
     ...staticRoutes,
     ...categoryRoutes,
@@ -199,5 +213,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...backtestRoutes,
     ...compareRoutes,
     ...pageRoutes,
+    ...dcaRoutes,
   ];
 }
