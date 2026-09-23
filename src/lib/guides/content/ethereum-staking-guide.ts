@@ -55,7 +55,7 @@ const guide: Guide = {
     { type: "tool", slug: "staking-rewards-calculator" },
 
     { type: "h2", text: "Liquid staking" },
-    { type: "p", text: "You deposit ETH and receive a token representing the staked position — stETH, rETH, cbETH and others. The position keeps earning while the receipt token stays tradeable and usable as DeFi collateral, so you are not locked out of your capital. In return you take on smart-contract risk and the possibility that the receipt trades below the underlying ETH when everyone wants out at once, as stETH did during the 2022 stress. Covered in more depth in our liquid staking guide." },
+    { type: "p", text: "You deposit ETH and receive a token representing the staked position — stETH, rETH, cbETH and others. The position keeps earning while the receipt token stays tradeable and usable as DeFi collateral, so you are not locked out of your capital. In return you take on smart-contract risk and the possibility that the receipt trades below the underlying ETH when everyone wants out at once, as stETH did during the 2022 stress. Our [liquid staking guide](/guides/liquid-staking-explained) covers it in more depth, including a side-by-side of stETH, rETH and cbETH." },
 
     { type: "h2", text: "Staking pool vs solo staking, side by side" },
     { type: "p", text: "The choice most people are weighing is a staking pool versus solo staking, so here it is in one view alongside the other two routes. Solo staking wins on yield and control but costs you 32 ETH and real operational effort; a pool drops both the minimum and the effort in exchange for a commission and more trust in an operator. Exchange and liquid staking sit further along that same trade-off." },
