@@ -215,6 +215,31 @@ export function StrategyDetail({ group, onBack }: { group: StrategyGroup; onBack
           Not investment advice. Past results — live or simulated — never guarantee future returns.
         </p>
       </div>
+
+      {/* How the setup service works */}
+      <div className="mt-6 rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)] p-6 sm:p-7">
+        <h2 className="text-lg font-bold">How the setup service works</h2>
+        <ol className="mt-5 grid gap-5 sm:grid-cols-3">
+          {[
+            { n: 1, t: "Tell us what you want", d: "Message us on Telegram or email — your exchange, budget and how much risk you're comfortable with." },
+            { n: 2, t: "We configure it on your account", d: "We set the strategy up on your own exchange account. Your API keys and funds stay with you — we never take custody." },
+            { n: 3, t: "It runs — you stay in control", d: "The strategy runs live on your account. You keep full control and can pause or stop it any time." },
+          ].map((s) => (
+            <li key={s.n} className="flex gap-3">
+              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-brand-500/50 text-sm font-extrabold text-brand-ink">{s.n}</span>
+              <span>
+                <span className="block font-semibold">{s.t}</span>
+                <span className="mt-1 block text-sm text-[var(--muted)]">{s.d}</span>
+              </span>
+            </li>
+          ))}
+        </ol>
+        <p className="mt-5 text-xs text-[var(--muted)]">
+          Your API keys and funds stay in your own exchange account — we never take custody or trade on your behalf beyond the
+          setup you approve. This is a setup and configuration service, not managed money or investment advice. We recommend
+          testing on a demo account first.
+        </p>
+      </div>
     </div>
   );
 }
