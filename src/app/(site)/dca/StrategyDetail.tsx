@@ -196,7 +196,7 @@ export function StrategyDetail({ group, onBack }: { group: StrategyGroup; onBack
       <div className="mt-6 rounded-2xl border border-brand-500/40 hero-glow p-6 sm:p-7">
         <h2 className="text-xl font-extrabold tracking-tight">Want to run a strategy like this?</h2>
         <p className="mt-2 max-w-2xl text-sm text-[var(--muted)]">
-          Pick an exchange and run it yourself, or let us set it up and run it for you on our own server — no setup headaches.
+          Pick an exchange and run it yourself, or have us set it up and get it running for you — no setup headaches.
           Prefer to try first? Test any strategy on a <strong>demo account</strong> before committing real funds.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
@@ -207,7 +207,8 @@ export function StrategyDetail({ group, onBack }: { group: StrategyGroup; onBack
           ))}
         </div>
         <div className="mt-4 flex flex-wrap gap-3">
-          <Link href="/donate" className="btn-primary">Get it set up for you →</Link>
+          <a href="https://t.me/izagorodnyi" target="_blank" rel="noopener noreferrer" className="btn-primary">Set it up for me — Telegram →</a>
+          <a href="mailto:info@thecryptotools.com?subject=DCA%20strategy%20setup" className="btn-ghost">Email us →</a>
           <Link href="/guides/grid-trading-explained" className="btn-ghost">How grid trading works</Link>
         </div>
         <p className="mt-3 text-xs text-[var(--muted)]">
