@@ -155,7 +155,7 @@ function PlatformCard({ platform: p }: { platform: Platform }) {
       </div>
 
       <a
-        href={p.url}
+        href={`/go/${p.slug}`}
         target="_blank"
         rel="sponsored nofollow noopener noreferrer"
         data-affiliate={p.slug}

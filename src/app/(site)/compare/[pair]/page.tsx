@@ -225,7 +225,7 @@ export default function Page({ params }: { params: { pair: string } }) {
               </div>
               <p className="muted mt-3 text-sm leading-relaxed">{why}</p>
               <a
-                href={p.url}
+                href={`/go/${p.slug}`}
                 target="_blank"
                 rel="sponsored nofollow noopener noreferrer"
                 data-affiliate={p.slug}
