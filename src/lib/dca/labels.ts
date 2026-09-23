@@ -50,10 +50,82 @@ export function variantTag(v: Variant): string {
   return humanizeVariant(raw);
 }
 
-/** Стабильный url-safe slug стратегии для /dca?s=<slug>. */
+/** Ключ стратегии, общий для всех монет: имя без символа монеты. */
+export function strategyKey(v: Variant): string {
+  return v.name.includes("·") ? v.name.split("·").slice(1).join("·") : v.name;
+}
+
+/** Человеческое имя стратегии по правилу входа (без сырой кириллицы/схем). */
+export function strategyName(v: Variant): string {
+  const f = (v.entry_filter || "").toLowerCase() + " " + (v.name || "").toLowerCase();
+  let lead = "Classic";
+  if (/откат|dip/.test(f)) { const m = f.match(/откат\s*(\d+)|dip\s*(\d+)/); const n = m?.[1] || m?.[2]; lead = n ? `Dip-buy (−${n}%)` : "Dip-buy"; }
+  else if (/отскок|bounce/.test(f)) lead = "Bounce";
+  else if (/трейл|trail/.test(f)) lead = "Trailing";
+  else if (/объ|volume|x2/.test(f)) lead = "Volume-spike";
+  else if (/час|ноч|hour|night/.test(f)) lead = "Time-filter";
+  else if (/sma|ниже|below/.test(f)) lead = "Trend-filter";
+  else if (/тих|quiet/.test(f)) lead = "Low-volatility";
+  return `${lead} DCA grid`;
+}
+
+/** Стабильный url-safe slug стратегии (по конфигу, не по монете). */
 export function strategySlug(v: Variant): string {
-  const base = `${coinOf(v.symbol).ticker}-${variantTag(v)}-${v.take_profit_pct ?? ""}`;
+  const style = /grid/i.test(`${v.scheme ?? ""} ${v.name ?? ""}`) ? "even" : "scaling";
+  const base = `${strategyName(v)}-tp${v.take_profit_pct ?? ""}-so${v.safety_orders ?? ""}-c${v.grid_coverage_pct != null ? Math.round(v.grid_coverage_pct) : ""}-${style}`;
   return base.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "strategy";
+}
+
+export interface StrategyGroup {
+  key: string;
+  slug: string;
+  name: string;
+  subtitle: string;
+  variants: Variant[]; // по монетам, отсортированы по ROI
+  coins: number;
+  isNew: boolean;
+  avgRoi: number | null;
+  totalRealized: number;
+  totalUnrealized: number;
+  totalDeals: number;
+  winrate: number | null;
+  avgHours: number | null;
+}
+
+/** Сгруппировать варианты в стратегии (одна стратегия = много монет). */
+export function buildGroups(all: Variant[]): StrategyGroup[] {
+  const m = new Map<string, Variant[]>();
+  for (const v of all) {
+    const k = strategyKey(v);
+    const arr = m.get(k);
+    if (arr) arr.push(v); else m.set(k, [v]);
+  }
+  const seen = new Set<string>();
+  return [...m.values()].map((variants) => {
+    const rep = variants[0];
+    let slug = strategySlug(rep);
+    while (seen.has(slug)) slug += "-x";
+    seen.add(slug);
+    const rois = variants.map(roiPct).filter((x): x is number => x != null);
+    const winDeals = variants.reduce((s, v) => s + (v.stats?.deals || 0), 0);
+    const wins = variants.reduce((s, v) => s + (v.stats?.winrate_pct != null ? (v.stats.winrate_pct / 100) * (v.stats.deals || 0) : 0), 0);
+    const hs = variants.map((v) => v.stats?.avg_hours).filter((x): x is number => x != null);
+    return {
+      key: strategyKey(rep),
+      slug,
+      name: strategyName(rep),
+      subtitle: strategySubtitle(rep),
+      variants: [...variants].sort((a, b) => (roiPct(b) ?? -1e9) - (roiPct(a) ?? -1e9)),
+      coins: variants.length,
+      isNew: !!rep.is_new,
+      avgRoi: rois.length ? rois.reduce((a, b) => a + b, 0) / rois.length : null,
+      totalRealized: variants.reduce((s, v) => s + (v.realized_pnl || 0), 0),
+      totalUnrealized: variants.reduce((s, v) => s + (v.unrealized_pnl || 0), 0),
+      totalDeals: variants.reduce((s, v) => s + (v.deals_done || 0), 0),
+      winrate: winDeals ? (wins / winDeals) * 100 : null,
+      avgHours: hs.length ? hs.reduce((a, b) => a + b, 0) / hs.length : null,
+    };
+  });
 }
 
 /** Короткий подзаголовок из реальных параметров. */
@@ -62,6 +134,7 @@ export function strategySubtitle(v: Variant): string {
   if (v.take_profit_pct != null) parts.push(`${round(v.take_profit_pct, 2)}% take-profit`);
   if (v.safety_orders != null) parts.push(`${v.safety_orders} safety orders`);
   if (v.grid_coverage_pct != null) parts.push(`${round(v.grid_coverage_pct, 0)}% coverage`);
+  parts.push(/grid/i.test(`${v.scheme ?? ""} ${v.name ?? ""}`) ? "even-step grid" : "scaling grid");
   return parts.join(" · ");
 }
 
