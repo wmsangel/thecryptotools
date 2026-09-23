@@ -3,8 +3,9 @@
 import { useEffect, useMemo, useState } from "react";
 import type { DcaStatus, Variant } from "@/lib/dca/types";
 import { SAMPLE_STATUS } from "@/lib/dca/sample";
+import { StrategyDetail } from "./StrategyDetail";
 import {
-  DCA_STATUS_URL, coinOf, strategyTitle, strategySubtitle, variantTag, entryLabel,
+  DCA_STATUS_URL, coinOf, strategyTitle, strategySubtitle, variantTag, strategySlug, entryLabel,
   roiPct, stateLabel, pct, usd, hours, daysSince, round,
 } from "@/lib/dca/labels";
 
@@ -14,8 +15,7 @@ function Num({ v, kind = "usd", d = 2 }: { v: number | null | undefined; kind?: 
   return <span className={cls}>{kind === "pct" ? pct(n, d) : usd(n, d)}</span>;
 }
 
-function Card({ v }: { v: Variant }) {
-  const [open, setOpen] = useState(false);
+function Card({ v, onOpen }: { v: Variant; onOpen: () => void }) {
   const coin = coinOf(v.symbol);
   const st = stateLabel(v);
   const roi = roiPct(v);
@@ -25,7 +25,7 @@ function Card({ v }: { v: Variant }) {
 
   return (
     <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)] p-5 transition hover:border-[color:var(--muted)]">
-      <button onClick={() => setOpen((o) => !o)} className="flex w-full items-start gap-3 text-left">
+      <button onClick={onOpen} className="flex w-full items-start gap-3 text-left">
         <span className="mt-1 h-3 w-3 shrink-0 rounded-full" style={{ background: coin.color }} aria-hidden />
         <span className="min-w-0 flex-1">
           <span className="flex flex-wrap items-center gap-2">
@@ -38,7 +38,7 @@ function Card({ v }: { v: Variant }) {
         </span>
         <span className="shrink-0 text-right">
           <span className="block text-lg font-extrabold"><Num v={roi} kind="pct" /></span>
-          <span className="block text-[10px] uppercase tracking-wide text-[var(--muted)]">ROI (paper)</span>
+          <span className="block text-[10px] uppercase tracking-wide text-[var(--muted)]">ROI</span>
         </span>
       </button>
 
@@ -57,46 +57,8 @@ function Card({ v }: { v: Variant }) {
         {v.stats?.avg_hours != null && (
           <span className="rounded-md border border-[var(--border)] px-2 py-1 text-[var(--muted)]">Avg hold {hours(v.stats.avg_hours)}</span>
         )}
-        <button onClick={() => setOpen((o) => !o)} className="ml-auto font-semibold text-brand-ink hover:underline">
-          {open ? "Hide details" : "Details"}
-        </button>
+        <button onClick={onOpen} className="ml-auto font-semibold text-brand-ink hover:underline">Details →</button>
       </div>
-
-      {open && (
-        <div className="mt-4 border-t border-[var(--border)] pt-4">
-          {slot ? (
-            <>
-              <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm sm:grid-cols-4">
-                <Metric label="Avg price">{slot.avg_price != null ? `$${round(slot.avg_price, slot.avg_price < 10 ? 4 : 2).toLocaleString("en-US")}` : "—"}</Metric>
-                <Metric label="To take-profit">{slot.to_take_profit_pct != null ? pct(slot.to_take_profit_pct) : "—"}</Metric>
-                <Metric label="Safety orders">{slot.safety_orders_filled ?? 0}/{slot.safety_orders_total ?? v.safety_orders ?? "—"}</Metric>
-                <Metric label="In position">{hours(slot.hours_in_position)}</Metric>
-              </div>
-              {slot.grid && slot.grid.length > 0 && (
-                <div className="mt-4">
-                  <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-[var(--muted)]">Safety-order grid</div>
-                  <div className="space-y-1">
-                    {slot.grid.map((g) => (
-                      <div key={g.step} className="flex items-center gap-2 text-xs">
-                        <span className={`h-2 w-2 rounded-full ${g.status === "filled" ? "bg-emerald-500" : g.status === "pending" ? "bg-amber-500" : "bg-white/20"}`} />
-                        <span className="w-14 text-[var(--muted)]">−{round(g.deviation_pct, 0)}%</span>
-                        <span className="flex-1 font-mono">${g.price.toLocaleString("en-US")}</span>
-                        <span className="text-[var(--muted)]">${round(g.amount_usdt, 1)}</span>
-                        <span className="w-16 text-right text-[var(--muted)]">{pct(g.distance_pct, 1)}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </>
-          ) : (
-            <p className="text-sm text-[var(--muted)]">
-              {v.waiting_for_signal ? "No open position — the entry filter is waiting for its signal." : "No open position right now."}
-              {" "}Closed deals: {v.deals_done}, all exits by take-profit.
-            </p>
-          )}
-        </div>
-      )}
     </div>
   );
 }
@@ -118,6 +80,14 @@ export function DcaBoard() {
   const [coin, setCoin] = useState("all");
   const [family, setFamily] = useState<"all" | "new" | "classic">("all");
   const [showAll, setShowAll] = useState(false);
+  const [selected, setSelected] = useState<string | null>(null);
+
+  useEffect(() => {
+    const read = () => setSelected(new URLSearchParams(window.location.search).get("s"));
+    read();
+    window.addEventListener("popstate", read);
+    return () => window.removeEventListener("popstate", read);
+  }, []);
 
   useEffect(() => {
     let alive = true;
@@ -163,8 +133,32 @@ export function DcaBoard() {
     return [...vs].sort((a, b) => key(b) - key(a));
   }, [all, coin, family, sort]);
 
+  const slugMaps = useMemo(() => {
+    const bySlug = new Map<string, Variant>();
+    const slugOf = new Map<Variant, string>();
+    const seen = new Set<string>();
+    for (const v of all) {
+      let s = strategySlug(v);
+      while (seen.has(s)) s += "-x";
+      seen.add(s); bySlug.set(s, v); slugOf.set(v, s);
+    }
+    return { bySlug, slugOf };
+  }, [all]);
+
   if (loading) return <p className="text-[var(--muted)]">Loading live strategies…</p>;
   if (!status) return null;
+
+  const go = (slug: string) => {
+    window.history.pushState({}, "", `?s=${encodeURIComponent(slug)}`);
+    setSelected(slug);
+    window.scrollTo({ top: 0 });
+  };
+  const back = () => {
+    window.history.pushState({}, "", window.location.pathname);
+    setSelected(null);
+  };
+  const current = selected ? slugMaps.bySlug.get(selected) : null;
+  if (current) return <StrategyDetail v={current} onBack={back} />;
 
   const totalRealized = all.reduce((s, v) => s + (v.realized_pnl || 0), 0);
   const totalDeals = all.reduce((s, v) => s + (v.deals_done || 0), 0);
@@ -183,7 +177,7 @@ export function DcaBoard() {
 
       <div className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
         <Tile k="Strategies" v={String(all.length)} />
-        <Tile k="Realized (paper)" v={usd(totalRealized)} tone={totalRealized} />
+        <Tile k="Realized P&L" v={usd(totalRealized)} tone={totalRealized} />
         <Tile k="Closed deals" v={String(totalDeals)} />
         <Tile k="Running" v={days != null ? `${days} days` : "—"} />
       </div>
@@ -211,7 +205,7 @@ export function DcaBoard() {
       </div>
 
       <div className="grid gap-4 lg:grid-cols-2">
-        {shown.map((v) => <Card key={`${v.symbol}-${v.name}`} v={v} />)}
+        {shown.map((v) => <Card key={`${v.symbol}-${v.name}`} v={v} onOpen={() => go(slugMaps.slugOf.get(v)!)} />)}
       </div>
 
       {filtered.length > shown.length && (
@@ -221,7 +215,7 @@ export function DcaBoard() {
       )}
 
       <p className="mt-6 text-xs text-[var(--muted)]">
-        {isSample ? "Example snapshot" : `Updated ${status.updated_at ?? "—"} UTC`} · paper trading, no real funds ·
+        {isSample ? "Example snapshot" : `Updated ${status.updated_at ?? "—"} UTC`} · live strategy test on real market prices ·
         refresh the page for the latest.
       </p>
     </div>

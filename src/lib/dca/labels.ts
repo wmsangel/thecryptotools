@@ -26,12 +26,34 @@ export function strategyTitle(v: Variant): string {
   return `${coinOf(v.symbol).name} DCA grid`;
 }
 
-/** Различитель варианта: схема или «хвост» сырого имени (чтобы одинаковые по
- *  параметрам стратегии не выглядели дублями). */
+// Русские токены пресетов бота → английские (чтобы не светить кириллицу на сайте).
+const RU_EN: Record<string, string> = {
+  "тейк-от-базы": "take-from-base", "от-базы": "from-base", "тейк": "take",
+  "половина": "half", "трейл": "trail", "откат": "dip", "отскок": "bounce",
+  "тихо": "quiet", "объём": "volume", "объем": "volume",
+  "часы-ночь": "night-hours", "часы": "hours", "ночь": "night",
+  "ниже": "below", "база": "base", "частые": "frequent", "дн": "day", "сма": "sma",
+};
+
+function humanizeVariant(s: string): string {
+  let t = s.toLowerCase().replace(/нов(\d+)/g, "v$1").replace(/(^|[^a-z0-9])нов($|[^a-z0-9])/g, "$1v1$2");
+  for (const [ru, en] of Object.entries(RU_EN)) t = t.split(ru).join(en);
+  t = t.replace(/[а-яё]+/g, "").replace(/[:·_]+/g, " ").replace(/\s+/g, " ").replace(/^[ -]+|[ -]+$/g, "");
+  return t || "variant";
+}
+
+/** Различитель варианта в человекочитаемом виде (без сырой кириллицы). */
 export function variantTag(v: Variant): string {
-  if (v.scheme) return String(v.scheme);
-  const parts = v.name.split("·");
-  return (parts.length > 1 ? parts.slice(1).join(" · ") : v.name).replace(/_/g, " ");
+  const raw = v.scheme
+    ? String(v.scheme)
+    : (v.name.includes("·") ? v.name.split("·").slice(1).join(" · ") : v.name);
+  return humanizeVariant(raw);
+}
+
+/** Стабильный url-safe slug стратегии для /dca?s=<slug>. */
+export function strategySlug(v: Variant): string {
+  const base = `${coinOf(v.symbol).ticker}-${variantTag(v)}-${v.take_profit_pct ?? ""}`;
+  return base.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "strategy";
 }
 
 /** Короткий подзаголовок из реальных параметров. */

@@ -22,11 +22,24 @@ export interface SlotStats {
   realized_pnl: number;
 }
 
+export interface HistoryDeal {
+  opened_at?: string;
+  closed_at?: string;
+  avg_price?: number;
+  exit_price?: number;
+  qty?: number;
+  invested?: number;
+  pnl: number;
+  safety_orders?: number;
+  hours: number;
+}
+
 export interface Slot {
   id: number;
   state: "in_position" | "started" | "idle";
   deals_done: number;
   realized_pnl: number;
+  history?: HistoryDeal[];
   opened_at?: string;
   hours_in_position?: number;
   avg_price?: number;

@@ -6,9 +6,9 @@ import { JsonLd } from "@/components/JsonLd";
 import { AdSlot } from "@/components/ads/AdSlot";
 import { DcaBoard } from "./DcaBoard";
 
-const TITLE = "Live DCA Strategy Lab — Real Paper-Trading Results";
+const TITLE = "Live DCA Strategy Lab — Real-Market Test Results";
 const DESC =
-  "Automated dollar-cost-averaging (DCA) grid bots running live in paper mode on real market prices. See each strategy's ROI, drawdown, safety-order grid and closed-deal history — updated continuously. Simulation only, no financial advice.";
+  "Automated dollar-cost-averaging (DCA) grid strategies running live on the real market, 24/7. See each strategy's ROI, drawdown, safety-order grid and closed-deal history — genuine results, updated continuously. Not financial advice.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -50,19 +50,19 @@ export default function DcaPage() {
 
       <div className="mx-auto max-w-5xl px-4 py-10">
         <header className="max-w-3xl">
-          <span className="chip">🧪 New · live paper trading</span>
+          <span className="chip">🧪 Live · real-market test</span>
           <h1 className="mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">Live DCA strategy lab</h1>
           <p className="mt-4 text-lg text-[var(--muted)]">
-            A rack of automated dollar-cost-averaging grid bots trading on <strong>real market prices in paper mode</strong> —
-            no real money at risk. Each one runs 24/7; here you see exactly how it&apos;s doing: return, open position,
-            the safety-order grid and every closed deal. New strategies get added as we test them.
+            Automated dollar-cost-averaging grid strategies running <strong>live against the real market, 24/7</strong>.
+            Every number here — ROI, drawdown, the safety-order grid, each closed deal — is a genuine result of the rules
+            on live prices, updated continuously. New strategies get added as we test them.
           </p>
         </header>
 
         <div className="mt-6 rounded-xl border border-[var(--border)] bg-white/5 px-4 py-3 text-sm text-[var(--muted)]">
-          <strong className="text-brand-ink">This is a simulation, not advice.</strong> These are paper (virtual) trades run
-          to study how mechanical DCA/grid rules behave over time. Past results — real or simulated — never guarantee future
-          returns. Nothing here is a recommendation to buy, sell or copy any strategy.
+          <strong className="text-brand-ink">Live strategy test — not advice.</strong> These strategies run in real time on
+          real market prices, so the metrics are genuine outcomes of the rules. Past results never guarantee future returns.
+          Try any strategy on a demo account before risking capital — nothing here is a recommendation to buy, sell or copy.
         </div>
 
         <div className="mt-8">
@@ -81,7 +81,7 @@ export default function DcaPage() {
               cycle is allowed to start.
             </p>
             <ul className="list-disc space-y-2 pl-5">
-              <li><strong>ROI (paper)</strong> — total profit (realized + open) against the strategy&apos;s allocated virtual capital.</li>
+              <li><strong>ROI</strong> — total profit (realized + open) against the strategy&apos;s allocated capital.</li>
               <li><strong>Realized vs unrealized</strong> — booked profit vs the open position&apos;s current mark. We show the unrealized side on purpose: grid bots can look great on realized profit while a position quietly bleeds.</li>
               <li><strong>Drawdown</strong> — how far the open position is underwater right now.</li>
               <li><strong>Safety-order grid</strong> — every rung, how far below price it sits, and whether it has filled.</li>
