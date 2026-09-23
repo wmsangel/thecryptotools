@@ -24,7 +24,7 @@ function Card({ v }: { v: Variant }) {
     : st.kind === "wait" ? "bg-amber-500/15 text-amber-500" : "bg-white/5 text-[var(--muted)]";
 
   return (
-    <div className="rounded-2xl border border-[var(--border)] bg-[var(--card,#141a24)] p-5 transition hover:border-[color:var(--muted)]">
+    <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)] p-5 transition hover:border-[color:var(--muted)]">
       <button onClick={() => setOpen((o) => !o)} className="flex w-full items-start gap-3 text-left">
         <span className="mt-1 h-3 w-3 shrink-0 rounded-full" style={{ background: coin.color }} aria-hidden />
         <span className="min-w-0 flex-1">
@@ -171,7 +171,7 @@ export function DcaBoard() {
   const earliest = all.flatMap((v) => v.slots || []).map((s) => s.opened_at).filter(Boolean).sort()[0];
   const days = daysSince(status.started_at) ?? daysSince(earliest);
   const shown = showAll ? filtered : filtered.slice(0, 24);
-  const selCls = "rounded-lg border border-[var(--border)] bg-[var(--card,#141a24)] px-3 py-1.5 text-sm";
+  const selCls = "rounded-lg border border-[var(--border)] bg-[var(--bg-elevated)] px-3 py-1.5 text-sm";
 
   return (
     <div>
@@ -231,7 +231,7 @@ export function DcaBoard() {
 function Tile({ k, v, tone }: { k: string; v: string; tone?: number }) {
   const cls = tone == null ? "" : tone > 0 ? "text-emerald-500" : tone < 0 ? "text-red-500" : "";
   return (
-    <div className="rounded-xl border border-[var(--border)] bg-[var(--card,#141a24)] p-4">
+    <div className="rounded-xl border border-[var(--border)] bg-[var(--bg-elevated)] p-4">
       <div className="text-[10px] uppercase tracking-wide text-[var(--muted)]">{k}</div>
       <div className={`mt-1 text-xl font-extrabold tabular-nums ${cls}`}>{v}</div>
     </div>
