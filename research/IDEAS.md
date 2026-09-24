@@ -36,4 +36,15 @@
 - [ ] ⚠️ Risk-checkers (rug-pull/memecoin/airdrop-eligibility) — трендово, но качество/ответственность + AdSense-риск; только с жёсткими дисклеймерами. Пер-коиновые **price-prediction** — пропустить (репутац./AdSense-риск).
 - [ ] Монетизация: усиливать партнёрки (налоговики, биржи/боты по комиссии, кошельки/карты); реклама на вечнозелёных тул-страницах; своя веб-«разовая покупка» (premium-экспорт) через Paddle/Lemon Squeezy — ТОЛЬКО после проверки выплат на ИП КГ, не recurring.
 
+
+### Аналитика / цели (GA4) — обвесить события, чтобы видеть что популярно и куда жмут
+Контекст: `track()` (src/lib/analytics.ts) уже шлёт кастомные события в **GA4** через gtag (cookieless, consent-mode). Но покрытие дырявое — `tool_used` стоит лишь на 1 калькуляторе из 69; остальное точечно (share/tax/live-price/feedback/donate). Цель — данными приоритизировать разработку и партнёрки.
+- [ ] **Единый хелпер событий для всех 69 калькуляторов**: `tool_used {tool, action}` где action = view / compute / copy_result / share / reset / example. Сейчас почти нигде не стоит → не видно, чем реально пользуются.
+- [ ] **Партнёрские клики в GA4**: событие `affiliate_click {platform, placement}` на всех `/go/<slug>`-ссылках (у нас уже есть `data-affiliate`/`data-affiliate-placement` атрибуты + edge-трекинг пути; добавить клиентское GA4-событие для среза «куда жмут» в разрезе плейсмента). Дополняет edge-счётчик `/go`.
+- [ ] **DCA-лаб**: `dca_strategy_view {slug}`, `dca_exchange_click {platform}` (кнопки бирж), `dca_setup_click {via}` (Telegram/email).
+- [ ] **Навигация/поиск**: `search {query}` (строка поиска тулов), `category_filter {id}`, `guide_scroll {depth}` (25/50/75/100%) для дочитываемости гайдов, `widget_embed_copy {tool}`.
+- [ ] **Пометить ключевые события как GA4 conversions (цели)**: `affiliate_click`, `tax_report_export`, `donate_cta_click`, `feedback_click`, `dca_exchange_click`. Тогда в GA4 (Reports → Conversions) видно воронку и что приносит партнёрский выход.
+- [ ] **Вывести в наш дневной срез**: расширить `collect.py` на GA4 events (не только sessions/channels) и добавить в `seo_report`/`context` блок «Топ тулов по использованию» и «Клики по партнёркам (GA4)». Тогда популярность/клики видно рядом с SEO, без захода в GA4.
+- Зачем: увидеть что популярно, куда жмут, чем пользуются → строить/усиливать то, что реально работает, и переставлять партнёрки по данным.
+
 - (прочие идеи — добавляй сюда)
