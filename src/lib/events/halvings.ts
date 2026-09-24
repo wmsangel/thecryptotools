@@ -17,7 +17,7 @@ export const halvings: EstimatedEvent[] = [
     title: "Bitcoin halving (estimated)",
     detail: "The block subsidy halves from 3.125 to 1.5625 BTC. Bitcoin's issuance has halved roughly every four years since 2012, and the schedule is the reason its supply is capped at 21 million.",
     category: "network",
-    href: "/tools/halving-countdown",
+    href: "/tools/bitcoin-halving-countdown/",
     basis: "Estimated from block 961,291 — 88,709 blocks to go at 10-minute targets. Faster blocks pull it earlier.",
   },
   {
@@ -27,7 +27,7 @@ export const halvings: EstimatedEvent[] = [
     title: "Litecoin halving (estimated)",
     detail: "The Litecoin block subsidy halves from 6.25 to 3.125 LTC. Litecoin halves every 840,000 blocks — four times as many as Bitcoin, at a quarter of the block time.",
     category: "network",
-    href: "/tools/halving-countdown",
+    href: "/tools/bitcoin-halving-countdown/",
     basis: "Estimated from block 3,155,286 — 204,714 blocks to go at 2.5-minute targets. Faster blocks pull it earlier.",
   },
   {
@@ -37,7 +37,7 @@ export const halvings: EstimatedEvent[] = [
     title: "Bitcoin Cash halving (estimated)",
     detail: "The Bitcoin Cash subsidy halves from 3.125 to 1.5625 BCH. It shares Bitcoin's 210,000-block schedule, inherited from the 2017 fork.",
     category: "network",
-    href: "/tools/halving-countdown",
+    href: "/tools/bitcoin-halving-countdown/",
     basis: "Estimated from block 962,872 — 87,128 blocks to go at 10-minute targets. Faster blocks pull it earlier.",
   },
 ];

@@ -121,7 +121,7 @@ export default function Page() {
           A halving is a block number, not a date. The estimate is derived from the chain&rsquo;s
           current height and its target block time, so it moves as hash rate changes — faster blocks
           pull it earlier. Every halving entry names the height it was computed from.{" "}
-          <Link href="/tools/halving-countdown" className="font-semibold text-brand-ink hover:underline">
+          <Link href="/tools/bitcoin-halving-countdown/" className="font-semibold text-brand-ink hover:underline">
             The live countdown →
           </Link>
         </p>
