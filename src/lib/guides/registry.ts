@@ -75,6 +75,7 @@ import cryptoStakingAndEarning from "./content/crypto-staking-and-earning";
 import stablecoinsExplained from "./content/stablecoins-explained";
 import bitcoinHalvingExplained from "./content/bitcoin-halving-explained";
 import cryptoOrderTypesExplained from "./content/crypto-order-types-explained";
+import cryptoAirdropsExplained from "./content/crypto-airdrops-explained";
 
 export const guides: Guide[] = [
   howToCalculateLiquidationPrice,
@@ -151,6 +152,7 @@ export const guides: Guide[] = [
   stablecoinsExplained,
   bitcoinHalvingExplained,
   cryptoOrderTypesExplained,
+  cryptoAirdropsExplained,
 ];
 
 const bySlug = new Map(guides.map((g) => [g.slug, g]));
