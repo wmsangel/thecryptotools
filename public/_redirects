@@ -23,6 +23,12 @@
 /embed   /widgets/  301
 /embed/  /widgets/  301
 
+# --- Guessed tool slugs → real tool ------------------------------------------
+# Top Bing query is "fake crypto wallet simulator"; visitors guess that slug
+# (seen as 404 in CF edge stats, 2026-09-26). Real tool: /tools/fake-wallet-generator/.
+/tools/fake-crypto-wallet-simulator   /tools/fake-wallet-generator/  301
+/tools/fake-crypto-wallet-simulator/  /tools/fake-wallet-generator/  301
+
 # --- 404 ----------------------------------------------------------------------
 # No rule needed: Pages automatically serves /404.html for any unmatched path,
 # which is exactly what `ErrorDocument 404 /404.html` did on Apache.
