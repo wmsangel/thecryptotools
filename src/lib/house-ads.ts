@@ -19,7 +19,7 @@
  *
  * Links are marked rel="sponsored nofollow" like our affiliate links: these are
  * promotional, and thousands of identical sitewide links to owned domains would
- * otherwise look like a link scheme and could hurt all four sites.
+ * otherwise look like a link scheme and could hurt every site in the network.
  */
 
 export type HouseAdLang = "en" | "ru";
@@ -111,6 +111,33 @@ export const houseAds: HouseAd[] = [
     cta: "Open Foldout",
   },
   {
+    id: "ocrsnip",
+    href: "https://ocrsnip.com/",
+    lang: "en",
+    eyebrow: "Docs in your browser",
+    title: "Bank statements → Excel, images → text",
+    description: "Turn PDFs, scans and screenshots into clean spreadsheets and text right in the browser. Nothing is uploaded to a server.",
+    cta: "Open OCRSnip",
+  },
+  {
+    id: "foundaday",
+    href: "https://foundaday.com/en",
+    lang: "en",
+    eyebrow: "Find of the day",
+    title: "One great find every day",
+    description: "A hand-picked site, Telegram, Instagram and TikTok of the day — one interesting thing in each category, refreshed daily.",
+    cta: "Open FoundADay",
+  },
+  {
+    id: "dasha-motion",
+    href: "https://dasha-motion.com/en/",
+    lang: "en",
+    eyebrow: "Motion design",
+    title: "Need motion graphics or 2D animation?",
+    description: "Portfolio of a motion designer — iGaming creatives, 2D animation and AI-assisted video. Available for freelance work.",
+    cta: "See the portfolio",
+  },
+  {
     id: "prodom-expert",
     href: "https://prodom-expert.ru/",
     lang: "ru",
@@ -136,6 +163,15 @@ export const houseAds: HouseAd[] = [
     title: "Учиться — это интересно",
     description: "Интерактивные задания по логике, математике и чтению — от подготовки к школе до 11 класса.",
     cta: "Открыть Bilimjol",
+  },
+  {
+    id: "foundaday-ru",
+    href: "https://foundaday.com/ru",
+    lang: "ru",
+    eyebrow: "Находка дня",
+    title: "Одна интересная находка в день",
+    description: "Сайт, телеграм, инстаграм и тикток дня — по одной вручную отобранной вещи в каждой рубрике, каждый день.",
+    cta: "Открыть FoundADay",
   },
 ];
 
