@@ -173,6 +173,15 @@ export const houseAds: HouseAd[] = [
     description: "Сайт, телеграм, инстаграм и тикток дня — по одной вручную отобранной вещи в каждой рубрике, каждый день.",
     cta: "Открыть FoundADay",
   },
+  {
+    id: "dasha-motion-ru",
+    href: "https://dasha-motion.com/",
+    lang: "ru",
+    eyebrow: "Моушн-дизайн",
+    title: "Нужна моушн-графика или 2D-анимация?",
+    description: "Портфолио моушн-дизайнера: iGaming-креативы, 2D-анимация и AI-видео. Открыта для заказов.",
+    cta: "Смотреть портфолио",
+  },
 ];
 
 export const englishHouseAds: HouseAd[] = houseAds.filter((a) => a.lang === "en");
