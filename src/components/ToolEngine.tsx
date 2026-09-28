@@ -131,6 +131,16 @@ export function ToolEngine({
   }, [tool, inputs]);
 
   /**
+   * One `tool_used {action:"view"}` per tool mount — the per-tool denominator
+   * for the view→compute→copy/share funnel, independent of GA4's page_title
+   * mapping. `prefill?.symbol` is constant for a page, so this fires once.
+   */
+  useEffect(() => {
+    if (!tool) return;
+    trackTool("view", tool.slug, { toolCategory: tool.category, coin: prefill?.symbol });
+  }, [tool, prefill?.symbol]);
+
+  /**
    * Exactly ONE `tool_used` per page view, and only once the visitor has edited
    * a field and that edit produced a result.
    *
@@ -147,11 +157,7 @@ export function ToolEngine({
     if (!tool || !interacted.current || trackedUse.current || !result) return;
     const timer = setTimeout(() => {
       trackedUse.current = true;
-      track("tool_used", {
-        tool_slug: tool.slug,
-        tool_category: tool.category,
-        coin: prefill?.symbol,
-      });
+      trackTool("compute", tool.slug, { toolCategory: tool.category, coin: prefill?.symbol });
     }, 1200);
     return () => clearTimeout(timer);
   }, [tool, result, prefill?.symbol]);
@@ -192,7 +198,7 @@ export function ToolEngine({
 
       {/* Result */}
       <div className="md:sticky md:top-28 md:self-start">
-        <ResultPanel result={result} error={error} toolSlug={tool.slug} />
+        <ResultPanel result={result} error={error} toolSlug={tool.slug} toolCategory={tool.category} />
       </div>
     </div>
   );
@@ -253,14 +259,37 @@ function Field({
   );
 }
 
+/**
+ * Every config-tool interaction is ONE `tool_used` event carrying an `action`
+ * dimension, so a single GA4 event shows the per-tool view→compute→copy/share
+ * funnel (slice by `tool_slug` × `action`). This is the shared engine for all
+ * config tools, so instrumenting it here covers the whole tool catalogue at
+ * once. Undefined params are dropped by track().
+ */
+type ToolAction = "view" | "compute" | "copy_result" | "share";
+function trackTool(
+  action: ToolAction,
+  toolSlug: string,
+  extra?: { toolCategory?: string; coin?: string },
+): void {
+  track("tool_used", {
+    action,
+    tool_slug: toolSlug,
+    tool_category: extra?.toolCategory,
+    coin: extra?.coin,
+  });
+}
+
 function ResultPanel({
   result,
   error,
   toolSlug,
+  toolCategory,
 }: {
   result: StructuredResult | null;
   error: string | null;
   toolSlug: string;
+  toolCategory: string;
 }) {
   const isTextBlock = useMemo(
     () => typeof result?.value === "string" && String(result.value).includes("\n"),
@@ -286,7 +315,7 @@ function ResultPanel({
     >
       <div className="mb-5 flex items-center justify-between gap-3">
         <h2 className="eyebrow">Result</h2>
-        {result && !error && <ShareButton toolSlug={toolSlug} />}
+        {result && !error && <ShareButton toolSlug={toolSlug} toolCategory={toolCategory} />}
       </div>
 
       {error ? (
@@ -296,7 +325,7 @@ function ResultPanel({
       ) : result ? (
         <div>
           {isTextBlock ? (
-            <CopyBlock text={String(result.value)} toolSlug={toolSlug} />
+            <CopyBlock text={String(result.value)} toolSlug={toolSlug} toolCategory={toolCategory} />
           ) : (
             <>
               <div
@@ -346,7 +375,7 @@ function ResultPanel({
                 <span className="muted hidden text-xs group-open:inline">hide ▴</span>
               </summary>
               <div className="border-t border-[var(--border)] p-3">
-                <CopyBlock text={result.copyText} toolSlug={toolSlug} />
+                <CopyBlock text={result.copyText} toolSlug={toolSlug} toolCategory={toolCategory} />
               </div>
             </details>
           )}
@@ -441,7 +470,7 @@ function LivePriceButton({ onPrice }: { onPrice: (price: number) => void }) {
   );
 }
 
-function ShareButton({ toolSlug }: { toolSlug: string }) {
+function ShareButton({ toolSlug, toolCategory }: { toolSlug: string; toolCategory: string }) {
   const [copied, setCopied] = useState(false);
   return (
     <button
@@ -453,7 +482,7 @@ function ShareButton({ toolSlug }: { toolSlug: string }) {
           await navigator.clipboard.writeText(window.location.href);
           setCopied(true);
           // Only on success — a rejected clipboard write is not a share.
-          track("share_click", { tool_slug: toolSlug });
+          trackTool("share", toolSlug, { toolCategory });
           setTimeout(() => setCopied(false), 1500);
         } catch {
           /* clipboard unavailable */
@@ -465,7 +494,7 @@ function ShareButton({ toolSlug }: { toolSlug: string }) {
   );
 }
 
-function CopyBlock({ text, toolSlug }: { text: string; toolSlug: string }) {
+function CopyBlock({ text, toolSlug, toolCategory }: { text: string; toolSlug: string; toolCategory: string }) {
   const [copied, setCopied] = useState(false);
   return (
     <div>
@@ -478,7 +507,7 @@ function CopyBlock({ text, toolSlug }: { text: string; toolSlug: string }) {
             setCopied(true);
             // The generators (fake wallet, JSON, random data) end here — copying
             // the output IS the conversion for that whole category.
-            track("result_copy", { tool_slug: toolSlug });
+            trackTool("copy_result", toolSlug, { toolCategory });
             setTimeout(() => setCopied(false), 1500);
           } catch {
             /* ignore */

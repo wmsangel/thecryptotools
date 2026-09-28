@@ -38,8 +38,10 @@
 
 
 ### Аналитика / цели (GA4) — обвесить события, чтобы видеть что популярно и куда жмут
-Контекст: `track()` (src/lib/analytics.ts) уже шлёт кастомные события в **GA4** через gtag (cookieless, consent-mode). Но покрытие дырявое — `tool_used` стоит лишь на 1 калькуляторе из 69; остальное точечно (share/tax/live-price/feedback/donate). Цель — данными приоритизировать разработку и партнёрки.
-- [ ] **Единый хелпер событий для всех 69 калькуляторов**: `tool_used {tool, action}` где action = view / compute / copy_result / share / reset / example. Сейчас почти нигде не стоит → не видно, чем реально пользуются.
+> ✅ **ГРИНЛАЙТ владельца 2026-09-28: обвязать все 69 калькуляторов GA4-событиями — в работе.**
+
+Контекст: `track()` (src/lib/analytics.ts) уже шлёт кастомные события в **GA4** через gtag (cookieless, consent-mode). Цель — данными приоритизировать разработку и партнёрки.
+- [x] **Единый хелпер событий для всех 69 калькуляторов** — DONE 2026-09-28. Оказалось, `tool_used` стоял НЕ «на 1 туле», а в общем движке `ToolEngine.tsx` (все конфиг-тулы: /tools, /coins/*/*, /embed) — но разными именами (`tool_used`/`result_copy`/`share_click`). Свёл к единой схеме `tool_used {action, tool_slug, tool_category, coin?}`, action ∈ view / compute / copy_result / share (хелпер `trackTool()`). `reset`/`example` НЕ добавлял — таких кнопок в движке нет. Проверено в браузере на прод-билде: view (1×/маунт, не спамит), compute, copy_result, share — все с верной схемой. Бесп. апп-тулы (tax/portfolio/backtest/harvest/cost-basis) имеют свои события, вне этого движка.
 - [ ] **Партнёрские клики в GA4**: событие `affiliate_click {platform, placement}` на всех `/go/<slug>`-ссылках (у нас уже есть `data-affiliate`/`data-affiliate-placement` атрибуты + edge-трекинг пути; добавить клиентское GA4-событие для среза «куда жмут» в разрезе плейсмента). Дополняет edge-счётчик `/go`.
 - [ ] **DCA-лаб**: `dca_strategy_view {slug}`, `dca_exchange_click {platform}` (кнопки бирж), `dca_setup_click {via}` (Telegram/email).
 - [ ] **Навигация/поиск**: `search {query}` (строка поиска тулов), `category_filter {id}`, `guide_scroll {depth}` (25/50/75/100%) для дочитываемости гайдов, `widget_embed_copy {tool}`.
