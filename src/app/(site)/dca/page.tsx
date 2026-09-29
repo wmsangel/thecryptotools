@@ -5,6 +5,9 @@ import { ogImage, breadcrumbJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { AdSlot } from "@/components/ads/AdSlot";
 import { DcaBoard } from "./DcaBoard";
+import { getStrategyGroups } from "@/lib/dca/build-snapshot";
+import { strategyTypes } from "@/lib/dca/strategy-types";
+import { pct } from "@/lib/dca/labels";
 
 const TITLE = "Live DCA Strategy Lab — Real-Market Test Results";
 const DESC =
@@ -43,6 +46,15 @@ function pageJsonLd() {
 }
 
 export default function DcaPage() {
+  // Server-rendered explainer + crawlable links into every strategy page. The
+  // board above is client-only (live feed), so without this the hub shipped zero
+  // internal links to /dca/<slug>/ — crawlers found strategy pages via sitemap
+  // only. Grouped by strategy TYPE (entry filter) with a plain-English write-up.
+  const groups = getStrategyGroups();
+  const byType = strategyTypes
+    .map((t) => ({ type: t, list: groups.filter((g) => g.name.startsWith(t.lead)) }))
+    .filter((x) => x.list.length > 0);
+
   return (
     <>
       <JsonLd data={breadcrumbJsonLd([{ name: "DCA strategy lab", path: "/dca" }])} />
@@ -70,6 +82,42 @@ export default function DcaPage() {
         </div>
 
         <AdSlot slot="dca-mid" className="mt-12" />
+
+        <section className="mt-16">
+          <h2 className="text-2xl font-bold sm:text-3xl">The strategies we test</h2>
+          <p className="mt-3 max-w-3xl text-[var(--muted)]">
+            Every strategy here is a <strong>DCA grid</strong> — the difference is the <em>entry filter</em>, the rule that
+            decides when a new cycle is allowed to start. Here is each type in plain terms, when it tends to work, its
+            honest trade-off, and the live tests running it right now.
+          </p>
+          <div className="mt-8 space-y-10">
+            {byType.map(({ type, list }) => (
+              <div key={type.id} id={type.id} className="scroll-mt-24 border-t border-[var(--border)] pt-8">
+                <h3 className="text-xl font-bold text-brand-ink">{type.title}</h3>
+                <p className="mt-1 text-sm font-semibold text-[var(--muted)]">{type.tagline}</p>
+                <p className="mt-3 max-w-3xl text-[var(--muted)]">{type.description}</p>
+                <div className="mt-3 grid max-w-3xl gap-1 sm:grid-cols-2">
+                  <p className="text-sm text-[var(--muted)]"><strong className="text-brand-ink">Best in:</strong> {type.whenGood}</p>
+                  <p className="text-sm text-[var(--muted)]"><strong className="text-brand-ink">Trade-off:</strong> {type.tradeoff}</p>
+                </div>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {list.map((g) => (
+                    <Link
+                      key={g.slug}
+                      href={`/dca/${g.slug}/`}
+                      className="inline-flex items-baseline gap-2 rounded-full border border-[var(--border)] px-3 py-1.5 text-sm transition hover:border-[color:var(--muted)] hover:text-brand-ink"
+                    >
+                      <span className="font-medium">{g.subtitle}</span>
+                      <span className="text-xs text-[var(--muted)]">
+                        {g.coins} coin{g.coins > 1 ? "s" : ""}{g.avgRoi != null ? ` · avg ${pct(g.avgRoi)}` : ""}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
 
         <section className="mt-14 max-w-3xl">
           <h2 className="text-2xl font-bold">How to read this</h2>

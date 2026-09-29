@@ -64,6 +64,7 @@ const guide: Guide = {
 
     { type: "h2", text: "The honest bottom line" },
     { type: "p", text: "A trading bot is a genuinely useful tool for removing emotion and running a plan around the clock — nothing more. Pick the type that matches the market you expect (DCA to accumulate, grid for a range), plan the numbers so the edge clears the fees, connect it with a trade-only API key, and start small. It is not a money machine, and any bot sold as one is selling something else. This is general information, not financial advice." },
+    { type: "cta", title: "See bot strategies running live", text: "We run automated DCA-grid strategies on the real market, 24/7, and publish every result — ROI, drawdown, the safety-order grid and each closed deal. A live look at what automation actually produces.", href: "/dca", label: "Open the live DCA strategy lab" },
   ],
   faq: [
     { q: "Are crypto trading bots profitable?", a: "They can be in the right conditions, but the conditions matter more than the bot. A grid bot profits in a ranging market and loses in a strong trend; a DCA bot's return is just the asset's smoothed out; a signal bot depends on a strategy that keeps working live. Fees and overfitting quietly erase most bot returns, so plan the numbers before automating." },

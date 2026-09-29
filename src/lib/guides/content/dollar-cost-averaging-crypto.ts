@@ -49,6 +49,7 @@ const guide: Guide = {
     { type: "h2", text: "Planning your DCA" },
     { type: "p", text: "Decide three things: how much per buy, how often, and for how long. Then model it. The calculator below lets you project how a recurring buy would have accumulated, and the average-entry tool shows your blended cost as you add to a position." },
     { type: "tool", slug: "dca-calculator" },
+    { type: "cta", title: "See DCA strategies running live", text: "We run automated DCA-grid strategies on the real market, 24/7, and publish every result — ROI, drawdown, the safety-order grid and each closed deal. A live look at what the theory does in practice.", href: "/dca", label: "Open the live DCA strategy lab" },
   ],
   faq: [
     { q: "Is DCA better than lump-sum investing?", a: "On average, lump sum tends to outperform because markets rise over time, but DCA reduces the risk of buying at a bad moment and is easier psychologically. The best choice depends on your risk tolerance and cash flow." },

@@ -109,6 +109,7 @@ const guide: Guide = {
       type: "p",
       text: "Grid bots are one of the few genuinely useful pieces of trading automation for ordinary users, because the logic is simple and the risk is legible: you know exactly what happens if the price leaves your range in each direction. They are not free money and they are not a market-direction edge. Plan the range, check the spacing against fees, keep the API key trade-only, and treat the bot as a disciplined executor of a plan you made — not a substitute for making one. This is general information, not financial advice.",
     },
+    { type: "cta", title: "See grid-bot strategies running live", text: "Curious what a grid bot's results actually look like? We run automated DCA-grid strategies on live prices, 24/7, and publish every metric — ROI, the safety-order grid, closed deals and the open drawdown.", href: "/dca", label: "Open the live DCA strategy lab" },
   ],
   faq: [
     {

@@ -182,6 +182,7 @@ const guide: Guide = {
       type: "p",
       text: "It is not passive income, it is not market-neutral, and it does not remove the need to have a view. It converts one kind of risk into another kind that is easier to ignore right up until it arrives.",
     },
+    { type: "cta", title: "See grid strategies running live", text: "We run automated DCA-grid strategies on the real market and publish every result — the safety-order ladder, take-profit, ROI and the open drawdown for each one. A live look at how a grid actually behaves.", href: "/dca", label: "Open the live DCA strategy lab" },
   ],
   faq: [
     {
