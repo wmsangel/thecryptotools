@@ -11,8 +11,10 @@ const tool: ToolConfig = {
   source: "builtin",
   updatedAt: "2026-07-31",
   seo: {
+    title: "Crypto Win Rate Calculator — Profit Factor & Break-Even Rate",
     keywords: [
       "win rate calculator",
+      "crypto winrate",
       "winrate calculator crypto",
       "crypto win rate calculator",
       "trading win rate calculator",
@@ -21,7 +23,7 @@ const tool: ToolConfig = {
       "break even win rate calculator",
     ],
     description:
-      "Free crypto win rate calculator. Enter winning and losing trades with average win and loss to get win rate, profit factor, net P&L and the break-even win rate you need.",
+      "Free crypto win rate calculator. Enter your wins and losses to get win rate, profit factor and net P&L — then see the break-even win rate your risk/reward actually needs. No signup, runs in your browser.",
   },
   inputs: [
     { name: "wins", label: "Winning trades", type: "number", suffix: "trades", default: 42, min: 0, step: 1 },

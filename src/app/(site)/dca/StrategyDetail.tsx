@@ -221,7 +221,7 @@ export function StrategyDetail({ group }: { group: StrategyGroup }) {
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           {EXCHANGES.map((p) => (
-            <a key={p.slug} href={`/go/${p.slug}`} target="_blank" rel="sponsored nofollow noopener noreferrer" className="btn-ghost">
+            <a key={p.slug} href={`/go/${p.slug}`} target="_blank" rel="sponsored nofollow noopener noreferrer" data-affiliate={p.slug} data-affiliate-placement="dca-strategy" className="btn-ghost">
               {p.name} →
             </a>
           ))}

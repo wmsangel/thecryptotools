@@ -256,7 +256,7 @@ const specs: CoinToolSpec[] = [
     applies: (c) => Boolean(c.circulatingSupply),
     title: (c) => `${c.name} Market Cap Calculator`,
     description: (c) =>
-      `Calculate ${nameAndTicker(c)} market cap from the live ${c.symbol} price and circulating supply — plus FDV, and the price ${c.symbol} would need to reach any target valuation.`,
+      `See what price ${c.symbol} needs to reach any market cap — plus ${c.name}'s live market cap, FDV and circulating supply, worked out from the current price. Free, no signup.`,
     keywords: (c) => [
       `${c.name.toLowerCase()} market cap calculator`,
       `${c.symbol.toLowerCase()} market cap calculator`,
