@@ -9,6 +9,7 @@ const guide: Guide = {
   readingMinutes: 9,
   updatedAt: "2026-09-18",
   seo: {
+    title: "Ethereum Staking: Pool vs Solo vs Exchange vs Liquid Compared",
     keywords: [
       "ethereum staking",
       "ethereum staking pool vs solo staking",
