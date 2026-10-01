@@ -112,6 +112,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // over the visitor's own file, so its HTML has no content date to claim.
     { url: absoluteUrl("/tax-loss-harvesting"), changeFrequency: "weekly", priority: 0.9 },
     { url: absoluteUrl("/cost-basis-method-calculator"), changeFrequency: "weekly", priority: 0.9 },
+    { url: absoluteUrl("/fear-and-greed-index"), changeFrequency: "daily", priority: 0.8 },
     { url: absoluteUrl("/research"), changeFrequency: "monthly", priority: 0.7 },
     { url: absoluteUrl("/research/crypto-correlation"), changeFrequency: "monthly", priority: 0.8 },
     { url: absoluteUrl("/research/crypto-drawdowns"), changeFrequency: "monthly", priority: 0.8 },

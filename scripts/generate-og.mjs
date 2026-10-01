@@ -350,6 +350,7 @@ async function main() {
     ["portfolio/correlation", "Correlation"],
     ["calendar", "Crypto calendar"],
     ["unlocks", "Token unlocks"],
+    ["fear-and-greed-index", "Market sentiment"],
     ["widgets", "Embeddable widgets"],
     ["exchanges", "Platforms"],
     ["dca", "DCA strategy lab"],
