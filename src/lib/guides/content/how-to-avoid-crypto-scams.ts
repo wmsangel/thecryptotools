@@ -57,6 +57,7 @@ const guide: Guide = {
     { type: "h2", text: "The habits that defend against all of them" },
     { type: "ul", items: [
       "**Self-custody, done right.** Keep savings in a hardware wallet and treat the [seed phrase](/guides/how-to-store-a-seed-phrase) as the money itself — offline, never typed into anything. Most theft ends here.",
+      "**Kill SMS 2FA, and guard your number.** SIM-swap attacks port your phone number to intercept text codes and drain accounts — secure every exchange with an authenticator app or hardware key, never SMS. Keeping a [separate virtual number](/go/2ndnumber) for signups also keeps your real one off the data leaks attackers shop from.",
       "**Verify, don't trust links.** Reach sites by your own bookmark, never an ad, email or DM link. Check the exact domain; scammers use near-identical spellings.",
       "**Read what you sign, and revoke.** Before approving a transaction, understand what it authorises; periodically revoke old token approvals.",
       "**Ignore DMs and giveaways.** No legitimate airdrop, support team or celebrity resolves anything in your DMs or asks you to send crypto first.",

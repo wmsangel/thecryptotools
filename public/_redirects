@@ -32,6 +32,12 @@
 /tools/halving-countdown   /tools/bitcoin-halving-countdown/  301
 /tools/halving-countdown/  /tools/bitcoin-halving-countdown/  301
 
+# --- Manual affiliate /go redirects (network offers not in platforms.ts) ------
+# Edge-tracked via the /go/* path like our platform links. Keep the destination
+# as the network's exact tracking URL.
+/go/2ndnumber   https://qbzdl.com/g/q9khw5u698ff871df07d7c1db20106/  302
+/go/ishosting   https://xcdus.com/g/t7pdcms1vhff871df07df6378a678b/  302
+
 # --- 404 ----------------------------------------------------------------------
 # No rule needed: Pages automatically serves /404.html for any unmatched path,
 # which is exactly what `ErrorDocument 404 /404.html` did on Apache.

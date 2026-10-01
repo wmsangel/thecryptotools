@@ -52,6 +52,7 @@ const guide: Guide = {
       "**IP-whitelist the key** where the exchange allows it, and revoke it the moment you stop using the bot.",
       "**Never** use a bot that asks for your seed phrase or your exchange password — no legitimate one does.",
       "**Start small and watch it.** A bot that looks perfect in a calm week behaves very differently in a crash. Fund it with money you can leave alone and scale only once you've seen it run.",
+      "**Keep it running 24/7.** A bot only works while it's online, so it needs an always-on machine, not your laptop. Cloud bots (3Commas, Pionex) host themselves; a self-hosted, open-source bot (Freqtrade, Hummingbot) needs a small always-on server — an [inexpensive VPS](/go/ishosting) handles it, and some providers accept crypto.",
     ] },
 
     { type: "h2", text: "Are they actually profitable?" },
