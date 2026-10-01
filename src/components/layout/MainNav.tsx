@@ -41,9 +41,10 @@ export function MainNav({ categories }: { categories: Cat[] }) {
     },
     {
       label: "Markets",
-      match: ["/calendar", "/unlocks", "/investment-calculator", "/dca", "/fear-and-greed-index"],
+      match: ["/calendar", "/unlocks", "/investment-calculator", "/dca", "/fear-and-greed-index", "/bitcoin-rainbow-chart"],
       items: [
         { href: "/fear-and-greed-index", label: "Fear & Greed Index", icon: "😱" },
+        { href: "/bitcoin-rainbow-chart", label: "Bitcoin Rainbow Chart", icon: "🌈" },
         { href: "/dca", label: "DCA strategy lab", icon: "🧪" },
         { href: "/investment-calculator", label: "What if? (backtest)", icon: "⏳" },
         { href: "/calendar", label: "Crypto calendar", icon: "🗓️" },
