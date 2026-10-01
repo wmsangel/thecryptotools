@@ -352,6 +352,8 @@ async function main() {
     ["unlocks", "Token unlocks"],
     ["fear-and-greed-index", "Market sentiment"],
     ["bitcoin-rainbow-chart", "Bitcoin indicator"],
+    ["pi-cycle-top-indicator", "Bitcoin indicator"],
+    ["bitcoin-stock-to-flow", "Bitcoin indicator"],
     ["widgets", "Embeddable widgets"],
     ["exchanges", "Platforms"],
     ["dca", "DCA strategy lab"],
