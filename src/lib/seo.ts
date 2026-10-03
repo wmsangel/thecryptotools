@@ -191,6 +191,33 @@ export function toolJsonLd(tool: ToolConfig): Record<string, unknown>[] {
  *
  * @param trail e.g. [{ name: "Guides", path: "/guides" }, { name: guide.title, path: `/guides/${slug}` }]
  */
+/**
+ * Dataset schema for our data pages (indices, indicators, studies). These pages
+ * publish numeric series derived from our own data, so Dataset is the correct
+ * type — it makes them eligible for Google Dataset Search and, increasingly,
+ * easier for AI answer engines to cite. Mirrors the research studies.
+ */
+export function datasetJsonLd(opts: {
+  name: string;
+  description: string;
+  path: string;
+  variableMeasured: string;
+  temporalCoverage?: string;
+}): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    name: opts.name,
+    description: opts.description,
+    url: absoluteUrl(opts.path),
+    creator: { "@type": "Organization", name: site.organization.name, url: site.url },
+    license: "https://creativecommons.org/licenses/by/4.0/",
+    isAccessibleForFree: true,
+    variableMeasured: opts.variableMeasured,
+    ...(opts.temporalCoverage ? { temporalCoverage: opts.temporalCoverage } : {}),
+  };
+}
+
 export function breadcrumbJsonLd(
   trail: { name: string; path: string }[],
 ): Record<string, unknown> {

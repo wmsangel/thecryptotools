@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { absoluteUrl, site } from "@/lib/site";
-import { ogImage } from "@/lib/seo";
+import { ogImage, datasetJsonLd } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { JsonLd } from "@/components/JsonLd";
 import { AdSlot } from "@/components/ads/AdSlot";
@@ -84,6 +84,13 @@ export default function StockToFlowPage() {
   return (
     <>
       <JsonLd data={pageJsonLd()} />
+      <JsonLd data={datasetJsonLd({
+        name: "Bitcoin Stock-to-Flow model",
+        description: "Bitcoin's stock-to-flow ratio (supply ÷ annual issuance) from the halving schedule, with a log-log fitted model price versus the actual price. From daily closes.",
+        path: PATH,
+        variableMeasured: "Bitcoin stock-to-flow ratio, model price, actual price",
+        temporalCoverage: `${study.start}/${study.end}`,
+      })} />
       <JsonLd data={faqJsonLd()} />
       <div className="mx-auto max-w-4xl px-4 py-10">
         <Breadcrumbs trail={[{ name: "Bitcoin Stock-to-Flow", path: PATH }]} />

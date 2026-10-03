@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { absoluteUrl, site } from "@/lib/site";
-import { ogImage } from "@/lib/seo";
+import { ogImage, datasetJsonLd } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { JsonLd } from "@/components/JsonLd";
 import { AdSlot } from "@/components/ads/AdSlot";
@@ -138,6 +138,13 @@ export default function BitcoinRainbowPage() {
   return (
     <>
       <JsonLd data={pageJsonLd()} />
+      <JsonLd data={datasetJsonLd({
+        name: "Bitcoin Rainbow Chart bands",
+        description: "Bitcoin price with nine logarithmic-regression valuation bands (fire sale to maximum bubble), fitted to daily closes and re-fit on every update.",
+        path: PATH,
+        variableMeasured: "Bitcoin price and log-regression valuation band",
+        temporalCoverage: `${study.start}/${study.end}`,
+      })} />
       <JsonLd data={faqJsonLd()} />
       <div className="mx-auto max-w-4xl px-4 py-10">
         <Breadcrumbs trail={[{ name: "Bitcoin Rainbow Chart", path: PATH }]} />

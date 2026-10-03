@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { absoluteUrl, site } from "@/lib/site";
-import { ogImage } from "@/lib/seo";
+import { ogImage, datasetJsonLd } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { JsonLd } from "@/components/JsonLd";
 import { AdSlot } from "@/components/ads/AdSlot";
@@ -97,6 +97,13 @@ export default function PiCyclePage() {
   return (
     <>
       <JsonLd data={pageJsonLd()} />
+      <JsonLd data={datasetJsonLd({
+        name: "Bitcoin Pi Cycle Top indicator",
+        description: "Bitcoin's 111-day moving average and twice its 350-day moving average, with the dates their crossover has historically marked cycle tops. From daily closes.",
+        path: PATH,
+        variableMeasured: "Bitcoin price, 111-day MA, 2×350-day MA, top-signal crossovers",
+        temporalCoverage: `${study.start}/${study.end}`,
+      })} />
       <JsonLd data={faqJsonLd()} />
       <div className="mx-auto max-w-4xl px-4 py-10">
         <Breadcrumbs trail={[{ name: "Pi Cycle Top Indicator", path: PATH }]} />

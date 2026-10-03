@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { absoluteUrl, site } from "@/lib/site";
-import { ogImage } from "@/lib/seo";
+import { ogImage, datasetJsonLd } from "@/lib/seo";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { JsonLd } from "@/components/JsonLd";
 import { AdSlot } from "@/components/ads/AdSlot";
@@ -90,6 +90,13 @@ export default function FearGreedPage() {
   return (
     <>
       <JsonLd data={pageJsonLd()} />
+      <JsonLd data={datasetJsonLd({
+        name: "Crypto Fear & Greed Index (daily)",
+        description: "Daily Crypto Fear & Greed Index values (0–100) and their classification, with current, yesterday, last-week and last-month readings and a ~1-year history.",
+        path: PATH,
+        variableMeasured: "Crypto Fear & Greed Index value (0–100)",
+        temporalCoverage: `${dayOf(data.history[0])}/${dayOf(data.current)}`,
+      })} />
       <JsonLd data={faqJsonLd()} />
 
       <div className="mx-auto max-w-4xl px-4 py-10">
