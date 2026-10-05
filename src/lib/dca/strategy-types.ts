@@ -27,6 +27,12 @@ export interface StrategyType {
   tradeoff: string;
 }
 
+/** Resolve the strategy TYPE for a group by matching the start of its name
+ *  (e.g. "Dip-buy (−12%) DCA grid" → the Dip-buy type). */
+export function strategyTypeFor(name: string): StrategyType | undefined {
+  return strategyTypes.find((t) => name.startsWith(t.lead));
+}
+
 export const strategyTypes: StrategyType[] = [
   {
     lead: "Classic",

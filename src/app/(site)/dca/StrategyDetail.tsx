@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import type { HistoryDeal } from "@/lib/dca/types";
 import type { StrategyGroup } from "@/lib/dca/labels";
 import { coinOf, entryLabel, roiPct, stateLabel, pct, usd, hours, round } from "@/lib/dca/labels";
+import { strategyTypeFor } from "@/lib/dca/strategy-types";
 import { platforms, type Platform } from "@/lib/platforms";
 
 const EXCHANGE_SLUGS = ["bybit", "binance", "okx", "kucoin", "bitget", "mexc"];
@@ -24,6 +25,18 @@ function Metric({ label, children, tone }: { label: string; children: React.Reac
       <div className="text-[10px] uppercase tracking-wide text-[var(--muted)]">{label}</div>
       <div className={`mt-1 font-extrabold tabular-nums ${cls}`}>{children}</div>
     </div>
+  );
+}
+
+function LiveBadge() {
+  return (
+    <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-1 text-xs font-semibold text-emerald-500">
+      <span className="relative flex h-2 w-2">
+        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-70" />
+        <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+      </span>
+      LIVE · updated continuously
+    </span>
   );
 }
 
@@ -73,11 +86,52 @@ function PnlChart({ deals }: { deals: (HistoryDeal & { symbol?: string })[] }) {
   );
 }
 
+type SortKey = "coin" | "roi" | "realized" | "unreal" | "deals" | "win" | "dd";
+
 export function StrategyDetail({ group }: { group: StrategyGroup }) {
   const rep = group.variants[0];
+  const type = strategyTypeFor(group.name);
+
   const deals: (HistoryDeal & { symbol: string })[] = group.variants
     .flatMap((v) => (v.slots || []).flatMap((s) => (s.history || []).map((h) => ({ ...h, symbol: v.symbol }))))
     .sort((a, b) => (a.closed_at || "").localeCompare(b.closed_at || ""));
+
+  // Rows for the per-coin table (sortable).
+  const rows = useMemo(() => group.variants.map((v) => {
+    const c = coinOf(v.symbol);
+    const st = stateLabel(v);
+    const dd = (v.slots || []).find((s) => s.state === "in_position")?.drawdown_pct ?? null;
+    return { v, c, st, coin: c.name, roi: roiPct(v), realized: v.realized_pnl, unreal: v.unrealized_pnl, deals: v.deals_done, win: v.stats?.winrate_pct ?? null, dd };
+  }), [group]);
+
+  const [sort, setSort] = useState<{ key: SortKey; dir: 1 | -1 }>({ key: "roi", dir: -1 });
+  const sorted = useMemo(() => {
+    const arr = [...rows];
+    const { key, dir } = sort;
+    arr.sort((a, b) => {
+      if (key === "coin") return a.coin.localeCompare(b.coin) * dir;
+      const av = a[key] as number | null, bv = b[key] as number | null;
+      if (av == null && bv == null) return 0;
+      if (av == null) return 1; // nulls last
+      if (bv == null) return -1;
+      return (av - bv) * dir;
+    });
+    return arr;
+  }, [rows, sort]);
+
+  const best = useMemo(() => rows.filter((r) => r.roi != null).sort((a, b) => (b.roi as number) - (a.roi as number))[0], [rows]);
+
+  function clickSort(key: SortKey) {
+    setSort((s) => (s.key === key ? { key, dir: s.dir === 1 ? -1 : 1 } : { key, dir: key === "coin" ? 1 : -1 }));
+  }
+  const arrow = (key: SortKey) => (sort.key === key ? (sort.dir === 1 ? " ↑" : " ↓") : "");
+  const Th = ({ k, children, right }: { k: SortKey; children: React.ReactNode; right?: boolean }) => (
+    <th className={`px-3 py-2 font-semibold ${right ? "text-right" : "text-left"}`}>
+      <button type="button" onClick={() => clickSort(k)} className={`inline-flex items-center hover:text-brand-ink ${sort.key === k ? "text-brand-ink" : ""}`}>
+        {children}<span className="tabular-nums">{arrow(k)}</span>
+      </button>
+    </th>
+  );
 
   return (
     <div>
@@ -85,72 +139,74 @@ export function StrategyDetail({ group }: { group: StrategyGroup }) {
 
       <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)] p-5 sm:p-7">
         {/* header */}
-        <div className="flex flex-wrap items-start gap-3">
+        <LiveBadge />
+        <div className="mt-3 flex flex-wrap items-start gap-3">
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-2">
-              <h1 className="text-2xl font-extrabold tracking-tight">{group.name}</h1>
+              <h1 className="text-2xl font-extrabold tracking-tight sm:text-3xl">{group.name}</h1>
               {group.isNew && <span className="rounded-md bg-fuchsia-500/15 px-1.5 py-0.5 text-[10px] font-bold text-fuchsia-400">NEW</span>}
               <span className="rounded-md bg-white/5 px-2 py-0.5 text-xs text-[var(--muted)]">{group.coins} coins</span>
             </div>
             <p className="mt-1 text-sm text-[var(--muted)]">{group.subtitle}</p>
+            {type && <p className="mt-2 max-w-2xl text-sm font-medium text-[var(--text)]/90">{type.tagline}</p>}
           </div>
           <div className="text-right">
-            <div className="text-2xl font-extrabold">{num(group.avgRoi, "pct")}</div>
+            <div className="text-3xl font-extrabold">{num(group.avgRoi, "pct")}</div>
             <div className="text-[10px] uppercase tracking-wide text-[var(--muted)]">Avg ROI across coins</div>
           </div>
         </div>
 
         {/* aggregate KPI */}
-        <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
           <Metric label="Realized P&L" tone={group.totalRealized}>{num(group.totalRealized)}</Metric>
           <Metric label="Unrealized" tone={group.totalUnrealized}>{num(group.totalUnrealized)}</Metric>
           <Metric label="Closed deals">{group.totalDeals}</Metric>
           <Metric label="Win rate">{group.winrate != null ? `${round(group.winrate, 0)}%` : "—"}</Metric>
+          <Metric label="Avg hold">{hours(group.avgHours)}</Metric>
+          <Metric label="Best coin">{best ? <span>{best.c.ticker} {num(best.roi, "pct")}</span> : "—"}</Metric>
         </div>
 
-        {/* per-coin comparison — the core view */}
+        {/* per-coin comparison — the core view, sortable */}
         <div className="mt-7">
-          <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-[var(--muted)]">This strategy across coins</div>
+          <div className="mb-2 flex items-center justify-between">
+            <div className="text-[11px] font-semibold uppercase tracking-wide text-[var(--muted)]">This strategy across coins</div>
+            <div className="text-[11px] text-[var(--muted)]">tap a column to sort</div>
+          </div>
           <div className="overflow-x-auto rounded-xl border border-[var(--border)]">
             <table className="w-full text-sm">
               <thead>
-                <tr className="text-left text-[var(--muted)]">
-                  <th className="px-3 py-2 font-semibold">Coin</th>
-                  <th className="px-3 py-2 font-semibold">State</th>
-                  <th className="px-3 py-2 text-right font-semibold">ROI</th>
-                  <th className="px-3 py-2 text-right font-semibold">Realized</th>
-                  <th className="px-3 py-2 text-right font-semibold">Unreal.</th>
-                  <th className="px-3 py-2 text-right font-semibold">Deals</th>
-                  <th className="px-3 py-2 text-right font-semibold">Win</th>
-                  <th className="px-3 py-2 text-right font-semibold">Drawdown</th>
+                <tr className="text-[var(--muted)]">
+                  <Th k="coin">Coin</Th>
+                  <th className="px-3 py-2 text-left font-semibold">State</th>
+                  <Th k="roi" right>ROI</Th>
+                  <Th k="realized" right>Realized</Th>
+                  <Th k="unreal" right>Unreal.</Th>
+                  <Th k="deals" right>Deals</Th>
+                  <Th k="win" right>Win</Th>
+                  <Th k="dd" right>Drawdown</Th>
                 </tr>
               </thead>
               <tbody>
-                {group.variants.map((v) => {
-                  const c = coinOf(v.symbol);
-                  const st = stateLabel(v);
-                  const dd = (v.slots || []).find((s) => s.state === "in_position")?.drawdown_pct;
-                  return (
-                    <tr key={v.symbol} className="border-t border-[var(--border)]">
-                      <td className="px-3 py-2">
-                        <span className="inline-flex items-center gap-2">
-                          <span className="h-2.5 w-2.5 rounded-full" style={{ background: c.color }} />
-                          <span className="font-semibold">{c.name}</span>
-                          <span className="text-[var(--muted)]">{c.ticker}</span>
-                        </span>
-                      </td>
-                      <td className="px-3 py-2">
-                        <span className={`text-xs ${st.kind === "pos" ? "text-emerald-500" : st.kind === "wait" ? "text-amber-500" : "text-[var(--muted)]"}`}>{st.text}</span>
-                      </td>
-                      <td className="px-3 py-2 text-right font-bold">{num(roiPct(v), "pct")}</td>
-                      <td className="px-3 py-2 text-right">{num(v.realized_pnl)}</td>
-                      <td className="px-3 py-2 text-right">{num(v.unrealized_pnl)}</td>
-                      <td className="px-3 py-2 text-right tabular-nums">{v.deals_done}</td>
-                      <td className="px-3 py-2 text-right tabular-nums text-[var(--muted)]">{v.stats?.winrate_pct != null ? `${round(v.stats.winrate_pct, 0)}%` : "—"}</td>
-                      <td className="px-3 py-2 text-right tabular-nums text-[var(--muted)]">{dd != null ? `${round(dd, 1)}%` : "—"}</td>
-                    </tr>
-                  );
-                })}
+                {sorted.map((r) => (
+                  <tr key={r.v.symbol} className="border-t border-[var(--border)]">
+                    <td className="px-3 py-2">
+                      <span className="inline-flex items-center gap-2">
+                        <span className="h-2.5 w-2.5 rounded-full" style={{ background: r.c.color }} />
+                        <span className="font-semibold">{r.c.name}</span>
+                        <span className="text-[var(--muted)]">{r.c.ticker}</span>
+                      </span>
+                    </td>
+                    <td className="px-3 py-2">
+                      <span className={`text-xs ${r.st.kind === "pos" ? "text-emerald-500" : r.st.kind === "wait" ? "text-amber-500" : "text-[var(--muted)]"}`}>{r.st.text}</span>
+                    </td>
+                    <td className="px-3 py-2 text-right font-bold">{num(r.roi, "pct")}</td>
+                    <td className="px-3 py-2 text-right">{num(r.realized)}</td>
+                    <td className="px-3 py-2 text-right">{num(r.unreal)}</td>
+                    <td className="px-3 py-2 text-right tabular-nums">{r.deals}</td>
+                    <td className="px-3 py-2 text-right tabular-nums text-[var(--muted)]">{r.win != null ? `${round(r.win, 0)}%` : "—"}</td>
+                    <td className="px-3 py-2 text-right tabular-nums text-[var(--muted)]">{r.dd != null ? `${round(r.dd, 1)}%` : "—"}</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
@@ -164,19 +220,43 @@ export function StrategyDetail({ group }: { group: StrategyGroup }) {
           </div>
         )}
 
-        {/* description */}
-        <div className="mt-7 space-y-3 text-sm text-[var(--muted)]">
-          <h2 className="text-base font-bold">How this strategy works</h2>
+        {/* description — enriched from the strategy type */}
+        <div className="mt-8 space-y-4 text-sm text-[var(--muted)]">
+          <h2 className="text-lg font-bold text-[var(--text)]">How this strategy works</h2>
+          {type && <p>{type.description}</p>}
           <p>
-            <strong>DCA grid</strong>: opens a base position and places a ladder of {rep.safety_orders ?? "several"} safety
-            orders across roughly {rep.grid_coverage_pct != null ? `${round(rep.grid_coverage_pct, 0)}%` : "a range"} below entry.
-            As price falls, those orders fill and pull the average down; a single take-profit
-            {rep.take_profit_pct != null ? ` ${round(rep.take_profit_pct, 2)}%` : ""} above the average closes the cycle in profit.
+            In numbers, this one is a <strong>DCA grid</strong> with {rep.safety_orders ?? "several"} safety orders laddered across
+            roughly {rep.grid_coverage_pct != null ? `${round(rep.grid_coverage_pct, 0)}%` : "a range"} below the entry
+            {/grid/i.test(`${rep.scheme ?? ""} ${rep.name ?? ""}`) ? " (even-step spacing)" : " (scaling spacing — orders grow further down)"}.
+            A base order opens the cycle; as price falls the safety orders fill and pull the average entry down, and a single
+            take-profit{rep.take_profit_pct != null ? ` ${round(rep.take_profit_pct, 2)}%` : ""} above that average closes the whole
+            cycle in profit. The entry rule — <strong>{entryLabel(rep.entry_filter)}</strong> — decides when a new cycle may start.
           </p>
+          {type && (
+            <div className="grid gap-3 sm:grid-cols-2">
+              <div className="rounded-xl border border-[var(--border)] px-4 py-3">
+                <div className="text-xs font-semibold uppercase tracking-wide text-emerald-500">Best in</div>
+                <div className="mt-1 text-[var(--text)]/90">{type.whenGood}</div>
+              </div>
+              <div className="rounded-xl border border-[var(--border)] px-4 py-3">
+                <div className="text-xs font-semibold uppercase tracking-wide text-amber-500">Trade-off</div>
+                <div className="mt-1 text-[var(--text)]/90">{type.tradeoff}</div>
+              </div>
+            </div>
+          )}
           <p>
-            Entry rule: <strong>{entryLabel(rep.entry_filter)}</strong>. The same rules run on {group.coins} coins in parallel —
-            the table above shows how each is doing. Every figure is a real outcome on live market prices, updated continuously.
-            One strategy can shine on one coin and struggle on another; that&apos;s exactly what this lets you see over time.
+            The same rules run on <strong>{group.coins} coins in parallel</strong>, and the table above shows how each is doing —
+            every figure is a real outcome on live market prices, updated continuously. One strategy can shine on one coin and
+            struggle on another; watching that over time is exactly the point.
+          </p>
+
+          <h2 className="pt-2 text-lg font-bold text-[var(--text)]">Reading the numbers honestly</h2>
+          <p>
+            A grid without a stop-loss tends to show a <strong>very high win rate</strong> — it only ever closes a cycle in
+            profit. The real risk doesn&apos;t live in the closed-deal record; it lives in the <strong>open drawdown</strong>
+            during a deep, sustained fall, while safety orders keep averaging down a position that&apos;s still underwater.
+            So read <em>realized</em> and <em>unrealized</em> together, and watch the drawdown column — that&apos;s where the
+            danger actually is.
           </p>
         </div>
 
