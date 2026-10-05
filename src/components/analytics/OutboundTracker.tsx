@@ -23,11 +23,19 @@ export function OutboundTracker() {
       // Left and middle button only — a right-click is a context menu, not a visit.
       if (event.button > 1) return;
       const target = event.target as Element | null;
-      const link = target?.closest?.("a[data-affiliate]") as HTMLAnchorElement | null;
+      const link = target?.closest?.("a") as HTMLAnchorElement | null;
       if (!link) return;
+      // Platform from the explicit attribute, else from a /go/<slug> href — so
+      // markdown-rendered /go links in guides (no data-affiliate) are tracked too.
+      let platform = link.dataset.affiliate;
+      if (!platform) {
+        const m = (link.getAttribute("href") || "").match(/\/go\/([a-z0-9-]+)\/?/i);
+        if (m) platform = m[1];
+      }
+      if (!platform) return; // not an affiliate link
       track("affiliate_click", {
-        platform: link.dataset.affiliate,
-        placement: link.dataset.affiliatePlacement ?? "unknown",
+        platform,
+        placement: link.dataset.affiliatePlacement ?? "link",
         page_path: window.location.pathname,
       });
     }

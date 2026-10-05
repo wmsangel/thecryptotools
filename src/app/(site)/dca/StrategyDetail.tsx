@@ -120,6 +120,13 @@ export function StrategyDetail({ group }: { group: StrategyGroup }) {
   }, [rows, sort]);
 
   const best = useMemo(() => rows.filter((r) => r.roi != null).sort((a, b) => (b.roi as number) - (a.roi as number))[0], [rows]);
+  // Unique, data-derived facts for this exact configuration (self-updating).
+  const worst = useMemo(() => rows.filter((r) => r.roi != null).sort((a, b) => (a.roi as number) - (b.roi as number))[0], [rows]);
+  const inPos = rows.filter((r) => r.st.kind === "pos").length;
+  const tp = rep.take_profit_pct;
+  const cov = rep.grid_coverage_pct;
+  const tpWord = tp == null ? null : tp <= 3 ? "quick, frequent take-profits" : tp <= 8 ? "moderate take-profits" : "patient, larger take-profits";
+  const covWord = cov == null ? null : cov >= 40 ? "deep coverage — lots of room before the last safety order fills" : cov >= 20 ? "moderate coverage" : "shallow coverage — the grid runs out of safety orders sooner in a big drop";
 
   function clickSort(key: SortKey) {
     setSort((s) => (s.key === key ? { key, dir: s.dir === 1 ? -1 : 1 } : { key, dir: key === "coin" ? 1 : -1 }));
@@ -231,6 +238,18 @@ export function StrategyDetail({ group }: { group: StrategyGroup }) {
             A base order opens the cycle; as price falls the safety orders fill and pull the average entry down, and a single
             take-profit{rep.take_profit_pct != null ? ` ${round(rep.take_profit_pct, 2)}%` : ""} above that average closes the whole
             cycle in profit. The entry rule — <strong>{entryLabel(rep.entry_filter)}</strong> — decides when a new cycle may start.
+          </p>
+          <p className="rounded-xl border border-[var(--border)] bg-[var(--bg)]/40 px-4 py-3">
+            <strong className="text-[var(--text)]">This configuration right now:</strong> it has booked {num(group.totalRealized)} across{" "}
+            {group.totalDeals} closed {group.totalDeals === 1 ? "cycle" : "cycles"} on {group.coins} coins, holding each about {hours(group.avgHours)} on average.{" "}
+            {best && worst && best.v.symbol !== worst.v.symbol && (
+              <>Results differ by coin — best is <strong>{best.c.ticker}</strong> at {num(best.roi, "pct")}, weakest{" "}
+              <strong>{worst.c.ticker}</strong> at {num(worst.roi, "pct")}. </>
+            )}
+            {inPos > 0 && <>{inPos} of {group.coins} {inPos === 1 ? "is" : "are"} in a position, carrying {num(group.totalUnrealized)} unrealized. </>}
+            {tpWord && covWord && tp != null && cov != null && (
+              <>Its {round(tp, 2)}% take-profit means {tpWord}, and its {round(cov, 0)}% coverage is {covWord}.</>
+            )}
           </p>
           {type && (
             <div className="grid gap-3 sm:grid-cols-2">
