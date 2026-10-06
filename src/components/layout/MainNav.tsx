@@ -24,11 +24,12 @@ export function MainNav({ categories }: { categories: Cat[] }) {
   const groups: Group[] = [
     {
       label: "Tools",
-      match: ["/tools", "/category", "/portfolio"],
+      match: ["/tools", "/category", "/portfolio", "/glossary"],
       items: [
         { href: "/tools", label: "All tools", icon: "🧰" },
         ...categories.map((c) => ({ href: `/category/${c.id}`, label: c.label, icon: c.icon })),
         { href: "/portfolio", label: "Portfolio analysis", icon: "📊" },
+        { href: "/glossary", label: "Glossary", icon: "📖" },
       ],
     },
     {

@@ -363,6 +363,7 @@ async function main() {
     // directory holding the per-coin cards.
     ["tools", "All tools"],
     ["guides", "All guides"],
+    ["glossary", "Learn"],
     ["coins", "All coins"],
     ["compare", "Comparisons"],
     ["investment-calculator", "Backtest"],

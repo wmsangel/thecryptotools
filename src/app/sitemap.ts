@@ -113,6 +113,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: absoluteUrl("/tax-loss-harvesting"), changeFrequency: "weekly", priority: 0.9 },
     { url: absoluteUrl("/cost-basis-method-calculator"), changeFrequency: "weekly", priority: 0.9 },
     { url: absoluteUrl("/fear-and-greed-index"), changeFrequency: "daily", priority: 0.8 },
+    { url: absoluteUrl("/glossary"), lastModified: newestGuide, changeFrequency: "monthly", priority: 0.7 },
     { url: absoluteUrl("/bitcoin-rainbow-chart"), changeFrequency: "weekly", priority: 0.8 },
     { url: absoluteUrl("/pi-cycle-top-indicator"), changeFrequency: "weekly", priority: 0.8 },
     { url: absoluteUrl("/bitcoin-stock-to-flow"), changeFrequency: "weekly", priority: 0.8 },
