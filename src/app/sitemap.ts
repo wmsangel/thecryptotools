@@ -134,7 +134,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // A coin×tool page moves when either half of it moves.
   const coinToolRoutes: MetadataRoute.Sitemap = allCoinToolPages().map(({ coin, spec }) => ({
     url: absoluteUrl(`/coins/${coin.slug}/${spec.slug}`),
-    lastModified: latest([coinDate(coin.slug), toolDate(spec.toolSlug)]),
+    // Include historyThrough: each coin×tool page renders a CoinToolInsight block
+    // derived from that price history, so its content genuinely moves with it —
+    // and the tool's own updatedAt was stale (stuck at 2026-07-31), starving the
+    // re-crawl signal Google needs to re-evaluate the trailing-slash canonical.
+    lastModified: latest([coinDate(coin.slug), toolDate(spec.toolSlug), historyThrough]),
     changeFrequency: "weekly",
     priority: 0.7,
   }));
