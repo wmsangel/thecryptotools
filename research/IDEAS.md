@@ -72,6 +72,8 @@
 
 - [ ] **Early Hints засоряют 5xx-статистику** (2026-09-28, аналитик): подтверждено по UA — 714 из 730 апекс-504 за 09-27 это `nginx-ssl early hints`, 16 — `bastion early hints`. Пользователи не страдают (главная/гайды отдают 200). Выключить Speed → Optimization → Early Hints в CF (см. пункт про хвосты cPanel выше).
 
+- [ ] **Понизить Cache-TTL для `/sitemap.xml`** (SEO-гигиена, S): сейчас sitemap кэшируется на edge Cloudflare и отдаёт устаревшую копию (видели 07-31 вместо свежего, пока не cache-bust). Добавить в `public/_headers` правило для `/sitemap.xml` (и `/robots.txt`?) с коротким `Cache-Control: public, max-age=300, must-revalidate` — чтобы GSC и мы всегда получали актуальную версию после деплоя. Мелкая правка, но убирает «кэш показывает старый sitemap». (Контекст: fix trailing-slash lastmod 2026-10-06.)
+
 - (прочие идеи — добавляй сюда)
 
 ---
