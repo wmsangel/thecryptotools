@@ -199,6 +199,19 @@ export default function CryptoTaxReportPage() {
             </li>
           ))}
         </ul>
+        <p className="muted mt-4 leading-relaxed">
+          <strong className="text-[var(--text)]">Only have a PDF?</strong> Some exchanges — and most
+          banks — only hand you a statement as a PDF, not a CSV. You can{" "}
+          <a
+            href="https://ocrsnip.com/"
+            target="_blank"
+            rel="noopener"
+            className="font-semibold text-brand-ink hover:underline"
+          >
+            convert a PDF statement into a spreadsheet
+          </a>{" "}
+          first, then drop that file in here and map its columns like any other export.
+        </p>
       </section>
 
       <div className="mt-12 max-w-3xl">

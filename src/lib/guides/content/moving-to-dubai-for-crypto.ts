@@ -154,7 +154,7 @@ const guide: Guide = {
     },
     {
       type: "p",
-      text: "None of that is a reason not to move. It is a reason to compare the actual saving against the actual cost, rather than comparing a tax rate against zero.",
+      text: "None of that is a reason not to move. It is a reason to compare the actual saving against the actual cost, rather than comparing a tax rate against zero. Before you commit, put a real number on it: [compare the cost of living in Dubai with your current city](https://costtrek.com/en) to see what the move does to your monthly outgoings and the salary it would take to cover them.",
     },
 
     { type: "h2", text: "A workable order of operations" },
