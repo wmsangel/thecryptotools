@@ -19,9 +19,9 @@ import { platforms, type Platform, type PlatformCategoryId } from "./platforms";
 export function isReferralLink(url: string): boolean {
   // Common affiliate params/paths across networks: ref/r (many), invite/join
   // (exchanges), via (Rewardful/Koinly), aff (generic), fpr (FirstPromoter),
-  // partner, atid (Cryptohopper). A bare utm_source is NOT enough — that is not
-  // a referral by itself.
-  return /(?:[?&/](?:ref|r|invite|join|via|aff|fpr|partner|atid)=?)|invite\.|\/join\/|referral/i.test(url);
+  // partner, atid (Cryptohopper), subid (Impact/Sovrn redirectors like
+  // cryptocom.sjv.io / go.expressvpn.com). A bare utm_source is NOT enough.
+  return /(?:[?&/](?:ref|r|invite|join|via|aff|fpr|partner|atid|subid)=?)|invite\.|\/join\/|referral/i.test(url);
 }
 
 export function earningExchanges(): Platform[] {

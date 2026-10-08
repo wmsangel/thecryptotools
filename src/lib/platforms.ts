@@ -182,7 +182,8 @@ export const platforms: Platform[] = [
       "Crypto.com pairs an easy mobile app with a wider ecosystem including a Visa card, staking and its own chain.",
     highlights: ["Polished mobile app", "Crypto Visa card", "Earn & staking products"],
     bonus: "Buy, earn and spend crypto in one app",
-    url: "https://crypto.com",
+    // Indoleads CPA (approved) — 372-day cookie, pays on a funded account.
+    url: "https://cryptocom.sjv.io/6kGBZb?subId1=thecryptotools",
   },
   {
     slug: "gemini",
@@ -466,7 +467,8 @@ export const platforms: Platform[] = [
       "A prepaid Visa card funded from your Crypto.com account, with cashback and perks that scale with the amount of CRO you stake.",
     highlights: ["Cashback on spending", "Tiered perks by CRO stake", "Widely accepted Visa"],
     bonus: "Prepaid crypto Visa with tiered cashback",
-    url: "https://crypto.com/cards",
+    // Same approved Crypto.com program as the exchange card (one funnel).
+    url: "https://cryptocom.sjv.io/6kGBZb?subId1=thecryptotools",
   },
   {
     slug: "bybit-card",
