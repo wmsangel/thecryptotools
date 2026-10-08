@@ -17,14 +17,14 @@ export function GuideAffiliateCTA({
   const picks = partnersForGuide(kind, 3);
   if (picks.length === 0) return null;
   const [primary, ...alts] = picks;
-  const { heading, verb } = GUIDE_AFFILIATE_COPY[kind];
+  const { heading, verb, blurb } = GUIDE_AFFILIATE_COPY[kind];
   const slot = placement ?? `guide-${kind}`;
 
   return (
     <section className="mt-12 rounded-2xl border border-brand-500/30 bg-brand-500/5 p-6">
       <div className="text-xs font-semibold uppercase tracking-wide text-brand-ink">Partner</div>
       <h2 className="mt-1 text-xl font-bold">{heading}</h2>
-      <p className="muted mt-1 text-sm leading-relaxed">{primary.bonus}</p>
+      <p className="muted mt-1 text-sm leading-relaxed">{blurb ?? primary.bonus}</p>
       <a
         href={primary.url}
         target="_blank"

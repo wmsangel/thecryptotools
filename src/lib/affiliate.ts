@@ -19,8 +19,9 @@ import { platforms, type Platform, type PlatformCategoryId } from "./platforms";
 export function isReferralLink(url: string): boolean {
   // Common affiliate params/paths across networks: ref/r (many), invite/join
   // (exchanges), via (Rewardful/Koinly), aff (generic), fpr (FirstPromoter),
-  // partner. A bare utm_source is NOT enough — that is not a referral by itself.
-  return /(?:[?&/](?:ref|r|invite|join|via|aff|fpr|partner)=?)|invite\.|\/join\/|referral/i.test(url);
+  // partner, atid (Cryptohopper). A bare utm_source is NOT enough — that is not
+  // a referral by itself.
+  return /(?:[?&/](?:ref|r|invite|join|via|aff|fpr|partner|atid)=?)|invite\.|\/join\/|referral/i.test(url);
 }
 
 export function earningExchanges(): Platform[] {
@@ -77,20 +78,50 @@ const CATEGORY_FOR: Record<Exclude<GuideAffiliateKind, "exchange" | "derivatives
   card: "earn",
 };
 
+/**
+ * Where a grid/DCA calculator user actually runs the strategy: an exchange with
+ * a free, built-in grid/DCA bot. No third-party API keys, no subscription — the
+ * exchange earns on the trades, and so do we on the referral. Ordered by bot
+ * quality + fit for the calculators that declare `affiliate: "bot"`. A dedicated
+ * third-party platform (3Commas/Cryptohopper) is a subscription product and a
+ * worse fit for this CTA, so it stays on /exchanges rather than here.
+ */
+const BOT_VENUES = ["bitget", "bybit", "binance", "okx", "kucoin"];
+
+export function botPartners(limit = 3): Platform[] {
+  return BOT_VENUES.map((slug) => platforms.find((p) => p.slug === slug))
+    .filter((p): p is Platform => !!p && isReferralLink(p.url))
+    .slice(0, limit);
+}
+
 /** Earning partners to feature for a guide's declared affiliate kind. */
 export function partnersForGuide(kind: GuideAffiliateKind, limit = 3): Platform[] {
   if (kind === "exchange") return exchangesForContext("spot", limit);
   if (kind === "derivatives") return exchangesForContext("derivatives", limit);
+  if (kind === "bot") return botPartners(limit);
   const cat = CATEGORY_FOR[kind];
   return platforms.filter((p) => p.category === cat && isReferralLink(p.url)).slice(0, limit);
 }
 
-/** Heading + CTA verb per kind, for the guide affiliate block. */
-export const GUIDE_AFFILIATE_COPY: Record<GuideAffiliateKind, { heading: string; verb: string }> = {
+/**
+ * Heading + CTA verb per kind, for the guide affiliate block. An optional
+ * `blurb` overrides the per-partner `bonus` line when the kind needs framing the
+ * individual platform text cannot carry (e.g. the bot CTA explaining why these
+ * exchanges are the right place to run the strategy).
+ */
+export const GUIDE_AFFILIATE_COPY: Record<
+  GuideAffiliateKind,
+  { heading: string; verb: string; blurb?: string }
+> = {
   exchange: { heading: "Where to buy or trade", verb: "Trade on" },
   derivatives: { heading: "Where to trade this", verb: "Trade on" },
   wallet: { heading: "Where to store it safely", verb: "Get a" },
   tax: { heading: "Do it without the spreadsheet", verb: "Try" },
-  bot: { heading: "Automate the strategy", verb: "Start with" },
+  bot: {
+    heading: "Run it on a free built-in bot",
+    verb: "Start with",
+    blurb:
+      "These exchanges run a grid or DCA strategy on a free, built-in bot — no third-party API keys and no subscription. You keep custody of your funds; the exchange earns from the trades, not from you.",
+  },
   card: { heading: "Where to spend your crypto", verb: "Get the" },
 };

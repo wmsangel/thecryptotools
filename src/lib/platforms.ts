@@ -223,6 +223,21 @@ export const platforms: Platform[] = [
     bonus: "Sign up via referral for a trading-fee discount",
     url: "https://www.bitfinex.com/sign-up?refcode=zlUb_U9lm",
   },
+  {
+    slug: "pionex",
+    name: "Pionex",
+    category: "exchange",
+    icon: "🤖",
+    tagline: "Exchange built around free trading bots",
+    bestFor: "Grid & DCA bots",
+    description:
+      "Pionex is an exchange built around automation: grid, DCA and other trading bots are built in and free to run, with no API keys and no subscription — you set a strategy directly inside your own account.",
+    highlights: ["Free built-in grid & DCA bots", "No API keys or subscription", "Aggregated liquidity from major venues"],
+    // TODO(owner): replace with your Pionex referral link to start earning — until
+    // then this card is informational only and is excluded from the paid CTAs.
+    bonus: "Run grid and DCA bots free, built into the exchange",
+    url: "https://www.pionex.com",
+  },
 
   // ---- Wallets -------------------------------------------------------------
   {
