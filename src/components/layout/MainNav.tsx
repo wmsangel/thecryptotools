@@ -42,7 +42,7 @@ export function MainNav({ categories }: { categories: Cat[] }) {
     },
     {
       label: "Markets",
-      match: ["/calendar", "/unlocks", "/investment-calculator", "/dca", "/fear-and-greed-index", "/bitcoin-rainbow-chart", "/pi-cycle-top-indicator", "/bitcoin-stock-to-flow"],
+      match: ["/calendar", "/unlocks", "/investment-calculator", "/grid-trading-backtest", "/dca", "/fear-and-greed-index", "/bitcoin-rainbow-chart", "/pi-cycle-top-indicator", "/bitcoin-stock-to-flow"],
       items: [
         { href: "/fear-and-greed-index", label: "Fear & Greed Index", icon: "😱" },
         { href: "/bitcoin-rainbow-chart", label: "Bitcoin Rainbow Chart", icon: "🌈" },
@@ -50,6 +50,7 @@ export function MainNav({ categories }: { categories: Cat[] }) {
         { href: "/bitcoin-stock-to-flow", label: "Stock-to-Flow", icon: "⛏️" },
         { href: "/dca", label: "DCA strategy lab", icon: "🧪" },
         { href: "/investment-calculator", label: "What if? (backtest)", icon: "⏳" },
+        { href: "/grid-trading-backtest", label: "Grid bot backtest", icon: "🤖" },
         { href: "/calendar", label: "Crypto calendar", icon: "🗓️" },
         { href: "/unlocks", label: "Token unlocks", icon: "🔓" },
       ],

@@ -354,6 +354,7 @@ async function main() {
     ["bitcoin-rainbow-chart", "Bitcoin indicator"],
     ["pi-cycle-top-indicator", "Bitcoin indicator"],
     ["bitcoin-stock-to-flow", "Bitcoin indicator"],
+    ["grid-trading-backtest", "Backtest"],
     ["widgets", "Embeddable widgets"],
     ["exchanges", "Platforms"],
     ["dca", "DCA strategy lab"],

@@ -156,6 +156,11 @@ const guide: Guide = {
     },
     { type: "tool", slug: "liquidation-calculator" },
 
+    {
+      type: "p",
+      text: "Before committing real money, test the exact range and grid count against years of real prices: the [grid bot backtest](/grid-trading-backtest) replays the strategy day by day and compares it to simply holding — the one comparison that decides whether a grid was worth running at all.",
+    },
+
     { type: "h2", text: "Where grid bots run" },
     {
       type: "p",
