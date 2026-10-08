@@ -38,7 +38,7 @@ const guide: Guide = {
     { type: "h2", text: "Step 1 — Gather every transaction" },
     {
       type: "p",
-      text: "Tax is computed on your whole history, not just this year, because the cost of what you sell was set when you bought it — sometimes years earlier. Export the full transaction history (usually a CSV) from every exchange and wallet you've ever used, not only the active ones. Missing an early buy doesn't just lose that row; it makes every later sale of that asset wrong, because the calculator can't find what the coins cost.",
+      text: "Tax is computed on your whole history, not just this year, because the cost of what you sell was set when you bought it — sometimes years earlier. Export the full transaction history (usually a CSV) from every exchange and wallet you've ever used, not only the active ones. If one of them only exports a PDF statement instead of a CSV, [turn the PDF into a spreadsheet](https://ocrsnip.com/) first so the full history imports cleanly. Missing an early buy doesn't just lose that row; it makes every later sale of that asset wrong, because the calculator can't find what the coins cost.",
     },
 
     { type: "h2", text: "Step 2 — Work out your cost basis" },
