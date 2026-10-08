@@ -6,7 +6,7 @@ const guide: Guide = {
   title: "Ethereum Staking Guide: Solo, Pooled, Exchange and Liquid Compared",
   description:
     "Four ways to stake ETH, with genuinely different economics and risks. What the yield is made of, what each route costs you, and how long your money is actually locked.",
-  readingMinutes: 9,
+  readingMinutes: 10,
   updatedAt: "2026-09-18",
   seo: {
     title: "Ethereum Staking: Pool vs Solo vs Exchange vs Liquid Compared",
@@ -20,6 +20,8 @@ const guide: Guide = {
       "solo staking ethereum",
       "liquid staking eth",
       "32 eth validator",
+      "ethereum staking yield vs l2 yield",
+      "eth restaking yield",
     ],
     description:
       "How Ethereum staking works: the 32 ETH validator minimum, where staking yield comes from, solo vs pooled vs exchange vs liquid staking, exit queues, slashing and how to calculate your real return.",
@@ -80,6 +82,12 @@ const guide: Guide = {
     { type: "p", text: "The bigger correction is denomination. ETH staking pays in ETH. A 3.5% yield on an asset that falls 30% is a 30% loss with a rounding error attached. Staking is a way to accumulate more of an asset you already intended to hold for years — it is not a hedge, an income strategy, or a reason to buy ETH you otherwise would not have bought." },
     { type: "tool", slug: "compound-interest-calculator" },
 
+    { type: "h2", text: "Staking yield vs L2 and restaking yield" },
+    { type: "p", text: "Native staking is the base rate of ETH — a few percent, paid in ETH, for the lowest risk on offer: solo staking puts no smart contract between you and the protocol, and no counterparty if you hold your own keys. Every yield quoted above it is higher because it adds a layer of risk, not because it is free money." },
+    { type: "p", text: "**Layer-2 yield is not staking at all.** Lending ETH or providing liquidity on [Arbitrum](/coins/arbitrum), Base or [Optimism](/coins/optimism) can pay more than staking, but it is DeFi: you take on smart-contract risk, and liquidity-pool returns carry impermanent loss and can reverse. L2s have no staking yield of their own in the Ethereum sense — they settle to Ethereum and inherit its security — so \"L2 yield\" means DeFi returns earned on an L2, a different risk category from securing the chain." },
+    { type: "p", text: "**Restaking** (EigenLayer and similar) sits in between: you take a liquid staking token that already earns the base rate and re-pledge it to secure additional services, stacking their rewards on top. The catch is stacked slashing — the same ETH now backs several systems at once, each able to penalise it — plus another smart-contract layer. Treat the extra yield as payment for extra risk, and size it accordingly." },
+    { type: "callout", text: "A useful rule: native staking is ETH's risk-free rate. If something pays more, find the added risk before you deposit — smart-contract exposure, a depeg, impermanent loss or stacked slashing. It is always there." },
+
     { type: "h2", text: "Which route fits" },
     { type: "ul", items: [
       "32+ ETH, comfortable with a Linux box and updates: solo stake. Best yield, best for the network, most work.",
@@ -94,6 +102,7 @@ const guide: Guide = {
     { q: "Can I lose ETH by staking?", a: "Slashing destroys a portion of the stake for provably malicious actions such as double-signing, and prolonged downtime causes small inactivity penalties. Neither happens to a correctly run validator. The larger real-world risks are custodial failure and smart-contract bugs, depending on the route you choose." },
     { q: "How long does it take to unstake ETH?", a: "Reward sweeps happen automatically every few days. A full exit joins a queue that is typically days but stretches when many validators leave at once. Liquid staking tokens sidestep the wait by letting you sell the receipt token on the open market instead." },
     { q: "Are ETH staking rewards taxed?", a: "In most jurisdictions staking rewards are income at the value on the day you gain control of them, and a later disposal is a separate capital gains event. Treatment varies by country — see our tax guides and confirm with a local professional." },
+    { q: "Is L2 or restaking yield better than staking?", a: "It is usually higher, but it is not the same thing. Native staking is ETH's base, lowest-risk rate. Layer-2 yield is DeFi — lending or liquidity on an L2 — and carries smart-contract and impermanent-loss risk, not a staking return. Restaking (EigenLayer and similar) stacks extra rewards on a liquid staking token in exchange for stacked slashing and another smart-contract layer. Any rate above native staking is paid for in added risk; decide whether that risk is one you want before chasing the number." },
   ],
 };
 
