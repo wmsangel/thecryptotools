@@ -25,6 +25,12 @@ export function OutboundTracker() {
       const target = event.target as Element | null;
       const link = target?.closest?.("a") as HTMLAnchorElement | null;
       if (!link) return;
+      // Internal spotlight promo (home-page rotating slot): its own event, so
+      // we can see which featured page the rotation actually sends people to.
+      if (link.dataset.spotlight) {
+        track("spotlight_click", { target: link.dataset.spotlight, page_path: window.location.pathname });
+        return;
+      }
       // Platform from the explicit attribute, else from a /go/<slug> href — so
       // markdown-rendered /go links in guides (no data-affiliate) are tracked too.
       let platform = link.dataset.affiliate;

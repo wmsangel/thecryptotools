@@ -12,6 +12,7 @@ import { ToolCard } from "@/components/ToolCard";
 import { JsonLd } from "@/components/JsonLd";
 import { OG_DEFAULT, collectionJsonLd } from "@/lib/seo";
 import { AdSlot, AffiliateBanner } from "@/components/ads/AdSlot";
+import { Spotlight } from "@/components/Spotlight";
 import { MyTools } from "@/components/MyTools";
 import { CoinCalcGrid } from "@/components/coins/CoinCalcGrid";
 import { featuredCoinCalculators } from "@/lib/coins/featured-pairs";
@@ -85,22 +86,8 @@ export default function HomePage() {
       </section>
 
       <div className="mx-auto max-w-content px-4">
-        {/* ---------- ANNOUNCEMENT: DCA strategy lab ---------- */}
-        <Link href="/dca" className="group mt-8 block overflow-hidden rounded-2xl border border-brand-500/40 hero-glow">
-          <div className="relative flex flex-col gap-4 p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
-            <div>
-              <span className="chip !px-3 !py-1 text-xs">🧪 Just launched</span>
-              <h2 className="mt-3 text-2xl font-extrabold tracking-tight sm:text-3xl">
-                Live <span className="text-gradient">DCA strategy lab</span> — real paper-trading results
-              </h2>
-              <p className="muted mt-2 max-w-2xl text-sm leading-relaxed sm:text-base">
-                Watch automated dollar-cost-averaging bots trade live on real prices (paper mode) — ROI, drawdown,
-                safety-order grids and every closed deal, updated continuously.
-              </p>
-            </div>
-            <span className="btn-primary btn-lg shrink-0 transition group-hover:translate-x-0.5">See it live →</span>
-          </div>
-        </Link>
+        {/* ---------- SPOTLIGHT: one of our own pages, rotating weekly ---------- */}
+        <Spotlight className="mt-8" />
 
         {/* Returning visitors land straight on what they used last; renders
             nothing at all for a first-time visitor. */}
