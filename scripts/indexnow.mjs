@@ -51,6 +51,11 @@ const MAX_URLS = 500;
 const dryRun = process.argv.includes("--dry-run");
 const baseline = process.argv.includes("--baseline");
 
+// Private/unlisted paths that must never be announced to search engines (the
+// internal roadmap vitrina lives under /roadmap/). They are noindex + robots-
+// disallowed too; this just keeps them out of the IndexNow ping and its state.
+const PRIVATE = [/^roadmap\//];
+
 /** Every route in out/, as a path with a trailing slash: "", "guides/foo/". */
 function currentRoutes() {
   const routes = new Set();
@@ -60,7 +65,8 @@ function currentRoutes() {
       if (statSync(full).isDirectory()) walk(full);
       else if (name === "index.html") {
         // "index.html" → "", "guides/foo/index.html" → "guides/foo/"
-        routes.add(relative(OUT, full).replace(/index\.html$/, ""));
+        const route = relative(OUT, full).replace(/index\.html$/, "");
+        if (!PRIVATE.some((re) => re.test(route))) routes.add(route);
       }
     }
   };
