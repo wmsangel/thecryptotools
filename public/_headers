@@ -19,6 +19,12 @@
   Strict-Transport-Security: max-age=31536000; includeSubDomains
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
 
+# --- Private roadmap dashboard: never index, never archive --------------------
+# Unlisted internal vitrina at an unguessable path; belt-and-suspenders with the
+# in-page meta robots and the robots.txt Disallow.
+/roadmap/*
+  X-Robots-Tag: noindex, nofollow, noarchive
+
 # --- Content-hashed build output: cache a year, immutable ---------------------
 # webpack-<hash>.js / <hash>.css can never change without changing their name.
 /_next/static/*

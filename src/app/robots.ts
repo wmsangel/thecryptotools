@@ -69,7 +69,8 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/"],
+        // /roadmap/ — private internal dashboard (unlisted, unguessable path).
+        disallow: ["/api/", "/roadmap/"],
       },
       ...AI_SEARCH.map((userAgent) => ({ userAgent, allow: "/" })),
       ...TRAINING_ONLY.map((userAgent) => ({ userAgent, disallow: "/" })),

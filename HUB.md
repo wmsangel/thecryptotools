@@ -1,6 +1,6 @@
 # TheCryptoTools — хаб
 
-Витрина: https://claude.ai/artifact/FtKLTMmavU5LvG1vJX1MAa
+Витрина: https://thecryptotools.com/roadmap/e453ac4fcb/
 Акцент: #3a5bb0
 
 ## Документы
