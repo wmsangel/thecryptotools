@@ -19,10 +19,12 @@ import { platforms, type Platform, type PlatformCategoryId } from "./platforms";
 export function isReferralLink(url: string): boolean {
   // Common affiliate params/paths across networks: ref/r (many), invite/join
   // (exchanges), via (Rewardful/Koinly), aff (generic), fpr (FirstPromoter),
-  // partner, atid (Cryptohopper), subid (Impact/Sovrn redirectors). Also the
-  // owner's own click-tracker hosts, which cloak an approved offer behind a
-  // short code with no tell-tale param (add new tracker domains here).
-  return /(?:[?&/](?:ref|r|invite|join|via|aff|fpr|partner|atid|subid)=?)|invite\.|\/join\/|referral|o10o\.xyz|gettracker\.net/i.test(url);
+  // partner, atid (Cryptohopper), subid (Impact/Sovrn redirectors). Also whole
+  // referral hosts/paths with no tell-tale query param: refr.cc (Trezor's
+  // ReferralCandy), promote.mexc.com/b/ (MEXC), and the owner's own click-
+  // tracker hosts that cloak an approved offer behind a short code (add new
+  // tracker domains/paths here).
+  return /(?:[?&/](?:ref|r|invite|join|via|aff|fpr|partner|atid|subid)=?)|invite\.|\/join\/|referral|refr\.cc|promote\.mexc\.com\/b\/|o10o\.xyz|gettracker\.net/i.test(url);
 }
 
 export function earningExchanges(): Platform[] {
