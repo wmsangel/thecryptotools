@@ -1,45 +1,49 @@
 # thecryptotools.com — план
 
 Источник правды по задачам. Идеи не в работе — `research/IDEAS.md`; монетизация — `research/ADVERTISING.md`.
-Витрина (приватный артефакт, запинен): https://claude.ai/artifact/FtKLTMmavU5LvG1vJX1MAa — обновлять на ТОТ ЖЕ URL после каждой задачи.
+Витрина (приватный URL на Cloudflare): https://thecryptotools.com/roadmap/e453ac4fcb/ — обновлять вместе с планом (`npm run deploy:pages`). Запинённый артефакт-зеркало: https://claude.ai/artifact/FtKLTMmavU5LvG1vJX1MAa.
 
 ## Очередь
 Порядок = приоритет (не дата).
 
-1. **Починить распознавание реф-ссылок Trezor и MEXC** — `isReferralLink` не ловит `trezorio.refr.cc` и `promote.mexc.com/b/`; две рабочие реф-ссылки не зарабатывают в CTA. Одна строка регэкспа. `деньги`
-2. **Собрать fee-compare бирж/кошельков с фильтрами** — расширить `/exchanges` в сравнение комиссий с фильтрами (модель Cryptotesters); прямой партнёрский лид-ген. `деньги`
+1. **Собрать fee-compare бирж/кошельков с фильтрами** — расширить `/exchanges` в сравнение комиссий с фильтрами (модель Cryptotesters); каждая строка → наш `/go/<биржа>` = прямой партнёрский лид-ген. Данные: курируемый датированный снапшот maker/taker по топ-биржам («as of \<дата\>» + ссылка на живой тариф), НЕ выдумывать. `деньги`
+2. **Почистить slug-коллизии DCA `-x-x`** — фид уже плодит нестабильные URL и почти-дубли (`…-scaling-x-x`, видно в IndexNow 10-12). Включить отличающий параметр/короткий хэш в slug (`src/lib/dca/labels.ts`), 301 со старых. Защищает от тонкого контента и «переезда» URL на другую стратегию. `баг`
 3. **Собрать лендинг «crypto tax calculator» + страновой угол** — free-калькулятор-лендинг как лид-магнит к CSV-tax-тулу (топ-канал Koinly/CoinLedger); 30 страновых tax-гайдов уже есть. `деньги`
-4. **Добить хвосты DCA-лаба** — сортируемая таблица «across coins» на уровне лаба + цена/конфиг в CTA «Set it up». `контент`
-5. **Перепроверить trailing-slash canonical на coin×tool** — без слэша → 301 на слэш, sitemap/внутр. ссылки только со слэшем; переотправить sitemap в GSC (не скачивался 19 дней). `индексация`
+4. **Добить DCA-лаб** — авто-описания на ~35 конфиг-страниц (абзац из данных: best/worst-монета, агрессивность, циклы), сортируемая таблица «across coins» на уровне лаба, цена/конфиг в CTA «Set it up». `контент`
+5. **Батч утилитарных калькуляторов** — bridge fee, NFT mint cost, HODL-vs-Sell, stablecoin interest. Дешёвые вечнозелёные SEO-крючки под конкретные фразы, каждый несёт партнёрский CTA. `контент`
+6. **Altcoin Season Index** — простой self-update виджет (как Fear&Greed), вечнозелёный, шарабельный, магнит внутренней перелинковки. `контент`
+7. **Добить покрытие GA4-событий** — вывести `spotlight_click` в дневной отчёт + DCA-события (`dca_strategy_view`/`dca_exchange_click`/`dca_setup_click`) + навигация (`search`/`category_filter`/`guide_scroll`). Видимость монетизации и спроса. `инфра`
+8. **Понизить Cache-TTL для `/sitemap.xml`** — правило в `public/_headers` (`max-age=300, must-revalidate`); edge Cloudflare отдаёт устаревший sitemap после деплоя. Мелко, но убирает «старый sitemap». `инфра`
+9. **Перепроверить trailing-slash canonical на coin×tool** — без слэша → 301 на слэш, sitemap/внутр. ссылки только со слэшем; переотправить sitemap в GSC. `индексация`
+10. **ETF-flows / crypto-treasuries трекеры** — трендовые темы, мало конкуренции среди тул-сайтов. ⚠️ Нужен надёжный бесплатный источник данных (притоки ETF / компании с BTC) — проверить ДО старта; без источника не делаем (не фабрикуем). `контент`
 
 ## Сделано
 За ~2 недели, свежее сверху.
-- Партнёрки Crypto.com + ExpressVPN (Indoleads CPA) вписаны; ссылки переключены на трекер владельца (o10o.xyz / gettracker.net) — 2026-10-09 `a717a1c`
+- Распознавание реф-ссылок Trezor (refr.cc) и MEXC (promote.mexc.com/b/) — две скрытые реф-ссылки заработали в CTA — 2026-10-12 `f32a7a4`
+- Витрина вынесена на Cloudflare (приватный путь, noindex) + корневой `HUB.md` для сетевого пульта — 2026-10-09/12 `f3cb183`
+- Доки PLAN/IDEAS/ADVERTISING приведены к сетевому канону; витрина в графитовом стиле — 2026-10-09 `7997e44`
+- Самоописание проекта для сети `research/SELF-DESCRIPTION.md` — 2026-10-12
+- Партнёрки Crypto.com + ExpressVPN (Indoleads CPA); ссылки на трекер владельца — 2026-10-09 `a717a1c`
 - Реестр рекламы `research/ADVERTISING.md` — полный инвентарь офферов/сети/nofollow — 2026-10-09 `fec947e`
-- 2-й OCRSnip do-follow кросс-линк в гайде how-to-do-your-crypto-taxes — 2026-10-08 `3bac030`
-- Spotlight — ротационный внутренний промо на главной (10 продуктов, смена по неделям, GA `spotlight_click`) — 2026-10-08 `664169d`
-- Стейкинг: секция «staking yield vs L2/restaking» в eth-гайде (кластер уже зрелый — 4 гайда + 33 per-coin) — 2026-10-08 `894bf43`
+- 2-й OCRSnip do-follow кросс-линк в гайде по крипто-налогам — 2026-10-08 `3bac030`
+- Spotlight — ротационный внутренний промо на главной (10 продуктов, по неделям) — 2026-10-08 `664169d`
+- Стейкинг: секция «staking yield vs L2/restaking» в ETH-гайде — 2026-10-08 `894bf43`
 - Grid бэктест на истории `/grid-trading-backtest/` + сравнение с buy-and-hold — 2026-10-08 `2b46e9a`
-- Бот-CTA: grid/dca-калькуляторы → биржи-с-ботами (Bitget/Bybit/Binance), +Pionex в каталог — 2026-10-08 `3b98811`
-- Контекстные кросс-ссылки Tier 1: OCRSnip + CostTrek (do-follow, в теле) — 2026-10-08 `b435803`
-- Партнёрки API-аудит (Admitad+Indoleads) + TradingView CPA — 2026-10-08 `2cba8ce`
-- Крипто-глоссарий `/glossary/` (31 термин, 53 внутр. ссылки, DefinedTermSet) — 2026-10-06
-- Trailing-slash: освежён lastmod coin×tool (378 URL → 09-13+) — 2026-10-06
-- GA4 в дневной отчёт: affiliate_click + tool_used + 4 custom dimensions — 2026-10-05/06
-- DCA-страницы: LIVE/плитки/сортировка/авто-описания/Dataset — 2026-10-05
-- Индикатор-чарты: Pi Cycle Top + Stock-to-Flow + Rainbow — 2026-10-01
-- Fear & Greed Index `/fear-and-greed-index/` — 2026-10-01
+- Бот-CTA: grid/dca-калькуляторы → биржи-с-ботами (Bitget/Bybit/Binance), +Pionex — 2026-10-08 `3b98811`
+- Контекстные кросс-ссылки Tier 1: OCRSnip + CostTrek (do-follow) — 2026-10-08 `b435803`
+- Крипто-глоссарий `/glossary/` (31 термин, 53 внутр. ссылки) — 2026-10-06
 
 ## Заметки
 
-**Стратегия.** Продвижение — только органика; платёжные рельсы ограничены (ИП КГ). **Bing — наш канал кликов** (fake-wallet-simulator, стейкинг-кластер на page-1). **Google: потолок = позиция/авторитет**, беклинки — рычаг владельца; с 2026-08-19 Google показывает почти только главную (доверие/качество, не техника). Монетизация: партнёрки + house-ads (AdSense на паузе — включится, слоты сами отдадут платную рекламу). Тонкие страницы не плодим (coin×tool на паузе).
+**Стратегия.** Продвижение — только органика; платёжные рельсы ограничены (ИП КГ). **Bing — наш канал кликов**; Google: потолок = позиция/авторитет, беклинки — рычаг владельца (с 2026-08-19 показывает почти только главную). Монетизация: партнёрки + house-ads (AdSense на паузе). Тонкие страницы не плодим. Приоритеты: (1) деньги/партнёрки, (2) защита рейтингов от тонкого контента, (3) новые вечнозелёные крючки, (4) видимость через GA4.
 
 **Паркинг — сторона владельца (не наши запуски):**
-- **Беклинки / outreach** — реальный потолок Google; linkbait готов (research-студии correlation 0.80 / seasonality / drawdowns / unlocks) — шарить в Reddit/HN/X/журналистам.
-- **AdSense** NEEDS_ATTENTION — наша сторона готова (ads.txt, verification, Consent Mode, обязательные страницы). Открыть карточку «Требует внимания» в кабинете; как станет готов — `NEXT_PUBLIC_ENABLE_ADS=true` + ad-юниты (house-ads уступят).
-- **GA4** — пометить conversions: `affiliate_click`, `spotlight_click`, `tax_report_export`, `dca_exchange_click`.
-- **Cloudflare** — выключить Early Hints (засоряет 5xx) + удалить хвосты cPanel DNS (webdisk./cpanel./mail.).
-- **Прямые реф-программы без ссылки** (подать → прислать): Coinbase, Gemini, Pionex, Tangem, CoinTracker, TokenTax, 3Commas, Nexo, Wirex. Детали — `research/ADVERTISING.md` §3.
+- **Беклинки / outreach** — реальный потолок Google; linkbait готов (research-студии correlation/seasonality/drawdowns/unlocks) — шарить в Reddit/HN/X/журналистам.
+- **AdSense** NEEDS_ATTENTION — наша сторона готова; открыть карточку «Требует внимания» в кабинете; как станет готов — `NEXT_PUBLIC_ENABLE_ADS=true` + ad-юниты.
+- **GA4** — пометить conversions: `affiliate_click`, `spotlight_click`, `tax_report_export`, `dca_exchange_click`. Завести custom dimension `target` (для разбивки spotlight).
+- **Cloudflare** — выключить Early Hints + удалить хвосты cPanel DNS.
+- **Прямые реф-программы без ссылки** (подать → прислать): Coinbase, Gemini, Pionex, Tangem, CoinTracker, TokenTax, 3Commas, Nexo, Wirex. См. `research/ADVERTISING.md` §3.
+- **izn.dca / VPS** — если бот гоняет >35 конфигов, расширить `push_status.py`, чтобы новые доходили до сайта.
 - **Платёжные рельсы** (Paddle/LemonSqueezy на ИП КГ) — проверить ДО любого платного продукта.
 
 **Данные:** GSC/Bing/GA4 — `~/Sites/izn.project.stats/context/thecryptotools.com.md`. Память — `cryptotoolkit-*`.

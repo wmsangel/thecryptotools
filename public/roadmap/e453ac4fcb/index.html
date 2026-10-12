@@ -84,7 +84,7 @@ footer{margin-top:46px;padding-top:18px;border-top:1px solid var(--line);color:v
 <body>
 <div class="wrap">
   <header>
-    <span class="kicker">Дорожная карта · обновлено 2026-10-09</span>
+    <span class="kicker">Дорожная карта · обновлено 2026-10-12</span>
     <h1>TheCryptoTools</h1>
     <p class="sub">69+ бесплатных крипто-калькуляторов, данные и утилиты. Эта страница — живой план поверх <code>research/PLAN.md</code>: что в очереди, что сделано, чем монетизируем.</p>
   </header>
@@ -92,61 +92,81 @@ footer{margin-top:46px;padding-top:18px;border-top:1px solid var(--line);color:v
   <div class="tiles">
     <div class="tile"><span class="n">33</span><span class="c">визитов за 7 дней (GA4)</span></div>
     <div class="tile"><span class="n">285<span style="color:var(--muted)">/773</span></span><span class="c">страниц в поиске</span></div>
-    <div class="tile"><span class="n accent">5</span><span class="c">задач в очереди</span></div>
+    <div class="tile"><span class="n accent">10</span><span class="c">задач в очереди</span></div>
     <div class="tile"><span class="n">38</span><span class="c">кликов из поиска (Bing, 7д)</span></div>
   </div>
 
   <section>
-    <div class="s-head"><h2>Очередь</h2><span class="count">по приоритету · 5</span></div>
+    <div class="s-head"><h2>Очередь</h2><span class="count">по приоритету · 10</span></div>
     <div class="q"><span class="idx">01</span><div>
-      <div class="t">Починить распознавание реф-ссылок Trezor и MEXC</div>
-      <div class="d">isReferralLink не ловит trezorio.refr.cc и promote.mexc.com/b/ — две рабочие реф-ссылки не зарабатывают в CTA. Одна строка регэкспа.</div>
+      <div class="t">Собрать fee-compare бирж/кошельков с фильтрами</div>
+      <div class="d">Расширить /exchanges в сравнение комиссий; каждая строка → /go = прямой лид-ген. Данные — датированный снапшот maker/taker, не выдумывать.</div>
       <span class="tag">деньги</span></div></div>
     <div class="q"><span class="idx">02</span><div>
-      <div class="t">Собрать fee-compare бирж/кошельков с фильтрами</div>
-      <div class="d">Расширить /exchanges в сравнение комиссий с фильтрами (модель Cryptotesters) — прямой партнёрский лид-ген.</div>
-      <span class="tag">деньги</span></div></div>
+      <div class="t">Почистить slug-коллизии DCA «-x-x»</div>
+      <div class="d">Фид плодит нестабильные URL и почти-дубли. Отличающий параметр/хэш в slug (labels.ts) + 301 со старых. Защита от тонкого контента.</div>
+      <span class="tag">баг</span></div></div>
     <div class="q"><span class="idx">03</span><div>
       <div class="t">Лендинг «crypto tax calculator» + страновой угол</div>
       <div class="d">Free-калькулятор-лендинг как лид-магнит к CSV-tax-тулу (топ-канал Koinly/CoinLedger). 30 страновых tax-гайдов уже есть.</div>
       <span class="tag">деньги</span></div></div>
     <div class="q"><span class="idx">04</span><div>
-      <div class="t">Добить хвосты DCA-лаба</div>
-      <div class="d">Сортируемая таблица «across coins» на уровне лаба + цена/конфиг в CTA «Set it up».</div>
+      <div class="t">Добить DCA-лаб</div>
+      <div class="d">Авто-описания на ~35 конфиг-страниц (из данных), сортируемая таблица «across coins», цена/конфиг в CTA «Set it up».</div>
       <span class="tag">контент</span></div></div>
     <div class="q"><span class="idx">05</span><div>
+      <div class="t">Батч утилитарных калькуляторов</div>
+      <div class="d">bridge fee, NFT mint cost, HODL-vs-Sell, stablecoin interest — дешёвые вечнозелёные SEO-крючки, каждый несёт партнёрский CTA.</div>
+      <span class="tag">контент</span></div></div>
+    <div class="q"><span class="idx">06</span><div>
+      <div class="t">Altcoin Season Index</div>
+      <div class="d">Простой self-update виджет (как Fear&amp;Greed) — вечнозелёный, шарабельный, магнит внутренней перелинковки.</div>
+      <span class="tag">контент</span></div></div>
+    <div class="q"><span class="idx">07</span><div>
+      <div class="t">Добить покрытие GA4-событий</div>
+      <div class="d">spotlight_click в дневной отчёт + DCA-события (view/exchange/setup) + навигация (search/category/guide_scroll). Видимость монетизации и спроса.</div>
+      <span class="tag">инфра</span></div></div>
+    <div class="q"><span class="idx">08</span><div>
+      <div class="t">Понизить Cache-TTL для /sitemap.xml</div>
+      <div class="d">Правило в public/_headers (max-age=300) — edge Cloudflare отдаёт устаревший sitemap после деплоя. Быстро.</div>
+      <span class="tag">инфра</span></div></div>
+    <div class="q"><span class="idx">09</span><div>
       <div class="t">Перепроверить trailing-slash canonical на coin×tool</div>
       <div class="d">Без слэша → 301 на слэш, sitemap/внутр. ссылки только со слэшем; переотправить sitemap в GSC.</div>
       <span class="tag">индексация</span></div></div>
+    <div class="q"><span class="idx">10</span><div>
+      <div class="t">ETF-flows / crypto-treasuries трекеры</div>
+      <div class="d">Трендово, мало конкуренции. ⚠️ Нужен надёжный бесплатный источник данных — проверить ДО старта; без него не делаем.</div>
+      <span class="tag">контент</span></div></div>
   </section>
 
   <section>
     <div class="s-head"><h2>Сделано</h2><span class="count">за 2 недели</span></div>
     <ul class="done">
-      <li><span class="mk">✓</span><span>Партнёрки Crypto.com + ExpressVPN (Indoleads CPA) вписаны; ссылки на трекер владельца <span class="note">— 10-09</span></span></li>
-      <li><span class="mk">✓</span><span>Реестр рекламы <code>research/ADVERTISING.md</code> — полный инвентарь офферов/сети/nofollow <span class="note">— 10-09</span></span></li>
+      <li><span class="mk">✓</span><span>Распознавание реф-ссылок Trezor + MEXC — две скрытые реф-ссылки заработали в CTA <span class="note">— 10-12</span></span></li>
+      <li><span class="mk">✓</span><span>Витрина вынесена на Cloudflare (приватный путь, noindex) + корневой <code>HUB.md</code> для сетевого пульта <span class="note">— 10-12</span></span></li>
+      <li><span class="mk">✓</span><span>Самоописание проекта для сети <code>research/SELF-DESCRIPTION.md</code> <span class="note">— 10-12</span></span></li>
+      <li><span class="mk">✓</span><span>Доки PLAN/IDEAS/ADVERTISING к сетевому канону + графитовая витрина <span class="note">— 10-09</span></span></li>
+      <li><span class="mk">✓</span><span>Партнёрки Crypto.com + ExpressVPN (Indoleads CPA); ссылки на трекер владельца <span class="note">— 10-09</span></span></li>
+      <li><span class="mk">✓</span><span>Реестр рекламы <code>research/ADVERTISING.md</code> — полный инвентарь офферов/сети <span class="note">— 10-09</span></span></li>
       <li><span class="mk">✓</span><span>2-й OCRSnip do-follow кросс-линк в гайде по крипто-налогам <span class="note">— 10-08</span></span></li>
       <li><span class="mk">✓</span><span>Spotlight — ротационный внутренний промо на главной (10 продуктов, по неделям) <span class="note">— 10-08</span></span></li>
-      <li><span class="mk">✓</span><span>Стейкинг: секция «staking yield vs L2/restaking» в ETH-гайде <span class="note">— 10-08</span></span></li>
       <li><span class="mk">✓</span><span>Grid бэктест на истории <code>/grid-trading-backtest/</code> + сравнение с buy-and-hold <span class="note">— 10-08</span></span></li>
       <li><span class="mk">✓</span><span>Бот-CTA: grid/dca-калькуляторы → биржи-с-ботами (Bitget/Bybit/Binance), +Pionex <span class="note">— 10-08</span></span></li>
-      <li><span class="mk">✓</span><span>Контекстные кросс-ссылки Tier 1: OCRSnip + CostTrek (do-follow) <span class="note">— 10-08</span></span></li>
-      <li><span class="mk">✓</span><span>Партнёрки API-аудит (Admitad+Indoleads) + TradingView CPA <span class="note">— 10-08</span></span></li>
-      <li><span class="mk">✓</span><span>Крипто-глоссарий <code>/glossary/</code> — 31 термин, 53 внутр. ссылки <span class="note">— 10-06</span></span></li>
-      <li><span class="mk">✓</span><span>GA4 в дневной отчёт: affiliate_click + tool_used + 4 custom dimensions <span class="note">— 10-05</span></span></li>
-      <li><span class="mk">✓</span><span>Индикатор-чарты (Pi Cycle / Stock-to-Flow / Rainbow) + Fear &amp; Greed Index <span class="note">— 10-01</span></span></li>
+      <li><span class="mk">✓</span><span>Стейкинг: секция «staking yield vs L2/restaking» в ETH-гайде <span class="note">— 10-08</span></span></li>
+      <li><span class="mk">✓</span><span>Контекстные кросс-ссылки Tier 1 (OCRSnip + CostTrek) + Крипто-глоссарий <span class="note">— 10-06/08</span></span></li>
     </ul>
   </section>
 
   <section>
     <div class="s-head"><h2>Идеи</h2><span class="count">инбокс · не в работе</span></div>
     <ul class="ideas">
-      <li><span class="bx"></span><span>ETF-flows трекер <span class="note">— трендово, мало конкуренции среди тул-сайтов</span></span></li>
-      <li><span class="bx"></span><span>Altcoin Season Index <span class="note">— простой вечнозелёный виджет</span></span></li>
-      <li><span class="bx"></span><span>Crypto-treasuries трекер <span class="note">— компании с BTC на балансе, горячая тема</span></span></li>
-      <li><span class="bx"></span><span>Уникальные описания на ~35 DCA-конфиг-страниц <span class="note">— авто из данных и/или тексты бот-чата</span></span></li>
-      <li><span class="bx"></span><span>Утилитарные калькуляторы: bridge fee, NFT mint, HODL-vs-Sell <span class="note">— дешёвые SEO-победы</span></span></li>
-      <li><span class="bx"></span><span>Понизить Cache-TTL для /sitemap.xml <span class="note">— edge отдаёт устаревший sitemap</span></span></li>
+      <li><span class="bx"></span><span>Multi-coin halving-countdown + список аирдропов <span class="note">— средний спрос, после очереди</span></span></li>
+      <li><span class="bx"></span><span>Пер-коиновые майнинг-калькуляторы <span class="note">— длинный хвост, осторожно с тонким контентом</span></span></li>
+      <li><span class="bx"></span><span>Глоссарий: доп. термины + per-term страницы <span class="note">— масштабируемый контент-SEO, ниже</span></span></li>
+      <li><span class="bx"></span><span>MVRV-индикатор <span class="note">— заблокировано: нет бесплатного on-chain источника</span></span></li>
+      <li><span class="bx"></span><span>Risk-checkers / price-prediction <span class="note">— не берём: репутация + AdSense-риск</span></span></li>
+      <li><span class="bx"></span><span>Кросс-ссылки Tier 2 (CalcLumen/izntools/testsweep) <span class="note">— низкая ценность / каннибализация</span></span></li>
     </ul>
   </section>
 
