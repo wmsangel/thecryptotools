@@ -24,7 +24,7 @@ export function isReferralLink(url: string): boolean {
   // ReferralCandy), promote.mexc.com/b/ (MEXC), and the owner's own click-
   // tracker hosts that cloak an approved offer behind a short code (add new
   // tracker domains/paths here).
-  return /(?:[?&/](?:ref|r|invite|join|via|aff|fpr|partner|atid|subid)=?)|invite\.|\/join\/|referral|refr\.cc|promote\.mexc\.com\/b\/|o10o\.xyz|gettracker\.net/i.test(url);
+  return /(?:[?&/](?:ref|r|invite|join|via|aff|fpr|partner|atid|subid)=?)|invite\.|\/join\/|referral|refr\.cc|promote\.mexc\.com\/b\/|o10o\.xyz|i05o\.xyz|gettracker\.net/i.test(url);
 }
 
 export function earningExchanges(): Platform[] {

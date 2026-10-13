@@ -412,8 +412,9 @@ export const platforms: Platform[] = [
       "TradingView is the most widely-used charting platform, with advanced indicators, drawing tools, alerts and a large community of ideas.",
     highlights: ["Powerful charts & indicators", "Price alerts", "Huge community scripts"],
     bonus: "Advanced charts, indicators and price alerts for every trader",
-    // Indoleads CPA (approved) — 90-day cookie, pays real commission per paid plan.
-    url: "https://www.tradingview.com/?aff_id=119097&aff_sub=thecryptotools",
+    // Indoleads CPA — proper tracking link generated in the cabinet for the
+    // thecryptotools.com source (90-day cookie). Was a raw aff_id link before.
+    url: "https://i05o.xyz/6acde4c53d049",
   },
   {
     slug: "3commas",
