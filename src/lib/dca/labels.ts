@@ -92,6 +92,18 @@ export interface StrategyGroup {
   avgHours: number | null;
 }
 
+/** Короткий детерминированный хэш (FNV-1a → base36) для различения конфигов,
+ *  чьи базовые slug совпали. Зависит ТОЛЬКО от identity конфига (strategyKey),
+ *  поэтому slug стабилен при любой перестановке фида. */
+function shortHash(s: string): string {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 0x01000193);
+  }
+  return (h >>> 0).toString(36).slice(0, 5);
+}
+
 /** Сгруппировать варианты в стратегии (одна стратегия = много монет). */
 export function buildGroups(all: Variant[]): StrategyGroup[] {
   const m = new Map<string, Variant[]>();
@@ -100,11 +112,23 @@ export function buildGroups(all: Variant[]): StrategyGroup[] {
     const arr = m.get(k);
     if (arr) arr.push(v); else m.set(k, [v]);
   }
+  const entries = [...m.values()];
+  // Сколько конфигов дают каждый базовый slug — чтобы отличить коллизии.
+  const baseCount = new Map<string, number>();
+  for (const variants of entries) {
+    const b = strategySlug(variants[0]);
+    baseCount.set(b, (baseCount.get(b) ?? 0) + 1);
+  }
   const seen = new Set<string>();
-  return [...m.values()].map((variants) => {
+  return entries.map((variants) => {
     const rep = variants[0];
-    let slug = strategySlug(rep);
-    while (seen.has(slug)) slug += "-x";
+    const base = strategySlug(rep);
+    // Коллизия базового slug → стабильный хэш identity конфига (не order-зависимый
+    // "-x"). Уникальный базовый slug остаётся как есть.
+    let slug = (baseCount.get(base) ?? 0) > 1 ? `${base}-${shortHash(strategyKey(rep))}` : base;
+    // Страховка от (крайне маловероятной) коллизии самих хэшей — детерминирована.
+    let n = 2;
+    while (seen.has(slug)) slug = `${base}-${shortHash(strategyKey(rep))}-${n++}`;
     seen.add(slug);
     const rois = variants.map(roiPct).filter((x): x is number => x != null);
     const winDeals = variants.reduce((s, v) => s + (v.stats?.deals || 0), 0);

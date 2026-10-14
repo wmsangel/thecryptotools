@@ -47,6 +47,39 @@
 /go/expressvpn   https://gettracker.net/6ac88e36883aa  302
 /go/expressvpn/  https://gettracker.net/6ac88e36883aa  302
 
+# --- DCA slug stabilisation (2026-10-14) --------------------------------------
+# Old DCA config slugs collided and got order-unstable "-x" suffixes; they now
+# use a stable hash of the config (see src/lib/dca/labels.ts). The old slugs
+# (bare base + -x…) no longer exist — send them to the strategy hub so nothing
+# 404s. Exact rules for the bare base and level-1 -x (a hash is [a-z0-9]{5} with
+# no dash, so these never shadow a real slug); the -x-x* splat catches deeper
+# junk safely (a hash can never contain "-x-x").
+/dca/bounce-dca-grid-tp3-so8-c43-scaling          /dca/  301
+/dca/bounce-dca-grid-tp3-so8-c43-scaling/         /dca/  301
+/dca/bounce-dca-grid-tp3-so8-c43-scaling-x        /dca/  301
+/dca/bounce-dca-grid-tp3-so8-c43-scaling-x/       /dca/  301
+/dca/bounce-dca-grid-tp3-so8-c43-scaling-x-x*     /dca/  301
+/dca/classic-dca-grid-tp3-so8-c43-scaling         /dca/  301
+/dca/classic-dca-grid-tp3-so8-c43-scaling/        /dca/  301
+/dca/classic-dca-grid-tp3-so8-c43-scaling-x       /dca/  301
+/dca/classic-dca-grid-tp3-so8-c43-scaling-x/      /dca/  301
+/dca/classic-dca-grid-tp3-so8-c43-scaling-x-x*    /dca/  301
+/dca/time-filter-dca-grid-tp1-so8-c29-scaling     /dca/  301
+/dca/time-filter-dca-grid-tp1-so8-c29-scaling/    /dca/  301
+/dca/time-filter-dca-grid-tp1-so8-c29-scaling-x   /dca/  301
+/dca/time-filter-dca-grid-tp1-so8-c29-scaling-x/  /dca/  301
+/dca/time-filter-dca-grid-tp1-so8-c29-scaling-x-x*  /dca/  301
+/dca/trailing-dca-grid-tp3-so8-c43-scaling        /dca/  301
+/dca/trailing-dca-grid-tp3-so8-c43-scaling/       /dca/  301
+/dca/trailing-dca-grid-tp3-so8-c43-scaling-x      /dca/  301
+/dca/trailing-dca-grid-tp3-so8-c43-scaling-x/     /dca/  301
+/dca/trailing-dca-grid-tp3-so8-c43-scaling-x-x*   /dca/  301
+/dca/volume-spike-dca-grid-tp3-so8-c43-scaling    /dca/  301
+/dca/volume-spike-dca-grid-tp3-so8-c43-scaling/   /dca/  301
+/dca/volume-spike-dca-grid-tp3-so8-c43-scaling-x  /dca/  301
+/dca/volume-spike-dca-grid-tp3-so8-c43-scaling-x/  /dca/  301
+/dca/volume-spike-dca-grid-tp3-so8-c43-scaling-x-x*  /dca/  301
+
 # --- 404 ----------------------------------------------------------------------
 # No rule needed: Pages automatically serves /404.html for any unmatched path,
 # which is exactly what `ErrorDocument 404 /404.html` did on Apache.
