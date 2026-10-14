@@ -50,6 +50,7 @@ const guide: Guide = {
     { type: "h2", text: "Capital gains: short vs long term" },
     { type: "p", text: "A capital gain is your sale proceeds minus your cost basis (what you paid, including fees). Many countries tax assets held longer than a year at a lower long-term rate than those sold within a year. Holding period can meaningfully change your bill." },
     { type: "tool", slug: "crypto-tax-calculator" },
+    { type: "p", text: "In most countries your crypto gains are added to your other capital gains — from shares or property — and taxed together under one annual allowance and the same rates. To estimate the tax on those non-crypto gains, a general [capital gains tax calculator](https://calclumen.com/en/capital-gains-tax-calculator) does the arithmetic for shares and property." },
     { type: "h2", text: "Reducing your tax legally" },
     { type: "ul", items: [
       "Hold longer to qualify for lower long-term rates where they exist.",
