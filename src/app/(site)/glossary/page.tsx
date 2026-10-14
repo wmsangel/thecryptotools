@@ -6,6 +6,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { JsonLd } from "@/components/JsonLd";
 import { AdSlot } from "@/components/ads/AdSlot";
 import { renderInline } from "@/components/RichText";
+import { AmazonPicks } from "@/components/AmazonPicks";
 import { glossaryTerms, GLOSSARY_CATEGORIES } from "@/lib/glossary/terms";
 
 const PATH = "/glossary";
@@ -115,6 +116,10 @@ export default function GlossaryPage() {
             <Related href="/dca" title="Live DCA strategy lab" desc="See strategies run on the real market." />
           </div>
         </section>
+
+        <div className="max-w-3xl">
+          <AmazonPicks topic="books" placement="glossary" />
+        </div>
       </div>
     </>
   );

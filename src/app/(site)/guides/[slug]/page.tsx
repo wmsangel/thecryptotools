@@ -12,6 +12,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { renderInline } from "@/components/RichText";
 import { AdSlot } from "@/components/ads/AdSlot";
 import { GuideAffiliateCTA } from "@/components/guides/GuideAffiliateCTA";
+import { AmazonPicks } from "@/components/AmazonPicks";
 
 export const dynamicParams = false;
 
@@ -347,6 +348,7 @@ export default function GuidePage({ params }: { params: { slug: string } }) {
       </div>
 
       {guide.affiliate && <GuideAffiliateCTA kind={guide.affiliate} />}
+      {guide.amazon && <AmazonPicks topic={guide.amazon} placement={`guide-amazon-${guide.slug}`} />}
 
       {guide.faq && guide.faq.length > 0 && (
         <section className="mt-12">

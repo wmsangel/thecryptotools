@@ -3,6 +3,7 @@ import type { Guide } from "../types";
 const guide: Guide = {
   slug: "crypto-inheritance-plan",
   affiliate: "wallet",
+  amazon: "security",
   partOf: "crypto-wallet-security",
   title: "Crypto Inheritance: Making Sure Your Coins Outlive You",
   description:

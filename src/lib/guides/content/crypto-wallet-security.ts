@@ -10,6 +10,7 @@ import type { Guide } from "../types";
 const guide: Guide = {
   slug: "crypto-wallet-security",
   affiliate: "wallet",
+  amazon: "security",
   hubName: "Wallet Security",
   hubBacklinkEyebrow: "The full self-custody guide",
   title: "Crypto Wallet Security: The Complete Self-Custody Guide",

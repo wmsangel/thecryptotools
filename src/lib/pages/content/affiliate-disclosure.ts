@@ -30,6 +30,12 @@ export const affiliateDisclosure: StaticPage = {
       text: "You never pay more for using our link. In most cases the opposite is true: the referral link carries a fee discount or deposit bonus that the plain homepage does not.",
     },
 
+    { type: "h2", text: "Amazon Associates" },
+    {
+      type: "p",
+      text: `${site.name} is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon.com. As an Amazon Associate we earn from qualifying purchases — at no extra cost to you. We only point to books and key-safety gear that genuinely fit the topic; prices and availability are always shown on Amazon, never stated by us.`,
+    },
+
     { type: "h2", text: "How we keep it honest" },
     {
       type: "ul",

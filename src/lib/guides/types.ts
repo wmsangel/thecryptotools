@@ -107,6 +107,12 @@ export interface Guide {
    */
   affiliate?: GuideAffiliateKind;
   /**
+   * Optional Amazon Associates block rendered after the body: "books" or
+   * "security" gear. Inline union (not imported) to keep this subtree isolated,
+   * same reason as `affiliate` above.
+   */
+  amazon?: "books" | "security";
+  /**
    * Slug of a hub guide this one belongs to. Renders a link back to the hub at
    * the top and bottom of the page — the return leg of hub-and-spoke internal
    * linking, which is what makes a large guide set crawlable.
