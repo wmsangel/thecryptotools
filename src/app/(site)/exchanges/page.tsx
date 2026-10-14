@@ -10,6 +10,7 @@ import {
 import { JsonLd } from "@/components/JsonLd";
 import { AdSlot } from "@/components/ads/AdSlot";
 import { PlatformLogo } from "@/components/PlatformLogo";
+import { FeeCompare } from "@/components/FeeCompare";
 
 export const metadata: Metadata = {
   title: "Best Crypto Exchanges 2026 (+ Wallets & Tax Tools)",
@@ -19,6 +20,10 @@ export const metadata: Metadata = {
     "best crypto exchange 2026",
     "best crypto exchanges",
     "crypto exchanges compared",
+    "crypto exchange fees",
+    "crypto exchange fees compared",
+    "lowest fee crypto exchange",
+    "spot trading fees",
     "best crypto wallet 2026",
     "crypto tax software",
     "crypto trading tools",
@@ -82,6 +87,7 @@ export default function ExchangesPage() {
 
       {/* ---------- Jump nav ---------- */}
       <nav className="mb-10 flex flex-wrap gap-2" aria-label="Categories">
+        <a href="#fees" className="chip hover:text-brand-ink">💸 Spot fees</a>
         {sortedPlatformCategories.map((c) => (
           <a
             key={c.id}
@@ -92,6 +98,16 @@ export default function ExchangesPage() {
           </a>
         ))}
       </nav>
+
+      {/* ---------- Fee comparison ---------- */}
+      <section id="fees" className="mb-14 scroll-mt-28">
+        <h2 className="text-2xl font-extrabold tracking-tight sm:text-3xl">Spot fees compared</h2>
+        <p className="muted mt-1 mb-5 max-w-2xl text-sm">
+          Standard-tier spot maker and taker fees across the major exchanges, with the live schedule
+          one click away. Filter by what you need, sort by cost, and trade from the cheapest.
+        </p>
+        <FeeCompare />
+      </section>
 
       {/* ---------- Sections ---------- */}
       <div className="space-y-14">
