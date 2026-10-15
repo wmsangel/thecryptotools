@@ -52,3 +52,4 @@ service-account*.json
 # cf-stats local runtime (report + referrer/history state) — not code
 scripts/.cf-stats-state.json
 scripts/cf-report.html
+scripts/social/out/
