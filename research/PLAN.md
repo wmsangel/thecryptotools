@@ -17,6 +17,7 @@
 
 ## Сделано
 За ~2 недели, свежее сверху.
+- GA4-события: сетевой параметр `item` на каждом кастомном событии (централизованно в `track()`, без правки call-sites) + зарегистрирован как event-scoped custom dimension — 2026-10-15 `5bee15d`
 - Fee-compare: сравнение spot-комиссий на /exchanges (12 бирж, фильтры/сортировка, датировано, спорные → «see schedule», каждая строка → /go) — 2026-10-14 `83b1d53`
 - DCA slug-коллизии: стабильный хэш вместо order-зависимого `-x` (5 баз, classic — 16 конфигов); старые → 301 на /dca — 2026-10-14 `bc6b3e5`
 - Amazon Associates (`thecryptotools-20`): книги (/glossary) + гир безопасности (2 гайда), тег/дисклеймер/nofollow — 2026-10-14 `8949512`
@@ -42,7 +43,7 @@
 **Паркинг — сторона владельца (не наши запуски):**
 - **Беклинки / outreach** — реальный потолок Google; linkbait готов (research-студии correlation/seasonality/drawdowns/unlocks) — шарить в Reddit/HN/X/журналистам.
 - **AdSense** NEEDS_ATTENTION — наша сторона готова; открыть карточку «Требует внимания» в кабинете; как станет готов — `NEXT_PUBLIC_ENABLE_ADS=true` + ad-юниты.
-- **GA4** — пометить conversions: `affiliate_click`, `spotlight_click`, `tax_report_export`, `dca_exchange_click`. Завести custom dimension `target` (для разбивки spotlight).
+- **GA4** — пометить conversions: `affiliate_click`, `spotlight_click`, `tax_report_export`, `dca_exchange_click`. (Custom dimension — готово: `item` зеркалит primary-параметр каждого события, разбивка spotlight идёт по нему.)
 - **Cloudflare** — выключить Early Hints + удалить хвосты cPanel DNS.
 - **Прямые реф-программы без ссылки** (подать → прислать): Coinbase, Gemini, Pionex, Tangem, CoinTracker, TokenTax, 3Commas, Nexo, Wirex. См. `research/ADVERTISING.md` §3.
 - **izn.dca / VPS** — если бот гоняет >35 конфигов, расширить `push_status.py`, чтобы новые доходили до сайта.
