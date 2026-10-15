@@ -86,7 +86,7 @@ export function CorrelationExplorer({
   useEffect(() => {
     if (!matrix) return;
     const timer = setTimeout(() => {
-      track("correlation_view", { assets: matrix.symbols.length, years });
+      track("correlation_view", { item: "portfolio-correlation", assets: matrix.symbols.length, years });
     }, 1200);
     return () => clearTimeout(timer);
   }, [matrix, years]);

@@ -189,6 +189,7 @@ export function PortfolioApp({
     if (!result) return;
     const timer = setTimeout(() => {
       track("portfolio_run", {
+        item: "portfolio",
         assets: result.assets.length,
         rebalance: result.input.rebalance,
         contributions: result.input.monthlyContribution > 0,

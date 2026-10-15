@@ -25,6 +25,19 @@ const NAME_RE = /^[A-Za-z][A-Za-z0-9_]{0,39}$/;
 type ParamValue = string | number | boolean;
 
 /**
+ * Network convention: every custom event carries one primary param, `item`, so
+ * the central network system can build a "what exactly" breakdown uniformly
+ * across events. Rather than touch every call site, `track` mirrors the event's
+ * own primary param into `item` when the caller didn't set it explicitly — the
+ * first of these that is present wins. Pass `item` directly to override.
+ */
+const ITEM_SOURCES = [
+  "tool_slug", "platform", "target", "coin", "country",
+  "channel", "section", "category", "chain", "source",
+  "strategy", "method", "choice", "sort", "file", "kind", "action",
+] as const;
+
+/**
  * Send one GA4 event. Safe to call anywhere: no-ops during SSR, before gtag
  * loads, when the visitor blocks analytics, and when GA is not configured.
  */
@@ -33,7 +46,16 @@ export function track(name: string, params?: Record<string, ParamValue | undefin
   const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
   if (typeof gtag !== "function") return;
   if (!NAME_RE.test(name)) return;
-  gtag("event", name, params ? clean(params) : undefined);
+  let payload = params ? clean(params) : undefined;
+  if (payload && payload.item === undefined) {
+    for (const k of ITEM_SOURCES) {
+      if (payload[k] !== undefined) {
+        payload = { item: payload[k], ...payload };
+        break;
+      }
+    }
+  }
+  gtag("event", name, payload);
 }
 
 /**
