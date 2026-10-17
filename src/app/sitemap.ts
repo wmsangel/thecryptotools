@@ -11,6 +11,7 @@ import { pairSlug, validPairs } from "@/lib/compare/pairs";
 import { unlocksAsOf } from "@/lib/unlocks/meta";
 import { halvingsComputedAt } from "@/lib/events/halvings";
 import { getStrategyGroups } from "@/lib/dca/build-snapshot";
+import { countryCalculators } from "@/lib/tax-calculator/countries";
 
 /**
  * ============================================================================
@@ -108,6 +109,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: absoluteUrl("/exchanges"), changeFrequency: "weekly", priority: 0.8 },
     { url: absoluteUrl("/prices"), changeFrequency: "daily", priority: 0.8 },
     { url: absoluteUrl("/crypto-tax-report"), changeFrequency: "weekly", priority: 0.9 },
+    // Per-country tax calculator cluster. No honest single date for these, so
+    // lastModified is omitted (see the note above) rather than asserting today.
+    { url: absoluteUrl("/crypto-tax-calculator"), changeFrequency: "monthly", priority: 0.8 },
+    ...countryCalculators.map((c) => ({
+      url: absoluteUrl(`/crypto-tax-calculator/${c.meta.slug}`),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
     // Same reasoning as the tax report: the page is a client-side calculator
     // over the visitor's own file, so its HTML has no content date to claim.
     { url: absoluteUrl("/tax-loss-harvesting"), changeFrequency: "weekly", priority: 0.9 },

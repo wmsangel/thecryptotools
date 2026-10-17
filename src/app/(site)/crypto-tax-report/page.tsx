@@ -110,6 +110,11 @@ export default function CryptoTaxReportPage() {
             <span key={j.id} className="chip !px-2.5 !py-1">{j.flag} {j.name}</span>
           ))}
         </div>
+        <p className="muted mt-4 text-sm">
+          Just one sale to check?{" "}
+          <Link href="/crypto-tax-calculator" className="underline">Use a country tax calculator</Link>{" "}
+          — pre-set with the rules for your country.
+        </p>
       </header>
 
       <TaxReportApp />
