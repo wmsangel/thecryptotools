@@ -1,0 +1,31 @@
+## TheCryptoTools
+- **URL:** https://thecryptotools.com
+- **Languages:** en (English only; the site serves no other locale)
+- **One-liner:** A free suite of crypto calculators, live market data and backtests — everything runs in your browser, no signup.
+- **What it is:** TheCryptoTools is a static, config-driven site bundling 69+ crypto calculators (profit, position size, liquidation, DCA, grid, staking, tax and more) with live prices, data/indicator pages, historical backtests, 75 guides and a glossary. Most tools compute entirely client-side, so there are no accounts and nothing is uploaded to a server. It is free to use; the only monetisation is affiliate links and ad slots (Google ads are configured but currently not serving).
+- **Who it's for:** Retail crypto traders and investors who need a quick, no-signup calculation or data check — sizing a position, working out profit or tax, planning a DCA or grid bot, researching a coin, or gauging market sentiment — without creating an account or handing their data to a site.
+- **What you can actually do (features):**
+  - Run 69+ calculators: profit, position size, liquidation, leverage, futures PnL, funding rate, risk/reward, DCA, DCA-bot, grid, win-rate, staking rewards, yield-farming APY, compound interest, arbitrage, average entry, market-cap, fake-wallet generator, and more.
+  - Generate a crypto capital-gains tax report from an exchange CSV for 12 countries (US, UK, Germany, Australia, Canada, Ireland, South Africa, Portugal, Poland, New Zealand, Spain, India), with the correct cost-basis method applied (FIFO, adjusted cost base, UK Section 104 pooling) — all in the browser.
+  - Backtest strategies on real daily price history across 60+ coins: a lump-sum / DCA "what if you invested" calculator and a grid-bot backtest that compares against simply holding.
+  - Analyse a portfolio in the browser — allocation, correlation and historical drawdowns — plus tax-loss harvesting and cost-basis-method comparison tools.
+  - Read data/indicator pages built from the site's own price history: Fear & Greed Index (gauge + ~180 days), Bitcoin Rainbow Chart, Pi Cycle Top, Stock-to-Flow — self-updating, with methodology shown.
+  - Watch a DCA strategy lab: automated dollar-cost-averaging strategies running in paper-trading (simulated) mode on real prices, with ROI, drawdown and closed deals.
+  - Track upcoming token unlocks, a crypto calendar and live prices; embed calculators as widgets.
+  - Learn from 75 guides, a 30+ term glossary, and per-coin pages (each coin paired with the relevant calculators).
+- **Why it stands out:** Nearly everything runs 100% in the browser — the tax report reads your CSV locally, computes there, and discards it when you close the tab; nothing is sent to a server. No signup, free to use. The tools are deliberately honest rather than flattering: the grid calculator tells you when a configuration loses money on every trade, and the tax report lists what it does NOT model for each country. Data pages are rebuilt from the site's own dated price history, not screenshots.
+- **Access:** Free, no signup, no paywall and no premium tier. There is no login or user account anywhere. (A "set it up for me" contact exists for the DCA lab, but that is a contact option, not a paid product on the site.)
+- **Privacy / data:** No server and no database — it is a set of static files. Calculators and the tax report run entirely in the visitor's browser, so transaction/CSV data never leaves the device. Live prices are fetched client-side from public APIs. Analytics are cookieless (GA4 with Consent Mode).
+- **Best use cases (examples):**
+  - Work out your crypto capital-gains tax from an exchange CSV for your country without uploading your transactions anywhere.
+  - Plan a grid or DCA bot, check whether the settings can actually make money after fees, then backtest that configuration on real history versus just holding.
+  - Do fast pre-trade math — position size, liquidation price, leverage, profit — before placing an order.
+  - Check market sentiment with the Fear & Greed Index, or see where Bitcoin sits in its cycle on the Rainbow / Pi Cycle / Stock-to-Flow charts.
+- **Key pages / entry points:**
+  - https://thecryptotools.com/tools (all calculators)
+  - https://thecryptotools.com/crypto-tax-report (browser-only tax report)
+  - https://thecryptotools.com/grid-trading-backtest (grid bot backtest vs hold)
+  - https://thecryptotools.com/fear-and-greed-index (market sentiment + history)
+- **Suggested tags/categories:** crypto, crypto calculators, trading tools, crypto tax, DCA, grid trading, backtesting, portfolio analysis, market data, no-signup, privacy-first, bitcoin
+- **Short blurb (~40 words):** TheCryptoTools is a free suite of 69+ crypto calculators plus live market data, backtests and guides — profit, DCA, grid, liquidation, staking, and a browser-only crypto tax report for 12 countries. No signup, nothing uploaded, everything computed in your browser.
+- **Do NOT claim:** It is NOT an exchange or trading platform — no accounts, no custody, it never executes trades or connects to your exchange account. The DCA strategy lab is PAPER trading (simulated), not real-money results or signals to copy. Backtests and indicator pages are historical/illustrative, not forecasts or financial advice; the tax report is an estimate and a checking aid, not tax filing or tax advice. There is no paid/premium subscription for users. Do not describe any unreleased feature as live (e.g. a fee-comparison table, a paid DCA setup service, or additional indicators are not shipped).
