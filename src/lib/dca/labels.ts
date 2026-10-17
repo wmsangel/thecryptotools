@@ -162,6 +162,20 @@ export function strategySubtitle(v: Variant): string {
   return parts.join(" · ");
 }
 
+/** Качественная «агрессивность» конфига из реальных параметров: быстрый
+ *  take-profit + глубокая лесенка safety-ордеров на узком покрытии = агрессивнее;
+ *  высокий take-profit, мало ордеров, широкое покрытие = консервативнее.
+ *  Описательная характеристика конфигурации, не рейтинг риска. */
+export function aggressivenessLabel(v: Variant): "aggressive" | "conservative" | "balanced" {
+  let score = 0;
+  if (v.take_profit_pct != null) score += v.take_profit_pct <= 2 ? 1 : v.take_profit_pct >= 5 ? -1 : 0;
+  if (v.grid_coverage_pct != null) score += v.grid_coverage_pct >= 40 ? -1 : v.grid_coverage_pct <= 15 ? 1 : 0;
+  if (v.safety_orders != null) score += v.safety_orders >= 7 ? 1 : v.safety_orders <= 3 ? -1 : 0;
+  if (score >= 2) return "aggressive";
+  if (score <= -2) return "conservative";
+  return "balanced";
+}
+
 /** Фильтр входа человеческим языком (значения бота бывают на русском). */
 export function entryLabel(filter?: string | null): string {
   if (!filter) return "No filter — always active";
@@ -173,6 +187,7 @@ export function entryLabel(filter?: string | null): string {
   if (f.includes("час") || f.includes("ноч") || f.includes("hour") || f.includes("night")) return "Time-of-day filter";
   if (f.includes("sma") || f.includes("ниже")) return "Below moving average";
   if (f.includes("тих") || f.includes("quiet")) return "Low-volatility filter";
+  if (f.includes("сетк") || f.includes("grid")) return "Base grid order (always on)";
   if (f.includes("баз") || f.includes("base")) return "Base order (no filter)";
   // общий случай: причесать
   return filter.replace(/[·:_-]+/g, " ").replace(/\s+/g, " ").trim();

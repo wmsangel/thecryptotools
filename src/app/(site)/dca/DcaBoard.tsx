@@ -32,6 +32,61 @@ function Tile({ k, v, tone }: { k: string; v: string; tone?: number }) {
   );
 }
 
+type SortKey = "roi" | "realized" | "unreal" | "winrate" | "deals" | "coins";
+
+/** A sortable header cell for the lab-level table. Sort is descending-only, to
+ *  match the rest of the board — tapping a column just makes it the active key. */
+function SortTh({ label, k, sort, setSort }: { label: string; k: SortKey; sort: SortKey; setSort: (k: SortKey) => void }) {
+  const active = sort === k;
+  return (
+    <th
+      onClick={() => setSort(k)}
+      className={`cursor-pointer select-none px-3 py-2 text-right font-semibold ${active ? "text-[var(--text)]" : ""}`}
+    >
+      {label}{active ? " ↓" : ""}
+    </th>
+  );
+}
+
+/** Lab-level comparison table: one row per strategy, aggregated across its
+ *  coins, sortable by any metric. The dense counterpart to the cards. */
+function StrategyTable({ groups, sort, setSort }: { groups: StrategyGroup[]; sort: SortKey; setSort: (k: SortKey) => void }) {
+  return (
+    <div className="overflow-x-auto rounded-xl border border-[var(--border)]">
+      <table className="w-full text-sm">
+        <thead>
+          <tr className="text-[var(--muted)]">
+            <th className="px-3 py-2 text-left font-semibold">Strategy</th>
+            <SortTh label="Coins" k="coins" sort={sort} setSort={setSort} />
+            <SortTh label="Avg ROI" k="roi" sort={sort} setSort={setSort} />
+            <SortTh label="Realized" k="realized" sort={sort} setSort={setSort} />
+            <SortTh label="Unreal." k="unreal" sort={sort} setSort={setSort} />
+            <SortTh label="Deals" k="deals" sort={sort} setSort={setSort} />
+            <SortTh label="Win" k="winrate" sort={sort} setSort={setSort} />
+          </tr>
+        </thead>
+        <tbody>
+          {groups.map((g) => (
+            <tr key={g.slug} className="border-t border-[var(--border)] transition hover:bg-white/5">
+              <td className="px-3 py-2">
+                <Link href={`/dca/${g.slug}/`} className="font-semibold text-brand-ink hover:underline">{g.name}</Link>
+                {g.isNew && <span className="ml-1.5 rounded-md bg-fuchsia-500/15 px-1 py-0.5 text-[10px] font-bold text-fuchsia-400">NEW</span>}
+                <div className="text-[11px] text-[var(--muted)]">{g.subtitle}</div>
+              </td>
+              <td className="px-3 py-2 text-right tabular-nums">{g.coins}</td>
+              <td className="px-3 py-2 text-right font-bold"><Num v={g.avgRoi} kind="pct" /></td>
+              <td className="px-3 py-2 text-right"><Num v={g.totalRealized} /></td>
+              <td className="px-3 py-2 text-right"><Num v={g.totalUnrealized} /></td>
+              <td className="px-3 py-2 text-right tabular-nums">{g.totalDeals}</td>
+              <td className="px-3 py-2 text-right tabular-nums text-[var(--muted)]">{g.winrate != null ? `${round(g.winrate, 0)}%` : "—"}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 function GroupCard({ g }: { g: StrategyGroup }) {
   return (
     <Link href={`/dca/${g.slug}/`} className="block w-full rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)] p-5 text-left transition hover:border-[color:var(--muted)]">
@@ -75,7 +130,8 @@ export function DcaBoard() {
   const [status, setStatus] = useState<DcaStatus | null>(null);
   const [isSample, setIsSample] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [sort, setSort] = useState<"roi" | "realized" | "deals" | "coins">("roi");
+  const [sort, setSort] = useState<SortKey>("roi");
+  const [view, setView] = useState<"table" | "cards">("table");
   const [family, setFamily] = useState<"all" | "new" | "classic">("all");
 
   useEffect(() => {
@@ -105,8 +161,10 @@ export function DcaBoard() {
     const key = (g: StrategyGroup) =>
       sort === "roi" ? (g.avgRoi ?? -1e9)
         : sort === "realized" ? g.totalRealized
-          : sort === "deals" ? g.totalDeals
-            : g.coins;
+          : sort === "unreal" ? g.totalUnrealized
+            : sort === "winrate" ? (g.winrate ?? -1e9)
+              : sort === "deals" ? g.totalDeals
+                : g.coins;
     return [...gs].sort((a, b) => key(b) - key(a));
   }, [groups, family, sort]);
 
@@ -143,18 +201,32 @@ export function DcaBoard() {
             </button>
           ))}
         </div>
-        <select value={sort} onChange={(e) => setSort(e.target.value as typeof sort)} className={selCls} aria-label="Sort by">
-          <option value="roi">Sort: avg ROI</option>
-          <option value="realized">Sort: realized P&L</option>
-          <option value="deals">Sort: closed deals</option>
-          <option value="coins">Sort: coins covered</option>
-        </select>
+        {view === "cards" && (
+          <select value={sort} onChange={(e) => setSort(e.target.value as SortKey)} className={selCls} aria-label="Sort by">
+            <option value="roi">Sort: avg ROI</option>
+            <option value="realized">Sort: realized P&L</option>
+            <option value="deals">Sort: closed deals</option>
+            <option value="coins">Sort: coins covered</option>
+          </select>
+        )}
+        <div className="inline-flex overflow-hidden rounded-lg border border-[var(--border)]">
+          {(["table", "cards"] as const).map((v) => (
+            <button key={v} onClick={() => setView(v)}
+              className={`px-3 py-1.5 ${view === v ? "bg-white/10 font-semibold" : "text-[var(--muted)]"}`}>
+              {v === "table" ? "Table" : "Cards"}
+            </button>
+          ))}
+        </div>
         <span className="ml-auto text-[var(--muted)]">{filtered.length} strategies</span>
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-2">
-        {filtered.map((g) => <GroupCard key={g.slug} g={g} />)}
-      </div>
+      {view === "table" ? (
+        <StrategyTable groups={filtered} sort={sort} setSort={setSort} />
+      ) : (
+        <div className="grid gap-4 lg:grid-cols-2">
+          {filtered.map((g) => <GroupCard key={g.slug} g={g} />)}
+        </div>
+      )}
 
       <p className="mt-6 text-xs text-[var(--muted)]">
         {isSample ? "Example snapshot" : `Updated ${status.updated_at ?? "—"} UTC`} · live strategy test on real market prices ·

@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import type { HistoryDeal } from "@/lib/dca/types";
 import type { StrategyGroup } from "@/lib/dca/labels";
-import { coinOf, entryLabel, roiPct, stateLabel, pct, usd, hours, round } from "@/lib/dca/labels";
+import { coinOf, entryLabel, roiPct, stateLabel, pct, usd, hours, round, aggressivenessLabel } from "@/lib/dca/labels";
 import { strategyTypeFor } from "@/lib/dca/strategy-types";
 import { platforms, type Platform } from "@/lib/platforms";
 
@@ -125,6 +125,8 @@ export function StrategyDetail({ group }: { group: StrategyGroup }) {
   const inPos = rows.filter((r) => r.st.kind === "pos").length;
   const tp = rep.take_profit_pct;
   const cov = rep.grid_coverage_pct;
+  // Capital is a budget, not a P&L, so format it unsigned (usd() prefixes a +).
+  const capStr = rep.capital != null ? `$${Math.round(rep.capital).toLocaleString("en-US")}` : null;
   const tpWord = tp == null ? null : tp <= 3 ? "quick, frequent take-profits" : tp <= 8 ? "moderate take-profits" : "patient, larger take-profits";
   const covWord = cov == null ? null : cov >= 40 ? "deep coverage — lots of room before the last safety order fills" : cov >= 20 ? "moderate coverage" : "shallow coverage — the grid runs out of safety orders sooner in a big drop";
 
@@ -232,7 +234,7 @@ export function StrategyDetail({ group }: { group: StrategyGroup }) {
           <h2 className="text-lg font-bold text-[var(--text)]">How this strategy works</h2>
           {type && <p>{type.description}</p>}
           <p>
-            In numbers, this one is a <strong>DCA grid</strong> with {rep.safety_orders ?? "several"} safety orders laddered across
+            In character it leans <strong>{aggressivenessLabel(rep)}</strong>. In numbers, a <strong>DCA grid</strong> with {rep.safety_orders ?? "several"} safety orders laddered across
             roughly {rep.grid_coverage_pct != null ? `${round(rep.grid_coverage_pct, 0)}%` : "a range"} below the entry
             {/grid/i.test(`${rep.scheme ?? ""} ${rep.name ?? ""}`) ? " (even-step spacing)" : " (scaling spacing — orders grow further down)"}.
             A base order opens the cycle; as price falls the safety orders fill and pull the average entry down, and a single
@@ -318,6 +320,24 @@ export function StrategyDetail({ group }: { group: StrategyGroup }) {
           Pick an exchange and run it yourself, or have us set it up and get it running for you — no setup headaches.
           Prefer to try first? Test any strategy on a <strong>demo account</strong> before committing real funds.
         </p>
+
+        {/* Exactly what this strategy is — the config to replicate + its capital footprint. */}
+        <div className="mt-5 rounded-xl border border-[var(--border)] bg-[var(--bg)]/40 p-4">
+          <div className="text-[11px] font-semibold uppercase tracking-wide text-[var(--muted)]">What you&apos;d be setting up</div>
+          <div className="mt-3 grid grid-cols-2 gap-x-4 gap-y-3 text-sm sm:grid-cols-3">
+            <Metric label="Take-profit">{tp != null ? `${round(tp, 2)}%` : "—"}</Metric>
+            <Metric label="Safety orders">{rep.safety_orders ?? "—"}</Metric>
+            <Metric label="Grid coverage">{cov != null ? `${round(cov, 0)}%` : "—"}</Metric>
+            <Metric label="Spacing">{/grid/i.test(`${rep.scheme ?? ""} ${rep.name ?? ""}`) ? "Even-step" : "Scaling"}</Metric>
+            <Metric label="Entry rule">{entryLabel(rep.entry_filter)}</Metric>
+            {capStr && <Metric label="Budget per coin">≈ {capStr}</Metric>}
+          </div>
+          <p className="mt-3 text-xs text-[var(--muted)]">
+            These are the exact settings tested above{capStr ? `, run with about ${capStr} of capital per coin` : ""}. Replicate
+            them on any bot-capable exchange, or send them to us and we&apos;ll configure it on your account.
+          </p>
+        </div>
+
         <div className="mt-4 flex flex-wrap gap-2">
           {EXCHANGES.map((p) => (
             <a key={p.slug} href={`/go/${p.slug}`} target="_blank" rel="sponsored nofollow noopener noreferrer" data-affiliate={p.slug} data-affiliate-placement="dca-strategy" className="btn-ghost">
