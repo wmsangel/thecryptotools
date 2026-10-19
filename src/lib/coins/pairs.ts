@@ -78,6 +78,9 @@ const specs: CoinToolSpec[] = [
       `${c.symbol.toLowerCase()} roi calculator`,
       `${c.name.toLowerCase()} gain calculator`,
       `how much profit ${c.name.toLowerCase()}`,
+      // Bare-ticker and "for <coin>" phrasings people actually search (Bing).
+      `${c.symbol.toLowerCase()} calculator`,
+      `crypto calculator for ${c.name.toLowerCase()}`,
     ],
     overrides: (c) => ({ amount: c.typicalAmount, feePct: 0.1 }),
     priceFields: { buyPrice: 0.8, sellPrice: 1 },

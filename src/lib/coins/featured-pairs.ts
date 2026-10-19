@@ -4,32 +4,40 @@ import { getCoinToolPage } from "./pairs";
  * ============================================================================
  * Curated internal links to the highest-opportunity coin calculators.
  * ============================================================================
- * Search Console (2026-08-17) shows a cluster of coin × profit-calculator pages
- * sitting at positions 12–30 with real impression volume — Solana profit at
- * ~12, Shiba Inu ~20, Dogecoin ~26 — i.e. one page of movement from their first
- * clicks. On-page content was already strengthened; the remaining on-site lever
- * is internal links from high-authority pages (the homepage, the sibling coin
- * pages) pointing at exactly these targets with descriptive anchors.
+ * The on-site lever is internal links from high-authority pages (the homepage,
+ * the sibling coin pages) pointing at exactly these targets with descriptive
+ * anchors. On-page content is already strong; this concentrates relevance.
  *
- * This is a hand-picked list, not "every pair": a curated, genuinely useful set
- * of links concentrates relevance, where linking all 343 would dilute it and
- * read as boilerplate.
+ * Refreshed 2026-10-19 from Bing Webmaster data (our real click channel): a
+ * cluster of coin calculators sits at positions 5–9 — one push from the top.
+ * The list now leads with those: Hedera profit (~9) and staking (~8), Stellar
+ * profit ("xlm calculator" ~8), Dogecoin profit (~8), Cardano staking, and
+ * Solana ("crypto calculator for solana" ~6). Majors follow for breadth.
+ *
+ * This is a hand-picked list, not "every pair": a curated set concentrates
+ * relevance, where linking all 343 would dilute it and read as boilerplate.
  */
 
-/** [coin slug, tool/URL slug]. Ordered by opportunity, then coin prominence. */
+/** [coin slug, tool/URL slug]. Ordered by opportunity, then coin prominence.
+ *  The homepage renders the first 12 (featuredCoinCalculators), so order here
+ *  decides which get homepage link juice. */
 const FEATURED: [string, string][] = [
+  // Fresh Bing opportunities (pos 5–9) — the first push target.
   ["solana", "profit-calculator"],
+  ["hedera", "profit-calculator"],
+  ["hedera", "staking-calculator"],
+  ["stellar", "profit-calculator"],
   ["dogecoin", "profit-calculator"],
-  ["shiba-inu", "profit-calculator"],
-  ["bitcoin", "profit-calculator"],
-  ["ethereum", "profit-calculator"],
-  ["xrp", "profit-calculator"],
-  ["cardano", "profit-calculator"],
-  ["bnb", "profit-calculator"],
-  ["bitcoin", "dca-calculator"],
-  ["ethereum", "dca-calculator"],
+  ["cardano", "staking-calculator"],
   ["solana", "staking-calculator"],
   ["ethereum", "staking-calculator"],
+  // Majors for breadth and sustained impression volume.
+  ["bitcoin", "profit-calculator"],
+  ["ethereum", "profit-calculator"],
+  ["shiba-inu", "profit-calculator"],
+  ["cardano", "profit-calculator"],
+  ["xrp", "profit-calculator"],
+  ["bnb", "profit-calculator"],
 ];
 
 /** Coins used to cross-link the same tool across popular assets. */
