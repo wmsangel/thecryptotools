@@ -59,6 +59,13 @@
 /*.json
   Cache-Control: public, max-age=3600
 
+# --- Sitemap: short TTL so a fresh deploy reaches crawlers fast ----------------
+# Regenerated every deploy with per-URL lastmod. The edge can otherwise hand a
+# crawler a stale sitemap for the default asset TTL after a deploy; 5 min +
+# must-revalidate keeps the lastmod signal timely without hammering origin.
+/sitemap.xml
+  Cache-Control: public, max-age=300, must-revalidate
+
 # --- MIME types Pages might otherwise get wrong -------------------------------
 # The PWA manifest is ignored by browsers if not served as manifest+json; the
 # guide .md twins exist for AI crawlers and should read as markdown, not plain.
