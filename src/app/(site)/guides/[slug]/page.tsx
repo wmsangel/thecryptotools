@@ -13,6 +13,7 @@ import { renderInline } from "@/components/RichText";
 import { AdSlot } from "@/components/ads/AdSlot";
 import { GuideAffiliateCTA } from "@/components/guides/GuideAffiliateCTA";
 import { AmazonPicks } from "@/components/AmazonPicks";
+import { GuideScrollDepth } from "@/components/analytics/GuideScrollDepth";
 
 export const dynamicParams = false;
 
@@ -296,6 +297,7 @@ export default function GuidePage({ params }: { params: { slug: string } }) {
   return (
     <article className="mx-auto max-w-3xl px-4 py-10">
       <JsonLd data={guideJsonLd(guide)} />
+      <GuideScrollDepth slug={guide.slug} />
       <Breadcrumbs
         trail={[
           { name: "Guides", path: "/guides" },

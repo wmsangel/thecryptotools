@@ -1,10 +1,11 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import type { HistoryDeal } from "@/lib/dca/types";
 import type { StrategyGroup } from "@/lib/dca/labels";
 import { coinOf, entryLabel, roiPct, stateLabel, pct, usd, hours, round, aggressivenessLabel } from "@/lib/dca/labels";
+import { track } from "@/lib/analytics";
 import { strategyTypeFor } from "@/lib/dca/strategy-types";
 import { platforms, type Platform } from "@/lib/platforms";
 
@@ -127,6 +128,11 @@ export function StrategyDetail({ group }: { group: StrategyGroup }) {
   const cov = rep.grid_coverage_pct;
   // Capital is a budget, not a P&L, so format it unsigned (usd() prefixes a +).
   const capStr = rep.capital != null ? `$${Math.round(rep.capital).toLocaleString("en-US")}` : null;
+
+  // Demand signal: which strategies people actually open. One event per view.
+  useEffect(() => {
+    track("dca_strategy_view", { strategy: group.slug });
+  }, [group.slug]);
   const tpWord = tp == null ? null : tp <= 3 ? "quick, frequent take-profits" : tp <= 8 ? "moderate take-profits" : "patient, larger take-profits";
   const covWord = cov == null ? null : cov >= 40 ? "deep coverage — lots of room before the last safety order fills" : cov >= 20 ? "moderate coverage" : "shallow coverage — the grid runs out of safety orders sooner in a big drop";
 
@@ -346,8 +352,8 @@ export function StrategyDetail({ group }: { group: StrategyGroup }) {
           ))}
         </div>
         <div className="mt-4 flex flex-wrap gap-3">
-          <a href="https://t.me/izagorodnyi" target="_blank" rel="noopener noreferrer" className="btn-primary">Set it up for me — Telegram →</a>
-          <a href="mailto:info@thecryptotools.com?subject=DCA%20strategy%20setup" className="btn-ghost">Email us →</a>
+          <a href="https://t.me/izagorodnyi" target="_blank" rel="noopener noreferrer" onClick={() => track("dca_setup_click", { strategy: group.slug, via: "telegram" })} className="btn-primary">Set it up for me — Telegram →</a>
+          <a href="mailto:info@thecryptotools.com?subject=DCA%20strategy%20setup" onClick={() => track("dca_setup_click", { strategy: group.slug, via: "email" })} className="btn-ghost">Email us →</a>
           <Link href="/guides/grid-trading-explained" className="btn-ghost">How grid trading works</Link>
         </div>
         <p className="mt-3 text-xs text-[var(--muted)]">

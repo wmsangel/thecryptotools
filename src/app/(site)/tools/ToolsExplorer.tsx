@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import { categories, categoryList, type CategoryId } from "@/lib/categories";
 import { useFavorites } from "@/lib/tool-prefs";
 import { FavoriteButton } from "@/components/FavoriteButton";
+import { track } from "@/lib/analytics";
 
 interface Item {
   slug: string;
@@ -58,12 +59,12 @@ export function ToolsExplorer({ items }: { items: Item[] }) {
           {/* Only offered once there is something to filter to — an empty
               favorites tab is a dead end for a first-time visitor. */}
           {ready && favorites.length > 0 && (
-            <Chip active={cat === "favorites"} onClick={() => setCat("favorites")}>
+            <Chip active={cat === "favorites"} onClick={() => { setCat("favorites"); track("category_filter", { category: "favorites" }); }}>
               ★ Favorites ({favorites.length})
             </Chip>
           )}
           {categoryList.map((c) => (
-            <Chip key={c.id} active={cat === c.id} onClick={() => setCat(c.id)}>
+            <Chip key={c.id} active={cat === c.id} onClick={() => { setCat(c.id); track("category_filter", { category: c.id }); }}>
               {c.icon} {c.label}
             </Chip>
           ))}
