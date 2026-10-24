@@ -1,0 +1,11 @@
+{
+  "name": "thecryptotools-social",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Соцсети TheCryptoTools: контент-план (posts.js) + генератор слайдов (@vercel/og из родительского проекта) + дневная рассылка готового поста в Telegram.",
+  "scripts": {
+    "slides": "node scripts/social-slides.mjs",
+    "daily": "node scripts/telegram-daily.mjs"
+  }
+}

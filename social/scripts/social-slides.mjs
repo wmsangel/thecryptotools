@@ -1,44 +1,35 @@
 /**
- * ============================================================================
  * Social slide generator — TheCryptoTools.
- * ============================================================================
- * Renders branded Instagram/Pinterest slides from scripts/social/content-plan.mjs,
- * the SAME way the site renders OG cards: @vercel/og (Satori) → PNG. We use
- * Satori rather than sharp+librsvg because the project already ships it and it
- * wraps text in flexbox automatically (no manual line-breaking, no fontconfig
- * surgery). Font is IBM Plex Sans, loaded from the TTFs installed on this Mac.
  *
- * Brand: the site's real public identity (teal gradient on graphite), not the
- * internal vitrina accent — this is what followers see when they land on the
- * site. Covers are a clean designed layout, not a stock photo: a crypto-tools
- * site has no article photography, and graphite+data IS the brand.
+ * Renders branded Instagram slides from ../posts.js the same way the site
+ * renders OG cards: @vercel/og (Satori) → PNG. Run it from the PROJECT ROOT
+ * (it resolves `next` from the project's node_modules) and fonts from the TTFs
+ * installed on this Mac. Output: social/out/<id>-en-NN-(square|story).png
+ * (+ manifest.json). square = 1080×1080 (carousel/post), story = 1080×1920.
  *
- * Usage:
- *   node scripts/social/generate-slides.mjs            # 1080px (IG native)
- *   node scripts/social/generate-slides.mjs --scale 2  # 2160px (retina)
- * Output: scripts/social/out/<day>-<slug>-<n>.png  (+ a manifest.json)
+ * Usage (from project root):
+ *   node social/scripts/social-slides.mjs            # 1080px (IG native)
+ *   node social/scripts/social-slides.mjs --scale 2  # 2160px (retina)
  */
-
 import { ImageResponse } from "next/dist/compiled/@vercel/og/index.node.js";
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { homedir } from "node:os";
 import path from "node:path";
-import { POSTS, BRAND, SITE } from "./content-plan.mjs";
+import { fileURLToPath } from "node:url";
+import { POSTS, BRAND, SITE } from "../posts.js";
 
 const SCALE = Math.max(1, Number((process.argv.find((a, i) => process.argv[i - 1] === "--scale")) || 1));
-const OUT = path.join(process.cwd(), "scripts", "social", "out");
+const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
+const OUT = path.join(ROOT, "out");
 
 // --- brand tokens (site identity) ------------------------------------------
 const BG = "#070b14";
-const PANEL = "#0e1524";
 const BRAND_C = "#16b378";
 const BRAND_LIGHT = "#2dd4bf";
 const TEXT = "#eef2f8";
 const MUTED = "#93a4bd";
 const BORDER = "#1c2740";
 const RED = "#f26d6d";
-
-const S = (n) => Math.round(n); // layout is defined in 1080-space; ImageResponse size carries the scale
 
 // --- fonts ------------------------------------------------------------------
 async function loadFonts() {
@@ -66,35 +57,13 @@ const el = (style, children) => ({ type: "div", props: { style: { display: "flex
 /** A ✓ / ✗ badge drawn as a vector path (never an emoji). */
 const mark = (ok) =>
   el(
-    {
-      width: 56,
-      height: 56,
-      minWidth: 56,
-      borderRadius: 999,
-      backgroundColor: ok ? "rgba(22,179,120,0.16)" : "rgba(242,109,109,0.16)",
-      alignItems: "center",
-      justifyContent: "center",
-    },
+    { width: 56, height: 56, minWidth: 56, borderRadius: 999, backgroundColor: ok ? "rgba(22,179,120,0.16)" : "rgba(242,109,109,0.16)", alignItems: "center", justifyContent: "center" },
     [
       {
         type: "svg",
         props: {
-          width: 30,
-          height: 30,
-          viewBox: "0 0 24 24",
-          fill: "none",
-          children: [
-            {
-              type: "path",
-              props: {
-                d: ok ? "M5 12.5l4 4 10-10.5" : "M6 6l12 12M18 6L6 18",
-                stroke: ok ? BRAND_C : RED,
-                strokeWidth: 2.6,
-                strokeLinecap: "round",
-                strokeLinejoin: "round",
-              },
-            },
-          ],
+          width: 30, height: 30, viewBox: "0 0 24 24", fill: "none",
+          children: [{ type: "path", props: { d: ok ? "M5 12.5l4 4 10-10.5" : "M6 6l12 12M18 6L6 18", stroke: ok ? BRAND_C : RED, strokeWidth: 2.6, strokeLinecap: "round", strokeLinejoin: "round" } }],
         },
       },
     ],
@@ -112,18 +81,11 @@ const brandHeader = (onAccent = false) =>
 
 const coverTitleSize = (t) => (t.length > 46 ? 76 : t.length > 32 ? 88 : 100);
 
-// --- slide templates (1080×1080 feed, 1080×1920 story) ----------------------
+// --- slide templates (1080×1080 square, 1080×1920 story) --------------------
 function slideNode(slide, format) {
   const story = format === "story";
   const pad = story ? 96 : 84;
-  const base = {
-    width: "100%",
-    height: "100%",
-    flexDirection: "column",
-    backgroundColor: BG,
-    padding: pad,
-    justifyContent: "space-between",
-  };
+  const base = { width: "100%", height: "100%", flexDirection: "column", backgroundColor: BG, padding: pad, justifyContent: "space-between" };
 
   switch (slide.type) {
     case "cover":
@@ -134,7 +96,6 @@ function slideNode(slide, format) {
           el({ fontSize: coverTitleSize(slide.title), fontWeight: 700, color: TEXT, lineHeight: 1.05, letterSpacing: -1 }, slide.title),
         ]),
       ]);
-
     case "text":
       return el(base, [
         brandHeader(),
@@ -145,22 +106,17 @@ function slideNode(slide, format) {
         ]),
         el({}, ""),
       ]);
-
     case "checklist":
       return el(base, [
         brandHeader(),
         el({ flexDirection: "column", gap: 30 }, [
           el({ fontSize: 56, fontWeight: 700, color: TEXT, letterSpacing: -0.5 }, slide.title),
-          el(
-            { flexDirection: "column", gap: 22 },
-            slide.items.map((it) =>
-              el({ alignItems: "center", gap: 24 }, [mark(it.ok), el({ fontSize: 38, fontWeight: 500, color: TEXT, lineHeight: 1.25, flex: 1 }, it.text)]),
-            ),
-          ),
+          el({ flexDirection: "column", gap: 22 }, slide.items.map((it) =>
+            el({ alignItems: "center", gap: 24 }, [mark(it.ok), el({ fontSize: 38, fontWeight: 500, color: TEXT, lineHeight: 1.25, flex: 1 }, it.text)]),
+          )),
         ]),
         el({}, ""),
       ]);
-
     case "cta": {
       const ctaBase = { width: "100%", height: "100%", flexDirection: "column", padding: pad, justifyContent: "space-between", backgroundImage: `linear-gradient(145deg, ${BRAND_C}, ${BRAND_LIGHT})` };
       return el(ctaBase, [
@@ -172,7 +128,6 @@ function slideNode(slide, format) {
         ]),
       ]);
     }
-
     case "mythfact":
       return el(base, [
         el({ flexDirection: "column", gap: 44 }, [
@@ -188,7 +143,6 @@ function slideNode(slide, format) {
         ]),
         el({ fontSize: 32, fontWeight: 600, color: BRAND_C }, slide.cta),
       ]);
-
     case "story":
       return el({ ...base, justifyContent: "flex-start", gap: 70 }, [
         brandHeader(),
@@ -200,14 +154,9 @@ function slideNode(slide, format) {
           el({ fontSize: 30, fontWeight: 400, color: MUTED }, "Then reveal today's real reading"),
         ]),
       ]);
-
     default:
       return el(base, [el({ fontSize: 48, color: TEXT }, `?${slide.type}`)]);
   }
-}
-
-function slug(s) {
-  return s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 40);
 }
 
 async function render(node, w, h, fonts) {
@@ -225,19 +174,20 @@ async function main() {
     const story = post.format === "story";
     const w = 1080;
     const h = story ? 1920 : 1080;
+    const shape = story ? "story" : "square";
     const files = [];
     for (let i = 0; i < post.slides.length; i++) {
-      const name = `${post.day.toLowerCase()}-${slug(post.title)}-${i + 1}.png`;
+      const name = `${post.id}-en-${String(i + 1).padStart(2, "0")}-${shape}.png`;
       const buf = await render(slideNode(post.slides[i], post.format), w, h, fonts);
       await writeFile(path.join(OUT, name), buf);
       files.push(name);
       total++;
     }
-    manifest.push({ day: post.day, title: post.title, rubric: post.rubric, format: post.format, files });
+    manifest.push({ id: post.id, day: post.day, rubric: post.rubric, format: post.format, page: post.page, files });
   }
 
   await writeFile(path.join(OUT, "manifest.json"), JSON.stringify(manifest, null, 2) + "\n");
-  console.log(`social: wrote ${total} slides (×${SCALE}) to scripts/social/out/ + manifest.json`);
+  console.log(`social: wrote ${total} slides (×${SCALE}) to social/out/ + manifest.json`);
 }
 
 main().catch((e) => {
