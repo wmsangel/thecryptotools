@@ -76,6 +76,10 @@ import marginCalculator from "./configs/margin-calculator";
 import tokenBurnCalculator from "./configs/token-burn-calculator";
 import cryptoLendingCalculator from "./configs/crypto-lending-calculator";
 import cryptoMortgageCalculator from "./configs/crypto-mortgage-calculator";
+import bridgeFeeCalculator from "./configs/bridge-fee-calculator";
+import nftMintCostCalculator from "./configs/nft-mint-cost-calculator";
+import hodlVsSellCalculator from "./configs/hodl-vs-sell-calculator";
+import stablecoinInterestCalculator from "./configs/stablecoin-interest-calculator";
 
 const builtinTools: ToolConfig[] = [
   profitCalculator,
@@ -147,6 +151,10 @@ const builtinTools: ToolConfig[] = [
   tokenBurnCalculator,
   cryptoLendingCalculator,
   cryptoMortgageCalculator,
+  bridgeFeeCalculator,
+  nftMintCostCalculator,
+  hodlVsSellCalculator,
+  stablecoinInterestCalculator,
 ];
 
 // --- Assemble + validate the full registry ---------------------------------
