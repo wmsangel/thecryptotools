@@ -23,9 +23,11 @@ import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { join, dirname, basename } from "node:path";
 import { fileURLToPath } from "node:url";
 import { POSTS, BRAND } from "../posts.js";
+import { PROFILE } from "../profile/profile.js";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const OUT = join(ROOT, "out");
+const PROFILE_DIR = join(ROOT, "profile");
 const HUB_URL = "https://claude.ai/artifact/GG5ZAEN2QpELC2MrexmrJP";
 const SITE = "thecryptotools.com";
 const DOW = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -110,8 +112,46 @@ async function sendText(bot, chat, text) {
   await tg(bot, "sendMessage", form);
 }
 
+// Un-compressed file (avatar/covers must not be re-compressed by Telegram).
+async function sendDocument(bot, chat, path, caption) {
+  const form = new FormData();
+  form.append("chat_id", chat);
+  form.append("document", fileBlob(path), basename(path));
+  if (caption) form.append("caption", caption);
+  await tg(bot, "sendDocument", form);
+}
+
+// Full Instagram profile pack — each piece a separate message to copy/download.
+async function sendProfile(bot, chat) {
+  const P = PROFILE;
+  const f = (name) => join(PROFILE_DIR, name);
+  await sendDocument(bot, chat, f("avatar.png"), `${BRAND} — Instagram profile pack\n\n1) AVATAR 1080×1080 — set as the profile photo using THIS file (un-compressed).`);
+  await sendPhoto(bot, chat, f("avatar.png"), "Avatar — preview (how it looks)");
+  await sendText(bot, chat, `2) PROFILE NAME (≤30 chars):\n${P.name}\n\n@USERNAME — pick the first free one, in order:\n${P.usernames.map((u, i) => `${i + 1}. @${u}`).join("\n")}\n(Availability not checked in-session — confirm in the app.)`);
+  await sendText(bot, chat, `3) BIO (≤150 chars):\n${P.bio}`);
+  await sendText(bot, chat, `4) LINK in profile (with UTM):\n${P.link}`);
+  await sendText(bot, chat, `5) ACCOUNT TYPE: ${P.accountType}\n\nCATEGORY: ${P.category}`);
+  await sendText(bot, chat, `6) HIGHLIGHT COVERS — upload each file below as a cover, then name it:\n${P.highlights.map((h) => `• ${h.name}`).join("\n")}`);
+  for (const h of P.highlights) await sendDocument(bot, chat, f(`highlight-${h.id}.png`), `Highlight cover → name it: ${h.name}`);
+  await sendText(bot, chat, `7) CONTACT: ${P.email}\n${P.emailNote}`);
+  await sendText(bot, chat, `8) PIN THESE 3 POSTS (after they're published):\n${P.pins.map((p) => `• ${p.id} — ${p.why}`).join("\n")}`);
+  await sendText(bot, chat, `9) WHAT TO TAP IN INSTAGRAM, in order:\n${P.checklist.map((s, i) => `${i + 1}. ${s}`).join("\n")}`);
+  console.log("Profile pack sent to Telegram.");
+}
+
 // ─── main ───
 const { bot, chat, lang } = config();
+
+if (process.argv.includes("--profile")) {
+  try {
+    await sendProfile(bot, chat);
+  } catch (e) {
+    console.error("Telegram error (profile):", e.message);
+    process.exit(1);
+  }
+  process.exit(0);
+}
+
 const arg = process.argv[2];
 const today = DOW[new Date().getDay()];
 const post = arg ? POSTS.find((p) => p.id === arg) : POSTS.find((p) => p.day === today);
