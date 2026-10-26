@@ -1,3 +1,5 @@
+ВЫПОЛНЕНО, 26.10.2026 — a18e7ef
+
 # Cursor prompt — 4 новых калькулятора (thecryptotools)
 
 Скопируй всё ниже в Cursor (репо `izn.crypto`).
