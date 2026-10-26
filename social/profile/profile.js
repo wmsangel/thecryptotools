@@ -7,7 +7,8 @@ export const PROFILE = {
   // ≤30 chars, brand + a searchable keyword.
   name: "TheCryptoTools · Calculators",
 
-  // In desirability order. Availability not verified in-session — confirm in the app.
+  // REGISTERED: @thecryptotools — instagram.com/thecryptotools (live).
+  // Alternates kept for record.
   usernames: ["thecryptotools", "cryptotools.app", "the.cryptotools"],
 
   // ≤150 chars, honest, says what you get.

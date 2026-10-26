@@ -127,7 +127,7 @@ async function sendProfile(bot, chat) {
   const f = (name) => join(PROFILE_DIR, name);
   await sendDocument(bot, chat, f("avatar.png"), `${BRAND} — Instagram profile pack\n\n1) AVATAR 1080×1080 — set as the profile photo using THIS file (un-compressed).`);
   await sendPhoto(bot, chat, f("avatar.png"), "Avatar — preview (how it looks)");
-  await sendText(bot, chat, `2) PROFILE NAME (≤30 chars):\n${P.name}\n\n@USERNAME — pick the first free one, in order:\n${P.usernames.map((u, i) => `${i + 1}. @${u}`).join("\n")}\n(Availability not checked in-session — confirm in the app.)`);
+  await sendText(bot, chat, `2) PROFILE NAME (≤30 chars):\n${P.name}\n\n@USERNAME (registered): @${P.usernames[0]}`);
   await sendText(bot, chat, `3) BIO (≤150 chars):\n${P.bio}`);
   await sendText(bot, chat, `4) LINK in profile (with UTM):\n${P.link}`);
   await sendText(bot, chat, `5) ACCOUNT TYPE: ${P.accountType}\n\nCATEGORY: ${P.category}`);

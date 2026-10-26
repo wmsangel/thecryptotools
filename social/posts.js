@@ -15,7 +15,7 @@
  */
 export const BRAND = "TheCryptoTools";
 export const SITE = "thecryptotools.com";
-export const HANDLE = "@thecryptotools"; // placeholder — set the real handle on signup
+export const HANDLE = "@thecryptotools"; // live — instagram.com/thecryptotools
 
 export const POSTS = [
   // ── Mon · Breakdown (carousel) ──

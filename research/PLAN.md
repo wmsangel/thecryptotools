@@ -64,6 +64,6 @@
 - **Прямые реф-программы без ссылки** (подать → прислать): Coinbase, Gemini, Pionex, Tangem, CoinTracker, TokenTax, 3Commas, Nexo, Wirex. См. `research/ADVERTISING.md` §3.
 - **izn.dca / VPS** — если бот гоняет >35 конфигов, расширить `push_status.py`, чтобы новые доходили до сайта.
 - **Платёжные рельсы** (Paddle/LemonSqueezy на ИП КГ) — проверить ДО любого платного продукта.
-- **Соцсети — регистрация аккаунтов** (чеклист в `research/SOCIAL.md`): Pinterest (приоритет №1, claim домена) · Instagram · Telegram-канал+бот (→ запускает `tg-daily.mjs`) · Threads · прислать @handle и TG-токен → доверну автопостинг. Контент-хаб и слайды уже готовы: https://claude.ai/artifact/GG5ZAEN2QpELC2MrexmrJP
+- **Соцсети — регистрация аккаунтов** (чеклист в `research/SOCIAL.md`): ✅ Instagram **@thecryptotools** зарегистрирован (26.10); свой TG-бот @thecryptotools_bot + дневная рассылка готовых постов (launchd 08:13) + пакет оформления профиля отправлены. Осталось: Pinterest (приоритет №1, claim домена) · Threads (кросс-пост из IG). IG постится вручную из бота (открытого API постинга нет).
 
 **Данные:** GSC/Bing/GA4 — `~/Sites/izn.project.stats/context/thecryptotools.com.md`. Память — `cryptotoolkit-*`.
