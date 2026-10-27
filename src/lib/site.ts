@@ -7,7 +7,7 @@ export const site = {
   shortName: "TheCryptoTools",
   tagline: "Free crypto tools, calculators & utilities",
   description:
-    "TheCryptoTools is a free suite of crypto trading calculators, portfolio tools, live prices and developer utilities. Fast, no signup, no ads in your way.",
+    "TheCryptoTools is a free suite of crypto trading calculators, portfolio tools, live prices and developer utilities. Fast, no signup, nothing uploaded.",
   url: (process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000").replace(
     /\/$/,
     "",
