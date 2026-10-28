@@ -161,6 +161,15 @@ if (!post) {
   process.exit(0);
 }
 
+// The bot now carries ONLY stories — those can't be uploaded via the web, so the
+// owner posts them by hand. Feed posts/carousels/videos are published to IG by
+// the scheduled Chrome autoposter, not sent here. (A manual `id` arg overrides,
+// so a specific post can still be test-sent.)
+if (!arg && post.format !== "story") {
+  console.log(`Today's post (${post.id}) is a ${post.format} — handled by the IG autoposter, not Telegram. Skipping.`);
+  process.exit(0);
+}
+
 const header = `📅 ${BRAND} · ${post.day} · ${post.rubric} · ${fmtName(post.format)}`;
 const video = post.video ? join(ROOT, post.video) : null;
 
