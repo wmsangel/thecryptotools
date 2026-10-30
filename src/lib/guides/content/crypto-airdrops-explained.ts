@@ -87,7 +87,7 @@ const guide: Guide = {
       "Seed-phrase phishing — no legitimate claim ever needs your seed phrase or private key. Entering it anywhere hands over the wallet completely.",
     ] },
     { type: "callout", text: "Golden rule: a genuine airdrop either lands in your wallet on its own, or is claimed on the project's own verified site with a transaction you can read. If claiming requires your seed phrase, an upfront payment, or a blind signature, it is theft." },
-    { type: "p", text: "Because the danger is a malicious signature rather than a stolen password, the defence is understanding what you're approving. Our guides on [wallet drainers and approval scams](/guides/wallet-drainers-and-approval-scams/) and [how to avoid crypto scams](/guides/how-to-avoid-crypto-scams/) cover exactly how these signatures work and how to revoke ones you've already given." },
+    { type: "p", text: "Because the danger is a malicious signature rather than a stolen password, the defence is understanding what you're approving. For the step-by-step version — where to find real drops and how to claim one without getting drained — see [how to find and claim airdrops safely](/guides/how-to-find-and-claim-airdrops-safely/). Our guides on [wallet drainers and approval scams](/guides/wallet-drainers-and-approval-scams/) and [how to avoid crypto scams](/guides/how-to-avoid-crypto-scams/) cover exactly how these signatures work and how to revoke ones you've already given." },
 
     { type: "h2", text: "Are airdrops taxable?" },
     { type: "p", text: "In most jurisdictions, yes — and in two separate ways. This surprises people who think \"free\" means tax-free. The general framework (always confirm your own country's rules):" },

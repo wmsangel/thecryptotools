@@ -1,4 +1,4 @@
-import { partnersForGuide, GUIDE_AFFILIATE_COPY, type GuideAffiliateKind } from "@/lib/affiliate";
+import { partnersForGuide, platformLink, GUIDE_AFFILIATE_COPY, type GuideAffiliateKind } from "@/lib/affiliate";
 
 /**
  * A disclosed, context-appropriate partner CTA for a guide. Renders nothing
@@ -19,6 +19,7 @@ export function GuideAffiliateCTA({
   const [primary, ...alts] = picks;
   const { heading, verb, blurb } = GUIDE_AFFILIATE_COPY[kind];
   const slot = placement ?? `guide-${kind}`;
+  const primaryLink = platformLink(primary);
 
   return (
     <section className="mt-12 rounded-2xl border border-brand-500/30 bg-brand-500/5 p-6">
@@ -26,11 +27,10 @@ export function GuideAffiliateCTA({
       <h2 className="mt-1 text-xl font-bold">{heading}</h2>
       <p className="muted mt-1 text-sm leading-relaxed">{blurb ?? primary.bonus}</p>
       <a
-        href={primary.url}
+        href={primaryLink.href}
         target="_blank"
-        rel="sponsored nofollow noopener noreferrer"
-        data-affiliate={primary.slug}
-        data-affiliate-placement={slot}
+        rel={primaryLink.sponsored ? "sponsored nofollow noopener noreferrer" : "noopener noreferrer"}
+        {...(primaryLink.sponsored ? { "data-affiliate": primary.slug, "data-affiliate-placement": slot } : {})}
         className="btn-primary mt-4"
       >
         {verb} {primary.name} →
@@ -38,21 +38,23 @@ export function GuideAffiliateCTA({
       {alts.length > 0 && (
         <p className="muted mt-3 text-xs">
           Also:{" "}
-          {alts.map((a, i) => (
-            <span key={a.slug}>
-              {i > 0 && " · "}
-              <a
-                href={a.url}
-                target="_blank"
-                rel="sponsored nofollow noopener noreferrer"
-                data-affiliate={a.slug}
-                data-affiliate-placement={slot}
-                className="font-semibold text-brand-ink hover:underline"
-              >
-                {a.name}
-              </a>
-            </span>
-          ))}
+          {alts.map((a, i) => {
+            const link = platformLink(a);
+            return (
+              <span key={a.slug}>
+                {i > 0 && " · "}
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel={link.sponsored ? "sponsored nofollow noopener noreferrer" : "noopener noreferrer"}
+                  {...(link.sponsored ? { "data-affiliate": a.slug, "data-affiliate-placement": slot } : {})}
+                  className="font-semibold text-brand-ink hover:underline"
+                >
+                  {a.name}
+                </a>
+              </span>
+            );
+          })}
         </p>
       )}
       <p className="muted mt-3 text-[11px] leading-snug">
