@@ -24,6 +24,13 @@ import { exchangesForContext, type TradeContext } from "@/lib/affiliate";
 
 const adsEnabled = process.env.NEXT_PUBLIC_ENABLE_ADS === "true";
 
+/**
+ * The one responsive display unit created in the AdSense dashboard
+ * (thecryptotools-responsive). Every manually-placed slot uses it unless a
+ * callsite passes its own `adUnitId`. Overridable via env for other envs.
+ */
+const DEFAULT_AD_UNIT_ID = process.env.NEXT_PUBLIC_ADSENSE_SLOT || "4816673325";
+
 /** Current consent, kept in sync with the banner. `undefined` = not decided. */
 function useConsent(): Consent | undefined {
   const [consent, setConsent] = useState<Consent | undefined>(undefined);
@@ -49,8 +56,9 @@ export function AdSlot({
   className?: string;
 }) {
   const consent = useConsent();
+  const unitId = adUnitId ?? DEFAULT_AD_UNIT_ID;
   // Undecided (or SSR): show the neutral placeholder, never an ad request.
-  const live = adsEnabled && consent !== undefined && Boolean(adUnitId) && Boolean(site.adsenseClient);
+  const live = adsEnabled && consent !== undefined && Boolean(unitId) && Boolean(site.adsenseClient);
   const pushed = useRef(false);
 
   useEffect(() => {
@@ -71,7 +79,7 @@ export function AdSlot({
           className="adsbygoogle"
           style={{ display: "block" }}
           data-ad-client={site.adsenseClient}
-          data-ad-slot={adUnitId}
+          data-ad-slot={unitId}
           data-ad-format="auto"
           data-full-width-responsive="true"
           {...(consent?.ads ? {} : { "data-npa-on-unfilled-ad": "true", "data-npa": "1" })}
