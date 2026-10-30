@@ -38,7 +38,7 @@ function fmtAmount(n: number): string {
 
 const tool: ToolConfig = {
   slug: "fake-portfolio-generator",
-  updatedAt: "2026-09-17",
+  updatedAt: "2026-10-30",
   title: "Fake Crypto Portfolio Generator & Simulator",
   description:
     "Generate a random but realistic-looking crypto portfolio — allocation, coin amounts, sample values and a simulated 24h move — shown as a dashboard and copyable as JSON for mockups and mock APIs. Simulated data only, not real holdings.",
@@ -148,6 +148,7 @@ const tool: ToolConfig = {
     {
       type: "ul",
       items: [
+        "Download the portfolio as a polished iPhone or Android screenshot — pick a style, with a donut chart and real coin logos — and drop it straight into a mockup, pitch deck or tutorial.",
         "Fill a portfolio dashboard mockup or screenshot with believable data instead of placeholders.",
         "Seed a test database, mock API or Storybook stories — copy the JSON straight in.",
         "QA how your UI handles many assets, tiny allocations, big numbers and negative 24h moves.",

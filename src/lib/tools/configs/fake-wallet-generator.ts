@@ -49,7 +49,7 @@ function daysAgoISO(days: number): string {
 
 const tool: ToolConfig = {
   slug: "fake-wallet-generator",
-  updatedAt: "2026-09-17",
+  updatedAt: "2026-10-30",
   title: "Fake Crypto Wallet Generator & Simulator",
   description:
     "Generate a realistic-looking but completely fake crypto wallet — address, sample balance and activity — for UI mockups, demos and test data. Simulated only: no private keys, never holds real funds.",
@@ -162,6 +162,7 @@ const tool: ToolConfig = {
     {
       type: "ul",
       items: [
+        "Download the wallet as a polished iPhone or Android screenshot — pick a style, with the real network logo — and drop it straight into a mockup, pitch deck or tutorial.",
         "Fill a UI mockup or Figma-to-code screen with address-shaped data instead of lorem ipsum.",
         "Seed a test database, fixtures or Storybook stories — copy the JSON straight in.",
         "QA how your app truncates, copies and validates addresses across networks.",

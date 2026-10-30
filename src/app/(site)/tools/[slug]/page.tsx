@@ -8,6 +8,7 @@ import { CoinLogo } from "@/components/CoinLogo";
 import { categories } from "@/lib/categories";
 import { buildToolMetadata, toolJsonLd } from "@/lib/seo";
 import { ToolEngine } from "@/components/ToolEngine";
+import { FakeWalletStudio, FakePortfolioStudio } from "@/components/tools/FakeStudio";
 import { ToolSeoContent } from "@/components/ToolSeoContent";
 import { FaqSection } from "@/components/FaqSection";
 import { RelatedTools } from "@/components/RelatedTools";
@@ -71,8 +72,15 @@ export default function ToolPage({ params }: { params: { slug: string } }) {
       </div>
 
       <div className="mx-auto max-w-content px-4 py-10">
-        {/* The universal engine */}
-        <ToolEngine slug={tool.slug} />
+        {/* Mockup studios replace the generic form for the visual generators;
+            everything else uses the universal engine. */}
+        {tool.slug === "fake-wallet-generator" ? (
+          <FakeWalletStudio />
+        ) : tool.slug === "fake-portfolio-generator" ? (
+          <FakePortfolioStudio />
+        ) : (
+          <ToolEngine slug={tool.slug} />
+        )}
 
         <AdSlot slot="tool-below-result" className="my-10" />
 
