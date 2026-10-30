@@ -15,6 +15,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { platforms as PLATFORMS } from "../src/lib/platforms";
+import { isReferralLink } from "../src/lib/affiliate";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const OUT = join(ROOT, "out", "_redirects");
@@ -37,7 +38,10 @@ function stripOld(t: string): string {
   return after ? `${before}\n\n${after}` : before;
 }
 
-const rows = PLATFORMS.filter((p) => p.url && p.slug).map(
+// Only platforms with a REAL referral link get a /go redirect. A plain homepage
+// earns nothing, so routing clicks through /go to it is a dead redirect — those
+// platforms are linked directly (see platformLink in affiliate.ts).
+const rows = PLATFORMS.filter((p) => p.slug && p.url && isReferralLink(p.url)).map(
   (p) => `/go/${p.slug}  ${p.url}  302`,
 );
 

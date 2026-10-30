@@ -3,6 +3,10 @@
 import { useMemo, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { EXCHANGE_FEES, FEES_AS_OF, feeBand, type ExchangeFee } from "@/lib/fee-compare";
+import { platforms } from "@/lib/platforms";
+import { platformLink } from "@/lib/affiliate";
+
+const PLAT_BY_SLUG = new Map(platforms.map((p) => [p.slug, p]));
 
 type SortKey = "taker" | "maker" | "name";
 type Feature = "futures" | "card" | "bots";
@@ -132,6 +136,8 @@ function Th({
 }
 
 function Row({ f }: { f: ExchangeFee }) {
+  const plat = PLAT_BY_SLUG.get(f.slug);
+  const earns = plat ? platformLink(plat).sponsored : false;
   const maker = pct(f.makerPct);
   const taker = pct(f.takerPct);
   const deferred = f.takerPct == null;
@@ -173,16 +179,20 @@ function Row({ f }: { f: ExchangeFee }) {
         {deferred && f.note && <div className="mt-1 text-[11px] muted">{f.note}</div>}
       </td>
       <td className="px-4 py-3 text-right">
-        <a
-          href={`/go/${f.slug}`}
-          target="_blank"
-          rel="sponsored nofollow noopener noreferrer"
-          data-affiliate={f.slug}
-          data-affiliate-placement="fee-compare"
-          className="btn-primary !px-3 !py-1.5 text-xs"
-        >
-          Trade →
-        </a>
+        {earns ? (
+          <a
+            href={`/go/${f.slug}`}
+            target="_blank"
+            rel="sponsored nofollow noopener noreferrer"
+            data-affiliate={f.slug}
+            data-affiliate-placement="fee-compare"
+            className="btn-primary !px-3 !py-1.5 text-xs"
+          >
+            Trade →
+          </a>
+        ) : (
+          <span className="text-xs muted">—</span>
+        )}
       </td>
     </tr>
   );

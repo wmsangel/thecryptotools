@@ -7,6 +7,7 @@ import {
   platforms,
   type Platform,
 } from "@/lib/platforms";
+import { platformLink } from "@/lib/affiliate";
 import { JsonLd } from "@/components/JsonLd";
 import { AdSlot } from "@/components/ads/AdSlot";
 import { PlatformLogo } from "@/components/PlatformLogo";
@@ -141,6 +142,7 @@ export default function ExchangesPage() {
 }
 
 function PlatformCard({ platform: p }: { platform: Platform }) {
+  const link = platformLink(p);
   return (
     <div className="card card-hover flex flex-col p-6">
       <div className="flex items-center gap-3">
@@ -165,17 +167,20 @@ function PlatformCard({ platform: p }: { platform: Platform }) {
         ))}
       </ul>
 
-      <div className="mt-4 rounded-lg bg-[var(--bg-elevated)] px-3 py-2 text-xs">
-        <span className="font-semibold text-brand-ink">Perk:</span>{" "}
-        <span className="muted">{p.bonus}</span>
-      </div>
+      {link.sponsored ? (
+        <div className="mt-4 rounded-lg bg-[var(--bg-elevated)] px-3 py-2 text-xs">
+          <span className="font-semibold text-brand-ink">Perk:</span>{" "}
+          <span className="muted">{p.bonus}</span>
+        </div>
+      ) : (
+        <p className="muted mt-4 text-xs">Listed for reference — we are not an affiliate partner of {p.name}.</p>
+      )}
 
       <a
-        href={`/go/${p.slug}`}
+        href={link.href}
         target="_blank"
-        rel="sponsored nofollow noopener noreferrer"
-        data-affiliate={p.slug}
-        data-affiliate-placement="exchanges"
+        rel={link.sponsored ? "sponsored nofollow noopener noreferrer" : "noopener noreferrer"}
+        {...(link.sponsored ? { "data-affiliate": p.slug, "data-affiliate-placement": "exchanges" } : {})}
         className="btn-primary mt-5 w-full justify-center"
       >
         Visit {p.name} →

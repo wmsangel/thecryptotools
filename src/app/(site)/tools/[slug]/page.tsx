@@ -17,6 +17,7 @@ import { renderInline } from "@/components/RichText";
 import { AdSlot, AffiliateBanner } from "@/components/ads/AdSlot";
 import { tradeContextForTool } from "@/lib/affiliate";
 import { GuideAffiliateCTA } from "@/components/guides/GuideAffiliateCTA";
+import { BuyCryptoCTA } from "@/components/BuyCryptoCTA";
 
 export const dynamicParams = false;
 
@@ -105,6 +106,11 @@ export default function ToolPage({ params }: { params: { slug: string } }) {
                 <GuideAffiliateCTA kind={tool.affiliate} placement={`tool-${tool.affiliate}-${tool.slug}`} />
               </div>
             )}
+
+            {/* The fake-wallet generator is the network's most-clicked page (21/32
+                affiliate clicks). It has no natural partner category, so it gets a
+                dedicated, geo-aware "real wallet / where to buy" block. */}
+            {tool.slug === "fake-wallet-generator" && <BuyCryptoCTA />}
 
             {coinVersions.length > 0 && (
               <section className="mt-10">

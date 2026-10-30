@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { absoluteUrl, site } from "@/lib/site";
 import { ogImage } from "@/lib/seo";
 import { platforms } from "@/lib/platforms";
+import { platformLink } from "@/lib/affiliate";
 import { compareData, CHECKED_ON } from "@/lib/compare/data";
 import { getPair, pairSlug, validPairs } from "@/lib/compare/pairs";
 import { JsonLd } from "@/components/JsonLd";
@@ -217,7 +218,10 @@ export default function Page({ params }: { params: { pair: string } }) {
           {[
             { p: a, d: da, why: pair.pickA },
             { p: b, d: db, why: pair.pickB },
-          ].map(({ p, d, why }) => (
+          ].map(({ p, d, why }) => {
+            void d;
+            const link = platformLink(p);
+            return (
             <div key={p.slug} className="card p-6">
               <div className="flex items-center gap-2">
                 <PlatformLogo slug={p.slug} name={p.name} emoji={p.icon} className="text-lg" />
@@ -225,17 +229,16 @@ export default function Page({ params }: { params: { pair: string } }) {
               </div>
               <p className="muted mt-3 text-sm leading-relaxed">{why}</p>
               <a
-                href={`/go/${p.slug}`}
+                href={link.href}
                 target="_blank"
-                rel="sponsored nofollow noopener noreferrer"
-                data-affiliate={p.slug}
-                data-affiliate-placement={`compare-${params.pair}`}
+                rel={link.sponsored ? "sponsored nofollow noopener noreferrer" : "noopener noreferrer"}
+                {...(link.sponsored ? { "data-affiliate": p.slug, "data-affiliate-placement": `compare-${params.pair}` } : {})}
                 className="btn-primary mt-5 w-full justify-center"
               >
                 Visit {p.name} →
               </a>
             </div>
-          ))}
+          );})}
         </div>
       </section>
 

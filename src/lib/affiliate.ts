@@ -31,6 +31,38 @@ export function earningExchanges(): Platform[] {
   return platforms.filter((p) => p.category === "exchange" && isReferralLink(p.url));
 }
 
+/**
+ * How to link a platform. A platform whose `url` is a real referral link is a
+ * disclosed partner: route it through the tracked `/go/<slug>` redirect
+ * (rel="sponsored"). A platform with no referral link earns us nothing, so it
+ * is NOT a partner — link its site directly (no `/go`, no "sponsored", no perk
+ * line), so we never fire an empty redirect or imply a deal we don't have.
+ */
+export function platformLink(p: Platform): { href: string; sponsored: boolean } {
+  return isReferralLink(p.url)
+    ? { href: `/go/${p.slug}`, sponsored: true }
+    : { href: p.url, sponsored: false };
+}
+
+/**
+ * Exchanges we earn from AND that actually serve the visitor's country. Most of
+ * our venues (Binance.com, Bybit, OKX, KuCoin, MEXC, Gate, HTX, Bitfinex,
+ * Bitget) block or restrict US residents, and our Crypto.com offer excludes the
+ * US (forbidden GEO in the cabinet) — so a US visitor sent to Binance is a dead
+ * click. Kraken serves the US and pays us, so it leads for US; everyone else
+ * gets the normal product-fit order.
+ */
+const US_UNAVAILABLE = new Set([
+  "binance", "bybit", "okx", "kucoin", "mexc", "gate-io", "htx", "bitfinex", "bitget", "crypto-com",
+]);
+export function exchangesForCountry(country: string | null, limit = 3): Platform[] {
+  if (country === "US") {
+    const usOk = earningExchanges().filter((p) => !US_UNAVAILABLE.has(p.slug));
+    if (usOk.length) return usOk.slice(0, limit);
+  }
+  return exchangesForContext("spot", limit);
+}
+
 export type TradeContext = "derivatives" | "spot";
 
 // Preferred order per context, by product strength. Slugs not listed fall to the
