@@ -6,19 +6,19 @@ import type { EstimatedEvent } from "./types";
 /** The day the block heights below were read. The sitemap dates /calendar
  *  from this, so a rebuild that did not refresh the data does not claim the
  *  page changed. */
-export const halvingsComputedAt = "2026-08-06";
+export const halvingsComputedAt = "2026-10-30";
 
-/** Computed 2026-08-06. Dates drift with hash rate. */
+/** Computed 2026-10-30. Dates drift with hash rate. */
 export const halvings: EstimatedEvent[] = [
   {
     kind: "estimate",
     id: "halving-bitcoin",
-    date: "2028-04-13",
+    date: "2028-04-11",
     title: "Bitcoin halving (estimated)",
-    detail: "The block subsidy halves from 3.125 to 1.5625 BTC. Bitcoin's issuance has halved roughly every four years since 2012, and the schedule is the reason its supply is capped at 21 million.",
+    detail: "The block subsidy halves from 3.125 to 1.5625 BTC. Bitcoin's issuance has halved every 210,000 blocks (roughly four years) since 2012, and the schedule is why its supply is capped at 21 million.",
     category: "network",
-    href: "/tools/bitcoin-halving-countdown/",
-    basis: "Estimated from block 961,291 — 88,709 blocks to go at 10-minute targets. Faster blocks pull it earlier.",
+    href: "/crypto-halving-countdown",
+    basis: "Estimated from block 973,830 — 76,170 blocks to go at 10-minute targets. Faster blocks pull it earlier.",
   },
   {
     kind: "estimate",
@@ -27,17 +27,27 @@ export const halvings: EstimatedEvent[] = [
     title: "Litecoin halving (estimated)",
     detail: "The Litecoin block subsidy halves from 6.25 to 3.125 LTC. Litecoin halves every 840,000 blocks — four times as many as Bitcoin, at a quarter of the block time.",
     category: "network",
-    href: "/tools/bitcoin-halving-countdown/",
-    basis: "Estimated from block 3,155,286 — 204,714 blocks to go at 2.5-minute targets. Faster blocks pull it earlier.",
+    href: "/crypto-halving-countdown",
+    basis: "Estimated from block 3,204,335 — 155,665 blocks to go at 2.5-minute targets. Faster blocks pull it earlier.",
   },
   {
     kind: "estimate",
     id: "halving-bitcoin-cash",
-    date: "2028-04-02",
+    date: "2028-04-01",
     title: "Bitcoin Cash halving (estimated)",
     detail: "The Bitcoin Cash subsidy halves from 3.125 to 1.5625 BCH. It shares Bitcoin's 210,000-block schedule, inherited from the 2017 fork.",
     category: "network",
-    href: "/tools/bitcoin-halving-countdown/",
-    basis: "Estimated from block 962,872 — 87,128 blocks to go at 10-minute targets. Faster blocks pull it earlier.",
+    href: "/crypto-halving-countdown",
+    basis: "Estimated from block 975,215 — 74,785 blocks to go at 10-minute targets. Faster blocks pull it earlier.",
+  },
+  {
+    kind: "estimate",
+    id: "halving-zcash",
+    date: "2028-11-24",
+    title: "Zcash halving (estimated)",
+    detail: "The Zcash block subsidy halves from 1.5625 to 0.78125 ZEC. Since the Blossom upgrade Zcash halves every 1,680,000 blocks (~4 years) at a 75-second block target.",
+    category: "network",
+    href: "/crypto-halving-countdown",
+    basis: "Estimated from block 3,535,938 — 870,462 blocks to go at 1.25-minute targets. Faster blocks pull it earlier.",
   },
 ];

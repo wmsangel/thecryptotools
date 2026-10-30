@@ -103,6 +103,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    // Dated from the block heights it was computed from, like /calendar.
+    {
+      url: absoluteUrl("/crypto-halving-countdown"),
+      lastModified: new Date(halvingsComputedAt),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
     // No content date exists for these four. /prices and the ticker are live
     // data fetched in the browser — the HTML itself does not change — so even
     // "today" would be a claim about the wrong thing.
