@@ -4,6 +4,7 @@ import { site, absoluteUrl } from "@/lib/site";
 import { ogImage, breadcrumbJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { FaqSection } from "@/components/FaqSection";
+import { AdSlot } from "@/components/ads/AdSlot";
 import { countryCalculators, TAX_YEAR } from "@/lib/tax-calculator/countries";
 
 const path = "/crypto-tax-calculator";
@@ -93,6 +94,8 @@ export default function CryptoTaxCalculatorHubPage() {
           </Link>
         ))}
       </div>
+
+      <AdSlot slot="tax-hub" className="mt-10" />
 
       <section className="mt-12 max-w-3xl">
         <h2 className="text-2xl font-extrabold tracking-tight sm:text-3xl">Not in the list?</h2>

@@ -5,6 +5,7 @@ import { site, absoluteUrl } from "@/lib/site";
 import { ogImage, breadcrumbJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { FaqSection } from "@/components/FaqSection";
+import { AdSlot } from "@/components/ads/AdSlot";
 import { GuideAffiliateCTA } from "@/components/guides/GuideAffiliateCTA";
 import type { Jurisdiction } from "@/lib/taxreport/jurisdictions";
 import {
@@ -171,6 +172,8 @@ export default function CountryTaxCalculatorPage({ params }: { params: { country
           <span className="text-gradient text-2xl font-bold" aria-hidden>→</span>
         </Link>
       </div>
+
+      <AdSlot slot="tax-country" className="mt-10 max-w-3xl" />
 
       <section className="mt-12 max-w-3xl">
         <h2 className="text-2xl font-extrabold tracking-tight sm:text-3xl">
