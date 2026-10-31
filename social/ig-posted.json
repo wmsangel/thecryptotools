@@ -3,5 +3,6 @@
   "leverage-myth": "2026-10-28 (owner, manual)",
   "swap-tax": "2026-10-28 (backfill, Claude)",
   "dca-checklist": "2026-10-28 (backfill, Claude)",
-  "grid-backtest": "2026-10-30 (autopost)"
+  "grid-backtest": "2026-10-30 (autopost)",
+  "tax-triggers": "2026-10-31 (autopost)"
 }
