@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { absoluteUrl } from "@/lib/site";
 import { getActiveCategories, tools, getTool } from "@/lib/tools/registry";
 import { guides } from "@/lib/guides/registry";
+import { glossaryTerms } from "@/lib/glossary/terms";
 import { staticPages } from "@/lib/pages/registry";
 import { sortedCoins } from "@/lib/coins/registry";
 import { allCoinToolPages } from "@/lib/coins/pairs";
@@ -200,6 +201,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
+  // One page per glossary term. No per-term date exists, so no lastModified —
+  // the /glossary hub carries the freshness signal.
+  const glossaryRoutes: MetadataRoute.Sitemap = glossaryTerms.map((t) => ({
+    url: absoluteUrl(`/glossary/${t.slug}`),
+    changeFrequency: "monthly",
+    priority: 0.6,
+  }));
+
   const categoryRoutes: MetadataRoute.Sitemap = getActiveCategories().map((c) => ({
     url: absoluteUrl(`/category/${c.id}`),
     lastModified: latest(tools.filter((t) => t.category === c.id).map((t) => t.updatedAt)),
@@ -233,6 +242,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...staticRoutes,
     ...categoryRoutes,
     ...guideRoutes,
+    ...glossaryRoutes,
     ...toolRoutes,
     ...coinRoutes,
     ...coinToolRoutes,

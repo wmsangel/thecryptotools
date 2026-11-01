@@ -40,7 +40,7 @@ function pageJsonLd() {
       "@type": "DefinedTerm",
       name: t.term,
       description: t.short,
-      url: absoluteUrl(`${PATH}#${t.slug}`),
+      url: absoluteUrl(`${PATH}/${t.slug}`),
     })),
   };
 }
@@ -85,7 +85,11 @@ export default function GlossaryPage() {
               <div className="mt-5 space-y-4">
                 {terms.map((t) => (
                   <article key={t.slug} id={t.slug} className="scroll-mt-24 rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)]/40 p-5">
-                    <h3 className="text-lg font-bold text-brand-ink">{t.term}</h3>
+                    <h3 className="text-lg font-bold">
+                      <Link href={`/glossary/${t.slug}`} className="text-brand-ink hover:underline">
+                        {t.term}
+                      </Link>
+                    </h3>
                     {t.aliases && t.aliases.length > 0 && (
                       <div className="mt-0.5 text-xs muted">also: {t.aliases.join(", ")}</div>
                     )}
