@@ -14,8 +14,16 @@ import { site } from "@/lib/site";
  * drop the consent defaults sitting in the queue. The inline part here is only
  * the `js` + `config` pair.
  *
- * Plain <script async> rather than next/script: the static export has no
- * runtime to hydrate a script strategy with.
+ * Plain <script> rather than next/script: the static export has no runtime to
+ * hydrate a script strategy with.
+ *
+ * HOST-GATED: GA only loads on the production host. The Pages project is also
+ * served on *.pages.dev mirrors (and the page runs on localhost in dev); the
+ * _middleware 301s the mirrors, but this is the belt-and-suspenders backstop so
+ * analytics never fires anywhere but the real domain even if that redirect is
+ * bypassed. gtag/dataLayer and the consent defaults are set unconditionally by
+ * ConsentModeScript (they set no cookies and make no requests), so a guarded
+ * no-op here is safe.
  *
  * Client-side navigation (next/link) does not re-fire `config`. GA4's Enhanced
  * measurement → "Page changes based on browser history events" — on by default
@@ -24,14 +32,13 @@ import { site } from "@/lib/site";
  */
 export function GoogleAnalytics() {
   if (!site.gaMeasurementId) return null;
-  const code = `gtag('js',new Date());gtag('config','${site.gaMeasurementId}');`;
-  return (
-    <>
-      <script
-        async
-        src={`https://www.googletagmanager.com/gtag/js?id=${site.gaMeasurementId}`}
-      />
-      <script dangerouslySetInnerHTML={{ __html: code }} />
-    </>
-  );
+  const host = new URL(site.url).hostname;
+  const id = site.gaMeasurementId;
+  const code =
+    `(function(){if(location.hostname!==${JSON.stringify(host)})return;` +
+    `var s=document.createElement('script');s.async=true;` +
+    `s.src='https://www.googletagmanager.com/gtag/js?id=${id}';` +
+    `document.head.appendChild(s);` +
+    `gtag('js',new Date());gtag('config','${id}');})();`;
+  return <script dangerouslySetInnerHTML={{ __html: code }} />;
 }
