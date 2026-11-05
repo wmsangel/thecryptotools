@@ -29,7 +29,7 @@ export function generateMetadata({ params }: { params: { strategy: string } }): 
     title,
     description,
     alternates: { canonical: absoluteUrl(`/dca/${params.strategy}`) },
-    openGraph: { title, description, url: absoluteUrl(`/dca/${params.strategy}`), images: [ogImage("dca", name)] },
+    openGraph: { title, description, url: absoluteUrl(`/dca/${params.strategy}`), images: [ogImage(`dca/${params.strategy}`, name)] },
   };
 }
 

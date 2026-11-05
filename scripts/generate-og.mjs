@@ -344,6 +344,16 @@ async function main() {
     }
   }
 
+  // DCA strategy lab: one card per strategy page (was sharing the generic
+  // og/dca.png). The /dca hub keeps its own card in the one-off list below.
+  for (const slug of await slugsIn("dca")) {
+    add(`dca/${slug}`, async () => ({
+      eyebrow: "DCA strategy",
+      title: await titleOf(`dca/${slug}`),
+      footnote: CTA,
+    }));
+  }
+
   // One-off pages worth their own card.
   for (const [dir, eyebrow] of [
     ["portfolio", "Portfolio analysis"],
