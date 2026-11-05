@@ -21,7 +21,7 @@
 
 ## Сделано
 За ~2 недели, свежее сверху.
-- **Разобраться со всплесками 522 у Cloudflare (SEO, 2026-10-31)** (02.11) <!-- crm:0mvvxrils8b709821de05b8d8 -->
+- **Разобраться со всплесками 522 у Cloudflare (SEO, 2026-10-31)** (02.11) — причина: **legacy cPanel-поддомены в DNS, не код**. Разбивка CF (7д, 3045×522): whm. 1464, cpanel. 1273, webdisk. 290, mail. 6, webdisk.admin./www.admin. 4; apex+www = 0. Старые CNAME от прежнего хостинга смотрят на apex→Pages, не привязаны к проекту; по ним ходят сканеры (/.env, gcp-credentials.json) и ИИ-боты. Сайт статический (нет /api/прокси), прод 30/30=200. Удаление DNS-записей — действие владельца (вопрос у диспетчера). <!-- crm:0mvvxrils8b709821de05b8d8 -->
 - **Глоссарий: per-term страницы + партия 1** (01.11) — динамич. роут `/glossary/[slug]` на 42 термина (DefinedTerm + breadcrumb JSON-LD, «use it»-ссылки, related); хаб линкует, sitemap + IndexNow 42/42. Партия 1 из 11 терминов (slippage, order-book, perpetual-futures, pnl, all-time-high, tokenomics, token-burn, tvl, liquidity-pool, yield-farming, private-key); rug/prediction пропущены (AdSense-риск). Дальнейшие партии — еженедельно в очереди. `2dd7559` <!-- crm:0mvarrrg930293cc3efd83bce -->
 - **Multi-coin halving-countdown + активные аирдропы** (31.10) <!-- crm:0mvarrrg298823225cebd08d9 -->
 - **Батч утилитарных калькуляторов** (26.10) — 4 config-калькулятора (bridge-fee, nft-mint-cost, hodl-vs-sell, stablecoin-interest) через Cursor по промту; приёмка: формулы сверены, данные не выдуманы, сборка зелёная, 4 страницы на проде 200. `a18e7ef` <!-- crm:0mvarrrfaf0296db56462161b -->
