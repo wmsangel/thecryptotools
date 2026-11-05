@@ -5,7 +5,7 @@ import type { DcaStatus } from "@/lib/dca/types";
 import { SAMPLE_STATUS } from "@/lib/dca/sample";
 import Link from "next/link";
 import type { StrategyGroup } from "@/lib/dca/labels";
-import { DCA_STATUS_URL, buildGroups, coinOf, pct, usd, round, daysSince } from "@/lib/dca/labels";
+import { DCA_STATUS_URL, buildGroups, coinOf, pct, usd, round, daysSince, roiPct } from "@/lib/dca/labels";
 
 function Num({ v, kind = "usd", d = 2 }: { v: number | null | undefined; kind?: "usd" | "pct"; d?: number }) {
   const n = v ?? null;
@@ -133,6 +133,7 @@ export function DcaBoard() {
   const [sort, setSort] = useState<SortKey>("roi");
   const [view, setView] = useState<"table" | "cards">("table");
   const [family, setFamily] = useState<"all" | "new" | "classic">("all");
+  const [coin, setCoin] = useState<string>("all");
 
   useEffect(() => {
     let alive = true;
@@ -156,8 +157,36 @@ export function DcaBoard() {
   const all = status?.variants ?? [];
   const groups = useMemo(() => buildGroups(all), [all]);
 
+  // One option per coin present in the feed, by display name.
+  const coinOptions = useMemo(() => {
+    const seen = new Map<string, { ticker: string; name: string }>();
+    for (const v of all) if (!seen.has(v.symbol)) { const c = coinOf(v.symbol); seen.set(v.symbol, { ticker: c.ticker, name: c.name }); }
+    return [...seen.entries()].map(([symbol, c]) => ({ symbol, ...c })).sort((a, b) => a.name.localeCompare(b.name));
+  }, [all]);
+
   const filtered = useMemo(() => {
-    const gs = groups.filter((g) => family === "all" || (family === "new" ? g.isNew : !g.isNew));
+    let gs = groups.filter((g) => family === "all" || (family === "new" ? g.isNew : !g.isNew));
+    // Coin filter: keep only strategies that run the chosen coin, and swap the
+    // group's cross-coin aggregates for THAT coin's own numbers, so the board
+    // answers "how does this coin do in each strategy".
+    if (coin !== "all") {
+      gs = gs
+        .map((g) => {
+          const v = g.variants.find((x) => x.symbol === coin);
+          if (!v) return null;
+          return {
+            ...g,
+            variants: [v],
+            coins: 1,
+            avgRoi: roiPct(v),
+            totalRealized: v.realized_pnl || 0,
+            totalUnrealized: v.unrealized_pnl || 0,
+            totalDeals: v.deals_done || 0,
+            winrate: v.stats?.winrate_pct ?? null,
+          } as StrategyGroup;
+        })
+        .filter((g): g is StrategyGroup => g !== null);
+    }
     const key = (g: StrategyGroup) =>
       sort === "roi" ? (g.avgRoi ?? -1e9)
         : sort === "realized" ? g.totalRealized
@@ -166,7 +195,7 @@ export function DcaBoard() {
               : sort === "deals" ? g.totalDeals
                 : g.coins;
     return [...gs].sort((a, b) => key(b) - key(a));
-  }, [groups, family, sort]);
+  }, [groups, family, coin, sort]);
 
   if (loading) return <p className="text-[var(--muted)]">Loading live strategies…</p>;
   if (!status) return null;
@@ -201,6 +230,14 @@ export function DcaBoard() {
             </button>
           ))}
         </div>
+        {coinOptions.length > 1 && (
+          <select value={coin} onChange={(e) => setCoin(e.target.value)} className={selCls} aria-label="Filter by coin">
+            <option value="all">All coins</option>
+            {coinOptions.map((c) => (
+              <option key={c.symbol} value={c.symbol}>{c.name} ({c.ticker})</option>
+            ))}
+          </select>
+        )}
         {view === "cards" && (
           <select value={sort} onChange={(e) => setSort(e.target.value as SortKey)} className={selCls} aria-label="Sort by">
             <option value="roi">Sort: avg ROI</option>
@@ -217,7 +254,9 @@ export function DcaBoard() {
             </button>
           ))}
         </div>
-        <span className="ml-auto text-[var(--muted)]">{filtered.length} strategies</span>
+        <span className="ml-auto text-[var(--muted)]">
+          {filtered.length} strateg{filtered.length === 1 ? "y" : "ies"}{coin !== "all" ? ` · ${coinOf(coin).ticker}` : ""}
+        </span>
       </div>
 
       {view === "table" ? (
