@@ -130,7 +130,7 @@ export const platforms: Platform[] = [
       "KuCoin lists a very large range of small- and mid-cap tokens, making it popular with traders looking beyond the majors.",
     highlights: ["Huge altcoin listing", "Trading bots built in", "Spot & futures"],
     bonus: "Sign up & trade to unlock KuCoin welcome rewards",
-    url: "https://www.kucoin.com/en/ucenter/signup?rcode=CXEENPVN",
+    url: "https://www.kucoin.com/ucenter/signup?rcode=CXEENPVN",
   },
   {
     slug: "bitget",
