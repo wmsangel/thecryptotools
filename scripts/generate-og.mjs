@@ -365,6 +365,7 @@ async function main() {
     ["pi-cycle-top-indicator", "Bitcoin indicator"],
     ["bitcoin-stock-to-flow", "Bitcoin indicator"],
     ["grid-trading-backtest", "Backtest"],
+    ["ethereum-staking-comparison", "Staking compared"],
     ["widgets", "Embeddable widgets"],
     ["exchanges", "Platforms"],
     ["dca", "DCA strategy lab"],

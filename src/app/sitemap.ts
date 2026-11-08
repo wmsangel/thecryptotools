@@ -135,6 +135,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: absoluteUrl("/pi-cycle-top-indicator"), changeFrequency: "weekly", priority: 0.8 },
     { url: absoluteUrl("/bitcoin-stock-to-flow"), changeFrequency: "weekly", priority: 0.8 },
     { url: absoluteUrl("/grid-trading-backtest"), changeFrequency: "weekly", priority: 0.8 },
+    { url: absoluteUrl("/ethereum-staking-comparison"), changeFrequency: "monthly", priority: 0.8 },
     { url: absoluteUrl("/research"), changeFrequency: "monthly", priority: 0.7 },
     { url: absoluteUrl("/research/crypto-correlation"), changeFrequency: "monthly", priority: 0.8 },
     { url: absoluteUrl("/research/crypto-drawdowns"), changeFrequency: "monthly", priority: 0.8 },
