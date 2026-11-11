@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { site, absoluteUrl } from "@/lib/site";
 import { ogImage } from "@/lib/seo";
 import { allCoinToolPages, getCoinToolPage, pagesForCoin } from "@/lib/coins/pairs";
+import { coinToolNoindex } from "@/lib/coins/indexing";
 import { getGuidesForTool } from "@/lib/guides/registry";
 import { ToolEngine } from "@/components/ToolEngine";
 import { CoinLogo } from "@/components/CoinLogo";
@@ -38,6 +39,10 @@ export function generateMetadata({
     description,
     keywords: [...spec.keywords(coin), ...tool.seo.keywords],
     alternates: { canonical: url },
+    // Zero-demand coins (no Google impressions in 180d, no Bing query) are set
+    // noindex,follow to stop them diluting crawl budget on the head pages. See
+    // src/lib/coins/indexing.ts — reversible per coin.
+    ...(coinToolNoindex(coin.slug) ? { robots: { index: false, follow: true } } : {}),
     openGraph: { type: "website", url, title: `${title} | ${site.name}`, description, images: [ogImage(`coins/${coin.slug}/${spec.slug}`, title)] },
     twitter: { card: "summary_large_image", title, description },
   };

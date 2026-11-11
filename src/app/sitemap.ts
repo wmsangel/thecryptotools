@@ -6,6 +6,7 @@ import { glossaryTerms } from "@/lib/glossary/terms";
 import { staticPages } from "@/lib/pages/registry";
 import { sortedCoins } from "@/lib/coins/registry";
 import { allCoinToolPages } from "@/lib/coins/pairs";
+import { coinToolNoindex } from "@/lib/coins/indexing";
 import { getHistoryMeta, historyThrough } from "@/lib/backtest/history-index";
 import { CHECKED_ON } from "@/lib/compare/data";
 import { pairSlug, validPairs } from "@/lib/compare/pairs";
@@ -152,7 +153,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   // A coin×tool page moves when either half of it moves.
-  const coinToolRoutes: MetadataRoute.Sitemap = allCoinToolPages().map(({ coin, spec }) => ({
+  const coinToolRoutes: MetadataRoute.Sitemap = allCoinToolPages()
+    .filter(({ coin }) => !coinToolNoindex(coin.slug)) // keep noindexed pages out of the sitemap
+    .map(({ coin, spec }) => ({
     url: absoluteUrl(`/coins/${coin.slug}/${spec.slug}`),
     // Include historyThrough: each coin×tool page renders a CoinToolInsight block
     // derived from that price history, so its content genuinely moves with it —
