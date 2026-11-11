@@ -25,8 +25,8 @@ import { calendarEvents } from "@/lib/events/registry";
  * an explicit title rather than inheriting the generic site default.
  */
 export const metadata: Metadata = {
-  title: `Crypto Calculator — ${tools.length}+ Free Crypto Calculators & Tools`,
-  description: `Free crypto calculator suite: profit, DCA, market cap, liquidation, staking and ${tools.length}+ more crypto trading calculators. No signup, runs in your browser.`,
+  title: `Crypto Calculator — ${tools.length}+ Free Tools: Profit, DCA, Tax`,
+  description: `Free crypto calculators — profit & ROI, DCA, market cap, liquidation, staking, tax and ${tools.length}+ more. No signup, nothing uploaded, works in your browser.`,
   alternates: { canonical: absoluteUrl("/") },
   openGraph: {
     type: "website",
