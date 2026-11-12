@@ -8,7 +8,8 @@ const guide: Guide = {
   description:
     "Which hardware wallet should you actually buy? What separates the main options — Ledger, Trezor, Tangem and air-gapped devices — on security model, openness, coin support and who each one is really for.",
   readingMinutes: 9,
-  updatedAt: "2026-08-27",
+  updatedAt: "2026-11-12",
+  reviewedAt: "2026-11-12",
   seo: {
     keywords: [
       "best hardware wallet",
@@ -77,12 +78,14 @@ const guide: Guide = {
     { type: "h2", text: "Air-gapped devices — for Bitcoin maximalists" },
     { type: "p", text: "Coldcard (Bitcoin-only) and Keystone (multi-chain) never physically connect to a computer — they sign transactions offline and pass them back and forth by QR code or microSD. That removes an entire class of attack, at the cost of a steeper learning curve. If you hold a large Bitcoin position and want the most defensive setup, this is the category to look at; for most people it is more than they need." },
 
+    { type: "callout", text: "⚠️ Coldcard seed-generation advisory (2026). Coinkite disclosed a firmware bug that weakened seed generation on affected COLDCARD firmware: Mk2/Mk3 4.0.1–4.1.9, Mk4/Mk5 before 5.6.0 (Edge before 6.6.0X), and Q before 1.5.0Q (Edge before 6.6.0QX). The devices were not hacked — attackers could regenerate private keys offline from the weak seeds. If you set up a COLDCARD on affected firmware, update to the fixed release and generate a NEW seed, then move your funds: updating does not repair a seed already created. A seed made with at least 50 fair, private dice rolls is not affected by this issue. Primary source: [Coinkite's official Coldcard Security Advisory](https://blog.coinkite.com/coldcard-mk3-seed-generation-warning/). Verified 2026-11-12." },
+
     { type: "h2", text: "How to choose — and what to do next" },
     { type: "ul", items: [
       "Broad multi-chain holdings or DeFi across ecosystems → **Ledger**, for the app breadth.",
       "You want fully open, auditable hardware, or you are Bitcoin-and-privacy focused → **Trezor**.",
       "First cold wallet, small balance, minimal fuss → **Tangem**.",
-      "Large Bitcoin holding, maximum defence → an **air-gapped** device like Coldcard.",
+      "Large Bitcoin holding, maximum defence → an **air-gapped** device — Coldcard (set it up on current, fixed firmware; see the advisory above) or Keystone.",
     ] },
     { type: "p", text: "Whichever you pick, the device is only half the job. The other half — the half that actually loses people their crypto — is the backup. Once it arrives, generate your own phrase, [store the seed phrase on metal in two places](/guides/how-to-store-a-seed-phrase), and **test recovery before funding it**. Then [move your crypto off the exchange](/guides/how-to-move-crypto-off-an-exchange) with a small test transaction first. This is general information, not financial advice." },
   ],
