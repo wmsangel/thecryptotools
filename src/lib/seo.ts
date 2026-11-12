@@ -27,7 +27,10 @@ export function buildBaseMetadata(): Metadata {
     metadataBase: new URL(site.url),
     title: {
       default: `${site.name} — ${site.tagline}`,
-      template: `%s | ${site.name}`,
+      // No " | TheCryptoTools" suffix: it added 17 chars to every page title and
+      // pushed ~155 of them past the ~60-char limit (Bing "Title too long").
+      // The brand still shows as the domain in the SERP; the title keeps the query.
+      template: `%s`,
     },
     description: site.description,
     keywords: [...site.keywords],

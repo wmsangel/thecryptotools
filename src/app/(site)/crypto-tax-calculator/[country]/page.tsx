@@ -26,7 +26,7 @@ export function generateMetadata({ params }: { params: { country: string } }): M
   const c = getCountryCalculator(params.country);
   if (!c) return {};
   const { meta, jurisdiction: j } = c;
-  const title = `${j.name} Crypto Tax Calculator (${TAX_YEAR}) — Capital Gains Estimate`;
+  const title = `${j.name} Crypto Tax Calculator (${TAX_YEAR})`;
   const description = `Estimate crypto capital gains tax in ${j.name}. ${meta.hook}`;
   const path = `/crypto-tax-calculator/${meta.slug}`;
   return {
