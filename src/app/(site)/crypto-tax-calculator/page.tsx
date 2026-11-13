@@ -12,7 +12,7 @@ const path = "/crypto-tax-calculator";
 export const metadata: Metadata = {
   title: `Crypto Tax Calculator by Country (${TAX_YEAR}) — ${countryCalculators.length} Countries`,
   description:
-    "Free crypto capital gains tax calculators for 12 countries. Each applies that country's real rules — holding-period relief, allowances and rates — then funnels to a full CSV report.",
+    "Free crypto capital-gains tax calculators for 12 countries — each applies its real holding relief, allowances and rates, then links to a full CSV report.",
   keywords: [
     "crypto tax calculator by country",
     "crypto capital gains tax calculator",

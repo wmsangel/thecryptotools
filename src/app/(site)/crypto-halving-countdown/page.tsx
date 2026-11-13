@@ -15,7 +15,7 @@ const coinList = halvingData.map((h) => h.name).join(", ").replace(/, ([^,]*)$/,
 export const metadata: Metadata = {
   title: "Crypto Halving Countdown — Bitcoin, Litecoin, Bitcoin Cash & Zcash",
   description:
-    "Live halving countdowns for Bitcoin, Litecoin, Bitcoin Cash and Zcash, each estimated from the chain's current block height — with the block, reward change and source shown. Dates drift, so every one is marked an estimate.",
+    "Live halving countdowns for Bitcoin, Litecoin, Bitcoin Cash and Zcash — each estimated from the chain's current block height, with the block and source shown.",
   keywords: [
     "crypto halving countdown",
     "bitcoin halving countdown",

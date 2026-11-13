@@ -11,7 +11,7 @@ import { StakingComparison } from "./StakingComparison";
 const PATH = "/ethereum-staking-comparison";
 const TITLE = "Ethereum Staking: Solo vs Pooled vs Liquid vs Exchange";
 const DESC =
-  "Compare the four ways to stake Ethereum — solo, pooled / staking-as-a-service, liquid staking and exchange staking — on net yield, fees, custody, liquidity and slashing risk, with a calculator that runs your own ETH through each.";
+  "Compare the four ways to stake Ethereum — solo, pooled, liquid and exchange — on net yield, fees, custody and risk, with a calculator for your own ETH.";
 
 export const metadata: Metadata = {
   title: TITLE,
