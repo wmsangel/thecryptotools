@@ -133,6 +133,42 @@ export default function Page() {
         </p>
       </section>
 
+      <section className="mt-12 max-w-3xl">
+        <h2 className="text-2xl font-extrabold tracking-tight sm:text-3xl">Staking yield vs L2 and DeFi yield</h2>
+        <p className="muted mt-4 leading-relaxed">
+          Base-layer ETH staking is the floor, not the ceiling. It pays a relatively low,
+          protocol-backed yield — roughly 3% before fees at typical participation — and the only
+          risk you take is ETH&apos;s own price. Every higher number you see advertised on an L2 or in
+          DeFi is buying that extra yield with extra risk, so the honest comparison is never headline
+          vs headline — it is <strong>yield per unit of risk</strong>.
+        </p>
+        <ul className="mt-5 space-y-3">
+          <li className="flex gap-3 leading-relaxed">
+            <span className="mt-1 select-none text-brand-ink" aria-hidden>▸</span>
+            <span className="muted"><strong className="text-[var(--text)]">Base staking (~3%)</strong> — protocol-issued, paid in ETH, no smart-contract counterparty. The lowest-risk way to earn on ETH, and the benchmark everything else should beat <em>after</em> accounting for risk.</span>
+          </li>
+          <li className="flex gap-3 leading-relaxed">
+            <span className="mt-1 select-none text-brand-ink" aria-hidden>▸</span>
+            <span className="muted"><strong className="text-[var(--text)]">Liquid staking (stETH, rETH)</strong> — the same staking yield minus a protocol fee, but your position becomes a token you can lend or LP for extra yield. That stacking adds smart-contract risk and a small chance the token trades off its peg. See <Link href="/guides/liquid-staking-explained" className="underline">liquid staking explained</Link> for how the peg and withdrawal queue actually work.</span>
+          </li>
+          <li className="flex gap-3 leading-relaxed">
+            <span className="mt-1 select-none text-brand-ink" aria-hidden>▸</span>
+            <span className="muted"><strong className="text-[var(--text)]">L2 and DeFi yield</strong> — lending, liquidity pools and farms on Arbitrum, Base and the rest can pay far more, but the return often comes in a volatile incentive token, carries impermanent-loss and bridge risk, and can evaporate when the incentive program ends. Treat a 15% farm as a 3% staking yield plus a 12% risk premium you are being paid to take — and decide if you want that risk.</span>
+          </li>
+          <li className="flex gap-3 leading-relaxed">
+            <span className="mt-1 select-none text-brand-ink" aria-hidden>▸</span>
+            <span className="muted"><strong className="text-[var(--text)]">Restaking (EigenLayer and similar)</strong> — stacks another reward layer on staked ETH by securing extra services, and with it another layer of slashing conditions. More yield, more ways to lose principal.</span>
+          </li>
+        </ul>
+        <p className="muted mt-5 leading-relaxed">
+          A sane way to read any crypto yield: start from the ~3% ETH staking floor, then ask what each
+          extra percentage point is compensating you for. If you cannot name the risk, you are not being
+          paid a premium — you are mispricing one. Run the staking number first in the{" "}
+          <Link href="/tools/staking-rewards-calculator" className="underline">staking rewards calculator</Link>,
+          then judge any DeFi offer against it rather than against zero.
+        </p>
+      </section>
+
       <div className="max-w-3xl">
         <FaqSection faq={FAQ} />
       </div>
