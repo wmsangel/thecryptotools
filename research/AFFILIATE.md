@@ -78,6 +78,25 @@
 
 После регистраций/одобрений — размещаю с пометкой рекламы: налоговые рядом с `/crypto-tax-report` и CSV-сверкой, кошельки в гайдах и balance-checker.
 
+## Tangem (прямая партнёрка — ПЕРЕГОВОРЫ 16.11)
+
+Кошелёк-карта (NFC, без seed-фразы). Менеджер: **Alex Shulha, Influencer Manager**. Владелец отвечает сам, диспетчер готовит письмо.
+
+- **Условия (письмо 16.11):** $10 за кошелёк по реф-ссылке; квартальные бонусы; **30% rev-share** с in-app сервисов приведённых пользователей; для нашей аудитории скидка 10% + $5–20 в BTC; бесплатные устройства на обзор. Просят ссылки на каналы.
+- **Статус:** переговоры 16.11 (реф-ссылка/дашборд ещё не пришли).
+- **sub-id:** узнаем из ответа Tangem (параметр в реф-ссылке). До этого — атрибуция через наш GA4 `affiliate_click[placement]` + edge `/go/tangem`.
+- **Интеграция (когда придёт ссылка):** вписать реф-ссылку в `platforms.ts` (slug `tangem`, сейчас голый `https://tangem.com` → не earning) → активирует `/go/tangem` и **авто-зажигает CTA на всех гайдах с `affiliate:"wallet"`** (Tangem войдёт в ротацию wallet-партнёров рядом с Ledger/Trezor/SafePal).
+- **План размещения (естественные страницы, все на проде):**
+  - `/guides/best-crypto-hardware-wallets/` (главный гайд-кошельки)
+  - `/compare/trezor-vs-tangem/` (уже есть) — усилить Tangem
+  - `/guides/how-to-choose-a-hardware-wallet/`
+  - `/guides/hot-wallet-vs-cold-wallet/`
+  - `/guides/crypto-wallet-security/`
+  - `/guides/how-to-store-a-seed-phrase/` (Tangem = no-seed-phrase угол, естественно)
+  - **balance-checker** (РОВ #1, план 01.12) — CTA «защити ключи»
+  - кандидат на новую страницу: `/compare/ledger-vs-tangem/` (пары нет, спрос Bing «ledger vs trezor vs tangem» поз10)
+- **AdSense:** кошельки/безопасность — ок; без обещаний доходности.
+
 ## WunderTrading (прямая партнёрка — РАЗМЕЩЕНО 16.11)
 
 Платформа автоматизации трейдинга (DCA, grid, копитрейдинг; подключается к бирже по API). Реф-ссылка от владельца.
