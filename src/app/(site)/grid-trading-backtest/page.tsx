@@ -7,6 +7,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { FaqSection } from "@/components/FaqSection";
 import { AdSlot } from "@/components/ads/AdSlot";
 import { GuideAffiliateCTA } from "@/components/guides/GuideAffiliateCTA";
+import { WunderTradingCTA } from "@/components/WunderTradingCTA";
 import { historyThrough } from "@/lib/backtest/history-index";
 import { GridBacktestApp } from "./GridBacktestApp";
 import { coinOptions } from "./options";
@@ -140,6 +141,10 @@ export default function GridBacktestPage() {
           </p>
         </div>
       </section>
+
+      <div className="mx-auto max-w-3xl">
+        <WunderTradingCTA placement="grid-backtest" />
+      </div>
 
       <div className="mx-auto mt-10 max-w-3xl">
         <AdSlot slot="grid-backtest-below" className="my-2" />

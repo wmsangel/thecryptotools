@@ -78,10 +78,29 @@
 
 После регистраций/одобрений — размещаю с пометкой рекламы: налоговые рядом с `/crypto-tax-report` и CSV-сверкой, кошельки в гайдах и balance-checker.
 
+## WunderTrading (прямая партнёрка — РАЗМЕЩЕНО 16.11)
+
+Платформа автоматизации трейдинга (DCA, grid, копитрейдинг; подключается к бирже по API). Реф-ссылка от владельца.
+
+- **Ссылка:** `https://wundertrading.com/en/register?ref=wbt6a5241dcdff1c7df` → в `platforms.ts` (slug `wundertrading`, категория `trading`) → `/go/wundertrading`.
+- **Ставка:** 30–50% lifetime recurring (растёт с числом активных подписчиков; источник — wundertrading.com/affiliates). Cookie — не раскрыт.
+- **Sub-id:** отдельного параметра у WunderTrading нет (только `ref`). Пер-страничная атрибуция — через наш GA4 `affiliate_click[placement]` (data-affiliate) + edge-счёт по `/go/*`. Если позже найдётся sub-id-параметр — добавить в ссылку.
+- **Где стоит** (компонент `WunderTradingCTA`, пометка «Partner · Ad» + дисклеймер риска, НЕ на главной):
+  - `/dca` (lab), placement `dca-lab`
+  - `/grid-trading-backtest`, placement `grid-backtest`
+  - `/tools/dca-calculator`, placement `tool-dca-calculator`
+  - `/tools/dca-vs-lump-sum-calculator`, placement `tool-dca-vs-lump-sum-calculator`
+  - `/guides/grid-trading-explained`, placement `guide-grid-trading-explained`
+  - плюс карточка в категории Trading на `/exchanges`.
+  - НЕ дублировал на страницах, где уже есть `affiliate:"bot"` CTA (встроенные боты бирж): grid-calculator, dca-bot-calculator, гайды crypto-trading-bots-explained / best-crypto-grid-trading-bots — чтобы не стакать два бот-блока.
+- **AdSense:** без обещаний доходности и «гарантий»; рядом дисклеймер риска («bot does not guarantee profit… not financial advice»).
+- **Клик-тест (прод, 16.11):** `/go/wundertrading` → HTTP 302 → `…register?ref=wbt6a5241dcdff1c7df` ✓; CTA live на `/dca` (200). Коммит — ниже.
+
 ## Журнал
 
 - 16.11.2026 — файл заведён; предв. research по сетям (ниже источники). Chrome-работа (property + заявки) запланирована на 20.11.
 - 16.11.2026 — решения владельца по прямому треку: Impact-аккаунт есть (КГ в списке) → Ledger+CoinTracker подаёт сессия 20.11 вместе с CJ/Awin (sub-id `subId1`). Koinly/CoinLedger регистрирует владелец сам с гейтом «если выплата проходит» (PayPal в КГ нет) — после пинга заявки/ссылки мои. Trezor отложен в пакет с Tangem. Раздел «Прямой трек» перестроен.
+- 16.11.2026 — **WunderTrading размещён** (прямая реф-ссылка владельца): platforms.ts + `/go/wundertrading`, компонент `WunderTradingCTA` на 5 страницах + карточка /exchanges. Клик-тест прод 302→ref ✓. Детали — секция выше.
 - 16.11.2026 — **поправка:** Impact отклонил аккаунт владельца (Declined, «do not qualify»). Impact убран: property не добавляем, заявки не подаём. Ledger → только in-house (affiliate.ledger.com, выплата BTC — проверить, устраивает ли; регистрирует владелец). CoinTracker → напрямую через cointracker.io (сессия проверяет 20.11, открыта ли). Остальное без изменений.
 
 ### Источники research 16.11

@@ -12,7 +12,14 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { renderInline } from "@/components/RichText";
 import { AdSlot } from "@/components/ads/AdSlot";
 import { GuideAffiliateCTA } from "@/components/guides/GuideAffiliateCTA";
+import { WunderTradingCTA } from "@/components/WunderTradingCTA";
 import { AmazonPicks } from "@/components/AmazonPicks";
+
+/**
+ * Strategy guides that get the WunderTrading automation CTA. Only guides that do
+ * NOT already show a "bot" GuideAffiliateCTA, so no page stacks two bot boxes.
+ */
+const WUNDER_GUIDE_SLUGS = new Set(["grid-trading-explained"]);
 import { GuideScrollDepth } from "@/components/analytics/GuideScrollDepth";
 
 export const dynamicParams = false;
@@ -350,6 +357,7 @@ export default function GuidePage({ params }: { params: { slug: string } }) {
       </div>
 
       {guide.affiliate && <GuideAffiliateCTA kind={guide.affiliate} />}
+      {WUNDER_GUIDE_SLUGS.has(guide.slug) && <WunderTradingCTA placement={`guide-${guide.slug}`} />}
       {guide.amazon && <AmazonPicks topic={guide.amazon} placement={`guide-amazon-${guide.slug}`} />}
 
       {guide.faq && guide.faq.length > 0 && (

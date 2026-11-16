@@ -4,6 +4,7 @@ import { absoluteUrl } from "@/lib/site";
 import { ogImage, breadcrumbJsonLd } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { AdSlot } from "@/components/ads/AdSlot";
+import { WunderTradingCTA } from "@/components/WunderTradingCTA";
 import { DcaBoard } from "./DcaBoard";
 import { getStrategyGroups } from "@/lib/dca/build-snapshot";
 import { strategyTypes } from "@/lib/dca/strategy-types";
@@ -80,6 +81,8 @@ export default function DcaPage() {
         <div className="mt-8">
           <DcaBoard />
         </div>
+
+        <WunderTradingCTA placement="dca-lab" />
 
         <AdSlot slot="dca-mid" className="mt-12" />
 

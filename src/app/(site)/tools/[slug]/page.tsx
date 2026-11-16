@@ -18,7 +18,15 @@ import { renderInline } from "@/components/RichText";
 import { AdSlot, AffiliateBanner } from "@/components/ads/AdSlot";
 import { tradeContextForTool } from "@/lib/affiliate";
 import { GuideAffiliateCTA } from "@/components/guides/GuideAffiliateCTA";
+import { WunderTradingCTA } from "@/components/WunderTradingCTA";
 import { BuyCryptoCTA } from "@/components/BuyCryptoCTA";
+
+/**
+ * DCA calculators that don't already declare `affiliate: "bot"` (which shows the
+ * free built-in-bot exchange CTA). These get the WunderTrading third-party
+ * automation CTA instead, so no tool stacks two partner boxes.
+ */
+const WUNDER_TOOL_SLUGS = new Set(["dca-calculator", "dca-vs-lump-sum-calculator"]);
 
 export const dynamicParams = false;
 
@@ -119,6 +127,8 @@ export default function ToolPage({ params }: { params: { slug: string } }) {
                 affiliate clicks). It has no natural partner category, so it gets a
                 dedicated, geo-aware "real wallet / where to buy" block. */}
             {tool.slug === "fake-wallet-generator" && <BuyCryptoCTA />}
+
+            {WUNDER_TOOL_SLUGS.has(tool.slug) && <WunderTradingCTA placement={`tool-${tool.slug}`} />}
 
             {coinVersions.length > 0 && (
               <section className="mt-10">

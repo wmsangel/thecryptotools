@@ -442,6 +442,19 @@ export const platforms: Platform[] = [
     bonus: "Start a free trial of Cryptohopper's cloud bots",
     url: "https://www.cryptohopper.com/?atid=41091",
   },
+  {
+    slug: "wundertrading",
+    name: "WunderTrading",
+    category: "trading",
+    icon: "⚙️",
+    tagline: "Automated DCA, grid & copy-trading bots",
+    bestFor: "DCA & grid automation",
+    description:
+      "WunderTrading connects to your exchange via API to run DCA, grid and copy-trading bots from one dashboard, while your funds stay on the exchange you already use.",
+    highlights: ["DCA, grid & copy-trading bots", "Connects to major exchanges", "Backtesting & paper trading"],
+    bonus: "Automate DCA, grid and copy-trading from one dashboard",
+    url: "https://wundertrading.com/en/register?ref=wbt6a5241dcdff1c7df",
+  },
 
   // ---- Earn / borrow / cards ----------------------------------------------
   {
