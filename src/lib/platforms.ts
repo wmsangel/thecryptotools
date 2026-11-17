@@ -277,8 +277,8 @@ export const platforms: Platform[] = [
     description:
       "Tangem is a card-shaped hardware wallet you tap to your phone over NFC — no cables, no battery, backed by a secure chip.",
     highlights: ["Card form factor", "No cables or charging", "Backup card sets"],
-    bonus: "Simple tap-to-use NFC cold storage",
-    url: "https://tangem.com",
+    bonus: "10% off with promo code CR6QNX (+ extra 10% in-app)",
+    url: "https://tangem.com/meet-tangem/?promocode=CR6QNX",
   },
   {
     slug: "safepal",
