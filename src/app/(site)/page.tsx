@@ -362,6 +362,12 @@ export default function HomePage() {
                   </li>
                 ))}
               </ul>
+              <Link
+                href="/crypto-calculator"
+                className="mt-4 inline-flex text-sm font-semibold text-brand-ink hover:underline"
+              >
+                → Open the crypto calculator hub
+              </Link>
             </div>
           </div>
         </section>

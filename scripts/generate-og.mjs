@@ -370,6 +370,7 @@ async function main() {
     ["exchanges", "Platforms"],
     ["dca", "DCA strategy lab"],
     ["prices", "Live prices"],
+    ["crypto-calculator", "Crypto calculators"],
     ["donate", "Donate"],
     // Section indexes. `og/coins.png` sits happily alongside the `og/coins/`
     // directory holding the per-coin cards.
