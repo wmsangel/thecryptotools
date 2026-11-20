@@ -62,6 +62,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1,
     },
     { url: absoluteUrl("/tools"), lastModified: newestTool, changeFrequency: "daily", priority: 0.9 },
+    // Calculator hub — a head-term landing that lists existing calculators, so
+    // it is as fresh as the newest tool it points to (same reasoning as /tools).
+    { url: absoluteUrl("/crypto-calculator"), lastModified: newestTool, changeFrequency: "weekly", priority: 0.9 },
     { url: absoluteUrl("/guides"), lastModified: newestGuide, changeFrequency: "weekly", priority: 0.7 },
     { url: absoluteUrl("/coins"), lastModified: newestCoin, changeFrequency: "weekly", priority: 0.8 },
     // Dated by the price history it replays, not by the build — the page's

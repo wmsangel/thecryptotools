@@ -38,7 +38,20 @@ export function OutboundTracker() {
         const m = (link.getAttribute("href") || "").match(/\/go\/([a-z0-9-]+)\/?/i);
         if (m) platform = m[1];
       }
-      if (!platform) return; // not an affiliate link
+      if (!platform) {
+        // Not an affiliate link — but if it leaves the site, record a generic
+        // outbound_click{host} (network event standard). Host only, no path or
+        // query, so no personal data. Respects Consent Mode via track().
+        try {
+          const u = new URL(link.getAttribute("href") || "", window.location.href);
+          if (u.host && u.host !== window.location.host && /^https?:$/.test(u.protocol)) {
+            track("outbound_click", { host: u.host, page_path: window.location.pathname });
+          }
+        } catch {
+          // A malformed href must never break the page.
+        }
+        return;
+      }
       track("affiliate_click", {
         platform,
         placement: link.dataset.affiliatePlacement ?? "link",

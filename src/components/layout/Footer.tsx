@@ -91,6 +91,16 @@ export function Footer() {
         <div className="muted mt-8 space-y-2 border-t border-[var(--border)] pt-6 text-xs">
           <p>
             © {`${new Date().getFullYear()} `}{site.name}. Free crypto tools for education only — not financial advice.
+            {" · "}
+            Made by{" "}
+            <a
+              href="https://izagorodnyi.dev"
+              target="_blank"
+              rel="nofollow noopener noreferrer"
+              className="hover:text-brand-ink underline"
+            >
+              izagorodnyi.dev
+            </a>
           </p>
           <p>
             Some links to exchanges and wallets are affiliate links: we may earn a commission at
