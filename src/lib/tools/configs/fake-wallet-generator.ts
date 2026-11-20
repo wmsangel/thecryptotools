@@ -182,6 +182,22 @@ const tool: ToolConfig = {
       type: "p",
       text: "If you want a real wallet, use a reputable self-custody wallet app, and back up your recovery phrase offline — never on a web page. This tool is for test data only.",
     },
+    { type: "h2", text: "Do not use this to fake earnings — that is fraud" },
+    {
+      type: "p",
+      text: "A picture of a wallet is a mockup, not a receipt. Presenting a generated balance as your real holdings — to lure someone into an 'investment', to 'prove' trading profits, or to back a giveaway or recovery scam — is fraud, and it is exactly the misuse this tool is not for. Every image the studio produces is labelled 'sample · not a real balance' along the bottom.",
+    },
+    { type: "h2", text: "How to spot a fake balance screenshot" },
+    {
+      type: "ul",
+      items: [
+        "Ask for an on-chain link, not an image — a real balance can be verified on a block explorer from its address, while a screenshot proves nothing.",
+        "Look for a watermark or suspiciously round, too-good numbers; many fakes (this one included, by design) are visibly marked.",
+        "Check the address actually resolves and holds what the image claims — a format-valid address with no matching on-chain history is a placeholder, not an account.",
+        "Be wary of anyone showing 'profit' screenshots to get you to send money, join a paid signal group, or pay a 'withdrawal fee' — that is the classic investment-scam script.",
+        "A reverse-image search or a look at the file's edit history can expose a reused or doctored screenshot.",
+      ],
+    },
   ],
   faq: [
     {

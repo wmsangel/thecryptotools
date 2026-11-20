@@ -327,7 +327,12 @@ function StudioLayout({
           {actions}
           <p className="muted text-xs leading-relaxed">
             Everything is generated at random in your browser — nothing is saved or sent anywhere, and no
-            private key exists. Sample data for mockups, screenshots and demos only.
+            private key exists. Sample data for mockups, screenshots and demos only. Every image is labelled
+            &ldquo;sample · not a real balance&rdquo; along the bottom.
+          </p>
+          <p className="rounded-lg border border-[color:var(--neg,#e23a4e)]/40 bg-[color:var(--neg,#e23a4e)]/5 px-3 py-2 text-xs font-medium leading-relaxed text-[var(--text)]">
+            ⚠ Do not use a generated image to deceive anyone. Passing off a fake balance, profit or wallet
+            as real — to lure investment, &ldquo;prove&rdquo; earnings or scam someone — is fraud and is against our terms.
           </p>
         </form>
       </div>

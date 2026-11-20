@@ -664,6 +664,30 @@ export function drawPortfolio(ctx: CanvasRenderingContext2D, size: Size, vm: Por
   }
 }
 
+/* ----------------------------------------------------- sample label --- */
+
+/**
+ * A small "sample" label along the BOTTOM backdrop strip of every image (both
+ * the on-page preview and the downloaded PNG — the same canvas). Deliberately
+ * NOT an overlay across the mockup: the design is meant to stay usable for the
+ * legitimate cases (UI mockups, demos, pranks/giveaways), so the label sits in
+ * the padding below the device, not over the content. It still makes clear the
+ * image is not a real balance. Owner decision 20.11.2026.
+ */
+function drawSampleLabel(ctx: CanvasRenderingContext2D, size: Size) {
+  ctx.save();
+  ctx.font = `600 11px ${SANS}`;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillStyle = "rgba(255,255,255,0.45)";
+  // The backdrop is dark on four of five themes; a soft shadow keeps it legible
+  // on the light theme too, without a heavy box over the artwork.
+  ctx.shadowColor = "rgba(0,0,0,0.35)";
+  ctx.shadowBlur = 3;
+  ctx.fillText("Sample image · for entertainment / mockups only · not a real balance", size.w / 2, size.h - 12);
+  ctx.restore();
+}
+
 /* ------------------------------------------------------------- render --- */
 
 export interface RenderOpts {
@@ -685,6 +709,8 @@ export function render(canvas: HTMLCanvasElement, opts: RenderOpts, scale = 2): 
   ctx.textBaseline = "alphabetic";
   if (opts.kind === "wallet") drawWallet(ctx, size, opts.vm as WalletVM, opts.theme, opts.device);
   else drawPortfolio(ctx, size, opts.vm as PortfolioVM, opts.theme, opts.device);
+  // Always last, so the preview matches the export.
+  drawSampleLabel(ctx, size);
   return size;
 }
 
