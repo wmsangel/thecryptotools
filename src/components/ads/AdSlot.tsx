@@ -17,6 +17,7 @@
  */
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { CONSENT_CHANGED_EVENT, readConsent, type Consent } from "@/lib/consent";
 import { site } from "@/lib/site";
 import { defaultHouseAd, houseAdFor, type HouseAd as HouseAdData } from "@/lib/house-ads";
@@ -89,8 +90,19 @@ export function AdSlot({
     );
   }
 
-  // AdSense not live for this slot: fill it with a cross-promo of a sister site
-  // rather than an empty placeholder. Never sets a cookie, so no consent gate.
+  // AdSense not live for this slot: a cross-promo of a sister site — but ONLY on
+  // the home page and /about (owner decision 2026-11-24: links to other sites of
+  // the network must not run sitewide). Everywhere else the slot stays empty until
+  // AdSense fills it. Never sets a cookie, so no consent gate.
+  return <HouseAdOnAllowedPage slot={slot} className={className} />;
+}
+
+/** House ads are allowed on the home page and /about only. */
+const HOUSE_AD_PATHS = new Set(["/", "/about"]);
+
+function HouseAdOnAllowedPage({ slot, className = "" }: { slot: string; className?: string }) {
+  const path = (usePathname() || "/").replace(/\/+$/, "") || "/";
+  if (!HOUSE_AD_PATHS.has(path)) return null;
   return <HouseAd slot={slot} className={className} />;
 }
 

@@ -24,9 +24,12 @@
  * scripts/build-go-redirects.ts from platforms.ts. This function replaces the
  * old static `/go/*` rules in _redirects (which would shadow it — none remain).
  *
- * Counting: 302 = a click we passed to the partner, 204 = refused. Both are
- * visible per path in Cloudflare's edge analytics; the reason is console-logged
- * (id + reason only — never headers, never cookies).
+ * Counting (no D1 — decision 2026-11-27): every verdict is sent to the network's
+ * cookieless beacon as `go_hit{reason, net, offer}` — reason "click" for a pass
+ * or the refusal reason ("bot-ua", "no-user-gesture", "no-token", …), net the
+ * network family, offer the /go id. It lands in stats.db with the other beacon
+ * events. Never headers, cookies, IPs or the user agent. 302 = click we passed,
+ * 204 = refused; both also show per path in Cloudflare's edge analytics.
  */
 import MAP from "../../src/lib/go-map.generated.json";
 import { goTokenValid } from "../../src/lib/go-token.ts";
@@ -56,9 +59,28 @@ function sendsUserHeader(ua) {
   return false;
 }
 
-function refuse(id, reason) {
-  console.log(JSON.stringify({ go: id, refused: reason }));
-  return new Response(null, { status: 204, headers: NOINDEX });
+/**
+ * Report one verdict to the beacon, fire-and-forget (waitUntil): counting must
+ * never decide or delay the answer. The Origin is ours, so the collector books it
+ * under thecryptotools.com; a plain browser-shaped UA because the collector drops
+ * anything that looks like a bot, and this is our own function reporting its own
+ * decision.
+ */
+function count(waitUntil, id, net, reason) {
+  try {
+    const task = fetch("https://b.izntools.com/e", {
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain",
+        Origin: "https://thecryptotools.com",
+        "User-Agent": "Mozilla/5.0 (thecryptotools go-gate)",
+      },
+      body: JSON.stringify({ e: "go_hit", p: "/go", d: { reason, net, offer: id.slice(0, 40) } }),
+    }).catch(() => undefined);
+    waitUntil(task);
+  } catch {
+    /* counting must never decide the answer */
+  }
 }
 
 /** Append the network's sub-id parameter, where the network has one. */
@@ -70,11 +92,16 @@ function withSub(url, net, slug) {
   return u.toString();
 }
 
-export async function onRequest({ request, params }) {
+export async function onRequest({ request, params, waitUntil }) {
   const segs = Array.isArray(params.path) ? params.path : [params.path];
   const id = (segs.find((s) => s) || "").toLowerCase();
   const entry = Object.prototype.hasOwnProperty.call(MAP, id) ? MAP[id] : null;
   if (!entry) return new Response("Not found", { status: 404, headers: NOINDEX });
+  const net = entry.n || "direct";
+  const refuse = (_id, reason) => {
+    count(waitUntil, id, net, reason);
+    return new Response(null, { status: 204, headers: NOINDEX });
+  };
   if (request.method !== "GET") return refuse(id, "method");
 
   const h = request.headers;
@@ -128,6 +155,6 @@ export async function onRequest({ request, params }) {
   } else {
     dest = withSub(entry.u, entry.n, slug);
   }
-  console.log(JSON.stringify({ go: id, ok: 1 }));
+  count(waitUntil, id, net, "click");
   return new Response(null, { status: 302, headers: { Location: dest, ...NOINDEX } });
 }
