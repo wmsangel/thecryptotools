@@ -5,6 +5,7 @@ import Link from "next/link";
 import { EXCHANGE_FEES, FEES_AS_OF, feeBand, type ExchangeFee } from "@/lib/fee-compare";
 import { platforms } from "@/lib/platforms";
 import { platformLink } from "@/lib/affiliate";
+import { goProps } from "@/lib/go-link";
 
 const PLAT_BY_SLUG = new Map(platforms.map((p) => [p.slug, p]));
 
@@ -181,11 +182,7 @@ function Row({ f }: { f: ExchangeFee }) {
       <td className="px-4 py-3 text-right">
         {earns ? (
           <a
-            href={`/go/${f.slug}`}
-            target="_blank"
-            rel="sponsored nofollow noopener noreferrer"
-            data-affiliate={f.slug}
-            data-affiliate-placement="fee-compare"
+            {...goProps(f.slug, "fee-compare")}
             className="btn-primary !px-3 !py-1.5 text-xs"
           >
             Trade →

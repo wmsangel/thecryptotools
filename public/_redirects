@@ -32,20 +32,13 @@
 /tools/halving-countdown   /tools/bitcoin-halving-countdown/  301
 /tools/halving-countdown/  /tools/bitcoin-halving-countdown/  301
 
-# --- Manual affiliate /go redirects (network offers not in platforms.ts) ------
-# Edge-tracked via the /go/* path like our platform links. Keep the destination
-# as the network's exact tracking URL.
-# Both with and without trailing slash: in-body guide links render via Next
-# <Link> and get a trailing slash (trailingSlash: true), while plain <a> CTAs
-# don't — cover both so neither 404s.
-/go/2ndnumber    https://qbzdl.com/g/q9khw5u698ff871df07d7c1db20106/  302
-/go/2ndnumber/   https://qbzdl.com/g/q9khw5u698ff871df07d7c1db20106/  302
-/go/ishosting    https://xcdus.com/g/t7pdcms1vhff871df07df6378a678b/  302
-/go/ishosting/   https://xcdus.com/g/t7pdcms1vhff871df07df6378a678b/  302
-/go/protonvpn    https://ntzgd.com/g/px9exodsjkff871df07d08612d8f27/  302
-/go/protonvpn/   https://ntzgd.com/g/px9exodsjkff871df07d08612d8f27/  302
-/go/expressvpn   https://gettracker.net/6ac88e36883aa  302
-/go/expressvpn/  https://gettracker.net/6ac88e36883aa  302
+# --- /go affiliate redirects: NOT here -----------------------------------------
+# /go/<id> is served by the Pages Function functions/go/[[path]].js (gesture gate
+# + signed click-time token; destinations in src/lib/go-map.generated.json, built
+# by scripts/build-go-redirects.ts from platforms.ts). A static /go/* rule in this
+# file would run BEFORE the function and bypass the gate, so none may be added —
+# the build fails if one appears. Manual offers (2ndnumber, ishosting, protonvpn,
+# expressvpn) live in EXTRA inside that script.
 
 # --- DCA slug stabilisation (2026-10-14) --------------------------------------
 # Old DCA config slugs collided and got order-unstable "-x" suffixes; they now

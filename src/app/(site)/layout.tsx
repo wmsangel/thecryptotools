@@ -8,6 +8,7 @@ import { ThemeScript } from "@/components/ThemeScript";
 import { ConsentModeScript } from "@/components/ConsentModeScript";
 import { AdSenseScript } from "@/components/ads/AdSenseScript";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
+import { IznBeacon } from "@/components/analytics/IznBeacon";
 import { CookieConsent } from "@/components/CookieConsent";
 import { DonateButton } from "@/components/DonateButton";
 import { OutboundTracker } from "@/components/analytics/OutboundTracker";
@@ -43,6 +44,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ConsentModeScript />
         {/* Must come after ConsentModeScript — consent defaults first, tags second. */}
         <GoogleAnalytics />
+        <IznBeacon />
         <AdSenseScript />
         <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
       </head>

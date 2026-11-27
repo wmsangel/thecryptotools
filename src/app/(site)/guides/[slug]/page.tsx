@@ -139,16 +139,35 @@ function Block({ block }: { block: GuideBlock }) {
         </div>
       );
     }
-    case "cta":
-      return (
-        <Link href={block.href} className="card card-hover group mt-6 block border-brand-500/40 p-6">
+    case "cta": {
+      const inner = (
+        <>
           <div className="eyebrow">{block.title}</div>
           <p className="mt-2 leading-relaxed text-[var(--text)]/90">{block.text}</p>
           <span className="mt-3 inline-flex items-center gap-1 text-sm font-bold text-brand-ink group-hover:underline">
             {block.label} →
           </span>
+        </>
+      );
+      const cls = "card card-hover group mt-6 block border-brand-500/40 p-6";
+      // An affiliate CTA is written as /go/<id>: render it as a gated, tokenized
+      // anchor (no /go or partner URL in the HTML, no Next prefetch). The sub-id
+      // placement comes from the page path when it is pressed.
+      const go = /^\/go\/([a-z0-9-]+)\/?$/i.exec(block.href);
+      if (go) {
+        const id = go[1].toLowerCase();
+        return (
+          <a href="#" target="_blank" rel="sponsored nofollow noopener" data-go={id} data-affiliate={id} data-affiliate-placement="guide-cta" className={cls}>
+            {inner}
+          </a>
+        );
+      }
+      return (
+        <Link href={block.href} className={cls}>
+          {inner}
         </Link>
       );
+    }
     case "table":
       return (
         // The table scrolls inside its own box so a wide comparison never makes

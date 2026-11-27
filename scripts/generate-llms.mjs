@@ -75,7 +75,11 @@ function blockToMarkdown(block) {
     case "tool":
       return `→ Calculator: ${SITE}/tools/${block.slug}/`;
     case "cta":
-      return `→ **${block.title}** — ${block.text}\n  ${SITE}${block.href}`;
+      // Affiliate CTAs (/go/<id>) are gated redirects, not pages — leave the URL out
+      // of the machine-readable copy.
+      return block.href.startsWith("/go/")
+        ? `→ **${block.title}** — ${block.text}`
+        : `→ **${block.title}** — ${block.text}\n  ${SITE}${block.href}`;
     case "table": {
       const head = `| ${block.headers.map(cell).join(" | ")} |`;
       const rule = `| ${block.headers.map(() => "---").join(" | ")} |`;

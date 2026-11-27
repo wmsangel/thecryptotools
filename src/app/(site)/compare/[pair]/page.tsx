@@ -5,6 +5,7 @@ import { absoluteUrl, site } from "@/lib/site";
 import { ogImage } from "@/lib/seo";
 import { platforms } from "@/lib/platforms";
 import { platformLink } from "@/lib/affiliate";
+import { goProps } from "@/lib/go-link";
 import { compareData, CHECKED_ON } from "@/lib/compare/data";
 import { getPair, pairSlug, validPairs } from "@/lib/compare/pairs";
 import { JsonLd } from "@/components/JsonLd";
@@ -229,10 +230,9 @@ export default function Page({ params }: { params: { pair: string } }) {
               </div>
               <p className="muted mt-3 text-sm leading-relaxed">{why}</p>
               <a
-                href={link.href}
-                target="_blank"
-                rel={link.sponsored ? "sponsored nofollow noopener noreferrer" : "noopener noreferrer"}
-                {...(link.sponsored ? { "data-affiliate": p.slug, "data-affiliate-placement": `compare-${params.pair}` } : {})}
+                {...(link.sponsored
+                  ? goProps(p.slug, `compare-${params.pair}`)
+                  : { href: link.href, target: "_blank", rel: "noopener noreferrer" })}
                 className="btn-primary mt-5 w-full justify-center"
               >
                 Visit {p.name} →

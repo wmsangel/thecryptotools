@@ -8,6 +8,7 @@ import { coinOf, entryLabel, roiPct, stateLabel, pct, usd, hours, round, aggress
 import { track } from "@/lib/analytics";
 import { strategyTypeFor } from "@/lib/dca/strategy-types";
 import { platforms, type Platform } from "@/lib/platforms";
+import { goProps } from "@/lib/go-link";
 
 const EXCHANGE_SLUGS = ["bybit", "binance", "okx", "kucoin", "bitget", "mexc"];
 const EXCHANGES = EXCHANGE_SLUGS
@@ -346,7 +347,7 @@ export function StrategyDetail({ group }: { group: StrategyGroup }) {
 
         <div className="mt-4 flex flex-wrap gap-2">
           {EXCHANGES.map((p) => (
-            <a key={p.slug} href={`/go/${p.slug}`} target="_blank" rel="sponsored nofollow noopener noreferrer" data-affiliate={p.slug} data-affiliate-placement="dca-strategy" className="btn-ghost">
+            <a key={p.slug} {...goProps(p.slug, "dca-strategy")} className="btn-ghost">
               {p.name} →
             </a>
           ))}

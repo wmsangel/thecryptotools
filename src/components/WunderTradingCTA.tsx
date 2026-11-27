@@ -1,5 +1,6 @@
 import { platforms } from "@/lib/platforms";
 import { platformLink } from "@/lib/affiliate";
+import { goProps } from "@/lib/go-link";
 
 /**
  * Disclosed CTA for WunderTrading — a third-party automation platform (DCA,
@@ -36,14 +37,7 @@ export function WunderTradingCTA({
         WunderTrading connects to your exchange via API to run DCA, grid and copy-trading bots from one
         dashboard. Your funds stay on the exchange you already use.
       </p>
-      <a
-        href={link.href}
-        target="_blank"
-        rel="sponsored nofollow noopener noreferrer"
-        data-affiliate={p.slug}
-        data-affiliate-placement={placement}
-        className="btn-primary mt-4"
-      >
+      <a {...goProps(p.slug, placement)} className="btn-primary mt-4">
         Try WunderTrading →
       </a>
       <p className="muted mt-3 text-[11px] leading-snug">

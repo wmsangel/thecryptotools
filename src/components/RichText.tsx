@@ -17,6 +17,27 @@ import type { ReactNode } from "react";
  */
 const TOKEN = /(\[[^\]]+\]\([^)]+\))|(\*\*[^*]+\*\*)/g;
 
+/**
+ * Other sites of our own network. A contextual link to a sibling is fine, but
+ * always rel="nofollow" (owner decision 2026-11-24): a web of dofollow links
+ * between domains of one owner reads as a link scheme.
+ */
+const NETWORK_HOSTS = [
+  "calclumen.com", "costtrek.com", "almanackit.com", "izntools.com", "pawdget.com",
+  "prodom-expert.ru", "24zdorovie.com", "izagorodnyi.dev", "ocrsnip.com", "testsweep.com",
+  "bilimjol.com", "foundaday.com", "foldoutkit.com", "iznkit.com", "izngames.com",
+  "gamerscalc.com", "rightweekend.com", "printmathsheets.com", "dasha-motion.com",
+];
+
+function isNetworkHost(href: string): boolean {
+  try {
+    const h = new URL(href).hostname.replace(/^www\./, "");
+    return NETWORK_HOSTS.some((n) => h === n || h.endsWith("." + n));
+  } catch {
+    return false;
+  }
+}
+
 export function renderInline(text: string): ReactNode {
   const parts: ReactNode[] = [];
   let last = 0;
@@ -33,8 +54,25 @@ export function renderInline(text: string): ReactNode {
       const splitAt = tok.indexOf("](");
       const label = tok.slice(1, splitAt);
       const href = tok.slice(splitAt + 2, -1);
+      const go = /^\/go\/([a-z0-9-]+)\/?$/i.exec(href);
       parts.push(
-        href.startsWith("/") ? (
+        go ? (
+          // Affiliate link written in prose: a gated, tokenized /go anchor — never a
+          // plain <Link> (Next would prefetch it, and a prefetch is a counted click).
+          // The sub-id placement comes from the page path at press time.
+          <a
+            key={key++}
+            href="#"
+            target="_blank"
+            rel="sponsored nofollow noopener"
+            data-go={go[1].toLowerCase()}
+            data-affiliate={go[1].toLowerCase()}
+            data-affiliate-placement="inline"
+            className="font-semibold text-brand-ink hover:underline"
+          >
+            {label}
+          </a>
+        ) : href.startsWith("/") ? (
           <Link key={key++} href={href} className="font-semibold text-brand-ink hover:underline">
             {label}
           </Link>
@@ -43,7 +81,7 @@ export function renderInline(text: string): ReactNode {
             key={key++}
             href={href}
             target="_blank"
-            rel="noopener noreferrer"
+            rel={isNetworkHost(href) ? "nofollow noopener noreferrer" : "noopener noreferrer"}
             className="font-semibold text-brand-ink hover:underline"
           >
             {label}

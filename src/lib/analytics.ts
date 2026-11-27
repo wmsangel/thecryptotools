@@ -43,6 +43,10 @@ const ITEM_SOURCES = [
  */
 export function track(name: string, params?: Record<string, ParamValue | undefined>): void {
   if (typeof window === "undefined") return;
+  // Network beacon FIRST, before the gtag check: visitors with a blocker lose
+  // gtag far more often than our first-party beacon, and an early return here
+  // would drop exactly the people the beacon exists for. Cookieless, no PII.
+  sendBeacon(name, params);
   const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
   if (typeof gtag !== "function") return;
   if (!NAME_RE.test(name)) return;
@@ -56,6 +60,64 @@ export function track(name: string, params?: Record<string, ParamValue | undefin
     }
   }
   gtag("event", name, payload);
+}
+
+/**
+ * Map one of our GA4 events onto the network beacon's standard vocabulary (see
+ * izn.project.stats/beacon/README.md): tool_opened / tool_used / download /
+ * affiliate_click / outbound_click, plus our own cta_view. Only whitelisted
+ * events go, with at most the standard keys — never free text, a wallet address,
+ * a CSV value or a search term. `iznTrack` is defined by an inline stub in the
+ * head, so it exists (and queues) even before b.js has loaded.
+ */
+function beaconPayload(
+  name: string,
+  p: Record<string, ParamValue | undefined> = {},
+): [string, Record<string, string>] | null {
+  const s = (v: ParamValue | undefined) => (v === undefined ? undefined : String(v).slice(0, 80));
+  const out = (o: Record<string, string | undefined>) =>
+    Object.fromEntries(Object.entries(o).filter(([, v]) => v)) as Record<string, string>;
+  switch (name) {
+    case "tool_used": {
+      const tool = s(p.tool_slug);
+      if (!tool) return null;
+      if (p.action === "view") return ["tool_opened", out({ tool })];
+      if (p.action === "download") return ["download", out({ tool, format: "png" })];
+      return ["tool_used", out({ tool, action: s(p.action) === "compute" ? "run" : s(p.action) })];
+    }
+    case "affiliate_click":
+      return ["affiliate_click", out({ network: s(p.platform), placement: s(p.placement) })];
+    case "cta_view":
+      return ["cta_view", out({ network: s(p.platform), placement: s(p.placement) })];
+    case "outbound_click":
+      return ["outbound_click", out({ host: s(p.host) })];
+    case "portfolio_run":
+      return ["tool_used", { tool: "portfolio-analyzer", action: "run" }];
+    case "backtest_run":
+      return ["tool_used", { tool: "investment-calculator", action: "run" }];
+    case "grid_backtest_run":
+      return ["tool_used", { tool: "grid-trading-backtest", action: "run" }];
+    case "harvest_plan_built":
+      return ["tool_used", { tool: "tax-loss-harvesting", action: "run" }];
+    case "cost_basis_compared":
+      return ["tool_used", { tool: "cost-basis-method-calculator", action: "run" }];
+    case "tax_report_built":
+      return ["tool_used", { tool: "crypto-tax-report", action: "run" }];
+    case "tax_report_export":
+      return ["download", { tool: "crypto-tax-report", format: "csv" }];
+    default:
+      return null;
+  }
+}
+
+function sendBeacon(name: string, params?: Record<string, ParamValue | undefined>): void {
+  try {
+    const w = window as unknown as { iznTrack?: (e: string, p: Record<string, string>) => void };
+    const m = beaconPayload(name, params);
+    if (m && typeof w.iznTrack === "function") w.iznTrack(m[0], m[1]);
+  } catch {
+    // The beacon must never break the page or the GA4 call after it.
+  }
 }
 
 /**

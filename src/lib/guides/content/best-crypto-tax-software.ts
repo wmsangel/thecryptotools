@@ -73,7 +73,7 @@ const guide: Guide = {
       type: "cta",
       title: "Run your history through Koinly",
       text: "Connect your exchanges and wallets, see your gains, income and losses computed for your country, and only pay when you download the report.",
-      href: "https://koinly.io/?via=5733C88D&utm_source=friend",
+      href: "/go/koinly",
       label: "Try Koinly",
     },
 
@@ -90,7 +90,7 @@ const guide: Guide = {
       type: "cta",
       title: "Try CoinLedger",
       text: "Import your transactions, preview your report, and export straight into TurboTax or TaxAct when you're ready to file.",
-      href: "https://coinledger.io?fpr=eb2ref",
+      href: "/go/coinledger",
       label: "Try CoinLedger",
     },
 

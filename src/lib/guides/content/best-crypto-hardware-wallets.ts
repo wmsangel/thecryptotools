@@ -59,7 +59,7 @@ const guide: Guide = {
       "A certified secure element and a long track record; the range spans the compact Nano S Plus, the Bluetooth Nano X, and the touchscreen Stax and Flex.",
       "The honest caveat: the secure-element firmware is **closed-source**, and the 2023 'Ledger Recover' opt-in seed-backup service upset people who felt an offline key should never be extractable at all. It is opt-in and off by default — but if fully open hardware is your line in the sand, this is why some people choose Trezor instead.",
     ] },
-    { type: "cta", title: "Get a Ledger", text: "Buy sealed and direct: choose your model, generate your own seed phrase on first boot, and back it up on metal before moving any funds. Then confirm recovery works with a small test transaction.", href: "https://shop.ledger.com/?r=c5f06eb56aa8", label: "Shop Ledger (official)" },
+    { type: "cta", title: "Get a Ledger", text: "Buy sealed and direct: choose your model, generate your own seed phrase on first boot, and back it up on metal before moving any funds. Then confirm recovery works with a small test transaction.", href: "/go/ledger", label: "Shop Ledger (official)" },
 
     { type: "h2", text: "Trezor — the open-source choice" },
     { type: "ul", items: [

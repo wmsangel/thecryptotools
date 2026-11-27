@@ -8,6 +8,7 @@ import {
   type Platform,
 } from "@/lib/platforms";
 import { platformLink } from "@/lib/affiliate";
+import { goProps } from "@/lib/go-link";
 import { JsonLd } from "@/components/JsonLd";
 import { AdSlot } from "@/components/ads/AdSlot";
 import { PlatformLogo } from "@/components/PlatformLogo";
@@ -177,10 +178,9 @@ function PlatformCard({ platform: p }: { platform: Platform }) {
       )}
 
       <a
-        href={link.href}
-        target="_blank"
-        rel={link.sponsored ? "sponsored nofollow noopener noreferrer" : "noopener noreferrer"}
-        {...(link.sponsored ? { "data-affiliate": p.slug, "data-affiliate-placement": "exchanges" } : {})}
+        {...(link.sponsored
+          ? goProps(p.slug, "exchanges")
+          : { href: link.href, target: "_blank", rel: "noopener noreferrer" })}
         className="btn-primary mt-5 w-full justify-center"
       >
         Visit {p.name} →

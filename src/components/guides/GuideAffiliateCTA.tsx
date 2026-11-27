@@ -1,3 +1,4 @@
+import { goProps } from "@/lib/go-link";
 import { partnersForGuide, platformLink, GUIDE_AFFILIATE_COPY, type GuideAffiliateKind } from "@/lib/affiliate";
 
 /**
@@ -27,10 +28,9 @@ export function GuideAffiliateCTA({
       <h2 className="mt-1 text-xl font-bold">{heading}</h2>
       <p className="muted mt-1 text-sm leading-relaxed">{blurb ?? primary.bonus}</p>
       <a
-        href={primaryLink.href}
-        target="_blank"
-        rel={primaryLink.sponsored ? "sponsored nofollow noopener noreferrer" : "noopener noreferrer"}
-        {...(primaryLink.sponsored ? { "data-affiliate": primary.slug, "data-affiliate-placement": slot } : {})}
+        {...(primaryLink.sponsored
+          ? goProps(primary.slug, slot)
+          : { href: primaryLink.href, target: "_blank", rel: "noopener noreferrer" })}
         className="btn-primary mt-4"
       >
         {verb} {primary.name} →
@@ -44,10 +44,9 @@ export function GuideAffiliateCTA({
               <span key={a.slug}>
                 {i > 0 && " · "}
                 <a
-                  href={link.href}
-                  target="_blank"
-                  rel={link.sponsored ? "sponsored nofollow noopener noreferrer" : "noopener noreferrer"}
-                  {...(link.sponsored ? { "data-affiliate": a.slug, "data-affiliate-placement": slot } : {})}
+                  {...(link.sponsored
+                    ? goProps(a.slug, slot)
+                    : { href: link.href, target: "_blank", rel: "noopener noreferrer" })}
                   className="font-semibold text-brand-ink hover:underline"
                 >
                   {a.name}

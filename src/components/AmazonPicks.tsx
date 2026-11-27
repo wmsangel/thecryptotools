@@ -1,4 +1,5 @@
-import { AMAZON_PICKS, amazonUrl, type AmazonTopic } from "@/lib/amazon";
+import { AMAZON_PICKS, type AmazonTopic } from "@/lib/amazon";
+import { goProps } from "@/lib/go-link";
 
 /**
  * Native Amazon Associates block: a short list of tracked text links plus the
@@ -18,11 +19,7 @@ export function AmazonPicks({ topic, placement }: { topic: AmazonTopic; placemen
         {block.items.map((p) => (
           <li key={p.title} className="leading-relaxed">
             <a
-              href={amazonUrl(p.q)}
-              target="_blank"
-              rel="sponsored nofollow noopener noreferrer"
-              data-affiliate="amazon"
-              data-affiliate-placement={slot}
+              {...goProps("amazon", slot, p.q)}
               className="font-semibold text-brand-ink hover:underline"
             >
               {p.title}

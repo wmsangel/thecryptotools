@@ -73,7 +73,7 @@ const guide: Guide = {
       type: "cta",
       title: "Set up cold storage with a hardware wallet",
       text: "A hardware wallet keeps your private keys offline on a secure chip, so malware on your computer can't reach them. It's the standard way to hold crypto you're not actively trading.",
-      href: "https://shop.ledger.com/?r=c5f06eb56aa8",
+      href: "/go/ledger",
       label: "Get a Ledger",
     },
 

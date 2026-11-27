@@ -31,12 +31,9 @@ export interface AmazonPick {
   q: string;
 }
 
-const TAG = "thecryptotools-20";
-
-/** A tracked Amazon US search link for a query. */
-export function amazonUrl(q: string): string {
-  return `https://www.amazon.com/s?k=${encodeURIComponent(q)}&tag=${TAG}`;
-}
+// The tag (thecryptotools-20) and the per-page ascsubtag are added server-side by
+// the /go function (functions/go/[[path]].js) when a person presses the link — the
+// HTML carries only data-go="amazon" + the search text, never an Amazon URL.
 
 export const AMAZON_PICKS: Record<AmazonTopic, { heading: string; items: AmazonPick[] }> = {
   books: {

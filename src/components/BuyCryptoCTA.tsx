@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { platforms, type Platform } from "@/lib/platforms";
 import { exchangesForCountry, platformLink } from "@/lib/affiliate";
+import { goProps } from "@/lib/go-link";
 
 /**
  * "Got a fake wallet? Here's the real thing" — a low-pressure, disclosed partner
@@ -42,11 +43,7 @@ function Offer({ p, placement, sub }: { p: Platform; placement: string; sub: str
   if (!link.sponsored) return null; // only disclosed partners
   return (
     <a
-      href={link.href}
-      target="_blank"
-      rel="sponsored nofollow noopener noreferrer"
-      data-affiliate={p.slug}
-      data-affiliate-placement={placement}
+      {...goProps(p.slug, placement)}
       className="card card-hover flex items-center gap-3 p-4"
     >
       <span className="text-2xl" aria-hidden>{p.icon}</span>

@@ -83,6 +83,20 @@
 
 После регистраций/одобрений — размещаю с пометкой рекламы: налоговые рядом с `/crypto-tax-report` и CSV-сверкой, кошельки в гайдах и balance-checker.
 
+## /go: гейт жеста + подписанный токен (27.11.2026)
+
+Аудит кабинетов сети 27.11: 0 конверсий за 30 дней при тысячах «кликов» — почти целиком боты и префетч. Раньше наши `/go/<id>` были статическими 302 в `_redirects` (любой запрос = клик у партнёра, плюс Next `<Link>` на `/go/...` в гайдах префетчился). Теперь по образцу costtrek (5e142b5/86c22e0):
+
+- **Pages Function** `functions/go/[[path]].js` вместо статических правил (статические `/go/*` в `_redirects` перекрыли бы Function — сборка падает, если они появятся). Назначения — `src/lib/go-map.generated.json` (пишет `scripts/build-go-redirects.ts` из `platforms.ts` + EXTRA ручных офферов 2ndnumber/ishosting/protonvpn/expressvpn + amazon).
+- **В HTML нет ни /go-, ни партнёрских URL**: ссылка = `<a href="#" data-go="<id>" data-go-s="<placement>">` (`goProps()` в `src/lib/go-link.ts`). `OutboundTracker` при доверенном нажатии вписывает `/go/<id>?s=…&t=<время>&k=<подпись>` (подпись по id+слаг+запрос+время, TTL 15 мин; `src/lib/go-token.ts`). Скриптовый клик остаётся `#` и отменяется. Проза в гайдах (`[Proton](/go/protonvpn)`) тоже рендерится так (`renderInline`).
+- **Гейт**: 204 для бот-UA, префетча (`Sec-Purpose`), `Sec-Fetch-Mode`≠navigate, Chromium-UA без `Sec-Fetch-*`; `Sec-Fetch-User: ?1` обязателен для всех браузеров, что его шлют (Chrome 76+, Firefox 90+, Safari 16.4+, iOS по версии ОС); мягкий путь (same-origin Referer/Sec-Fetch-Site) только для старых; затем токен. `/go/` в `robots.txt` Disallow.
+- **sub-id** подставляет Function: `thecryptotools-<placement>` → Indoleads `p1` (трекеры o10o.xyz / i05o.xyz / gettracker.net), Admitad `subid` (ntzgd/xcdus/qbzdl), Amazon `ascsubtag` + тег `thecryptotools-20`. Прямые программы бирж/брендов (фиксированный реф-код) sub-id не принимают — атрибуция по GA4 `affiliate_click[placement]`.
+- **Проверено 27.11 на проде (матрица curl, 15/15)**: Chrome с полным набором → 302; Chrome без `?1` → 204; Safari 17 с полным набором → 302; Safari 17 без `?1` → 204; curl → 204; без токена / голый URL / токен старше 15 мин / подпись чужого id / prefetch / бот-UA / Chromium без Sec-Fetch-* → 204; Safari 15 + Referer → 302 (legacy), без Referer → 204; неизвестный id → 404. Настоящий клик в Chrome по Tangem на гайде → `tangem.com/en/meet-tangem/?promocode=CR6QNX`; скриптовый (`a.click()`) клик ничего не открывает. Маячок: `cta_view` ×3 + `affiliate_click` попали в Analytics Engine.
+- **sub-id в кабинетах**: Indoleads ✓ — в отчёте By SubID виден `Sub 1 (p1) = thecryptotools-test-matrix` (и s_id `tctest-sid` у тест-запроса): короткие трекеры o10o/i05o/gettracker принимают `?p1=`, в `Location` он не светится (хранится у сети). Admitad (`subid`) и Amazon (`ascsubtag`) — Function подставляет, видимость в отчёте сети проверить кликом 29.11 (CRM 0mwlntouy…).
+- **Учёт**: 302 = клик, 204 = отказ (по пути /go/* в edge-аналитике Cloudflare); причина отказа — в `console.log` (id + reason, без заголовков). D1 `go_hits` как у pawdget НЕ заводил (новый ресурс в аккаунте Cloudflare — вопрос владельцу).
+- AliExpress и GetYourGuide на сайте не используются (в коде их нет).
+- События воронки: `cta_view` (ссылка показана) → `affiliate_click` (нажата, только доверенное) + маячок `b.izntools.com` (то же + `tool_opened`/`tool_used`/`download`/`outbound_click`).
+
 ## Tangem (прямая партнёрка — ПЕРЕГОВОРЫ 16.11)
 
 Кошелёк-карта (NFC, без seed-фразы). Менеджер: **Alex Shulha, Influencer Manager**. Владелец отвечает сам, диспетчер готовит письмо.

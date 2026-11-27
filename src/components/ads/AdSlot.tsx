@@ -21,6 +21,7 @@ import { CONSENT_CHANGED_EVENT, readConsent, type Consent } from "@/lib/consent"
 import { site } from "@/lib/site";
 import { defaultHouseAd, houseAdFor, type HouseAd as HouseAdData } from "@/lib/house-ads";
 import { exchangesForContext, type TradeContext } from "@/lib/affiliate";
+import { goProps } from "@/lib/go-link";
 
 const adsEnabled = process.env.NEXT_PUBLIC_ENABLE_ADS === "true";
 
@@ -162,14 +163,7 @@ export function AffiliateBanner({
       <div className="text-xs font-semibold uppercase tracking-wide text-brand-ink">Partner</div>
       <div className="mt-1 font-semibold">{verb} on {primary.name}</div>
       <p className="muted mt-1 text-xs leading-relaxed">{primary.bonus}</p>
-      <a
-        href={primary.url}
-        target="_blank"
-        rel="sponsored nofollow noopener noreferrer"
-        data-affiliate={primary.slug}
-        data-affiliate-placement={placement}
-        className="btn-primary mt-3 w-full"
-      >
+      <a {...goProps(primary.slug, placement)} className="btn-primary mt-3 w-full">
         {verb} on {primary.name} →
       </a>
       {alts.length > 0 && (
@@ -179,11 +173,7 @@ export function AffiliateBanner({
             <span key={a.slug}>
               {i > 0 && " · "}
               <a
-                href={a.url}
-                target="_blank"
-                rel="sponsored nofollow noopener noreferrer"
-                data-affiliate={a.slug}
-                data-affiliate-placement={placement}
+                {...goProps(a.slug, placement)}
                 className="font-semibold text-brand-ink hover:underline"
               >
                 {a.name}
